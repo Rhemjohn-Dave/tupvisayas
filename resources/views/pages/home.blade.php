@@ -117,13 +117,13 @@
     <!-- Partners & Accreditations -->
     <div class="section center-align" style="margin-top:2rem;">
         <h5 style="color:#C41E3A;" class="center-align">Our Partners & Accreditations</h5>
-        <div class="row">
-            <div class="col s4 m2 offset-m2 center-align"><img src="{{ asset('images/ched-logo.png') }}" alt="CHED"
+        <div class="row" style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+            <div class="center-align" style="flex: 0 0 auto;"><img src="{{ asset('images/ched-logo.png') }}" alt="CHED"
                     style="max-width:80px;"></div>
-            <div class="col s4 m2 center-align"><img src="{{ asset('images/iso-logo.png') }}" alt="ISO"
+            <div class="center-align" style="flex: 0 0 auto;"><img src="{{ asset('images/iso-logo.png') }}" alt="ISO"
                     style="max-width:80px;"></div>
-            <div class="col s4 m2 center-align"><img src="{{ asset('images/TUV_Rheinland_Logo.png') }}" alt="tuv"
-                    style="max-width:80px;"></div>
+            <div class="center-align" style="flex: 0 0 auto;"><img src="{{ asset('images/TUV_Rheinland_Logo.png') }}"
+                    alt="tuv" style="max-width:80px;"></div>
         </div>
     </div>
 @endsection

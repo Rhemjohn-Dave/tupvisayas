@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'TUP Visayas') }}</title>
+    <title>@yield('title', 'TUP Visayas - Technological University of the Philippines Visayas')</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/tup-logo.png') }}">
     <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <!-- Material Icons -->
@@ -82,6 +83,7 @@
             <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo"
                 style="height:40px;vertical-align:middle;">
             <p style="color:#C41E3A;">&copy; {{ date('Y') }} TUP Visayas. All rights reserved.</p>
+            <p style="color:#888; font-size:0.95rem; margin-top:0.5rem;">Design by UITC-Visayas</p>
         </div>
     </footer>
     <!-- Scroll-to-top FAB -->

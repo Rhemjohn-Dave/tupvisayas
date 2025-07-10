@@ -20,26 +20,46 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <ul id="categories-dropdown" class="dropdown-content">
+    <!-- Sidenav for mobile -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="{{ route('home') }}">Home</a></li>
+        <li><a href="{{ route('about') }}">About Us</a></li>
+        <li><a href="{{ route('programs') }}">Programs</a></li>
+        <li><a href="{{ route('admissions') }}">Admissions</a></li>
         <li><a href="{{ route('facilities') }}">Facilities</a></li>
         <li><a href="{{ route('student_services') }}">Student Services</a></li>
         <li><a href="{{ route('officials') }}">Officials</a></li>
         <li><a href="{{ route('contact') }}">Contact</a></li>
-    </ul>
-    <ul id="more-dropdown" class="dropdown-content">
         <li><a href="{{ route('announcements') }}">Announcements</a></li>
         <li><a href="{{ route('news_events') }}">News & Events</a></li>
         <li><a href="{{ route('jobs') }}">Job Listings</a></li>
+        @auth
+            @if(auth()->user()->is_admin)
+                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn-flat" style="color: #C41E3A !important;">Logout</button>
+                    </form>
+                </li>
+            @endif
+        @endauth
     </ul>
     <nav class="z-depth-1 white">
         <div class="nav-wrapper container">
-            <a href="/" class="brand-logo" style="color:#C41E3A; display: flex; align-items: center; height: 56px;">
-                <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo"
-                    style="height:44px; margin-right:12px;">
-                <span style="font-size:1.5rem; font-weight:600; line-height:1;">TUP Visayas</span>
+            <!-- Hamburger icon for mobile -->
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger left" style="margin-right:10px;">
+                <i class="material-icons" style="color:#C41E3A;">menu</i>
             </a>
-            <ul class="right">
+            <a href="/" class="brand-logo" style="color:#C41E3A; display: flex; align-items: center; height: 56px;">
+                <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" class="responsive-img"
+                    style="height:44px; max-height:44px; margin-right:8px; max-width:40vw; width:auto;">
+                <span class="hide-on-small-only" style="font-size:1.5rem; font-weight:600; line-height:1;">TUP
+                    Visayas</span>
+                <span class="hide-on-med-and-up" style="font-size:1.1rem; font-weight:600; line-height:1;">TUP
+                    Visayas</span>
+            </a>
+            <ul class="right hide-on-med-and-down">
                 @auth
                     @if(auth()->user()->is_admin)
                         <li><a href="{{ route('admin.dashboard') }}" style="color: #C41E3A !important;">Dashboard</a></li>

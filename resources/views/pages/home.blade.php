@@ -4,9 +4,9 @@
     <!-- Welcome Section with Executive Officials on the Right -->
     <div class="section" style="padding-top:2rem;">
         <div class="row"
-            style="max-width:1200px; margin:0 auto; display:flex; justify-content:center; align-items:flex-start;">
+            style="max-width:1200px; margin:0 auto; display:flex; justify-content:center; align-items:flex-start; flex-wrap:wrap;">
             <!-- Main Welcome Content -->
-            <div class="col s12 m10" style="float:none;">
+            <div class="col s12 m8 order-1 order-m-1" style="float:none;">
                 <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" style="max-width:100px;">
                 <h2 style="color:#C41E3A; font-weight:700;">Welcome to TUP Visayas Campus</h2>
                 <div style="border-top:3px solid #C41E3A; width:80px; margin:1rem 0;"></div>
@@ -20,8 +20,8 @@
                         title="TUP Visayas Campus" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
-            <!-- Executive Officials on the Right -->
-            <div class="col s12 m2" style="min-width:300px; max-width:380px; float:none;">
+            <!-- Executive Officials -->
+            <div class="col s12 m4 order-2 order-m-2" style="min-width:260px; max-width:380px; float:none;">
                 <h5 style="color:#C41E3A; font-weight:600;">TUP - Visayas Campus Executive Officials</h5>
                 <div style="border-top:3px solid #C41E3A; width:60px; margin-bottom:1.2rem;"></div>
                 <div class="official-card" style="margin-bottom:2rem; text-align:center;">
@@ -55,6 +55,36 @@
             </div>
         </div>
     </div>
+    <style>
+        @media (max-width: 992px) {
+            .order-1 {
+                order: 1 !important;
+            }
+
+            .order-2 {
+                order: 2 !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .order-1 {
+                order: 1 !important;
+            }
+
+            .order-2 {
+                order: 2 !important;
+            }
+
+            .official-card img {
+                width: 100px !important;
+                height: 100px !important;
+            }
+
+            .section h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
 
     <!-- TUP Campuses -->
     <div class="section">

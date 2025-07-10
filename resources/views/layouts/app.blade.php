@@ -45,6 +45,18 @@
             @endif
         @endauth
     </ul>
+    <!-- Dropdown Structures (only once, outside nav) -->
+    <ul id="categories-dropdown" class="dropdown-content">
+        <li><a href="{{ route('facilities') }}">Facilities</a></li>
+        <li><a href="{{ route('student_services') }}">Student Services</a></li>
+        <li><a href="{{ route('officials') }}">Officials</a></li>
+        <li><a href="{{ route('contact') }}">Contact</a></li>
+    </ul>
+    <ul id="more-dropdown" class="dropdown-content">
+        <li><a href="{{ route('announcements') }}">Announcements</a></li>
+        <li><a href="{{ route('news_events') }}">News & Events</a></li>
+        <li><a href="{{ route('jobs') }}">Job Listings</a></li>
+    </ul>
     <nav class="z-depth-1 white">
         <div class="nav-wrapper container">
             <!-- Hamburger icon for mobile -->

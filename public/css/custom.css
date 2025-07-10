@@ -1,0 +1,167 @@
+:root {
+    --cardinal-red: #c41e3a;
+}
+
+nav,
+.btn,
+.card-panel,
+.pagination .active,
+.tabs .tab a.active {
+    background-color: var(--cardinal-red) !important;
+}
+
+a,
+.btn-flat,
+.breadcrumb,
+.pagination li.active a {
+    color: var(--cardinal-red) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--cardinal-red);
+}
+
+/* Remove Cardinal Red background from all footers */
+/* .page-footer {
+  background: var(--cardinal-red) !important;
+} */
+.page-footer.white {
+    background: #fff !important;
+}
+
+nav.white .nav-wrapper .right > li > a {
+    color: #c41e3a !important;
+    font-weight: 500;
+}
+
+.page-footer.white a,
+.page-footer.white p,
+.page-footer.white .material-icons {
+    color: #c41e3a !important;
+}
+
+nav .nav-wrapper .right > li {
+    margin-left: 1.2rem;
+}
+nav .nav-wrapper .right > li > a {
+    line-height: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+}
+nav .brand-logo {
+    display: flex !important;
+    align-items: center;
+    height: 56px;
+    padding: 0;
+}
+nav .brand-logo img {
+    height: 44px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+nav .brand-logo span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #c41e3a;
+}
+nav .nav-wrapper .right {
+    margin-left: 220px; /* Adjust this value as needed for your logo/title width */
+}
+
+/* Align dropdown menus with the navbar */
+nav .dropdown-content {
+    margin-top: 0.5rem;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+nav .dropdown-content li > a {
+    color: #c41e3a !important;
+    padding: 10px 18px;
+    font-size: 1rem;
+}
+nav .dropdown-trigger i.material-icons {
+    vertical-align: middle;
+    font-size: 1.2em;
+    margin-left: 2px;
+}
+
+nav .nav-wrapper .right > li,
+nav .nav-wrapper .right > li > a,
+nav .dropdown-trigger {
+    display: flex !important;
+    align-items: flex-start !important;
+    height: 56px;
+    line-height: 56px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+nav .dropdown-trigger i.material-icons {
+    align-self: flex-start;
+    margin-top: 18px;
+}
+
+@media (max-width: 1200px) {
+    nav .nav-wrapper .right {
+        margin-left: 180px;
+    }
+}
+@media (max-width: 992px) {
+    nav .nav-wrapper .right {
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    nav .nav-wrapper .right > li {
+        float: none;
+        display: inline-block;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    nav .nav-wrapper .right > li > a {
+        font-size: 0.95rem;
+        padding: 0 6px;
+    }
+}
+@media (max-width: 800px) {
+    nav .brand-logo {
+        font-size: 1rem;
+        height: 48px;
+    }
+    nav .brand-logo img {
+        height: 32px;
+        margin-right: 8px;
+    }
+    nav .brand-logo span {
+        font-size: 1.1rem;
+    }
+    nav .nav-wrapper .right {
+        margin-left: 0;
+        float: none;
+        text-align: right;
+    }
+}
+
+@media (max-width: 600px) {
+    nav .brand-logo {
+        font-size: 0.95rem;
+        height: 40px;
+    }
+    nav .brand-logo img {
+        height: 24px;
+        margin-right: 6px;
+    }
+    nav .brand-logo span {
+        font-size: 1rem;
+    }
+}

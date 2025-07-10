@@ -38,29 +38,19 @@
                     <span style="font-size:0.95rem;">Assistant Director for Academic Affairs</span><br>
                     <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
                 </div>
-                <div class="official-card" style="margin-bottom:2rem;">
-                    <div class="row valign-wrapper" style="margin-bottom:0;">
-                        <div class="col s3">
-                            <img src="https://via.placeholder.com/80" alt="Official 3" class="circle responsive-img">
-                        </div>
-                        <div class="col s9">
-                            <span style="font-weight:700;">Dr. Sheila Mae Escobar</span><br>
-                            <span style="font-size:0.95rem;">Dean, Engineering</span><br>
-                            <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
-                        </div>
-                    </div>
+                <div class="official-card" style="margin-bottom:2rem; text-align:center;">
+                    <img src="{{ asset('images/escobar-sheila.jpg') }}" alt="Dr. Patrick Delumpa" class="responsive-img"
+                        style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
+                    <span style="font-weight:700;">Dr. Sheila Mae Escobar</span><br>
+                    <span style="font-size:0.95rem;">Dean, College of Engineering</span><br>
+                    <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
                 </div>
-                <div class="official-card" style="margin-bottom:2rem;">
-                    <div class="row valign-wrapper" style="margin-bottom:0;">
-                        <div class="col s3">
-                            <img src="https://via.placeholder.com/80" alt="Official 4" class="circle responsive-img">
-                        </div>
-                        <div class="col s9">
-                            <span style="font-weight:700;">Edcel Gaitan</span><br>
-                            <span style="font-size:0.95rem;">Registrar</span><br>
-                            <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
-                        </div>
-                    </div>
+                <div class="official-card" style="margin-bottom:2rem; text-align:center;">
+                    <img src="{{ asset('images/faciolan-chris.jpg') }}" alt="Dr. Patrick Delumpa" class="responsive-img"
+                        style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
+                    <span style="font-weight:700;">Engr. Christopher Faciolan, PECE</span><br>
+                    <span style="font-size:0.95rem;">Administrator, UITC</span><br>
+                    <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
                 </div>
             </div>
         </div>

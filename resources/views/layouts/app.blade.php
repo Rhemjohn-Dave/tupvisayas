@@ -83,7 +83,7 @@
             <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo"
                 style="height:40px;vertical-align:middle;">
             <p style="color:#C41E3A;">&copy; {{ date('Y') }} TUP Visayas. All rights reserved.</p>
-            <p style="color:#888; font-size:0.95rem; margin-top:0.5rem;">Design by UITC-Visayas</p>
+            <p style="color:#888; font-size:0.95rem; margin-top:0.5rem;">Developed by UITC TUPV</p>
         </div>
     </footer>
     <!-- Scroll-to-top FAB -->

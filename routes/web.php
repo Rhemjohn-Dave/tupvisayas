@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'pages.home')->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/programs', 'pages.programs')->name('programs');
 Route::view('/admissions', 'pages.admissions')->name('admissions');
 Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
-Route::view('/officials', 'pages.officials')->name('officials');
+Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');
+Route::get('/officials/{id}', [App\Http\Controllers\OfficialController::class, 'show'])->name('officials.show');
 Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index'])->name('news_events');
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('announcements', App\Http\Controllers\AnnouncementController::class);
     Route::resource('jobs', App\Http\Controllers\JobController::class);
     Route::resource('events', App\Http\Controllers\EventController::class);
+    Route::resource('officials', App\Http\Controllers\Admin\OfficialController::class);
 });
 
 require __DIR__ . '/auth.php';

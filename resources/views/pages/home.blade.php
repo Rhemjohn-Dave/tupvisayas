@@ -7,7 +7,7 @@
             style="max-width:1200px; margin:0 auto; display:flex; justify-content:center; align-items:flex-start; flex-wrap:wrap;">
             <!-- Main Welcome Content -->
             <div class="col s12 m8 order-1 order-m-1" style="float:none;">
-                <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" style="max-width:100px;">
+                <!-- <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" style="max-width:100px;"> -->
                 <h2 style="color:#C41E3A; font-weight:700;">Welcome to TUP Visayas Campus</h2>
                 <div style="border-top:3px solid #C41E3A; width:80px; margin:1rem 0;"></div>
                 <p style="font-size:1.2rem; max-width:600px;">
@@ -24,33 +24,19 @@
             <div class="col s12 m4 order-2 order-m-2" style="min-width:260px; max-width:380px; float:none;">
                 <h5 style="color:#C41E3A; font-weight:600;">TUP - Visayas Campus Executive Officials</h5>
                 <div style="border-top:3px solid #C41E3A; width:60px; margin-bottom:1.2rem;"></div>
-                <div class="official-card" style="margin-bottom:2rem; text-align:center;">
-                    <img src="{{ asset('images/eric-malooy.jpg') }}" alt="Dr. Eric Malo-oy" class="responsive-img"
-                        style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
-                    <span style="font-weight:700;">Dr. Eric Malo-oy</span><br>
-                    <span style="font-size:0.95rem;">Campus Director</span><br>
-                    <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
-                </div>
-                <div class="official-card" style="margin-bottom:2rem; text-align:center;">
-                    <img src="{{ asset('images/patrick-delumpa.jpg') }}" alt="Dr. Patrick Delumpa" class="responsive-img"
-                        style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
-                    <span style="font-weight:700;">Dr. Patrick Delumpa, PME</span><br>
-                    <span style="font-size:0.95rem;">Assistant Director for Academic Affairs</span><br>
-                    <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
-                </div>
-                <div class="official-card" style="margin-bottom:2rem; text-align:center;">
-                    <img src="{{ asset('images/escobar-sheila.jpg') }}" alt="Dr. Patrick Delumpa" class="responsive-img"
-                        style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
-                    <span style="font-weight:700;">Dr. Sheila Mae Escobar</span><br>
-                    <span style="font-size:0.95rem;">Dean, College of Engineering</span><br>
-                    <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
-                </div>
-                <div class="official-card" style="margin-bottom:2rem; text-align:center;">
-                    <img src="{{ asset('images/faciolan-chris.jpg') }}" alt="Dr. Patrick Delumpa" class="responsive-img"
-                        style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
-                    <span style="font-weight:700;">Engr. Christopher Faciolan, PECE</span><br>
-                    <span style="font-size:0.95rem;">Administrator, UITC</span><br>
-                    <a href="#" class="red-text text-darken-2" style="font-size:0.95rem;">View Full Profile</a>
+                @foreach($officials_preview as $official)
+                    <div class="official-card" style="margin-bottom:2rem; text-align:center;">
+                        <img src="{{ $official->photo ? asset('storage/' . $official->photo) : 'https://via.placeholder.com/200x200' }}"
+                            alt="{{ $official->name }}" class="responsive-img"
+                            style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
+                        <span style="font-weight:700;">{{ $official->name }}</span><br>
+                        <span style="font-size:0.95rem;">{{ $official->position }}</span><br>
+                        <a href="{{ route('officials.show', $official->id) }}" class="red-text text-darken-2"
+                            style="font-size:0.95rem;">View Full Profile</a>
+                    </div>
+                @endforeach
+                <div class="center-align">
+                    <a href="{{ route('officials') }}" class="btn red darken-2">View All Officials</a>
                 </div>
             </div>
         </div>

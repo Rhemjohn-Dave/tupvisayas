@@ -4,29 +4,22 @@
     <div class="section">
         <h3>Administrative Officials</h3>
         <div class="row">
-            <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/200x200" alt="Official 1">
-                    </div>
-                    <div class="card-content center-align">
-                        <span class="card-title">Dr. Juan Dela Cruz</span>
-                        <p>Campus Director</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/200x200" alt="Official 2">
-                    </div>
-                    <div class="card-content center-align">
-                        <span class="card-title">Engr. Maria Santos</span>
-                        <p>Dean, College of Engineering</p>
+            @foreach($officials as $official)
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ $official->photo ? asset('storage/' . $official->photo) : 'https://via.placeholder.com/200x200' }}"
+                                alt="{{ $official->name }}">
+                        </div>
+                        <div class="card-content center-align">
+                            <span class="card-title">{{ $official->name }}</span>
+                            <p>{{ $official->position }}</p>
+                            <a href="{{ route('officials.show', $official->id) }}" class="btn-small"
+                                style="margin-top:10px;">View Profile</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Add more officials as needed -->
+            @endforeach
         </div>
     </div>
 @endsection

@@ -27,7 +27,7 @@
                     $item->type === 'News' ? route('news.show', $item->id) :
                     ($item->type === 'Event' ? route('events.show', $item->id) :
                         route('announcements.show', $item->id))
-                                }}" style="width:350px;">
+                                            }}" style="width:350px;">
                             <div class="card hoverable" style="overflow:hidden;position:relative;">
                                 <!-- Category Label -->
                                 <span
@@ -43,8 +43,9 @@
                                 <div class="card-content" style="min-height:120px;">
                                     <span style="font-weight:600;font-size:1.1rem;">{{ $item->title }}</span>
                                     <div style="font-size:0.95rem;color:#888;margin-bottom:4px;">
-                                        {{ $item->created_at->format('M d, Y') }}</div>
-                                    <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
+                                        {{ $item->created_at->format('M d, Y') }}
+                                    </div>
+                                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($item->content), 80) }}</p>
                                 </div>
                                 <div class="card-action">
                                     <span class="red-text">Read More</span>

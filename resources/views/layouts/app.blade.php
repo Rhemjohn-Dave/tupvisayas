@@ -35,20 +35,6 @@
         <li><a href="{{ route('jobs') }}">Job Listings</a></li>
         @auth
             @if(auth()->user()->is_admin)
-                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ route('admin.officials.index') }}" style="color: #C41E3A !important;">Officials</a></li>
-                <li>
-                    <a class="dropdown-trigger" href="#!" data-target="admin-posts-dropdown"
-                        style="color: #C41E3A !important;">Posts<i class="material-icons right">arrow_drop_down</i></a>
-                </li>
-                <ul id="admin-posts-dropdown" class="dropdown-content">
-                    <li><a href="{{ route('admin.news.index') }}">News</a></li>
-                    <li><a href="{{ route('admin.announcements.index') }}">Announcements</a></li>
-                    <li><a href="{{ route('admin.events.index') }}">Events</a></li>
-                </ul>
-                <li><a href="{{ route('admin.jobs.index') }}" style="color: #C41E3A !important;">Job Postings</a></li>
-                <li><a href="{{ route('admin.carousel-images.index') }}" style="color: #C41E3A !important;">Carousel Images</a>
-                </li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                         @csrf
@@ -88,20 +74,6 @@
             <ul class="right hide-on-med-and-down">
                 @auth
                     @if(auth()->user()->is_admin)
-                        <li><a href="{{ route('admin.dashboard') }}" style="color: #C41E3A !important;">Dashboard</a></li>
-                        <li><a href="{{ route('admin.officials.index') }}" style="color: #C41E3A !important;">Officials</a></li>
-                        <li>
-                            <a class="dropdown-trigger" href="#!" data-target="admin-posts-dropdown"
-                                style="color: #C41E3A !important;">Posts<i class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-                        <ul id="admin-posts-dropdown" class="dropdown-content">
-                            <li><a href="{{ route('admin.news.index') }}">News</a></li>
-                            <li><a href="{{ route('admin.announcements.index') }}">Announcements</a></li>
-                            <li><a href="{{ route('admin.events.index') }}">Events</a></li>
-                        </ul>
-                        <li><a href="{{ route('admin.jobs.index') }}" style="color: #C41E3A !important;">Job Postings</a></li>
-                        <li><a href="{{ route('admin.carousel-images.index') }}" style="color: #C41E3A !important;">Carousel
-                                Images</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                                 @csrf
@@ -114,9 +86,9 @@
                         <li><a href="{{ route('about') }}">About Us</a></li>
                         <li><a href="{{ route('programs') }}">Programs</a></li>
                         <li><a href="{{ route('admissions') }}">Admissions</a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="categories-dropdown">Categories<i
+                        <li><a class="dropdown-trigger" href="#" data-target="categories-dropdown">Categories<i
                                     class="material-icons right">arrow_drop_down</i></a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="more-dropdown">More<i
+                        <li><a class="dropdown-trigger" href="#" data-target="more-dropdown">More<i
                                     class="material-icons right">arrow_drop_down</i></a></li>
                     @endif
                 @else
@@ -124,9 +96,9 @@
                     <li><a href="{{ route('about') }}">About Us</a></li>
                     <li><a href="{{ route('programs') }}">Programs</a></li>
                     <li><a href="{{ route('admissions') }}">Admissions</a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="categories-dropdown">Categories<i
+                    <li><a class="dropdown-trigger" href="#" data-target="categories-dropdown">Categories<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="more-dropdown">More<i
+                    <li><a class="dropdown-trigger" href="#" data-target="more-dropdown">More<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
                 @endauth
             </ul>

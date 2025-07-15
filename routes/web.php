@@ -39,6 +39,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('jobs', App\Http\Controllers\JobController::class);
     Route::resource('events', App\Http\Controllers\EventController::class);
     Route::resource('officials', App\Http\Controllers\Admin\OfficialController::class);
+    Route::resource('carousel-images', App\Http\Controllers\Admin\CarouselImageController::class);
 });
 
 require __DIR__ . '/auth.php';

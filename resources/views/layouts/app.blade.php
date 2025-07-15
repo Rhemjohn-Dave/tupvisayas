@@ -36,10 +36,24 @@
         @auth
             @if(auth()->user()->is_admin)
                 <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ route('admin.officials.index') }}" style="color: #C41E3A !important;">Officials</a></li>
                 <li>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <a class="dropdown-trigger" href="#!" data-target="admin-posts-dropdown"
+                        style="color: #C41E3A !important;">Posts<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+                <ul id="admin-posts-dropdown" class="dropdown-content">
+                    <li><a href="{{ route('admin.news.index') }}">News</a></li>
+                    <li><a href="{{ route('admin.announcements.index') }}">Announcements</a></li>
+                    <li><a href="{{ route('admin.events.index') }}">Events</a></li>
+                </ul>
+                <li><a href="{{ route('admin.jobs.index') }}" style="color: #C41E3A !important;">Job Postings</a></li>
+                <li><a href="{{ route('admin.carousel-images.index') }}" style="color: #C41E3A !important;">Carousel Images</a>
+                </li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                         @csrf
-                        <button type="submit" class="btn-flat" style="color: #C41E3A !important;">Logout</button>
+                        <button type="submit" class="btn-flat"
+                            style="color: #C41E3A !important; background: none; border: none; padding: 0 15px; height: 56px; line-height: 56px; text-transform: none; font-size: 1rem; cursor: pointer;">Logout</button>
                     </form>
                 </li>
             @endif
@@ -75,6 +89,19 @@
                 @auth
                     @if(auth()->user()->is_admin)
                         <li><a href="{{ route('admin.dashboard') }}" style="color: #C41E3A !important;">Dashboard</a></li>
+                        <li><a href="{{ route('admin.officials.index') }}" style="color: #C41E3A !important;">Officials</a></li>
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="admin-posts-dropdown"
+                                style="color: #C41E3A !important;">Posts<i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                        <ul id="admin-posts-dropdown" class="dropdown-content">
+                            <li><a href="{{ route('admin.news.index') }}">News</a></li>
+                            <li><a href="{{ route('admin.announcements.index') }}">Announcements</a></li>
+                            <li><a href="{{ route('admin.events.index') }}">Events</a></li>
+                        </ul>
+                        <li><a href="{{ route('admin.jobs.index') }}" style="color: #C41E3A !important;">Job Postings</a></li>
+                        <li><a href="{{ route('admin.carousel-images.index') }}" style="color: #C41E3A !important;">Carousel
+                                Images</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                                 @csrf

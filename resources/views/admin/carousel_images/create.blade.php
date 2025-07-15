@@ -5,10 +5,14 @@
         <h4>Add New Carousel Image</h4>
         <form action="{{ route('admin.carousel-images.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="input-field">
-                <label for="image_path" style="display:block; margin-bottom:8px;">Image <span
-                        style="color:red">*</span></label>
-                <input type="file" name="image_path" id="image_path" required accept="image/*">
+            <div class="file-field input-field">
+                <div class="btn red">
+                    <span>Image <span style="color:red">*</span></span>
+                    <input type="file" name="image_path" id="image_path" required accept="image/*">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload carousel image">
+                </div>
                 @error('image_path')
                     <span class="red-text">{{ $message }}</span>
                 @enderror

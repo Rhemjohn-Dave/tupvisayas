@@ -14,9 +14,14 @@
                         style="height: 80px; width: auto; border-radius: 4px; margin-bottom: 10px;">
                 @endif
             </div>
-            <div class="input-field">
-                <label for="image_path" style="display:block; margin-bottom:8px;">Replace Image</label>
-                <input type="file" name="image_path" id="image_path" accept="image/*">
+            <div class="file-field input-field">
+                <div class="btn orange">
+                    <span>Replace Image</span>
+                    <input type="file" name="image_path" id="image_path" accept="image/*">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload new carousel image (optional)">
+                </div>
                 @error('image_path')
                     <span class="red-text">{{ $message }}</span>
                 @enderror
@@ -37,7 +42,7 @@
                 @enderror
             </div>
             <button type="submit" class="btn orange">Update Image</button>
-            <a href="{{ route('admin.carousel-images.index') }}" class="btn grey">Cancel</a>
+            <a href="{{ route('admin.carousel-images.index') }}" class="btn red white-text">Cancel</a>
         </form>
     </div>
 @endsection

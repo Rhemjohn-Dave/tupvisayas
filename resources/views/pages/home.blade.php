@@ -1,30 +1,123 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Welcome Section with Executive Officials on the Right -->
+    <!-- Materialize Carousel -->
     <div class="section" style="padding-top:2rem;">
-        <div class="row"
-            style="max-width:1200px; margin:0 auto; display:flex; justify-content:center; align-items:flex-start; flex-wrap:wrap;">
-            <!-- Main Welcome Content -->
-            <div class="col s12 m8 order-1 order-m-1" style="float:none;">
-                <!-- <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" style="max-width:100px;"> -->
-                <h2 style="color:#C41E3A; font-weight:700;">Welcome to TUP Visayas Campus</h2>
-                <div style="border-top:3px solid #C41E3A; width:80px; margin:1rem 0;"></div>
-                <p style="font-size:1.2rem; max-width:600px;">
-                    Technological University of the Philippines – Visayas Campus is a leading institution for engineering
-                    and technology education in the region, committed to academic excellence and nation-building.
-                </p>
-                <!-- Optional: Add a campus image or video here -->
-                <div class="video-container" style="margin-top:1.5rem;">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/qV02hsbTcEY"
-                        title="TUP Visayas Campus" frameborder="0" allowfullscreen></iframe>
-                </div>
+        @if($carouselImages->count())
+            <div class="carousel carousel-slider" id="homepageCarousel">
+                @foreach($carouselImages as $img)
+                    <a class="carousel-item" href="#carousel-{{ $img->id }}">
+                        <img src="{{ asset('storage/' . $img->image_path) }}" alt="Carousel Image"
+                            style="max-height:420px;width:100%;object-fit:cover;">
+                    </a>
+                @endforeach
             </div>
-            <!-- Executive Officials -->
-            <div class="col s12 m4 order-2 order-m-2" style="min-width:260px; max-width:380px; float:none;">
-                <h5 style="color:#C41E3A; font-weight:600;">TUP - Visayas Campus Executive Officials</h5>
-                <div style="border-top:3px solid #C41E3A; width:60px; margin-bottom:1.2rem;"></div>
-                @foreach($officials_preview as $official)
+        @endif
+    </div>
+
+    <!-- Previews: News, Events, Announcements -->
+    <div class="section" style="max-width:1200px;margin:0 auto;">
+        <div class="row">
+            <div class="col s12 m4">
+                <h5 style="font-weight:600; color:#C41E3A;">Latest News</h5>
+                @foreach($news as $item)
+                    <div class="card small hoverable">
+                        @if($item->picture)
+                            <div class="card-image">
+                                <img src="{{ asset('storage/' . $item->picture) }}" alt="News Image"
+                                    style="height:120px;object-fit:cover;">
+                            </div>
+                        @endif
+                        <div class="card-content">
+                            <span class="card-title" style="font-size:1.1rem;">{{ $item->title }}</span>
+                            <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ route('news.show', $item->id) }}" class="red-text">Read More</a>
+                        </div>
+                    </div>
+                @endforeach
+                <a href="{{ route('news_events') }}" class="btn-flat red-text">View All News & Events</a>
+            </div>
+            <div class="col s12 m4">
+                <h5 style="font-weight:600; color:#C41E3A;">Events</h5>
+                @foreach($events as $item)
+                    <div class="card small hoverable">
+                        @if($item->picture)
+                            <div class="card-image">
+                                <img src="{{ asset('storage/' . $item->picture) }}" alt="Event Image"
+                                    style="height:120px;object-fit:cover;">
+                            </div>
+                        @endif
+                        <div class="card-content">
+                            <span class="card-title" style="font-size:1.1rem;">{{ $item->title }}</span>
+                            <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ route('events.show', $item->id) }}" class="red-text">Read More</a>
+                        </div>
+                    </div>
+                @endforeach
+                <a href="{{ route('news_events') }}" class="btn-flat red-text">View All Events</a>
+            </div>
+            <div class="col s12 m4">
+                <h5 style="font-weight:600; color:#C41E3A;">Announcements</h5>
+                @foreach($announcements as $item)
+                    <div class="card small hoverable">
+                        @if($item->picture)
+                            <div class="card-image">
+                                <img src="{{ asset('storage/' . $item->picture) }}" alt="Announcement Image"
+                                    style="height:120px;object-fit:cover;">
+                            </div>
+                        @endif
+                        <div class="card-content">
+                            <span class="card-title" style="font-size:1.1rem;">{{ $item->title }}</span>
+                            <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ route('announcements.show', $item->id) }}" class="red-text">Read More</a>
+                        </div>
+                    </div>
+                @endforeach
+                <a href="{{ route('announcements') }}" class="btn-flat red-text">View All Announcements</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Postings Preview -->
+    <div class="section" style="max-width:1200px;margin:0 auto;">
+        <h5 style="font-weight:600; color:#C41E3A;">Job Postings</h5>
+        <div class="row">
+            @foreach($jobs as $item)
+                <div class="col s12 m4">
+                    <div class="card small hoverable">
+                        @if($item->picture)
+                            <div class="card-image">
+                                <img src="{{ asset('storage/' . $item->picture) }}" alt="Job Image"
+                                    style="height:120px;object-fit:cover;">
+                            </div>
+                        @endif
+                        <div class="card-content">
+                            <span class="card-title" style="font-size:1.1rem;">{{ $item->title }}</span>
+                            <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ route('jobs.show', $item->id) }}" class="red-text">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <a href="{{ route('jobs') }}" class="btn-flat red-text">View All Job Postings</a>
+    </div>
+
+    <!-- Executive Officials Section (Retained) -->
+    <div class="section" style="max-width:1200px;margin:0 auto;">
+        <h5 style="color:#C41E3A; font-weight:600;">TUP - Visayas Campus Executive Officials</h5>
+        <div style="border-top:3px solid #C41E3A; width:60px; margin-bottom:1.2rem;"></div>
+        <div class="row">
+            @foreach($officials_preview as $official)
+                <div class="col s12 m4">
                     <div class="official-card" style="margin-bottom:2rem; text-align:center;">
                         <img src="{{ $official->photo ? asset('storage/' . $official->photo) : 'https://via.placeholder.com/200x200' }}"
                             alt="{{ $official->name }}" class="responsive-img"
@@ -34,45 +127,15 @@
                         <a href="{{ route('officials.show', $official->id) }}" class="red-text text-darken-2"
                             style="font-size:0.95rem;">View Full Profile</a>
                     </div>
-                @endforeach
-                <div class="center-align">
-                    <a href="{{ route('officials') }}" class="btn red darken-2">View All Officials</a>
                 </div>
-            </div>
+            @endforeach
+        </div>
+        <div class="center-align">
+            <a href="{{ route('officials') }}" class="btn red white-text">View All Officials</a>
         </div>
     </div>
-    <style>
-        @media (max-width: 992px) {
-            .order-1 {
-                order: 1 !important;
-            }
 
-            .order-2 {
-                order: 2 !important;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .order-1 {
-                order: 1 !important;
-            }
-
-            .order-2 {
-                order: 2 !important;
-            }
-
-            .official-card img {
-                width: 100px !important;
-                height: 100px !important;
-            }
-
-            .section h2 {
-                font-size: 1.5rem !important;
-            }
-        }
-    </style>
-
-    <!-- TUP Campuses -->
+    <!-- TUP Campuses in the Philippines (Retained) -->
     <div class="section">
         <h4 style="color:#C41E3A;">TUP Campuses in the Philippines</h4>
         <div class="row center-align">
@@ -118,27 +181,19 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Partners & Accreditations -->
-    <div class="section center-align" style="margin-top:2rem;">
-        <h5 style="color:#C41E3A;" class="center-align">Our Partners & Accreditations</h5>
-        <div class="row" style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
-            <div class="center-align" style="flex: 0 0 auto;"><img src="{{ asset('images/ched-logo.png') }}" alt="CHED"
-                    style="max-width:80px;"></div>
-            <div class="center-align" style="flex: 0 0 auto;"><img src="{{ asset('images/iso-logo.png') }}" alt="ISO"
-                    style="max-width:80px;"></div>
-            <div class="center-align" style="flex: 0 0 auto;"><img src="{{ asset('images/TUV_Rheinland_Logo.png') }}"
-                    alt="tuv" style="max-width:80px;"></div>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.carousel');
-            M.Carousel.init(elems, { fullWidth: true, indicators: true });
+            var elems = document.querySelectorAll('.carousel.carousel-slider');
+            var instances = M.Carousel.init(elems, { fullWidth: true, indicators: true });
+            // Auto-scroll every 4 seconds
+            if (instances.length > 0) {
+                setInterval(function () {
+                    instances[0].next();
+                }, 4000);
+            }
         });
     </script>
 @endsection

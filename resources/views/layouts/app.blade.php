@@ -165,6 +165,21 @@
         });
     </script>
     @yield('scripts')
+    <script src="https://cdn.tiny.cloud/1/hs2vg824j6roaf09c4zbod91ua2vy8gy4slpjztc5rjuosx6/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof tinymce !== 'undefined') {
+                tinymce.init({
+                    selector: 'textarea.wysiwyg',
+                    plugins: 'lists link image table code',
+                    toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | code',
+                    menubar: false,
+                    height: 350
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

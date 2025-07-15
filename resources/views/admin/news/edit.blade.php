@@ -7,11 +7,22 @@
             @csrf
             @method('PUT')
             <div class="input-field">
+                <label for="category_id" class="active">Category</label>
+                <select name="category_id" id="category_id" required class="browser-default">
+                    <option value="" disabled>Select Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ $news->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="input-field">
                 <input type="text" name="title" id="title" value="{{ $news->title }}" required>
                 <label for="title" class="active">Title</label>
             </div>
             <div class="input-field">
-                <textarea name="content" id="content" class="materialize-textarea" required>{{ $news->content }}</textarea>
+                <textarea name="content" id="content" class="materialize-textarea wysiwyg">{{ $news->content }}</textarea>
                 <label for="content" class="active">Content</label>
             </div>
             <div class="file-field input-field">

@@ -6,7 +6,16 @@
         <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="input-field">
-                <select name="type" required>
+                <label for="category_id" class="active">Category</label>
+                <select name="category_id" id="category_id" required class="browser-default">
+                    <option value="" disabled selected>Select Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="input-field">
+                <select name="type">
                     <option value="" disabled selected>Select Post Type</option>
                     <option value="news">News</option>
                     <option value="announcement">Announcement</option>
@@ -20,7 +29,7 @@
                 <label for="title">Title</label>
             </div>
             <div class="input-field">
-                <textarea name="content" id="content" class="materialize-textarea" required></textarea>
+                <textarea name="content" id="content" class="materialize-textarea wysiwyg"></textarea>
                 <label for="content">Content</label>
             </div>
             <div class="file-field input-field">

@@ -10,11 +10,26 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $news = \App\Models\News::orderBy('created_at', 'desc')->get();
-        $events = \App\Models\Event::orderBy('created_at', 'desc')->get();
-        return view('pages.news_events', compact('news', 'events'));
+        $categories = \App\Models\Category::all();
+        $category = null;
+
+        if ($request->has('category')) {
+            $category = \App\Models\Category::where('slug', $request->category)->first();
+            if ($category) {
+                $news = \App\Models\News::where('category_id', $category->id)->orderBy('created_at', 'desc')->get();
+                $announcements = \App\Models\Announcement::where('category_id', $category->id)->orderBy('created_at', 'desc')->get();
+            } else {
+                $news = collect();
+                $announcements = collect();
+            }
+        } else {
+            $news = \App\Models\News::orderBy('created_at', 'desc')->get();
+            $announcements = \App\Models\Announcement::orderBy('created_at', 'desc')->get();
+        }
+
+        return view('pages.news_events', compact('news', 'announcements', 'categories', 'category'));
     }
 
     /**
@@ -39,7 +54,8 @@ class NewsController extends Controller
     public function show($id)
     {
         $news = \App\Models\News::findOrFail($id);
-        return view('pages.news_show', compact('news'));
+        $categories = \App\Models\Category::all();
+        return view('pages.news_show', compact('news', 'categories'));
     }
 
     /**
@@ -47,7 +63,8 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        return view('admin.news.edit', compact('news'));
+        $categories = \App\Models\Category::all();
+        return view('admin.news.edit', compact('news', 'categories'));
     }
 
     /**
@@ -58,10 +75,11 @@ class NewsController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->only(['title', 'content']);
+        $data = $request->only(['title', 'content', 'category_id']);
 
         if ($request->hasFile('picture')) {
             // Delete old image if exists

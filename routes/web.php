@@ -40,6 +40,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('events', App\Http\Controllers\EventController::class);
     Route::resource('officials', App\Http\Controllers\Admin\OfficialController::class);
     Route::resource('carousel-images', App\Http\Controllers\Admin\CarouselImageController::class);
+    Route::get('categories', [App\Http\Controllers\Admin\PostController::class, 'indexCategory'])->name('categories.index');
+    Route::get('categories/create', [App\Http\Controllers\Admin\PostController::class, 'createCategory'])->name('categories.create');
+    Route::post('categories', [App\Http\Controllers\Admin\PostController::class, 'storeCategory'])->name('categories.store');
 });
 
 require __DIR__ . '/auth.php';

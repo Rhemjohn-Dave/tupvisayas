@@ -15,72 +15,46 @@
         @endif
     </div>
 
-    <!-- Previews: News, Events, Announcements -->
+    <!-- Latest Updates Carousel -->
     <div class="section" style="max-width:1200px;margin:0 auto;">
-        <div class="row">
-            <div class="col s12 m4">
-                <h5 style="font-weight:600; color:#C41E3A;">Latest News</h5>
-                @foreach($news as $item)
-                    <div class="card small hoverable">
-                        @if($item->picture)
-                            <div class="card-image">
-                                <img src="{{ asset('storage/' . $item->picture) }}" alt="News Image"
-                                    style="height:120px;object-fit:cover;">
+        <h4 style="font-weight:600; color:#C41E3A; text-align:center;">Latest Updates</h4>
+        <div style="position:relative;">
+            <a class="btn-floating btn-large red white-text" id="updates-prev"
+                style="position:absolute;left:-30px;top:40%;z-index:2;"><i class="material-icons">chevron_left</i></a>
+            <div class="carousel" id="updatesCarousel">
+                @foreach($latestUpdates as $item)
+                        <a class="carousel-item" href="{{
+                    $item->type === 'News' ? route('news.show', $item->id) :
+                    ($item->type === 'Event' ? route('events.show', $item->id) :
+                        route('announcements.show', $item->id))
+                                }}" style="width:350px;">
+                            <div class="card hoverable" style="overflow:hidden;position:relative;">
+                                <!-- Category Label -->
+                                <span
+                                    style="position:absolute;top:12px;left:12px;background:#f5f5f5;color:#C41E3A;font-weight:600;font-size:0.95rem;padding:3px 12px;border-radius:12px;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,0.04);letter-spacing:0.5px;">
+                                    {{ $item->type }}
+                                </span>
+                                @if($item->picture)
+                                    <div class="card-image">
+                                        <img src="{{ asset('storage/' . $item->picture) }}" alt="{{ $item->type }} Image"
+                                            style="height:160px;object-fit:cover;">
+                                    </div>
+                                @endif
+                                <div class="card-content" style="min-height:120px;">
+                                    <span style="font-weight:600;font-size:1.1rem;">{{ $item->title }}</span>
+                                    <div style="font-size:0.95rem;color:#888;margin-bottom:4px;">
+                                        {{ $item->created_at->format('M d, Y') }}</div>
+                                    <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
+                                </div>
+                                <div class="card-action">
+                                    <span class="red-text">Read More</span>
+                                </div>
                             </div>
-                        @endif
-                        <div class="card-content">
-                            <span class="card-title" style="font-size:1.1rem;">{{ $item->title }}</span>
-                            <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="{{ route('news.show', $item->id) }}" class="red-text">Read More</a>
-                        </div>
-                    </div>
+                        </a>
                 @endforeach
-                <a href="{{ route('news_events') }}" class="btn-flat red-text">View All News & Events</a>
             </div>
-            <div class="col s12 m4">
-                <h5 style="font-weight:600; color:#C41E3A;">Events</h5>
-                @foreach($events as $item)
-                    <div class="card small hoverable">
-                        @if($item->picture)
-                            <div class="card-image">
-                                <img src="{{ asset('storage/' . $item->picture) }}" alt="Event Image"
-                                    style="height:120px;object-fit:cover;">
-                            </div>
-                        @endif
-                        <div class="card-content">
-                            <span class="card-title" style="font-size:1.1rem;">{{ $item->title }}</span>
-                            <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="{{ route('events.show', $item->id) }}" class="red-text">Read More</a>
-                        </div>
-                    </div>
-                @endforeach
-                <a href="{{ route('news_events') }}" class="btn-flat red-text">View All Events</a>
-            </div>
-            <div class="col s12 m4">
-                <h5 style="font-weight:600; color:#C41E3A;">Announcements</h5>
-                @foreach($announcements as $item)
-                    <div class="card small hoverable">
-                        @if($item->picture)
-                            <div class="card-image">
-                                <img src="{{ asset('storage/' . $item->picture) }}" alt="Announcement Image"
-                                    style="height:120px;object-fit:cover;">
-                            </div>
-                        @endif
-                        <div class="card-content">
-                            <span class="card-title" style="font-size:1.1rem;">{{ $item->title }}</span>
-                            <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="{{ route('announcements.show', $item->id) }}" class="red-text">Read More</a>
-                        </div>
-                    </div>
-                @endforeach
-                <a href="{{ route('announcements') }}" class="btn-flat red-text">View All Announcements</a>
-            </div>
+            <a class="btn-floating btn-large red white-text" id="updates-next"
+                style="position:absolute;right:-30px;top:40%;z-index:2;"><i class="material-icons">chevron_right</i></a>
         </div>
     </div>
 
@@ -194,6 +168,16 @@
                     instances[0].next();
                 }, 4000);
             }
+
+            // Latest Updates carousel (not fullWidth)
+            var updatesElem = document.getElementById('updatesCarousel');
+            var updatesInstance = M.Carousel.init(updatesElem, { dist: 0, shift: 0, padding: 20, indicators: true });
+            document.getElementById('updates-prev').onclick = function () {
+                updatesInstance.prev();
+            };
+            document.getElementById('updates-next').onclick = function () {
+                updatesInstance.next();
+            };
         });
     </script>
 @endsection

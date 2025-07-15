@@ -46,7 +46,8 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        return view('admin.jobs.edit', compact('job'));
+        $categories = \App\Models\Category::all();
+        return view('admin.jobs.edit', compact('job', 'categories'));
     }
 
     /**
@@ -57,10 +58,11 @@ class JobController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->only(['title', 'content']);
+        $data = $request->only(['title', 'content', 'category_id']);
 
         if ($request->hasFile('picture')) {
             // Delete old image if exists

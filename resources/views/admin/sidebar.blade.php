@@ -19,5 +19,8 @@
         <li><a href="{{ route('admin.categories.index') }}" class="white-text"
                 style="display:flex;align-items:center;padding:14px 24px;"><i class="material-icons left"
                     style="margin-right:12px;">category</i>Categories</a></li>
+        <li><a href="{{ route('admin.college-pages.index') }}" class="white-text"
+                style="display:flex;align-items:center;padding:14px 24px;"><i class="material-icons left"
+                    style="margin-right:12px;">school</i>Manage Academics Pages</a></li>
     </ul>
 </div>

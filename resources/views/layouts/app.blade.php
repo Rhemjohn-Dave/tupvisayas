@@ -24,7 +24,20 @@
     <ul class="sidenav" id="mobile-nav">
         <li><a href="{{ route('home') }}">Home</a></li>
         <li><a href="{{ route('about') }}">About Us</a></li>
-        <li><a href="{{ route('programs') }}">Programs</a></li>
+        <li>
+            <a class="dropdown-trigger" href="#" data-target="academics-mobile-dropdown">Academics<i
+                    class="material-icons right">arrow_drop_down</i></a>
+        </li>
+        <ul id="academics-mobile-dropdown" class="dropdown-content">
+            @php
+                $collegePages = \App\Models\CollegePage::all();
+            @endphp
+            @foreach($collegePages as $college)
+                <li><a
+                        href="{{ url('/academics/' . $college->college) }}">{{ ucwords(str_replace('_', ' ', $college->college)) }}</a>
+                </li>
+            @endforeach
+        </ul>
         <li><a href="{{ route('admissions') }}">Admissions</a></li>
         <li><a href="{{ route('facilities') }}">Facilities</a></li>
         <li><a href="{{ route('student_services') }}">Student Services</a></li>
@@ -57,6 +70,17 @@
         <li><a href="{{ route('news_events') }}">News & Events</a></li>
         <li><a href="{{ route('jobs') }}">Job Listings</a></li>
     </ul>
+    <!-- Academics Dropdown Structure -->
+    <ul id="academics-dropdown" class="dropdown-content">
+        @php
+            $collegePages = \App\Models\CollegePage::all();
+        @endphp
+        @foreach($collegePages as $college)
+            <li><a
+                    href="{{ url('/academics/' . $college->college) }}">{{ ucwords(str_replace('_', ' ', $college->college)) }}</a>
+            </li>
+        @endforeach
+    </ul>
     <nav class="z-depth-1 white">
         <div class="nav-wrapper container">
             <!-- Hamburger icon for mobile -->
@@ -84,7 +108,8 @@
                     @else
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('about') }}">About Us</a></li>
-                        <li><a href="{{ route('programs') }}">Programs</a></li>
+                        <li><a class="dropdown-trigger" href="#" data-target="academics-dropdown">Academics<i
+                                    class="material-icons right">arrow_drop_down</i></a></li>
                         <li><a href="{{ route('admissions') }}">Admissions</a></li>
                         <li><a class="dropdown-trigger" href="#" data-target="categories-dropdown">Categories<i
                                     class="material-icons right">arrow_drop_down</i></a></li>
@@ -94,7 +119,8 @@
                 @else
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ route('programs') }}">Programs</a></li>
+                    <li><a class="dropdown-trigger" href="#" data-target="academics-dropdown">Academics<i
+                                class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a href="{{ route('admissions') }}">Admissions</a></li>
                     <li><a class="dropdown-trigger" href="#" data-target="categories-dropdown">Categories<i
                                 class="material-icons right">arrow_drop_down</i></a></li>

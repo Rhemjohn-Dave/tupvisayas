@@ -32,7 +32,7 @@
                                 <td>
                                     @if($official->photo)
                                         <img src="{{ asset('storage/' . $official->photo) }}" alt="{{ $official->name }}"
-                                            style="max-width:50px;">
+                                            style="width:80px; height:80px; object-fit:cover; border-radius:8px;">
                                     @else
                                         N/A
                                     @endif

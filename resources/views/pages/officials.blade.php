@@ -9,7 +9,8 @@
                     <div class="card">
                         <div class="card-image">
                             <img src="{{ $official->photo ? asset('storage/' . $official->photo) : 'https://via.placeholder.com/200x200' }}"
-                                alt="{{ $official->name }}">
+                                alt="{{ $official->name }}"
+                                style="width:300px; height:300px; object-fit:cover; display:block; margin:auto; border-radius:8px;">
                         </div>
                         <div class="card-content center-align">
                             <span class="card-title">{{ $official->name }}</span>

@@ -27,7 +27,7 @@
                     $item->type === 'News' ? route('news.show', $item->id) :
                     ($item->type === 'Event' ? route('events.show', $item->id) :
                         route('announcements.show', $item->id))
-                                            }}" style="width:350px;">
+                                                        }}" style="width:350px;">
                             <div class="card hoverable" style="overflow:hidden;position:relative;">
                                 <!-- Category Label -->
                                 <span
@@ -96,7 +96,7 @@
                     <div class="official-card" style="margin-bottom:2rem; text-align:center;">
                         <img src="{{ $official->photo ? asset('storage/' . $official->photo) : 'https://via.placeholder.com/200x200' }}"
                             alt="{{ $official->name }}" class="responsive-img"
-                            style="width:140px; height:140px; object-fit:cover; display:block; margin:0 auto 0.5rem auto;">
+                            style="width:300px; height:300px; object-fit:cover; display:block; margin:0 auto 0.5rem auto; border-radius:8px;">
                         <span style="font-weight:700;">{{ $official->name }}</span><br>
                         <span style="font-size:0.95rem;">{{ $official->position }}</span><br>
                         <a href="{{ route('officials.show', $official->id) }}" class="red-text text-darken-2"

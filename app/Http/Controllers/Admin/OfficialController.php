@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Official;
+use Intervention\Image\Facades\Image;
 
 class OfficialController extends Controller
 {
@@ -40,7 +41,14 @@ class OfficialController extends Controller
             'social_links.*' => 'nullable|string',
         ]);
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('photos/officials', 'public');
+            $image = $request->file('photo');
+            $filename = uniqid('official_') . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath());
+            $img->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            });
+            $img->save(public_path('storage/photos/officials/' . $filename));
+            $data['photo'] = 'photos/officials/' . $filename;
         }
         if (isset($data['social_links'])) {
             $data['social_links'] = json_encode($data['social_links']);
@@ -82,7 +90,14 @@ class OfficialController extends Controller
             'social_links.*' => 'nullable|string',
         ]);
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('photos/officials', 'public');
+            $image = $request->file('photo');
+            $filename = uniqid('official_') . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath());
+            $img->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            });
+            $img->save(public_path('storage/photos/officials/' . $filename));
+            $data['photo'] = 'photos/officials/' . $filename;
         }
         if (isset($data['social_links'])) {
             $data['social_links'] = json_encode($data['social_links']);

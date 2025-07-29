@@ -41,7 +41,7 @@
                         @if($official->photo)
                             <div style="margin-top:10px;">
                                 <img src="{{ asset('storage/' . $official->photo) }}" alt="Current Photo"
-                                    style="max-width:100px;">
+                                    style="width:150px; height:150px; object-fit:cover; border-radius:8px;">
                             </div>
                         @endif
                     </div>

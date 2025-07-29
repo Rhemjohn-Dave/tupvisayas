@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col s12 m4 center-align">
                 <img src="{{ $official->photo ? asset('storage/' . $official->photo) : 'https://via.placeholder.com/200x200' }}"
-                    alt="{{ $official->name }}" class="circle responsive-img" style="max-width:200px;">
+                    alt="{{ $official->name }}" class="circle responsive-img"
+                    style="width:300px; height:300px; object-fit:cover; display:block; margin:auto;">
                 <h4>{{ $official->name }}</h4>
                 <h6>{{ $official->position }}</h6>
             </div>

@@ -21,7 +21,8 @@
                             <p>{{ Str::limit($item->content, 120) }}</p>
                         </div>
                         <div class="card-action">
-                            <a href="{{ route('jobs.show', $item->id) }}" class="btn-flat red-text text-darken-2">Read More</a>
+                            <a href="{{ route('jobs.show', $item->slug) }}" class="btn-flat red-text text-darken-2">Read
+                                More</a>
                         </div>
                     </div>
                 </div>

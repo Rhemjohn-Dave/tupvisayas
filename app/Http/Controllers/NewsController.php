@@ -45,15 +45,32 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $data = $request->only(['title', 'content', 'category_id']);
+
+        // Generate slug from title
+        $data['slug'] = \Illuminate\Support\Str::slug($request->title);
+
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $request->file('picture')->store('uploads', 'public');
+        }
+
+        \App\Models\News::create($data);
+
+        return redirect()->route('admin.dashboard')->with('success', 'News created successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(News $news)
     {
-        $news = \App\Models\News::findOrFail($id);
         $categories = \App\Models\Category::all();
         return view('pages.news_show', compact('news', 'categories'));
     }
@@ -80,6 +97,11 @@ class NewsController extends Controller
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);
+
+        // Update slug if title changed
+        if ($news->title !== $request->title) {
+            $data['slug'] = \Illuminate\Support\Str::slug($request->title);
+        }
 
         if ($request->hasFile('picture')) {
             // Delete old image if exists

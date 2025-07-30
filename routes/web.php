@@ -34,10 +34,10 @@ Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index']
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
 Route::view('/contact', 'pages.contact')->name('contact');
-Route::get('/news/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
-Route::get('/announcements/{id}', [App\Http\Controllers\AnnouncementController::class, 'show'])->name('announcements.show');
-Route::get('/jobs/{id}', [App\Http\Controllers\JobController::class, 'show'])->name('jobs.show');
-Route::get('/events/{id}', [App\Http\Controllers\EventController::class, 'show'])->name('events.show');
+Route::get('/news/{news}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
+Route::get('/announcements/{announcement}', [App\Http\Controllers\AnnouncementController::class, 'show'])->name('announcements.show');
+Route::get('/jobs/{job}', [App\Http\Controllers\JobController::class, 'show'])->name('jobs.show');
+Route::get('/events/{event}', [App\Http\Controllers\EventController::class, 'show'])->name('events.show');
 Route::get('/academics/{college}', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->name('academics.show');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

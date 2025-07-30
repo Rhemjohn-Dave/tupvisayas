@@ -29,15 +29,32 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $data = $request->only(['title', 'content', 'category_id']);
+
+        // Generate slug from title
+        $data['slug'] = \Illuminate\Support\Str::slug($request->title);
+
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $request->file('picture')->store('uploads', 'public');
+        }
+
+        \App\Models\Event::create($data);
+
+        return redirect()->route('admin.dashboard')->with('success', 'Event created successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        $event = \App\Models\Event::findOrFail($id);
         return view('pages.event_show', compact('event'));
     }
 
@@ -63,6 +80,11 @@ class EventController extends Controller
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);
+
+        // Update slug if title changed
+        if ($event->title !== $request->title) {
+            $data['slug'] = \Illuminate\Support\Str::slug($request->title);
+        }
 
         if ($request->hasFile('picture')) {
             // Delete old image if exists

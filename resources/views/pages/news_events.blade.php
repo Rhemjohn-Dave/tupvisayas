@@ -25,7 +25,8 @@
                             <p>{{ \Illuminate\Support\Str::limit(strip_tags($item->content), 120) }}</p>
                         </div>
                         <div class="card-action">
-                            <a href="{{ route('news.show', $item->id) }}" class="btn-flat red-text text-darken-2">Read More</a>
+                            <a href="{{ route('news.show', $item->slug) }}" class="btn-flat red-text text-darken-2">Read
+                                More</a>
                         </div>
                     </div>
                 @endforeach
@@ -45,7 +46,7 @@
                             <p>{{ \Illuminate\Support\Str::limit(strip_tags($item->content), 120) }}</p>
                         </div>
                         <div class="card-action">
-                            <a href="{{ route('announcements.show', $item->id) }}"
+                            <a href="{{ route('announcements.show', $item->slug) }}"
                                 class="btn-flat green-text text-darken-2">Read More</a>
                         </div>
                     </div>

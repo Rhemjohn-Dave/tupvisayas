@@ -74,7 +74,7 @@
                             <div style="font-size:0.95rem;color:#888;">{{ $item->created_at->format('M d, Y') }}</div>
                         </div>
                         <div class="card-action" style="padding:0 1rem 1rem 1rem;">
-                            <a href="{{ route('announcements.show', $item->id) }}" class="red-text">Read More</a>
+                            <a href="{{ route('announcements.show', $item->slug) }}" class="red-text">Read More</a>
                         </div>
                     </div>
                 </div>

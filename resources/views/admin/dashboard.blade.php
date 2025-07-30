@@ -26,7 +26,8 @@
                     this dashboard.</p>
                 @if(session('success'))
                     <div class="card-panel green lighten-4 green-text text-darken-4" style="border-radius:8px;">
-                        {{ session('success') }}</div>
+                        {{ session('success') }}
+                    </div>
                 @endif
                 <a href="{{ route('admin.posts.create') }}" class="btn waves-effect waves-light"
                     style="background-color:#C41E3A; margin-bottom:1.5rem; color: white !important;">
@@ -47,14 +48,17 @@
                             @foreach($news as $item)
                                 <tr>
                                     <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                        {{ Str::limit($item->title, 50) }}</td>
+                                        {{ Str::limit($item->title, 50) }}
+                                    </td>
                                     <td><span
                                             style="background:#C41E3A;color:white;padding:4px 16px;border-radius:16px;font-weight:600;font-size:0.95rem;">News</span>
                                     </td>
                                     <td>{{ $item->category ? $item->category->name : '-' }}</td>
                                     <td>{{ $item->created_at->format('M d, Y') }}</td>
                                     <td>
-                                        <a href="{{ route('news.show', $item->id) }}" class="btn-small waves-effect waves-light" style="background:#C41E3A;" target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
+                                        <a href="{{ route('news.show', $item->slug) }}"
+                                            class="btn-small waves-effect waves-light" style="background:#C41E3A;"
+                                            target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
                                         <a href="{{ route('admin.news.edit', $item->id) }}"
                                             class="btn-small waves-effect waves-light" style="background:#444;" title="Edit"><i
                                                 class="material-icons white-text">edit</i></a>
@@ -73,14 +77,15 @@
                             @foreach($announcements as $item)
                                 <tr>
                                     <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                        {{ Str::limit($item->title, 50) }}</td>
+                                        {{ Str::limit($item->title, 50) }}
+                                    </td>
                                     <td><span
                                             style="background:#C41E3A;color:white;padding:4px 16px;border-radius:16px;font-weight:600;font-size:0.95rem;">Announcement</span>
                                     </td>
                                     <td>{{ $item->category ? $item->category->name : '-' }}</td>
                                     <td>{{ $item->created_at->format('M d, Y') }}</td>
                                     <td>
-                                        <a href="{{ route('announcements.show', $item->id) }}"
+                                        <a href="{{ route('announcements.show', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#C41E3A;"
                                             target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
                                         <a href="{{ route('admin.announcements.edit', $item->id) }}"
@@ -101,16 +106,17 @@
                             @foreach($jobs as $item)
                                 <tr>
                                     <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                        {{ Str::limit($item->title, 50) }}</td>
+                                        {{ Str::limit($item->title, 50) }}
+                                    </td>
                                     <td><span
                                             style="background:#C41E3A;color:white;padding:4px 16px;border-radius:16px;font-weight:600;font-size:0.95rem;">Job</span>
                                     </td>
                                     <td>{{ $item->category ? $item->category->name : '-' }}</td>
                                     <td>{{ $item->created_at->format('M d, Y') }}</td>
                                     <td>
-                                        <a href="{{ route('jobs.show', $item->id) }}" class="btn-small waves-effect waves-light"
-                                            style="background:#C41E3A;" target="_blank" title="View"><i
-                                                class="material-icons white-text">visibility</i></a>
+                                        <a href="{{ route('jobs.show', $item->slug) }}"
+                                            class="btn-small waves-effect waves-light" style="background:#C41E3A;"
+                                            target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
                                         <a href="{{ route('admin.jobs.edit', $item->id) }}"
                                             class="btn-small waves-effect waves-light" style="background:#444;" title="Edit"><i
                                                 class="material-icons white-text">edit</i></a>
@@ -129,14 +135,15 @@
                             @foreach($events as $item)
                                 <tr>
                                     <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                        {{ Str::limit($item->title, 50) }}</td>
+                                        {{ Str::limit($item->title, 50) }}
+                                    </td>
                                     <td><span
                                             style="background:#C41E3A;color:white;padding:4px 16px;border-radius:16px;font-weight:600;font-size:0.95rem;">Event</span>
                                     </td>
                                     <td>{{ $item->category ? $item->category->name : '-' }}</td>
                                     <td>{{ $item->created_at->format('M d, Y') }}</td>
                                     <td>
-                                        <a href="{{ route('events.show', $item->id) }}"
+                                        <a href="{{ route('events.show', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#C41E3A;"
                                             target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
                                         <a href="{{ route('admin.events.edit', $item->id) }}"

@@ -19,7 +19,8 @@
                             <p>{{ Str::limit($item->content, 120) }}</p>
                         </div>
                         <div class="card-action">
-                            <a href="{{ route('announcements.show', $item->id) }}" class="btn-flat red-text text-darken-2">Read
+                            <a href="{{ route('announcements.show', $item->slug) }}"
+                                class="btn-flat red-text text-darken-2">Read
                                 More</a>
                         </div>
                     </div>

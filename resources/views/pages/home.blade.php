@@ -24,10 +24,10 @@
             <div class="carousel" id="updatesCarousel">
                 @foreach($latestUpdates as $item)
                         <a class="carousel-item" href="{{
-                    $item->type === 'News' ? route('news.show', $item->id) :
-                    ($item->type === 'Event' ? route('events.show', $item->id) :
-                        route('announcements.show', $item->id))
-                                                        }}" style="width:350px;">
+                    $item->type === 'News' ? route('news.show', $item->slug) :
+                    ($item->type === 'Event' ? route('events.show', $item->slug) :
+                        route('announcements.show', $item->slug))
+                                                                                            }}" style="width:350px;">
                             <div class="card hoverable" style="overflow:hidden;position:relative;">
                                 <!-- Category Label -->
                                 <span
@@ -77,7 +77,7 @@
                             <p>{{ \Illuminate\Support\Str::limit($item->content, 80) }}</p>
                         </div>
                         <div class="card-action">
-                            <a href="{{ route('jobs.show', $item->id) }}" class="red-text">Read More</a>
+                            <a href="{{ route('jobs.show', $item->slug) }}" class="red-text">Read More</a>
                         </div>
                     </div>
                 </div>

@@ -38,8 +38,25 @@ class EventController extends Controller
 
         $data = $request->only(['title', 'content', 'category_id']);
 
-        // Generate slug from title
-        $data['slug'] = \Illuminate\Support\Str::slug($request->title);
+        // Generate slug from title with proper cleaning
+        $cleanTitle = strip_tags($request->title);
+        $cleanTitle = html_entity_decode($cleanTitle, ENT_QUOTES, 'UTF-8');
+        $baseSlug = \Illuminate\Support\Str::slug($cleanTitle);
+        
+        if (empty($baseSlug)) {
+            $baseSlug = 'event-' . time();
+        }
+        
+        $slug = $baseSlug;
+        $counter = 1;
+
+        // Make sure slug is unique
+        while (\App\Models\Event::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        $data['slug'] = $slug;
 
         if ($request->hasFile('picture')) {
             $data['picture'] = $request->file('picture')->store('uploads', 'public');
@@ -83,7 +100,24 @@ class EventController extends Controller
 
         // Update slug if title changed
         if ($event->title !== $request->title) {
-            $data['slug'] = \Illuminate\Support\Str::slug($request->title);
+            $cleanTitle = strip_tags($request->title);
+            $cleanTitle = html_entity_decode($cleanTitle, ENT_QUOTES, 'UTF-8');
+            $baseSlug = \Illuminate\Support\Str::slug($cleanTitle);
+            
+            if (empty($baseSlug)) {
+                $baseSlug = 'event-' . $event->id;
+            }
+            
+            $slug = $baseSlug;
+            $counter = 1;
+
+            // Make sure slug is unique (excluding current event item)
+            while (\App\Models\Event::where('slug', $slug)->where('id', '!=', $event->id)->exists()) {
+                $slug = $baseSlug . '-' . $counter;
+                $counter++;
+            }
+
+            $data['slug'] = $slug;
         }
 
         if ($request->hasFile('picture')) {

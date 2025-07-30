@@ -59,10 +59,10 @@
                                         <a href="{{ route('news.show', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#C41E3A;"
                                             target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
-                                        <a href="{{ route('admin.news.edit', $item->id) }}"
+                                        <a href="{{ route('admin.news.edit', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#444;" title="Edit"><i
                                                 class="material-icons white-text">edit</i></a>
-                                        <form method="POST" action="{{ route('admin.news.destroy', $item->id) }}"
+                                        <form method="POST" action="{{ route('admin.news.destroy', $item->slug) }}"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -88,10 +88,10 @@
                                         <a href="{{ route('announcements.show', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#C41E3A;"
                                             target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
-                                        <a href="{{ route('admin.announcements.edit', $item->id) }}"
+                                        <a href="{{ route('admin.announcements.edit', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#444;" title="Edit"><i
                                                 class="material-icons white-text">edit</i></a>
-                                        <form method="POST" action="{{ route('admin.announcements.destroy', $item->id) }}"
+                                        <form method="POST" action="{{ route('admin.announcements.destroy', $item->slug) }}"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -117,10 +117,10 @@
                                         <a href="{{ route('jobs.show', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#C41E3A;"
                                             target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
-                                        <a href="{{ route('admin.jobs.edit', $item->id) }}"
+                                        <a href="{{ route('admin.jobs.edit', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#444;" title="Edit"><i
                                                 class="material-icons white-text">edit</i></a>
-                                        <form method="POST" action="{{ route('admin.jobs.destroy', $item->id) }}"
+                                        <form method="POST" action="{{ route('admin.jobs.destroy', $item->slug) }}"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -146,10 +146,10 @@
                                         <a href="{{ route('events.show', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#C41E3A;"
                                             target="_blank" title="View"><i class="material-icons white-text">visibility</i></a>
-                                        <a href="{{ route('admin.events.edit', $item->id) }}"
+                                        <a href="{{ route('admin.events.edit', $item->slug) }}"
                                             class="btn-small waves-effect waves-light" style="background:#444;" title="Edit"><i
                                                 class="material-icons white-text">edit</i></a>
-                                        <form method="POST" action="{{ route('admin.events.destroy', $item->id) }}"
+                                        <form method="POST" action="{{ route('admin.events.destroy', $item->slug) }}"
                                             style="display: inline;">
                                             @csrf
                                             @method('DELETE')

@@ -8,7 +8,7 @@
         <div class="col s12 m9 l10 offset-m3 offset-l2" style="margin-left:220px;">
             <div class="section">
                 <h4 style="color:#C41E3A; font-weight:700;">Edit Event Post</h4>
-                <form method="POST" action="{{ route('admin.events.update', $event->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.events.update', $event->slug) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="input-field">

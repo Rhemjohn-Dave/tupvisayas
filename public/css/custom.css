@@ -43,88 +43,96 @@ nav.white .nav-wrapper .right > li > a {
     color: #c41e3a !important;
 }
 
-/* Navbar specific styles */
-nav .nav-wrapper .right > li {
+/* Navbar specific styles - More specific selectors */
+nav.z-depth-1.white .nav-wrapper .right > li {
     margin-left: 1.2rem;
 }
 
-nav .nav-wrapper .right > li > a {
-    line-height: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    font-size: 1rem !important; /* Ensure consistent font size */
-}
-
-nav .brand-logo {
+nav.z-depth-1.white .nav-wrapper .right > li > a {
+    line-height: 56px !important;
+    height: 56px !important;
     display: flex !important;
-    align-items: center;
-    height: 56px;
-    padding: 0;
+    align-items: center !important;
+    font-size: 1rem !important; /* Force consistent font size */
+    font-weight: 500 !important;
+    text-transform: none !important;
 }
 
-nav .brand-logo img {
-    height: 44px;
-    margin-right: 12px;
-    vertical-align: middle;
+nav.z-depth-1.white .brand-logo {
+    display: flex !important;
+    align-items: center !important;
+    height: 56px !important;
+    padding: 0 !important;
 }
 
-nav .brand-logo span {
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1;
-    color: #c41e3a;
+nav.z-depth-1.white .brand-logo img {
+    height: 44px !important;
+    max-height: 44px !important;
+    margin-right: 12px !important;
+    vertical-align: middle !important;
+    width: auto !important;
 }
 
-nav .nav-wrapper .right {
+nav.z-depth-1.white .brand-logo span {
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    color: #c41e3a !important;
+}
+
+nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
+    font-size: 1.1rem !important;
+}
+
+nav.z-depth-1.white .nav-wrapper .right {
     margin-left: 220px; /* Adjust this value as needed for your logo/title width */
 }
 
 /* Align dropdown menus with the navbar */
-nav .dropdown-content {
+nav.z-depth-1.white .dropdown-content {
     margin-top: 0.5rem;
     min-width: 180px;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-nav .dropdown-content li > a {
+nav.z-depth-1.white .dropdown-content li > a {
     color: #c41e3a !important;
     padding: 10px 18px;
     font-size: 1rem;
 }
 
-nav .dropdown-trigger i.material-icons {
+nav.z-depth-1.white .dropdown-trigger i.material-icons {
     vertical-align: middle;
     font-size: 1.2em;
     margin-left: 2px;
 }
 
-nav .nav-wrapper .right > li,
-nav .nav-wrapper .right > li > a,
-nav .dropdown-trigger {
+nav.z-depth-1.white .nav-wrapper .right > li,
+nav.z-depth-1.white .nav-wrapper .right > li > a,
+nav.z-depth-1.white .dropdown-trigger {
     display: flex !important;
     align-items: flex-start !important;
-    height: 56px;
-    line-height: 56px;
-    padding-top: 0;
-    padding-bottom: 0;
+    height: 56px !important;
+    line-height: 56px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
-nav .dropdown-trigger i.material-icons {
+nav.z-depth-1.white .dropdown-trigger i.material-icons {
     align-self: flex-start;
     margin-top: 18px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    nav .nav-wrapper .right {
+    nav.z-depth-1.white .nav-wrapper .right {
         margin-left: 180px;
     }
 }
 
 @media (max-width: 992px) {
-    nav .nav-wrapper .right {
+    nav.z-depth-1.white .nav-wrapper .right {
         overflow-x: auto;
         white-space: nowrap;
         width: 100%;
@@ -132,36 +140,36 @@ nav .dropdown-trigger i.material-icons {
         padding-left: 0;
         padding-right: 0;
     }
-    
-    nav .nav-wrapper .right > li {
+
+    nav.z-depth-1.white .nav-wrapper .right > li {
         float: none;
         display: inline-block;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
     }
-    
-    nav .nav-wrapper .right > li > a {
+
+    nav.z-depth-1.white .nav-wrapper .right > li > a {
         font-size: 0.95rem !important;
         padding: 0 6px;
     }
 }
 
 @media (max-width: 800px) {
-    nav .brand-logo {
+    nav.z-depth-1.white .brand-logo {
         font-size: 1rem;
         height: 48px;
     }
-    
-    nav .brand-logo img {
+
+    nav.z-depth-1.white .brand-logo img {
         height: 32px;
         margin-right: 8px;
     }
-    
-    nav .brand-logo span {
+
+    nav.z-depth-1.white .brand-logo span {
         font-size: 1.1rem;
     }
-    
-    nav .nav-wrapper .right {
+
+    nav.z-depth-1.white .nav-wrapper .right {
         margin-left: 0;
         float: none;
         text-align: right;
@@ -169,17 +177,17 @@ nav .dropdown-trigger i.material-icons {
 }
 
 @media (max-width: 600px) {
-    nav .brand-logo {
+    nav.z-depth-1.white .brand-logo {
         font-size: 0.95rem;
         height: 40px;
     }
-    
-    nav .brand-logo img {
+
+    nav.z-depth-1.white .brand-logo img {
         height: 24px;
         margin-right: 6px;
     }
-    
-    nav .brand-logo span {
+
+    nav.z-depth-1.white .brand-logo span {
         font-size: 1rem;
     }
 }

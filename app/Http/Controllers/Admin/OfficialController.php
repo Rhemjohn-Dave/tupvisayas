@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Official;
-use Intervention\Image\Facades\Image;
 
 class OfficialController extends Controller
 {
@@ -40,19 +39,26 @@ class OfficialController extends Controller
             'social_links' => 'nullable|array',
             'social_links.*' => 'nullable|string',
         ]);
+
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
             $filename = uniqid('official_') . '.' . $image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath());
-            $img->fit(300, 300, function ($constraint) {
-                $constraint->upsize();
-            });
-            $img->save(public_path('storage/photos/officials/' . $filename));
+
+            // Create directory if it doesn't exist
+            $directory = public_path('storage/photos/officials');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            // Simple file upload without image processing
+            $image->move($directory, $filename);
             $data['photo'] = 'photos/officials/' . $filename;
         }
+
         if (isset($data['social_links'])) {
             $data['social_links'] = json_encode($data['social_links']);
         }
+
         Official::create($data);
         return redirect()->route('admin.officials.index')->with('success', 'Official created successfully.');
     }
@@ -89,19 +95,31 @@ class OfficialController extends Controller
             'social_links' => 'nullable|array',
             'social_links.*' => 'nullable|string',
         ]);
+
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
             $filename = uniqid('official_') . '.' . $image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath());
-            $img->fit(300, 300, function ($constraint) {
-                $constraint->upsize();
-            });
-            $img->save(public_path('storage/photos/officials/' . $filename));
+
+            // Create directory if it doesn't exist
+            $directory = public_path('storage/photos/officials');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            // Delete old photo if exists
+            if ($official->photo && file_exists(public_path('storage/' . $official->photo))) {
+                unlink(public_path('storage/' . $official->photo));
+            }
+
+            // Simple file upload without image processing
+            $image->move($directory, $filename);
             $data['photo'] = 'photos/officials/' . $filename;
         }
+
         if (isset($data['social_links'])) {
             $data['social_links'] = json_encode($data['social_links']);
         }
+
         $official->update($data);
         return redirect()->route('admin.officials.index')->with('success', 'Official updated successfully.');
     }

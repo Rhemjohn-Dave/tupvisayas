@@ -31,11 +31,11 @@ class CarouselImageController extends Controller
     {
         $request->validate([
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'caption' => 'nullable|string|max:255',
+            // 'caption' => 'nullable|string|max:255', // Temporarily commented out
             'order' => 'required|integer',
         ]);
 
-        $data = $request->only(['caption', 'order']);
+        $data = $request->only(['order']); // Removed 'caption' temporarily
         if ($request->hasFile('image_path')) {
             $data['image_path'] = $request->file('image_path')->store('carousel', 'public');
         }

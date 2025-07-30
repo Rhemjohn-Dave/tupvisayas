@@ -13,6 +13,59 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Custom Cardinal Red Theme -->
     <link href="{{ asset('css/custom.css?v=' . time()) }}" rel="stylesheet">
+    
+    <!-- Inline CSS to fix navbar sizing -->
+    <style>
+        /* Force navbar sizing */
+        nav.z-depth-1.white .brand-logo {
+            display: flex !important;
+            align-items: center !important;
+            height: 56px !important;
+            padding: 0 !important;
+        }
+        
+        nav.z-depth-1.white .brand-logo img {
+            height: 44px !important;
+            max-height: 44px !important;
+            margin-right: 12px !important;
+            vertical-align: middle !important;
+            width: auto !important;
+        }
+        
+        nav.z-depth-1.white .brand-logo span {
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            line-height: 1 !important;
+            color: #c41e3a !important;
+        }
+        
+        nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
+            font-size: 1.1rem !important;
+        }
+        
+        nav.z-depth-1.white .nav-wrapper .right > li > a {
+            line-height: 56px !important;
+            height: 56px !important;
+            display: flex !important;
+            align-items: center !important;
+            font-size: 1rem !important;
+            font-weight: 500 !important;
+            text-transform: none !important;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 800px) {
+            nav.z-depth-1.white .brand-logo span {
+                font-size: 1.1rem !important;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            nav.z-depth-1.white .brand-logo span {
+                font-size: 1rem !important;
+            }
+        }
+    </style>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

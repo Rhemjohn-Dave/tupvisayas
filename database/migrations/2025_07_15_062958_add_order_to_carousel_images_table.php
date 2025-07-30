@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('carousel_images', function (Blueprint $table) {
-            $table->integer('order')->default(1)->after('caption');
+            $table->integer('order')->default(1)->after('image_path');
         });
     }
 

@@ -58,11 +58,11 @@ class NewsController extends Controller
         $cleanTitle = strip_tags($request->title);
         $cleanTitle = html_entity_decode($cleanTitle, ENT_QUOTES, 'UTF-8');
         $baseSlug = \Illuminate\Support\Str::slug($cleanTitle);
-        
+
         if (empty($baseSlug)) {
             $baseSlug = 'news-' . time();
         }
-        
+
         $slug = $baseSlug;
         $counter = 1;
 
@@ -120,11 +120,11 @@ class NewsController extends Controller
             $cleanTitle = strip_tags($request->title);
             $cleanTitle = html_entity_decode($cleanTitle, ENT_QUOTES, 'UTF-8');
             $baseSlug = \Illuminate\Support\Str::slug($cleanTitle);
-            
+
             if (empty($baseSlug)) {
                 $baseSlug = 'news-' . $news->id;
             }
-            
+
             $slug = $baseSlug;
             $counter = 1;
 

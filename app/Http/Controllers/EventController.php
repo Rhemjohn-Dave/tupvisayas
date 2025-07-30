@@ -42,11 +42,11 @@ class EventController extends Controller
         $cleanTitle = strip_tags($request->title);
         $cleanTitle = html_entity_decode($cleanTitle, ENT_QUOTES, 'UTF-8');
         $baseSlug = \Illuminate\Support\Str::slug($cleanTitle);
-        
+
         if (empty($baseSlug)) {
             $baseSlug = 'event-' . time();
         }
-        
+
         $slug = $baseSlug;
         $counter = 1;
 
@@ -103,11 +103,11 @@ class EventController extends Controller
             $cleanTitle = strip_tags($request->title);
             $cleanTitle = html_entity_decode($cleanTitle, ENT_QUOTES, 'UTF-8');
             $baseSlug = \Illuminate\Support\Str::slug($cleanTitle);
-            
+
             if (empty($baseSlug)) {
                 $baseSlug = 'event-' . $event->id;
             }
-            
+
             $slug = $baseSlug;
             $counter = 1;
 

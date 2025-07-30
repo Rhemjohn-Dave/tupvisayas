@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('head')
+    <meta property="og:title" content="{{ $job->title }}" />
+    <meta property="og:description" content="{{ strip_tags(Str::limit($job->content, 150)) }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    @if($job->picture)
+        <meta property="og:image" content="{{ asset('storage/' . $job->picture) }}" />
+    @else
+        <meta property="og:image" content="{{ asset('images/tup-logo.png') }}" />
+    @endif
+@endsection
+
 @section('content')
     <div class="section" style="max-width: 900px; margin: 0 auto;">
         <h2 style="color:#C41E3A;font-weight:800;text-align:center;margin-bottom:2rem;letter-spacing:1px;">University Job

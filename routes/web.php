@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('/about', 'pages.about')->name('about');
+Route::view('/about/history', 'pages.about.history')->name('about.history');
+Route::view('/about/mission', 'pages.about.mission')->name('about.mission');
+Route::view('/about/values', 'pages.about.values')->name('about.values');
+Route::view('/about/goals', 'pages.about.goals')->name('about.goals');
+Route::view('/about/mandate', 'pages.about.mandate')->name('about.mandate');
+Route::view('/about/hymn', 'pages.about.hymn')->name('about.hymn');
 Route::view('/academics', 'pages.programs')->name('academics');
 Route::view('/academics/coe', 'pages.academics_coe')->name('academics.coe');
 Route::view('/academics/coac', 'pages.academics_coac')->name('academics.coac');

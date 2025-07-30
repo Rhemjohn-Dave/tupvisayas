@@ -23,7 +23,17 @@
     <!-- Sidenav for mobile -->
     <ul class="sidenav" id="mobile-nav">
         <li><a href="{{ route('home') }}">Home</a></li>
-        <li><a href="{{ route('about') }}">About Us</a></li>
+        <!-- Only About TUP dropdown, remove any single About TUP link -->
+        <li>
+            <a class="dropdown-trigger" href="#" data-target="about-mobile-dropdown">About TUP<i
+                    class="material-icons right">arrow_drop_down</i></a>
+        </li>
+        <ul id="about-mobile-dropdown" class="dropdown-content">
+            <li><a href="{{ route('about.history') }}">TUP History</a></li>
+            <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
+            <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
+            <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
+        </ul>
         <li>
             <a class="dropdown-trigger" href="#" data-target="academics-mobile-dropdown">Academics<i
                     class="material-icons right">arrow_drop_down</i></a>
@@ -81,6 +91,12 @@
             </li>
         @endforeach
     </ul>
+    <ul id="about-dropdown" class="dropdown-content">
+        <li><a href="{{ route('about.history') }}">TUP History</a></li>
+        <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
+        <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
+        <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
+    </ul>
     <nav class="z-depth-1 white">
         <div class="nav-wrapper container">
             <!-- Hamburger icon for mobile -->
@@ -96,6 +112,7 @@
                     Visayas</span>
             </a>
             <ul class="right hide-on-med-and-down">
+
                 @auth
                     @if(auth()->user()->is_admin)
                         <li>
@@ -107,7 +124,11 @@
                         </li>
                     @else
                         <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('about') }}">About Us</a></li>
+                        <!-- Only About TUP dropdown, remove any single About TUP link -->
+                        <li>
+                            <a class="dropdown-trigger" href="#" data-target="about-dropdown">About TUP<i
+                                    class="material-icons right">arrow_drop_down</i></a>
+                        </li>
                         <li><a class="dropdown-trigger" href="#" data-target="academics-dropdown">Academics<i
                                     class="material-icons right">arrow_drop_down</i></a></li>
                         <li><a href="{{ route('admissions') }}">Admissions</a></li>
@@ -118,7 +139,11 @@
                     @endif
                 @else
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('about') }}">About Us</a></li>
+                    <!-- Only About TUP dropdown, remove any single About TUP link -->
+                    <li>
+                        <a class="dropdown-trigger" href="#" data-target="about-dropdown">About TUP<i
+                                class="material-icons right">arrow_drop_down</i></a>
+                    </li>
                     <li><a class="dropdown-trigger" href="#" data-target="academics-dropdown">Academics<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a href="{{ route('admissions') }}">Admissions</a></li>

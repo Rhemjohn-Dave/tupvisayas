@@ -2,7 +2,8 @@
     --cardinal-red: #c41e3a;
 }
 
-nav,
+/* Materialize CSS overrides */
+nav.materialize-nav,
 .btn,
 .card-panel,
 .pagination .active,
@@ -27,9 +28,6 @@ h6 {
 }
 
 /* Remove Cardinal Red background from all footers */
-/* .page-footer {
-  background: var(--cardinal-red) !important;
-} */
 .page-footer.white {
     background: #fff !important;
 }
@@ -45,32 +43,39 @@ nav.white .nav-wrapper .right > li > a {
     color: #c41e3a !important;
 }
 
+/* Navbar specific styles */
 nav .nav-wrapper .right > li {
     margin-left: 1.2rem;
 }
+
 nav .nav-wrapper .right > li > a {
     line-height: 56px;
     height: 56px;
     display: flex;
     align-items: center;
+    font-size: 1rem !important; /* Ensure consistent font size */
 }
+
 nav .brand-logo {
     display: flex !important;
     align-items: center;
     height: 56px;
     padding: 0;
 }
+
 nav .brand-logo img {
     height: 44px;
     margin-right: 12px;
     vertical-align: middle;
 }
+
 nav .brand-logo span {
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 1;
     color: #c41e3a;
 }
+
 nav .nav-wrapper .right {
     margin-left: 220px; /* Adjust this value as needed for your logo/title width */
 }
@@ -82,11 +87,13 @@ nav .dropdown-content {
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
 nav .dropdown-content li > a {
     color: #c41e3a !important;
     padding: 10px 18px;
     font-size: 1rem;
 }
+
 nav .dropdown-trigger i.material-icons {
     vertical-align: middle;
     font-size: 1.2em;
@@ -103,16 +110,19 @@ nav .dropdown-trigger {
     padding-top: 0;
     padding-bottom: 0;
 }
+
 nav .dropdown-trigger i.material-icons {
     align-self: flex-start;
     margin-top: 18px;
 }
 
+/* Responsive adjustments */
 @media (max-width: 1200px) {
     nav .nav-wrapper .right {
         margin-left: 180px;
     }
 }
+
 @media (max-width: 992px) {
     nav .nav-wrapper .right {
         overflow-x: auto;
@@ -122,29 +132,35 @@ nav .dropdown-trigger i.material-icons {
         padding-left: 0;
         padding-right: 0;
     }
+    
     nav .nav-wrapper .right > li {
         float: none;
         display: inline-block;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
     }
+    
     nav .nav-wrapper .right > li > a {
-        font-size: 0.95rem;
+        font-size: 0.95rem !important;
         padding: 0 6px;
     }
 }
+
 @media (max-width: 800px) {
     nav .brand-logo {
         font-size: 1rem;
         height: 48px;
     }
+    
     nav .brand-logo img {
         height: 32px;
         margin-right: 8px;
     }
+    
     nav .brand-logo span {
         font-size: 1.1rem;
     }
+    
     nav .nav-wrapper .right {
         margin-left: 0;
         float: none;
@@ -157,10 +173,12 @@ nav .dropdown-trigger i.material-icons {
         font-size: 0.95rem;
         height: 40px;
     }
+    
     nav .brand-logo img {
         height: 24px;
         margin-right: 6px;
     }
+    
     nav .brand-logo span {
         font-size: 1rem;
     }

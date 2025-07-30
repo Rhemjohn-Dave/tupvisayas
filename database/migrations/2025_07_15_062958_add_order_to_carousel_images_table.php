@@ -8,11 +8,10 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('carousel_images', function (Blueprint $table) {
-            $table->string('caption')->nullable();
-            $table->integer('order')->default(1);
+            $table->integer('order')->default(1)->after('caption');
         });
     }
 

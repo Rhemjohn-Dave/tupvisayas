@@ -14,37 +14,39 @@
     <!-- Custom Cardinal Red Theme -->
     <link href="{{ asset('css/custom.css?v=' . time()) }}" rel="stylesheet">
 
-    <!-- Inline CSS to fix navbar sizing -->
+    <!-- Clean navbar CSS fix -->
     <style>
-        /* Force navbar sizing with maximum specificity */
-        body nav.z-depth-1.white .brand-logo {
+        /* Navbar logo and text sizing */
+        nav.z-depth-1.white .brand-logo {
             display: flex !important;
             align-items: center !important;
             height: 56px !important;
             padding: 0 !important;
-            font-size: 1rem !important;
         }
 
-        body nav.z-depth-1.white .brand-logo img {
+        nav.z-depth-1.white .brand-logo img {
             height: 44px !important;
             max-height: 44px !important;
-            margin-right: 12px !important;
-            vertical-align: middle !important;
+            margin-right: 8px !important;
             width: auto !important;
         }
 
-        body nav.z-depth-1.white .brand-logo span {
+        /* Desktop text size */
+        nav.z-depth-1.white .brand-logo span.hide-on-small-only {
             font-size: 1.5rem !important;
             font-weight: 600 !important;
             line-height: 1 !important;
-            color: #c41e3a !important;
         }
 
-        body nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
+        /* Mobile text size */
+        nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
             font-size: 1.1rem !important;
+            font-weight: 600 !important;
+            line-height: 1 !important;
         }
 
-        body nav.z-depth-1.white .nav-wrapper .right>li>a {
+        /* Navigation links */
+        nav.z-depth-1.white .nav-wrapper .right>li>a {
             line-height: 56px !important;
             height: 56px !important;
             display: flex !important;
@@ -54,67 +56,15 @@
             text-transform: none !important;
         }
 
-        /* Override Materialize default styles */
-        .brand-logo {
-            font-size: 1.5rem !important;
-        }
-
-        .brand-logo span {
-            font-size: 1.5rem !important;
-        }
-
-        /* Force smaller sizes */
-        nav .brand-logo {
-            font-size: 1.5rem !important;
-        }
-
-        nav .brand-logo span {
-            font-size: 1.5rem !important;
-        }
-
-        /* Target specific elements with maximum specificity */
-        html body nav.z-depth-1.white .brand-logo span.hide-on-small-only {
-            font-size: 1.5rem !important;
-        }
-
-        html body nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
-            font-size: 1.1rem !important;
-        }
-
-        /* Override any Materialize CSS */
-        .brand-logo span.hide-on-small-only {
-            font-size: 1.5rem !important;
-        }
-
-        .brand-logo span.hide-on-med-and-up {
-            font-size: 1.1rem !important;
-        }
-
         /* Responsive adjustments */
         @media (max-width: 800px) {
-            body nav.z-depth-1.white .brand-logo span {
-                font-size: 1.1rem !important;
-            }
-
-            .brand-logo span {
-                font-size: 1.1rem !important;
-            }
-
-            html body nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
+            nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
                 font-size: 1.1rem !important;
             }
         }
 
         @media (max-width: 600px) {
-            body nav.z-depth-1.white .brand-logo span {
-                font-size: 1rem !important;
-            }
-
-            .brand-logo span {
-                font-size: 1rem !important;
-            }
-
-            html body nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
+            nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
                 font-size: 1rem !important;
             }
         }

@@ -24,13 +24,13 @@ return new class extends Migration {
             $slug = \Illuminate\Support\Str::slug($item->title);
             $counter = 1;
             $originalSlug = $slug;
-            
+
             // Make slug unique
             while (DB::table('jobs')->where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
                 $slug = $originalSlug . '-' . $counter;
                 $counter++;
             }
-            
+
             DB::table('jobs')->where('id', $item->id)->update(['slug' => $slug]);
         }
 

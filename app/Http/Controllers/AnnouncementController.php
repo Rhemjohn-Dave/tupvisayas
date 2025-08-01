@@ -27,9 +27,9 @@ class AnnouncementController extends Controller
         // Handle search functionality
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
-            $announcements->where(function($query) use ($search) {
+            $announcements->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
-                      ->orWhere('content', 'like', '%' . $search . '%');
+                    ->orWhere('content', 'like', '%' . $search . '%');
             });
         }
 
@@ -94,7 +94,8 @@ class AnnouncementController extends Controller
      */
     public function show(Announcement $announcement)
     {
-        return view('pages.announcement_show', compact('announcement'));
+        $categories = \App\Models\Category::all();
+        return view('pages.announcement_show', compact('announcement', 'categories'));
     }
 
     /**

@@ -19,7 +19,7 @@
                                 </div>
                             @endif
                             <div class="card-content">
-                                <span class="card-title" style="color:#388e3c;font-weight:700;">{{ $item->title }}</span>
+                                <span class="card-title" style="color:#C41E3A;font-weight:700;">{{ $item->title }}</span>
                                 <div style="color:#888;font-size:0.95rem;margin-bottom:0.5rem;">
                                     <span>{{ $item->created_at->format('M d, Y') }}</span>
                                     @if($item->category)
@@ -29,8 +29,8 @@
                                 <p>{{ \Illuminate\Support\Str::limit(strip_tags($item->content), 200) }}</p>
                             </div>
                             <div class="card-action">
-                                <a href="{{ route('announcements.show', $item->slug) }}" 
-                                   class="btn-flat green-text text-darken-2">Read More</a>
+                                <a href="{{ route('announcements.show', $item->slug) }}"
+                                    class="btn-flat red-text text-darken-2">Read More</a>
                             </div>
                         </div>
                     @endforeach
@@ -49,7 +49,7 @@
                     <div class="input-field" style="margin-bottom:0;">
                         <input type="text" name="search" id="search" placeholder="Search announcements..."
                             value="{{ request('search') }}">
-                        <button type="submit" class="btn green" style="margin-top:8px;">Search</button>
+                        <button type="submit" class="btn red" style="margin-top:8px;">Search</button>
                     </div>
                 </form>
                 <div>

@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="center-align" style="margin-top:2rem;">
-            <a href="{{ route('announcements') }}" class="btn grey" style="color: #fff !important;">Back to
+            <a href="{{ route('announcements.index') }}" class="btn grey" style="color: #fff !important;">Back to
                 Announcements</a>
         </div>
     </div>

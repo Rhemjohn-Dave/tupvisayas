@@ -10,10 +10,32 @@ class AnnouncementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $announcements = \App\Models\Announcement::orderBy('created_at', 'desc')->get();
-        return view('pages.announcements', compact('announcements'));
+        $categories = \App\Models\Category::all();
+        $category = null;
+        $announcements = \App\Models\Announcement::query();
+
+        // Handle category filtering
+        if ($request->has('category') && $request->category !== '') {
+            $category = \App\Models\Category::where('slug', $request->category)->first();
+            if ($category) {
+                $announcements->where('category_id', $category->id);
+            }
+        }
+
+        // Handle search functionality
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $announcements->where(function($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                      ->orWhere('content', 'like', '%' . $search . '%');
+            });
+        }
+
+        $announcements = $announcements->with('category')->orderBy('created_at', 'desc')->get();
+
+        return view('pages.announcements', compact('announcements', 'categories', 'category'));
     }
 
     /**

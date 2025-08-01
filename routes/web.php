@@ -31,7 +31,7 @@ Route::view('/student-services', 'pages.student_services')->name('student_servic
 Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');
 Route::get('/officials/{id}', [App\Http\Controllers\OfficialController::class, 'show'])->name('officials.show');
 Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index'])->name('news_events');
-Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements');
+Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::get('/news/{news}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');

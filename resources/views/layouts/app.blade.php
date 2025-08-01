@@ -110,7 +110,7 @@
         <li><a href="{{ route('student_services') }}">Student Services</a></li>
         <li><a href="{{ route('officials') }}">Officials</a></li>
         <li><a href="{{ route('contact') }}">Contact</a></li>
-        <li><a href="{{ route('announcements') }}">Announcements</a></li>
+        <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
         <li><a href="{{ route('news_events') }}">News & Events</a></li>
         <li><a href="{{ route('jobs') }}">Job Listings</a></li>
         @auth
@@ -133,7 +133,7 @@
         <li><a href="{{ route('contact') }}">Contact</a></li>
     </ul>
     <ul id="more-dropdown" class="dropdown-content">
-        <li><a href="{{ route('announcements') }}">Announcements</a></li>
+        <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
         <li><a href="{{ route('news_events') }}">News & Events</a></li>
         <li><a href="{{ route('jobs') }}">Job Listings</a></li>
     </ul>

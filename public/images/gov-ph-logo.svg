@@ -1,0 +1,19 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle -->
+  <circle cx="12" cy="12" r="11" fill="#0038A8" stroke="#FCD116" stroke-width="1"/>
+  
+  <!-- Inner circle -->
+  <circle cx="12" cy="12" r="8" fill="#CE1126"/>
+  
+  <!-- Sun rays -->
+  <g fill="#FCD116">
+    <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+  </g>
+  
+  <!-- Three stars -->
+  <g fill="#FCD116">
+    <path d="M8 6L8.5 7.5L10 8L8.5 8.5L8 10L7.5 8.5L6 8L7.5 7.5L8 6Z"/>
+    <path d="M16 6L16.5 7.5L18 8L16.5 8.5L16 10L15.5 8.5L14 8L15.5 7.5L16 6Z"/>
+    <path d="M12 10L12.5 11.5L14 12L12.5 12.5L12 14L11.5 12.5L10 12L11.5 11.5L12 10Z"/>
+  </g>
+</svg>

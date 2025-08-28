@@ -28,6 +28,7 @@ Route::view('/academics/coet', 'pages.academics_coet')->name('academics.coet');
 Route::view('/admissions', 'pages.admissions')->name('admissions');
 Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
+Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');
 Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');
 Route::get('/officials/{id}', [App\Http\Controllers\OfficialController::class, 'show'])->name('officials.show');
 Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index'])->name('news_events');

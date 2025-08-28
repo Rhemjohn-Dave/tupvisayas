@@ -421,24 +421,111 @@
             margin-left: 20px !important;
             border-radius: 0 !important;
             min-width: auto !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .sidenav .dropdown-content.active {
             display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .sidenav .dropdown-content li {
             margin: 0 !important;
         }
 
+        /* Child dropdown items - Gray text for better contrast on white sidebar */
         .sidenav .dropdown-content a {
             padding: 10px 15px !important;
             color: #666 !important;
             font-size: 0.9rem !important;
+            background-color: transparent !important;
         }
 
         .sidenav .dropdown-content a:hover {
             background-color: rgba(196, 30, 58, 0.1) !important;
+            color: #C41E3A !important;
+        }
+
+        /* Force override for all mobile dropdown content - ensure visibility */
+        .sidenav ul.dropdown-content li a,
+        .sidenav .dropdown-content li a,
+        .sidenav #about-mobile-dropdown li a,
+        .sidenav #admission-mobile-dropdown li a,
+        .sidenav #students-mobile-dropdown li a,
+        .sidenav #academics-mobile-dropdown li a,
+        .sidenav #updates-mobile-dropdown li a,
+        .sidenav #resources-mobile-dropdown li a {
+            color: #666 !important;
+            background-color: transparent !important;
+            text-decoration: none !important;
+            display: block !important;
+        }
+
+        .sidenav ul.dropdown-content li a:hover,
+        .sidenav .dropdown-content li a:hover,
+        .sidenav #about-mobile-dropdown li a:hover,
+        .sidenav #admission-mobile-dropdown li a:hover,
+        .sidenav #students-mobile-dropdown li a:hover,
+        .sidenav #academics-mobile-dropdown li a:hover,
+        .sidenav #updates-mobile-dropdown li a:hover,
+        .sidenav #resources-mobile-dropdown li a:hover {
+            color: #C41E3A !important;
+            background-color: rgba(196, 30, 58, 0.1) !important;
+        }
+
+        /* ULTRA HIGH SPECIFICITY - Force gray color on mobile dropdown children */
+        body .sidenav ul.dropdown-content li a,
+        body .sidenav .dropdown-content li a,
+        body .sidenav #about-mobile-dropdown li a,
+        body .sidenav #admission-mobile-dropdown li a,
+        body .sidenav #students-mobile-dropdown li a,
+        body .sidenav #academics-mobile-dropdown li a,
+        body .sidenav #updates-mobile-dropdown li a,
+        body .sidenav #resources-mobile-dropdown li a,
+        .sidenav ul.dropdown-content li a,
+        .sidenav .dropdown-content li a,
+        .sidenav #about-mobile-dropdown li a,
+        .sidenav #admission-mobile-dropdown li a,
+        .sidenav #students-mobile-dropdown li a,
+        .sidenav #academics-mobile-dropdown li a,
+        .sidenav #updates-mobile-dropdown li a,
+        .sidenav #resources-mobile-dropdown li a {
+            color: #666 !important;
+            background-color: transparent !important;
+            text-decoration: none !important;
+            display: block !important;
+            font-weight: normal !important;
+        }
+
+        /* Force hover states */
+        body .sidenav ul.dropdown-content li a:hover,
+        body .sidenav .dropdown-content li a:hover,
+        body .sidenav #about-mobile-dropdown li a:hover,
+        body .sidenav #admission-mobile-dropdown li a:hover,
+        body .sidenav #students-mobile-dropdown li a:hover,
+        body .sidenav #academics-mobile-dropdown li a:hover,
+        body .sidenav #updates-mobile-dropdown li a:hover,
+        body .sidenav #resources-mobile-dropdown li a:hover,
+        .sidenav ul.dropdown-content li a:hover,
+        .sidenav .dropdown-content li a:hover,
+        .sidenav #about-mobile-dropdown li a:hover,
+        .sidenav #admission-mobile-dropdown li a:hover,
+        .sidenav #students-mobile-dropdown li a:hover,
+        .sidenav #academics-mobile-dropdown li a:hover,
+        .sidenav #updates-mobile-dropdown li a:hover,
+        .sidenav #resources-mobile-dropdown li a:hover {
+            color: #C41E3A !important;
+            background-color: rgba(196, 30, 58, 0.1) !important;
+        }
+
+        /* Mobile dropdown trigger text color - Parent items in cardinal red */
+        .sidenav .dropdown-trigger {
+            color: #C41E3A !important;
+        }
+
+        .sidenav .dropdown-trigger:hover {
             color: #C41E3A !important;
         }
 
@@ -551,10 +638,10 @@
                     class="material-icons right">arrow_drop_down</i></a>
         </li>
         <ul id="about-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('about.history') }}">TUP History</a></li>
-            <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
-            <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
-            <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
+            <li><a href="{{ route('about.history') }}" style="color: #666 !important;">TUP History</a></li>
+            <li><a href="{{ route('about.mission') }}" style="color: #666 !important;">TUP Mission Vision</a></li>
+            <li><a href="{{ route('about.mandate') }}" style="color: #666 !important;">The TUP Mandate</a></li>
+            <li><a href="{{ route('about.hymn') }}" style="color: #666 !important;">The TUP Hymn</a></li>
         </ul>
 
         <!-- Admission -->
@@ -563,10 +650,10 @@
                     class="material-icons right">arrow_drop_down</i></a>
         </li>
         <ul id="admission-mobile-dropdown" class="dropdown-content">
-            <li><a href="#">Graduate Programs</a></li>
-            <li><a href="#">Undergraduate Programs</a></li>
-            <li><a href="#">Enrollment Procedure for Freshmen Students</a></li>
-            <li><a href="#">Contact Information</a></li>
+            <li><a href="#" style="color: #666 !important;">Graduate Programs</a></li>
+            <li><a href="#" style="color: #666 !important;">Undergraduate Programs</a></li>
+            <li><a href="#" style="color: #666 !important;">Enrollment Procedure for Freshmen Students</a></li>
+            <li><a href="#" style="color: #666 !important;">Contact Information</a></li>
         </ul>
 
         <!-- Students -->
@@ -575,10 +662,10 @@
                     class="material-icons right">arrow_drop_down</i></a>
         </li>
         <ul id="students-mobile-dropdown" class="dropdown-content">
-            <li><a href="#">The Office of Student Affairs</a></li>
-            <li><a href="#">Student Organizations</a></li>
-            <li><a href="#">Enrollment Procedure</a></li>
-            <li><a href="#">TUP Student Handbook</a></li>
+            <li><a href="#" style="color: #666 !important;">The Office of Student Affairs</a></li>
+            <li><a href="#" style="color: #666 !important;">Student Organizations</a></li>
+            <li><a href="#" style="color: #666 !important;">Enrollment Procedure</a></li>
+            <li><a href="#" style="color: #666 !important;">TUP Student Handbook</a></li>
         </ul>
 
         <!-- Academics -->
@@ -587,9 +674,11 @@
                     class="material-icons right">arrow_drop_down</i></a>
         </li>
         <ul id="academics-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
-            <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
-            <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
+            <li><a href="{{ route('academics.coe') }}" style="color: #666 !important;">College of Engineering</a></li>
+            <li><a href="{{ route('academics.coac') }}" style="color: #666 !important;">College of Automation and
+                    Control</a></li>
+            <li><a href="{{ route('academics.coet') }}" style="color: #666 !important;">College of Engineering
+                    Technology</a></li>
         </ul>
 
         <!-- Updates -->
@@ -598,9 +687,9 @@
                     class="material-icons right">arrow_drop_down</i></a>
         </li>
         <ul id="updates-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('news_events') }}">News and Events</a></li>
-            <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
-            <li><a href="#">Director's Corner</a></li>
+            <li><a href="{{ route('news_events') }}" style="color: #666 !important;">News and Events</a></li>
+            <li><a href="{{ route('announcements.index') }}" style="color: #666 !important;">Announcements</a></li>
+            <li><a href="#" style="color: #666 !important;">Director's Corner</a></li>
         </ul>
 
         <!-- Resources and Offices -->
@@ -610,32 +699,34 @@
         </li>
         <ul id="resources-mobile-dropdown" class="dropdown-content">
             <li>
-                <a class="dropdown-trigger" href="#" data-target="administration-mobile-dropdown">Administration<i
+                <a class="dropdown-trigger" href="#" data-target="administration-mobile-dropdown"
+                    style="color: #666 !important;">Administration<i
                         class="material-icons right">arrow_drop_down</i></a>
             </li>
             <li>
-                <a class="dropdown-trigger" href="#" data-target="support-services-mobile-dropdown">Support Services<i
+                <a class="dropdown-trigger" href="#" data-target="support-services-mobile-dropdown"
+                    style="color: #666 !important;">Support Services<i
                         class="material-icons right">arrow_drop_down</i></a>
             </li>
         </ul>
 
         <!-- Administration Mobile Sub-dropdown -->
         <ul id="administration-mobile-dropdown" class="dropdown-content">
-            <li><a href="#">Board of Regents</a></li>
-            <li><a href="#">Office of the Director</a></li>
-            <li><a href="#">Assistant Director for Administration and Finance</a></li>
-            <li><a href="#">Assistant Director for Academic Affairs</a></li>
-            <li><a href="#">Assistant Director for Research and Finance</a></li>
+            <li><a href="#" style="color: #666 !important;">Board of Regents</a></li>
+            <li><a href="#" style="color: #666 !important;">Office of the Director</a></li>
+            <li><a href="#" style="color: #666 !important;">Assistant Director for Administration and Finance</a></li>
+            <li><a href="#" style="color: #666 !important;">Assistant Director for Academic Affairs</a></li>
+            <li><a href="#" style="color: #666 !important;">Assistant Director for Research and Finance</a></li>
         </ul>
 
 
         <!-- Support Services Mobile Sub-dropdown -->
         <ul id="support-services-mobile-dropdown" class="dropdown-content">
-            <li><a href="#">University Registrar</a></li>
-            <li><a href="#">University Medical and Dental Clinic</a></li>
-            <li><a href="#">Supervised Industrial Training</a></li>
-            <li><a href="#">University Information Technology Center</a></li>
-            <li><a href="#">University Library</a></li>
+            <li><a href="#" style="color: #666 !important;">University Registrar</a></li>
+            <li><a href="#" style="color: #666 !important;">University Medical and Dental Clinic</a></li>
+            <li><a href="#" style="color: #666 !important;">Supervised Industrial Training</a></li>
+            <li><a href="#" style="color: #666 !important;">University Information Technology Center</a></li>
+            <li><a href="#" style="color: #666 !important;">University Library</a></li>
         </ul>
 
         @auth
@@ -842,15 +933,61 @@
             var elems = document.querySelectorAll('.sidenav');
             M.Sidenav.init(elems);
 
-            // Initialize ALL dropdowns with Materialize (simple approach)
-            var allDropdowns = document.querySelectorAll('.dropdown-trigger');
-            M.Dropdown.init(allDropdowns, {
-                coverTrigger: false,
-                constrainWidth: false,
-                hover: false,
-                alignment: 'left',
-                autoFocus: false,
-                closeOnClick: true
+            // Initialize desktop dropdowns only (not mobile)
+            var desktopDropdowns = document.querySelectorAll('.hide-on-med-and-down .dropdown-trigger');
+            console.log('Found desktop dropdowns:', desktopDropdowns.length);
+            if (desktopDropdowns.length > 0) {
+                var dropdownInstances = M.Dropdown.init(desktopDropdowns, {
+                    coverTrigger: false,
+                    constrainWidth: false,
+                    hover: false,
+                    alignment: 'left',
+                    autoFocus: false,
+                    closeOnClick: true
+                });
+                console.log('Desktop dropdown instances:', dropdownInstances);
+            }
+
+            // Custom mobile dropdown behavior
+            var mobileDropdowns = document.querySelectorAll('.sidenav .dropdown-trigger');
+            console.log('Found mobile dropdowns:', mobileDropdowns.length);
+            mobileDropdowns.forEach(function (trigger) {
+                trigger.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var targetId = this.getAttribute('data-target');
+                    var dropdown = document.getElementById(targetId);
+                    console.log('Mobile dropdown clicked:', targetId, dropdown);
+
+                    if (dropdown) {
+                        // Close other mobile dropdowns
+                        var allMobileDropdowns = document.querySelectorAll('.sidenav .dropdown-content');
+                        allMobileDropdowns.forEach(function (dd) {
+                            if (dd !== dropdown) {
+                                dd.classList.remove('active');
+                                dd.style.display = 'none';
+                            }
+                        });
+
+                        // Toggle current dropdown
+                        dropdown.classList.toggle('active');
+                        if (dropdown.classList.contains('active')) {
+                            dropdown.style.display = 'block';
+                            // Force all child links to be gray and visible
+                            var childLinks = dropdown.querySelectorAll('a');
+                            childLinks.forEach(function (link) {
+                                link.style.color = '#666';
+                                link.style.display = 'block';
+                                link.style.visibility = 'visible';
+                                link.style.opacity = '1';
+                            });
+                        } else {
+                            dropdown.style.display = 'none';
+                        }
+                        console.log('Mobile dropdown toggled:', dropdown.classList.contains('active'));
+                    }
+                });
             });
 
             // Scroll to top
@@ -859,18 +996,20 @@
             };
         });
 
-        // Additional initialization if needed
+        // Additional initialization for desktop dropdowns if needed
         $(document).ready(function () {
             setTimeout(function () {
-                var allDropdowns = document.querySelectorAll('.dropdown-trigger');
-                M.Dropdown.init(allDropdowns, {
-                    coverTrigger: false,
-                    constrainWidth: false,
-                    hover: false,
-                    alignment: 'left',
-                    autoFocus: false,
-                    closeOnClick: true
-                });
+                var desktopDropdowns = document.querySelectorAll('.hide-on-med-and-down .dropdown-trigger');
+                if (desktopDropdowns.length > 0) {
+                    M.Dropdown.init(desktopDropdowns, {
+                        coverTrigger: false,
+                        constrainWidth: false,
+                        hover: false,
+                        alignment: 'left',
+                        autoFocus: false,
+                        closeOnClick: true
+                    });
+                }
             }, 100);
         });
     </script>

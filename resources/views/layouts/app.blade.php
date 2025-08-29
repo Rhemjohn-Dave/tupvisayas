@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Custom Cardinal Red Theme -->
     <link href="{{ asset('css/custom.css?v=' . time()) }}" rel="stylesheet">
+    <!-- Navbar scoped overrides -->
+    <link href="{{ asset('css/navbar.overrides.css?v=' . time()) }}" rel="stylesheet">
 
     <!-- Clean navbar CSS -->
     <style>
@@ -181,7 +183,7 @@
         .resources-dropdown {
             width: 600px !important;
             max-width: 90vw !important;
-            display: flex !important;
+            /* display must be controlled by Materialize; do not force it */
             flex-direction: row !important;
             padding: 20px !important;
         }
@@ -248,7 +250,7 @@
         /* Show sidenav only on mobile screens */
         @media (max-width: 992px) {
             .sidenav {
-                display: block !important;
+            display: block !important;
                 visibility: visible !important;
                 opacity: 1 !important;
             }
@@ -299,7 +301,7 @@
             }
 
             .brand-logo .hide-on-med-and-up {
-                display: block !important;
+            display: block !important;
             }
         }
 
@@ -349,9 +351,9 @@
         /* Fix mobile sidenav interference with desktop navbar */
         /* Ensure sidenav is completely hidden on desktop */
         .sidenav {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
             z-index: 999 !important;
             pointer-events: none !important;
         }
@@ -379,7 +381,7 @@
 
             /* Hide desktop navigation on mobile */
             .nav-wrapper .right.hide-on-med-and-down {
-                display: none !important;
+            display: none !important;
             }
         }
 
@@ -435,9 +437,74 @@
             }
         }
 
+        /* Mobile sidenav dropdown styling */
+        .sidenav .dropdown-content {
+            padding-top: 15px !important;
+            overflow-y: auto !important;
+            max-height: 80vh !important;
+        }
+
+        .sidenav .dropdown-content li a {
+            padding: 10px 32px !important;
+            color: #C41E3A !important;
+            line-height: 1.4 !important;
+            white-space: normal !important;
+            height: auto !important;
+            min-height: 48px !important;
+        }
+
+        /* Section headers in mobile dropdowns */
+        .sidenav .dropdown-content .section-header {
+            background-color: #f5f5f5 !important;
+            padding: 12px 32px !important;
+            font-weight: 600 !important;
+            color: #333 !important;
+            border-bottom: 1px solid #ddd !important;
+            font-size: 0.9rem !important;
+            margin-top: 8px !important;
+            height: auto !important;
+            line-height: 1.4 !important;
+            clear: both !important;
+            display: block !important;
+                width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Fix for Administration section positioning */
+        .sidenav .dropdown-content .section-header:first-child {
+            margin-top: 20px !important;
+        }
+
+        .sidenav .dropdown-content .section-header span {
+            color: #C41E3A !important;
+            font-weight: 700 !important;
+        }
+
+        /* Fix overlapping text in mobile dropdown */
+        .sidenav .dropdown-content li {
+            min-height: 48px !important;
+            height: auto !important;
+            line-height: 1.4 !important;
+            clear: both !important;
+        }
+
+        /* Ensure Support Services section stays with Administration */
+        .sidenav .dropdown-content .section-header:nth-child(7) {
+            margin-top: 24px !important;
+            border-top: 1px solid #eee !important;
+            padding-top: 16px !important;
+        }
+
+        /* Add scroll padding to handle fixed header */
+        html {
+            scroll-padding-top: 60px !important;
+        }
+
+
+
         @media (max-width: 1100px) {
             .nav-wrapper .right.hide-on-med-and-down li:nth-child(n+5) {
-                display: none !important;
+            display: none !important;
             }
         }
 
@@ -492,45 +559,89 @@
     </div>
 
     <!-- Main Navigation -->
-    <nav class="z-depth-1 white">
-        <div class="nav-wrapper">
-            <!-- Brand Logo -->
-            <a href="/" class="brand-logo" style="color:#C41E3A; position: absolute; left: 15px;">
-                <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" class="responsive-img">
-                <span class="hide-on-small-only">TUP Visayas</span>
-                <span class="hide-on-med-and-up">TUP Visayas</span>
-            </a>
+    <div class="app-navbar">
+        <nav class="z-depth-1 white">
+            <div class="nav-wrapper">
+                <!-- Brand Logo -->
+                <a href="/" class="brand-logo" style="color:#C41E3A; position: absolute; left: 15px;">
+                    <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" class="responsive-img">
+                    <span class="hide-on-small-only">TUP Visayas</span>
+                    <span class="hide-on-med-and-up">TUP Visayas</span>
+                </a>
 
-            <!-- Mobile Sidenav Trigger -->
-            <a href="#" data-target="mobile-nav" class="sidenav-trigger left">
-                <i class="material-icons" style="color:#C41E3A;">menu</i>
-            </a>
+                <!-- Mobile Sidenav Trigger -->
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger left">
+                    <i class="material-icons" style="color:#C41E3A;">menu</i>
+                </a>
 
-            <!-- Desktop Navigation -->
-            <ul class="right hide-on-med-and-down">
-                @auth
-                    @if(auth()->user()->is_admin)
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="btn-flat"
-                                    style="color: #C41E3A !important; background: none; border: none; padding: 0 15px; height: 56px; line-height: 56px; text-transform: none; font-size: 1rem; cursor: pointer;">Logout</button>
-                            </form>
-                        </li>
+                <!-- Desktop Navigation -->
+                <ul class="right hide-on-med-and-down">
+                    @auth
+                        @if(auth()->user()->is_admin)
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn-flat"
+                                        style="color: #C41E3A !important; background: none; border: none; padding: 0 15px; height: 56px; line-height: 56px; text-transform: none; font-size: 1rem; cursor: pointer;">Logout</button>
+                                </form>
+                            </li>
+                        @else
+        <!-- About TUP -->
+        <li>
+                                <a class="dropdown-trigger" href="#!" data-target="about-dropdown">
+                                    About TUP<i class="material-icons right">arrow_drop_down</i>
+                                </a>
+        </li>
+
+        <!-- Admission -->
+        <li>
+                                <a class="dropdown-trigger" href="#!" data-target="admission-dropdown">
+                                    Admission<i class="material-icons right">arrow_drop_down</i>
+                                </a>
+        </li>
+
+        <!-- Students -->
+        <li>
+                                <a class="dropdown-trigger" href="#!" data-target="students-dropdown">
+                                    Students<i class="material-icons right">arrow_drop_down</i>
+                                </a>
+        </li>
+
+        <!-- Academics -->
+        <li>
+                                <a class="dropdown-trigger" href="#!" data-target="academics-dropdown">
+                                    Academics<i class="material-icons right">arrow_drop_down</i>
+                                </a>
+        </li>
+
+        <!-- Updates -->
+        <li>
+                                <a class="dropdown-trigger" href="#!" data-target="updates-dropdown">
+                                    Updates<i class="material-icons right">arrow_drop_down</i>
+                                </a>
+        </li>
+
+        <!-- Resources and Offices -->
+        <li>
+                                <a class="dropdown-trigger" href="#!" data-target="resources-dropdown">
+                                    Resources and Offices<i class="material-icons right">arrow_drop_down</i>
+                                </a>
+        </li>
+                        @endif
                     @else
                         <!-- About TUP -->
                         <li>
                             <a class="dropdown-trigger" href="#!" data-target="about-dropdown">
                                 About TUP<i class="material-icons right">arrow_drop_down</i>
                             </a>
-                        </li>
+            </li>
 
                         <!-- Admission -->
                         <li>
                             <a class="dropdown-trigger" href="#!" data-target="admission-dropdown">
                                 Admission<i class="material-icons right">arrow_drop_down</i>
                             </a>
-                        </li>
+            </li>
 
                         <!-- Students -->
                         <li>
@@ -553,66 +664,24 @@
                             </a>
                         </li>
 
+                        <!-- Procurement -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="procurement-dropdown">
+                                Procurement<i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                </li>
+
                         <!-- Resources and Offices -->
                         <li>
                             <a class="dropdown-trigger" href="#!" data-target="resources-dropdown">
                                 Resources and Offices<i class="material-icons right">arrow_drop_down</i>
                             </a>
                         </li>
-                    @endif
-                @else
-                    <!-- About TUP -->
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="about-dropdown">
-                            About TUP<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-
-                    <!-- Admission -->
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="admission-dropdown">
-                            Admission<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-
-                    <!-- Students -->
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="students-dropdown">
-                            Students<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-
-                    <!-- Academics -->
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="academics-dropdown">
-                            Academics<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-
-                    <!-- Updates -->
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="updates-dropdown">
-                            Updates<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-
-                    <!-- Procurement -->
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="procurement-dropdown">
-                            Procurement<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-
-                    <!-- Resources and Offices -->
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="resources-dropdown">
-                            Resources and Offices<i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-                @endauth
-            </ul>
-        </div>
-    </nav>
+        @endauth
+    </ul>
+            </div>
+        </nav>
+    </div>
 
     <!-- Dropdown Structures -->
     <!-- About TUP Dropdown -->
@@ -687,25 +756,25 @@
     <ul class="sidenav" id="mobile-nav">
         <li><a href="{{ route('home') }}">Home</a></li>
 
-        <!-- About TUP -->
-        <li>
+                    <!-- About TUP -->
+                    <li>
             <a class="dropdown-trigger" href="#!" data-target="about-mobile-dropdown">
                 About TUP<i class="material-icons right">arrow_drop_down</i>
             </a>
         </li>
         <ul id="about-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('about.history') }}">TUP History</a></li>
-            <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
-            <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
-            <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
-        </ul>
+                            <li><a href="{{ route('about.history') }}">TUP History</a></li>
+                            <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
+                            <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
+                            <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
+                        </ul>
 
-        <!-- Admission -->
-        <li>
+                    <!-- Admission -->
+                    <li>
             <a class="dropdown-trigger" href="#!" data-target="admission-mobile-dropdown">
                 Admission<i class="material-icons right">arrow_drop_down</i>
             </a>
-        </li>
+                    </li>
         <ul id="admission-mobile-dropdown" class="dropdown-content">
             <li><a href="#!">Graduate Programs</a></li>
             <li><a href="#!">Undergraduate Programs</a></li>
@@ -713,12 +782,12 @@
             <li><a href="#!">Contact Information</a></li>
         </ul>
 
-        <!-- Students -->
-        <li>
+                    <!-- Students -->
+                    <li>
             <a class="dropdown-trigger" href="#!" data-target="students-mobile-dropdown">
                 Students<i class="material-icons right">arrow_drop_down</i>
             </a>
-        </li>
+                    </li>
         <ul id="students-mobile-dropdown" class="dropdown-content">
             <li><a href="#!">The Office of Student Affairs</a></li>
             <li><a href="#!">Student Organizations</a></li>
@@ -726,78 +795,66 @@
             <li><a href="#!">TUP Student Handbook</a></li>
         </ul>
 
-        <!-- Academics -->
-        <li>
+                    <!-- Academics -->
+                    <li>
             <a class="dropdown-trigger" href="#!" data-target="academics-mobile-dropdown">
                 Academics<i class="material-icons right">arrow_drop_down</i>
             </a>
         </li>
         <ul id="academics-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
-            <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
-            <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
-        </ul>
+                            <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
+                            <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
+                            <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
+                        </ul>
 
-        <!-- Updates -->
-        <li>
+                    <!-- Updates -->
+                    <li>
             <a class="dropdown-trigger" href="#!" data-target="updates-mobile-dropdown">
                 Updates<i class="material-icons right">arrow_drop_down</i>
             </a>
         </li>
         <ul id="updates-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('news_events') }}">News and Events</a></li>
-            <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
+                            <li><a href="{{ route('news_events') }}">News and Events</a></li>
+                            <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
             <li><a href="#!">Director's Corner</a></li>
-        </ul>
+                        </ul>
 
         <!-- Procurement -->
         <li>
             <a class="dropdown-trigger" href="#!" data-target="procurement-mobile-dropdown">
                 Procurement<i class="material-icons right">arrow_drop_down</i>
             </a>
-        </li>
+                    </li>
         <ul id="procurement-mobile-dropdown" class="dropdown-content">
             <li><a href="https://www.philgeps.gov.ph/" target="_blank" rel="noopener noreferrer">PhilGEPS Posting</a>
             </li>
             <li><a href="#!">Bid Opportunities</a></li>
         </ul>
 
-        <!-- Resources and Offices -->
-        <li>
+                    <!-- Resources and Offices -->
+                    <li>
             <a class="dropdown-trigger" href="#!" data-target="resources-mobile-dropdown">
                 Resources and Offices<i class="material-icons right">arrow_drop_down</i>
             </a>
-        </li>
+                            </li>
         <ul id="resources-mobile-dropdown" class="dropdown-content">
-            <li>
-                <a class="dropdown-trigger" href="#!" data-target="administration-mobile-dropdown">
-                    Administration<i class="material-icons right">arrow_drop_down</i>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-trigger" href="#!" data-target="support-services-mobile-dropdown">
-                    Support Services<i class="material-icons right">arrow_drop_down</i>
-                </a>
-            </li>
-        </ul>
-
-        <!-- Administration Mobile Sub-dropdown -->
-        <ul id="administration-mobile-dropdown" class="dropdown-content">
+            <li style="height: 15px; min-height: 15px;"></li>
+            <li class="section-header"><span>Administration</span></li>
             <li><a href="#!">Board of Regents</a></li>
             <li><a href="#!">Office of the Director</a></li>
-            <li><a href="#!">Assistant Director for Administration and Finance</a></li>
-            <li><a href="#!">Assistant Director for Academic Affairs</a></li>
-            <li><a href="#!">Assistant Director for Research and Finance</a></li>
-        </ul>
-
-        <!-- Support Services Mobile Sub-dropdown -->
-        <ul id="support-services-mobile-dropdown" class="dropdown-content">
+            <li><a href="#!" style="white-space: normal; line-height: 1.4; padding: 12px 32px;">Assistant Director for
+                    Administration and Finance</a></li>
+            <li><a href="#!" style="white-space: normal; line-height: 1.4; padding: 12px 32px;">Assistant Director for
+                    Academic Affairs</a></li>
+            <li><a href="#!" style="white-space: normal; line-height: 1.4; padding: 12px 32px;">Assistant Director for
+                    Research and Finance</a></li>
+            <li class="section-header"><span>Support Services</span></li>
             <li><a href="#!">University Registrar</a></li>
             <li><a href="#!">University Medical and Dental Clinic</a></li>
             <li><a href="#!">Supervised Industrial Training</a></li>
             <li><a href="#!">University Information Technology Center</a></li>
             <li><a href="#!">University Library</a></li>
-        </ul>
+                                </ul>
 
         @auth
             @if(auth()->user()->is_admin)
@@ -807,10 +864,10 @@
                         <button type="submit" class="btn-flat"
                             style="color: #C41E3A !important; background: none; border: none; padding: 0 15px; height: 56px; line-height: 56px; text-transform: none; font-size: 1rem; cursor: pointer;">Logout</button>
                     </form>
-                </li>
+                            </li>
             @endif
-        @endauth
-    </ul>
+                @endauth
+            </ul>
 
     <!-- Main Content -->
     <main class="container" style="min-height:70vh;">
@@ -835,24 +892,11 @@
     <!-- Materialize JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ asset('js/navbar.init.js?v=' . time()) }}"></script>
 
-    <!-- Initialize Materialize Components -->
+    <!-- Initialize Scroll-to-top only (navbar init moved to navbar.init.js) -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Initialize sidenav
-            var sidenavElems = document.querySelectorAll('.sidenav');
-            var sidenavInstances = M.Sidenav.init(sidenavElems);
-
-            // Initialize dropdowns
-            var dropdownElems = document.querySelectorAll('.dropdown-trigger');
-            var dropdownInstances = M.Dropdown.init(dropdownElems, {
-                constrainWidth: false,
-                hover: false,
-                coverTrigger: false,
-                closeOnClick: true
-            });
-
-            // Scroll to top functionality
             var scrollTopBtn = document.getElementById("scrollTopBtn");
             if (scrollTopBtn) {
                 scrollTopBtn.onclick = function () {

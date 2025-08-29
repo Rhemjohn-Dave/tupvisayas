@@ -1,0 +1,50 @@
+/* Scope all navbar fixes to avoid global side-effects */
+.app-navbar nav,
+.app-navbar .nav-wrapper {
+    position: relative;
+    z-index: 1000;
+    overflow: visible !important; /* allow dropdown to escape */
+}
+
+/* Ensure dropdown renders above banners/carousels and stays clickable */
+.app-navbar .dropdown-content {
+    z-index: 9999 !important; /* above overlays/hero */
+    position: absolute; /* let Materialize compute placement */
+}
+
+/* Let Materialize control visibility; ensure hidden when not active */
+/* Do not force visibility; Materialize controls display */
+
+/* Prevent clipping if any li had overflow hidden */
+.app-navbar nav ul li {
+    overflow: visible;
+}
+
+/* Desktop: never show/keep the mobile overlay; do not let it capture clicks */
+@media (min-width: 992px) {
+    .sidenav-trigger {
+        display: none !important;
+    }
+    .sidenav {
+        transform: translateX(-105%) !important;
+    }
+    .sidenav-overlay {
+        display: none !important;
+        pointer-events: none !important;
+    }
+}
+
+/* Mobile: normal Materialize behavior */
+@media (max-width: 991px) {
+    .sidenav-trigger {
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Defensive: avoid any accidental header/banner layer blocking clicks */
+header,
+.navbar-fixed {
+    position: relative;
+    z-index: 1000;
+}

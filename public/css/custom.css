@@ -65,24 +65,8 @@ nav.z-depth-1.white .dropdown-trigger i.material-icons {
 
 /* Responsive navigation adjustments */
 @media (max-width: 992px) {
+    /* Hide desktop navigation on mobile - handled in app.blade.php */
     nav.z-depth-1.white .nav-wrapper .right {
-        overflow-x: auto;
-        white-space: nowrap;
-        width: 100%;
-        margin-left: 0;
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    nav.z-depth-1.white .nav-wrapper .right > li {
-        float: none;
-        display: inline-block;
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-    }
-
-    nav.z-depth-1.white .nav-wrapper .right > li > a {
-        font-size: 0.95rem !important;
-        padding: 0 6px;
+        display: none !important;
     }
 }

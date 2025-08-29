@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'TUP Visayas - Technological University of the Philippines Visayas')</title>
     <link rel="icon" type="image/png" href="{{ asset('images/tup-logo.png') }}">
+
     <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <!-- Material Icons -->
@@ -14,7 +15,7 @@
     <!-- Custom Cardinal Red Theme -->
     <link href="{{ asset('css/custom.css?v=' . time()) }}" rel="stylesheet">
 
-    <!-- Clean navbar CSS fix -->
+    <!-- Clean navbar CSS -->
     <style>
         /* Utility Bar Styles */
         .utility-bar {
@@ -114,14 +115,14 @@
         }
 
         /* Navbar logo and text sizing */
-        nav.z-depth-1.white .brand-logo {
+        .brand-logo {
             display: flex !important;
             align-items: center !important;
             height: 56px !important;
             padding: 0 !important;
         }
 
-        nav.z-depth-1.white .brand-logo img {
+        .brand-logo img {
             height: 44px !important;
             max-height: 44px !important;
             margin-right: 8px !important;
@@ -129,21 +130,21 @@
         }
 
         /* Desktop text size */
-        nav.z-depth-1.white .brand-logo span.hide-on-small-only {
+        .brand-logo span.hide-on-small-only {
             font-size: 1.5rem !important;
             font-weight: 600 !important;
             line-height: 1 !important;
         }
 
         /* Mobile text size */
-        nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
+        .brand-logo span.hide-on-med-and-up {
             font-size: 1.1rem !important;
             font-weight: 600 !important;
             line-height: 1 !important;
         }
 
         /* Navigation links */
-        nav.z-depth-1.white .nav-wrapper .right>li>a {
+        .nav-wrapper .right>li>a {
             line-height: 56px !important;
             height: 56px !important;
             display: flex !important;
@@ -158,119 +159,25 @@
         }
 
         /* Hover effect for navigation links */
-        nav.z-depth-1.white .nav-wrapper .right>li>a:hover {
+        .nav-wrapper .right>li>a:hover {
             background-color: rgba(196, 30, 58, 0.1) !important;
             color: #C41E3A !important;
         }
 
-        /* Fix navbar alignment and spacing */
-        nav.z-depth-1.white .nav-wrapper {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            width: 100% !important;
-        }
-
-        /* Ensure logo stays on the very left edge */
-        nav.z-depth-1.white .brand-logo {
-            flex-shrink: 0 !important;
-            margin-right: auto !important;
-            margin-left: 0 !important;
-            padding-left: 15px !important;
-            order: 1 !important;
-        }
-
-        nav.z-depth-1.white .nav-wrapper .right {
-            display: flex !important;
-            align-items: center !important;
-            gap: 0 !important;
-            margin: 0 !important;
-            margin-left: auto !important;
-            padding-right: 20px !important;
-            flex-wrap: nowrap !important;
-            order: 2 !important;
-            justify-content: flex-end !important;
-        }
-
-        nav.z-depth-1.white .nav-wrapper .right li {
-            margin: 0 !important;
-            list-style: none !important;
-            flex-shrink: 0 !important;
-        }
-
-        /* Improve spacing between nav items */
-        nav.z-depth-1.white .nav-wrapper .right li {
-            margin: 0 4px !important;
-        }
-
-        nav.z-depth-1.white .nav-wrapper .right li:first-child {
-            margin-left: 0 !important;
-        }
-
-        nav.z-depth-1.white .nav-wrapper .right li:last-child {
-            margin-right: 0 !important;
-        }
-
-        /* Fix hamburger menu positioning */
-        nav.z-depth-1.white .sidenav-trigger {
-            margin-right: 15px !important;
-            margin-left: 0 !important;
-            order: 0 !important;
-        }
-
-        /* Ensure proper mobile layout */
-        @media (max-width: 992px) {
-            nav.z-depth-1.white .nav-wrapper {
-                justify-content: flex-start !important;
-            }
-
-            nav.z-depth-1.white .brand-logo {
-                margin-right: 0 !important;
-                margin-left: auto !important;
-            }
-
-            nav.z-depth-1.white .nav-wrapper .right {
-                margin-left: 0 !important;
-                padding-right: 0 !important;
+        /* Responsive adjustments */
+        @media (max-width: 800px) {
+            .brand-logo span.hide-on-med-and-up {
+                font-size: 1.1rem !important;
             }
         }
 
-        /* Ensure proper spacing for mobile */
-        @media (max-width: 992px) {
-            nav.z-depth-1.white .brand-logo {
-                margin-left: auto !important;
-                padding-left: 0 !important;
-            }
-
-            nav.z-depth-1.white .nav-wrapper .right {
-                padding-right: 10px !important;
-            }
-
-            nav.z-depth-1.white .nav-wrapper .right li {
-                margin: 0 2px !important;
-            }
-
-            nav.z-depth-1.white .nav-wrapper .right>li>a {
-                padding: 0 8px !important;
-                font-size: 0.9rem !important;
-            }
-        }
-
-        /* Extra small screens */
         @media (max-width: 600px) {
-            nav.z-depth-1.white .nav-wrapper .right li {
-                margin: 0 1px !important;
-            }
-
-            nav.z-depth-1.white .nav-wrapper .right>li>a {
-                padding: 0 6px !important;
-                font-size: 0.85rem !important;
+            .brand-logo span.hide-on-med-and-up {
+                font-size: 1rem !important;
             }
         }
 
-        /* Resources and Offices Multi-column Dropdown */
+        /* Resources dropdown special styling */
         .resources-dropdown {
             width: 600px !important;
             max-width: 90vw !important;
@@ -316,237 +223,6 @@
             color: #C41E3A;
         }
 
-        /* Ensure dropdowns are properly positioned */
-        .dropdown-content {
-            z-index: 1000 !important;
-            position: absolute !important;
-            top: 100% !important;
-            left: 0 !important;
-            display: none !important;
-            background: white !important;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
-            border-radius: 4px !important;
-            min-width: 200px !important;
-        }
-
-        /* Show dropdown when active */
-        .dropdown-content.active {
-            display: block !important;
-        }
-
-        /* Fix dropdown trigger positioning */
-        .dropdown-trigger {
-            position: relative !important;
-            cursor: pointer !important;
-        }
-
-        /* Ensure dropdown content is properly styled */
-        .dropdown-content li {
-            clear: both;
-            color: rgba(0, 0, 0, 0.87);
-            cursor: pointer;
-            min-height: 50px;
-            line-height: 1.5rem;
-            width: 100%;
-            text-align: left;
-            text-transform: none;
-        }
-
-        .dropdown-content li>a,
-        .dropdown-content li>span {
-            font-size: 16px;
-            color: #26a69a;
-            display: block;
-            line-height: 22px;
-            padding: 14px 16px;
-        }
-
-        .dropdown-content li>a:hover,
-        .dropdown-content li>span:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        /* Hide desktop navbar on mobile */
-        @media (max-width: 992px) {
-
-            /* Hide all desktop menu items */
-            .hide-on-med-and-down {
-                display: none !important;
-            }
-
-            /* Specifically hide the right menu - override existing CSS */
-            nav.z-depth-1.white .nav-wrapper .right {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                height: 0 !important;
-                overflow: hidden !important;
-            }
-
-            /* Override existing navbar wrapper CSS for mobile */
-            nav.z-depth-1.white .nav-wrapper {
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-            }
-
-            /* Make sure hamburger is visible */
-            nav.z-depth-1.white .sidenav-trigger {
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-            }
-
-            /* Override existing brand logo CSS for mobile */
-            nav.z-depth-1.white .brand-logo {
-                flex: 1 !important;
-                text-align: center !important;
-                margin: 0 !important;
-                margin-right: auto !important;
-                margin-left: 0 !important;
-                padding-left: 15px !important;
-                order: 1 !important;
-            }
-        }
-
-        /* Mobile dropdown styling */
-        .sidenav .dropdown-content {
-            position: static !important;
-            display: none !important;
-            box-shadow: none !important;
-            background: rgba(0, 0, 0, 0.05) !important;
-            margin-left: 20px !important;
-            border-radius: 0 !important;
-            min-width: auto !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        .sidenav .dropdown-content.active {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        .sidenav .dropdown-content li {
-            margin: 0 !important;
-        }
-
-        /* Child dropdown items - Gray text for better contrast on white sidebar */
-        .sidenav .dropdown-content a {
-            padding: 10px 15px !important;
-            color: #666 !important;
-            font-size: 0.9rem !important;
-            background-color: transparent !important;
-        }
-
-        .sidenav .dropdown-content a:hover {
-            background-color: rgba(196, 30, 58, 0.1) !important;
-            color: #C41E3A !important;
-        }
-
-        /* Force override for all mobile dropdown content - ensure visibility */
-        .sidenav ul.dropdown-content li a,
-        .sidenav .dropdown-content li a,
-        .sidenav #about-mobile-dropdown li a,
-        .sidenav #admission-mobile-dropdown li a,
-        .sidenav #students-mobile-dropdown li a,
-        .sidenav #academics-mobile-dropdown li a,
-        .sidenav #updates-mobile-dropdown li a,
-        .sidenav #resources-mobile-dropdown li a {
-            color: #666 !important;
-            background-color: transparent !important;
-            text-decoration: none !important;
-            display: block !important;
-        }
-
-        .sidenav ul.dropdown-content li a:hover,
-        .sidenav .dropdown-content li a:hover,
-        .sidenav #about-mobile-dropdown li a:hover,
-        .sidenav #admission-mobile-dropdown li a:hover,
-        .sidenav #students-mobile-dropdown li a:hover,
-        .sidenav #academics-mobile-dropdown li a:hover,
-        .sidenav #updates-mobile-dropdown li a:hover,
-        .sidenav #resources-mobile-dropdown li a:hover {
-            color: #C41E3A !important;
-            background-color: rgba(196, 30, 58, 0.1) !important;
-        }
-
-        /* ULTRA HIGH SPECIFICITY - Force gray color on mobile dropdown children */
-        body .sidenav ul.dropdown-content li a,
-        body .sidenav .dropdown-content li a,
-        body .sidenav #about-mobile-dropdown li a,
-        body .sidenav #admission-mobile-dropdown li a,
-        body .sidenav #students-mobile-dropdown li a,
-        body .sidenav #academics-mobile-dropdown li a,
-        body .sidenav #updates-mobile-dropdown li a,
-        body .sidenav #resources-mobile-dropdown li a,
-        .sidenav ul.dropdown-content li a,
-        .sidenav .dropdown-content li a,
-        .sidenav #about-mobile-dropdown li a,
-        .sidenav #admission-mobile-dropdown li a,
-        .sidenav #students-mobile-dropdown li a,
-        .sidenav #academics-mobile-dropdown li a,
-        .sidenav #updates-mobile-dropdown li a,
-        .sidenav #resources-mobile-dropdown li a {
-            color: #666 !important;
-            background-color: transparent !important;
-            text-decoration: none !important;
-            display: block !important;
-            font-weight: normal !important;
-        }
-
-        /* Force hover states */
-        body .sidenav ul.dropdown-content li a:hover,
-        body .sidenav .dropdown-content li a:hover,
-        body .sidenav #about-mobile-dropdown li a:hover,
-        body .sidenav #admission-mobile-dropdown li a:hover,
-        body .sidenav #students-mobile-dropdown li a:hover,
-        body .sidenav #academics-mobile-dropdown li a:hover,
-        body .sidenav #updates-mobile-dropdown li a:hover,
-        body .sidenav #resources-mobile-dropdown li a:hover,
-        .sidenav ul.dropdown-content li a:hover,
-        .sidenav .dropdown-content li a:hover,
-        .sidenav #about-mobile-dropdown li a:hover,
-        .sidenav #admission-mobile-dropdown li a:hover,
-        .sidenav #students-mobile-dropdown li a:hover,
-        .sidenav #academics-mobile-dropdown li a:hover,
-        .sidenav #updates-mobile-dropdown li a:hover,
-        .sidenav #resources-mobile-dropdown li a:hover {
-            color: #C41E3A !important;
-            background-color: rgba(196, 30, 58, 0.1) !important;
-        }
-
-        /* Mobile dropdown trigger text color - Parent items in cardinal red */
-        .sidenav .dropdown-trigger {
-            color: #C41E3A !important;
-        }
-
-        .sidenav .dropdown-trigger:hover {
-            color: #C41E3A !important;
-        }
-
-        /* Nested Dropdown Styling */
-        .dropdown-content .dropdown-content {
-            position: absolute;
-            left: 100%;
-            top: 0;
-            min-width: 200px;
-            z-index: 1001;
-        }
-
-        .dropdown-content li:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Fix dropdown trigger positioning */
-        .dropdown-trigger {
-            cursor: pointer;
-        }
-
         /* Mobile responsive for resources dropdown */
         @media (max-width: 768px) {
             .resources-dropdown {
@@ -560,33 +236,156 @@
             }
         }
 
-        /* Accessibility improvements */
-        .dropdown-trigger:focus {
-            outline: none;
+        /* Fix mobile sidenav interference with desktop navbar */
+        /* Ensure sidenav is completely hidden on desktop */
+        .sidenav {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            z-index: 999 !important;
         }
 
-        .dropdown-content a:focus {
-            background-color: #f5f5f5;
-            outline: none;
-        }
-
-        /* Remove focus outline from all navigation elements */
-        nav a:focus,
-        nav button:focus,
-        .brand-logo:focus {
-            outline: none !important;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 800px) {
-            nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
-                font-size: 1.1rem !important;
+        /* Show sidenav only on mobile screens */
+        @media (max-width: 992px) {
+            .sidenav {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
             }
         }
 
-        @media (max-width: 600px) {
-            nav.z-depth-1.white .brand-logo span.hide-on-med-and-up {
-                font-size: 1rem !important;
+        /* Ensure sidenav trigger is hidden on desktop */
+        .sidenav-trigger {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Show sidenav trigger only on mobile screens */
+        @media (max-width: 992px) {
+            .sidenav-trigger {
+                display: block !important;
+                visibility: visible !important;
+            }
+        }
+
+        /* Ensure desktop navbar has proper z-index */
+        nav.z-depth-1.white {
+            z-index: 1000 !important;
+            position: relative !important;
+        }
+
+        /* Ensure desktop navigation links are clickable */
+        .nav-wrapper .right.hide-on-med-and-down {
+            z-index: 1001 !important;
+            position: relative !important;
+        }
+
+        /* Ensure dropdowns appear above sidenav */
+        .dropdown-content {
+            z-index: 1002 !important;
+            position: absolute !important;
+        }
+
+        /* Fix resources dropdown positioning */
+        #resources-dropdown {
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            z-index: 1002 !important;
+        }
+
+        /* Ensure dropdown content is properly contained */
+        .resources-dropdown .dropdown-column {
+            display: block !important;
+            position: relative !important;
+        }
+
+        /* Fix mobile sidenav interference with desktop navbar */
+        /* Ensure sidenav is completely hidden on desktop */
+        .sidenav {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            z-index: 999 !important;
+            pointer-events: none !important;
+        }
+
+        /* Show sidenav only on mobile screens */
+        @media (max-width: 992px) {
+            .sidenav {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                z-index: 1050 !important;
+                /* Higher than navbar on mobile */
+            }
+
+            /* Ensure sidenav overlay appears above navbar on mobile */
+            .sidenav-overlay {
+                z-index: 1049 !important;
+            }
+
+            /* Lower navbar z-index on mobile so sidenav appears above */
+            nav.z-depth-1.white {
+                z-index: 1000 !important;
+            }
+
+            /* Hide desktop navigation on mobile */
+            .nav-wrapper .right.hide-on-med-and-down {
+                display: none !important;
+            }
+        }
+
+        /* Ensure sidenav trigger is hidden on desktop */
+        .sidenav-trigger {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Show sidenav trigger only on mobile screens */
+        @media (max-width: 992px) {
+            .sidenav-trigger {
+                display: block !important;
+                visibility: visible !important;
+            }
+        }
+
+        /* Ensure desktop navbar has proper z-index */
+        nav.z-depth-1.white {
+            z-index: 1000 !important;
+            position: relative !important;
+        }
+
+        /* Ensure desktop navigation links are clickable */
+        .nav-wrapper .right.hide-on-med-and-down {
+            z-index: 1001 !important;
+            position: relative !important;
+            pointer-events: auto !important;
+        }
+
+        /* Ensure all navbar links are clickable on desktop */
+        .nav-wrapper .right.hide-on-med-and-down li {
+            pointer-events: auto !important;
+        }
+
+        .nav-wrapper .right.hide-on-med-and-down li a {
+            pointer-events: auto !important;
+        }
+
+        /* Fix navbar positioning on mobile */
+        @media (max-width: 992px) {
+            nav .nav-wrapper {
+                justify-content: space-between !important;
+            }
+
+            nav .brand-logo {
+                margin-left: 0 !important;
+                padding-left: 15px !important;
+            }
+
+            nav .sidenav-trigger {
+                margin-right: 15px !important;
             }
         }
     </style>
@@ -628,105 +427,287 @@
         </div>
     </div>
 
-    <!-- Sidenav for mobile -->
+    <!-- Main Navigation -->
+    <nav class="z-depth-1 white">
+        <div class="nav-wrapper container">
+            <!-- Brand Logo -->
+            <a href="/" class="brand-logo" style="color:#C41E3A;">
+                <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" class="responsive-img">
+                <span class="hide-on-small-only">TUP Visayas</span>
+                <span class="hide-on-med-and-up">TUP Visayas</span>
+            </a>
+
+            <!-- Mobile Sidenav Trigger -->
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger left">
+                <i class="material-icons" style="color:#C41E3A;">menu</i>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="right hide-on-med-and-down">
+                @auth
+                    @if(auth()->user()->is_admin)
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn-flat"
+                                    style="color: #C41E3A !important; background: none; border: none; padding: 0 15px; height: 56px; line-height: 56px; text-transform: none; font-size: 1rem; cursor: pointer;">Logout</button>
+                            </form>
+                        </li>
+                    @else
+                        <!-- About TUP -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="about-dropdown">
+                                About TUP<i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+
+                        <!-- Admission -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="admission-dropdown">
+                                Admission<i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+
+                        <!-- Students -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="students-dropdown">
+                                Students<i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+
+                        <!-- Academics -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="academics-dropdown">
+                                Academics<i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+
+                        <!-- Updates -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="updates-dropdown">
+                                Updates<i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+
+                        <!-- Resources and Offices -->
+                        <li>
+                            <a class="dropdown-trigger" href="#!" data-target="resources-dropdown">
+                                Resources and Offices<i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                    @endif
+                @else
+                    <!-- About TUP -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="about-dropdown">
+                            About TUP<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+
+                    <!-- Admission -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="admission-dropdown">
+                            Admission<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+
+                    <!-- Students -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="students-dropdown">
+                            Students<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+
+                    <!-- Academics -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="academics-dropdown">
+                            Academics<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+
+                    <!-- Updates -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="updates-dropdown">
+                            Updates<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+
+                    <!-- Resources and Offices -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="resources-dropdown">
+                            Resources and Offices<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+                @endauth
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dropdown Structures -->
+    <!-- About TUP Dropdown -->
+    <ul id="about-dropdown" class="dropdown-content">
+        <li><a href="{{ route('about.history') }}">TUP History</a></li>
+        <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
+        <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
+        <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
+    </ul>
+
+    <!-- Admission Dropdown -->
+    <ul id="admission-dropdown" class="dropdown-content">
+        <li><a href="#!">Graduate Programs</a></li>
+        <li><a href="#!">Undergraduate Programs</a></li>
+        <li><a href="#!">Enrollment Procedure for Freshmen Students</a></li>
+        <li><a href="#!">Contact Information</a></li>
+    </ul>
+
+    <!-- Students Dropdown -->
+    <ul id="students-dropdown" class="dropdown-content">
+        <li><a href="#!">The Office of Student Affairs</a></li>
+        <li><a href="#!">Student Organizations</a></li>
+        <li><a href="#!">Enrollment Procedure</a></li>
+        <li><a href="#!">TUP Student Handbook</a></li>
+    </ul>
+
+    <!-- Academics Dropdown -->
+    <ul id="academics-dropdown" class="dropdown-content">
+        <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
+        <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
+        <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
+    </ul>
+
+    <!-- Updates Dropdown -->
+    <ul id="updates-dropdown" class="dropdown-content">
+        <li><a href="{{ route('news_events') }}">News and Events</a></li>
+        <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
+        <li><a href="#!">Director's Corner</a></li>
+    </ul>
+
+    <!-- Resources and Offices Dropdown -->
+    <ul id="resources-dropdown" class="dropdown-content resources-dropdown">
+        <li class="dropdown-column">
+            <h6 class="dropdown-header">Administration</h6>
+            <ul class="dropdown-sublist">
+                <li><a href="#!">Board of Regents</a></li>
+                <li><a href="#!">Office of the Director</a></li>
+                <li><a href="#!">Assistant Director for Administration and Finance</a></li>
+                <li><a href="#!">Assistant Director for Academic Affairs</a></li>
+                <li><a href="#!">Assistant Director for Research and Finance</a></li>
+            </ul>
+        </li>
+        <li class="dropdown-column">
+            <h6 class="dropdown-header">Support Services</h6>
+            <ul class="dropdown-sublist">
+                <li><a href="#!">University Registrar</a></li>
+                <li><a href="#!">University Medical and Dental Clinic</a></li>
+                <li><a href="#!">Supervised Industrial Training</a></li>
+                <li><a href="#!">University Information Technology Center</a></li>
+                <li><a href="#!">University Library</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <!-- Mobile Sidenav -->
     <ul class="sidenav" id="mobile-nav">
         <li><a href="{{ route('home') }}">Home</a></li>
 
         <!-- About TUP -->
         <li>
-            <a class="dropdown-trigger" href="#" data-target="about-mobile-dropdown">About TUP<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" href="#!" data-target="about-mobile-dropdown">
+                About TUP<i class="material-icons right">arrow_drop_down</i>
+            </a>
         </li>
         <ul id="about-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('about.history') }}" style="color: #666 !important;">TUP History</a></li>
-            <li><a href="{{ route('about.mission') }}" style="color: #666 !important;">TUP Mission Vision</a></li>
-            <li><a href="{{ route('about.mandate') }}" style="color: #666 !important;">The TUP Mandate</a></li>
-            <li><a href="{{ route('about.hymn') }}" style="color: #666 !important;">The TUP Hymn</a></li>
+            <li><a href="{{ route('about.history') }}">TUP History</a></li>
+            <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
+            <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
+            <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
         </ul>
 
         <!-- Admission -->
         <li>
-            <a class="dropdown-trigger" href="#" data-target="admission-mobile-dropdown">Admission<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" href="#!" data-target="admission-mobile-dropdown">
+                Admission<i class="material-icons right">arrow_drop_down</i>
+            </a>
         </li>
         <ul id="admission-mobile-dropdown" class="dropdown-content">
-            <li><a href="#" style="color: #666 !important;">Graduate Programs</a></li>
-            <li><a href="#" style="color: #666 !important;">Undergraduate Programs</a></li>
-            <li><a href="#" style="color: #666 !important;">Enrollment Procedure for Freshmen Students</a></li>
-            <li><a href="#" style="color: #666 !important;">Contact Information</a></li>
+            <li><a href="#!">Graduate Programs</a></li>
+            <li><a href="#!">Undergraduate Programs</a></li>
+            <li><a href="#!">Enrollment Procedure for Freshmen Students</a></li>
+            <li><a href="#!">Contact Information</a></li>
         </ul>
 
         <!-- Students -->
         <li>
-            <a class="dropdown-trigger" href="#" data-target="students-mobile-dropdown">Students<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" href="#!" data-target="students-mobile-dropdown">
+                Students<i class="material-icons right">arrow_drop_down</i>
+            </a>
         </li>
         <ul id="students-mobile-dropdown" class="dropdown-content">
-            <li><a href="#" style="color: #666 !important;">The Office of Student Affairs</a></li>
-            <li><a href="#" style="color: #666 !important;">Student Organizations</a></li>
-            <li><a href="#" style="color: #666 !important;">Enrollment Procedure</a></li>
-            <li><a href="#" style="color: #666 !important;">TUP Student Handbook</a></li>
+            <li><a href="#!">The Office of Student Affairs</a></li>
+            <li><a href="#!">Student Organizations</a></li>
+            <li><a href="#!">Enrollment Procedure</a></li>
+            <li><a href="#!">TUP Student Handbook</a></li>
         </ul>
 
         <!-- Academics -->
         <li>
-            <a class="dropdown-trigger" href="#" data-target="academics-mobile-dropdown">Academics<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" href="#!" data-target="academics-mobile-dropdown">
+                Academics<i class="material-icons right">arrow_drop_down</i>
+            </a>
         </li>
         <ul id="academics-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('academics.coe') }}" style="color: #666 !important;">College of Engineering</a></li>
-            <li><a href="{{ route('academics.coac') }}" style="color: #666 !important;">College of Automation and
-                    Control</a></li>
-            <li><a href="{{ route('academics.coet') }}" style="color: #666 !important;">College of Engineering
-                    Technology</a></li>
+            <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
+            <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
+            <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
         </ul>
 
         <!-- Updates -->
         <li>
-            <a class="dropdown-trigger" href="#" data-target="updates-mobile-dropdown">Updates<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" href="#!" data-target="updates-mobile-dropdown">
+                Updates<i class="material-icons right">arrow_drop_down</i>
+            </a>
         </li>
         <ul id="updates-mobile-dropdown" class="dropdown-content">
-            <li><a href="{{ route('news_events') }}" style="color: #666 !important;">News and Events</a></li>
-            <li><a href="{{ route('announcements.index') }}" style="color: #666 !important;">Announcements</a></li>
-            <li><a href="#" style="color: #666 !important;">Director's Corner</a></li>
+            <li><a href="{{ route('news_events') }}">News and Events</a></li>
+            <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
+            <li><a href="#!">Director's Corner</a></li>
         </ul>
 
         <!-- Resources and Offices -->
         <li>
-            <a class="dropdown-trigger" href="#" data-target="resources-mobile-dropdown">Resources and Offices<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" href="#!" data-target="resources-mobile-dropdown">
+                Resources and Offices<i class="material-icons right">arrow_drop_down</i>
+            </a>
         </li>
         <ul id="resources-mobile-dropdown" class="dropdown-content">
             <li>
-                <a class="dropdown-trigger" href="#" data-target="administration-mobile-dropdown"
-                    style="color: #666 !important;">Administration<i
-                        class="material-icons right">arrow_drop_down</i></a>
+                <a class="dropdown-trigger" href="#!" data-target="administration-mobile-dropdown">
+                    Administration<i class="material-icons right">arrow_drop_down</i>
+                </a>
             </li>
             <li>
-                <a class="dropdown-trigger" href="#" data-target="support-services-mobile-dropdown"
-                    style="color: #666 !important;">Support Services<i
-                        class="material-icons right">arrow_drop_down</i></a>
+                <a class="dropdown-trigger" href="#!" data-target="support-services-mobile-dropdown">
+                    Support Services<i class="material-icons right">arrow_drop_down</i>
+                </a>
             </li>
         </ul>
 
         <!-- Administration Mobile Sub-dropdown -->
         <ul id="administration-mobile-dropdown" class="dropdown-content">
-            <li><a href="#" style="color: #666 !important;">Board of Regents</a></li>
-            <li><a href="#" style="color: #666 !important;">Office of the Director</a></li>
-            <li><a href="#" style="color: #666 !important;">Assistant Director for Administration and Finance</a></li>
-            <li><a href="#" style="color: #666 !important;">Assistant Director for Academic Affairs</a></li>
-            <li><a href="#" style="color: #666 !important;">Assistant Director for Research and Finance</a></li>
+            <li><a href="#!">Board of Regents</a></li>
+            <li><a href="#!">Office of the Director</a></li>
+            <li><a href="#!">Assistant Director for Administration and Finance</a></li>
+            <li><a href="#!">Assistant Director for Academic Affairs</a></li>
+            <li><a href="#!">Assistant Director for Research and Finance</a></li>
         </ul>
-
 
         <!-- Support Services Mobile Sub-dropdown -->
         <ul id="support-services-mobile-dropdown" class="dropdown-content">
-            <li><a href="#" style="color: #666 !important;">University Registrar</a></li>
-            <li><a href="#" style="color: #666 !important;">University Medical and Dental Clinic</a></li>
-            <li><a href="#" style="color: #666 !important;">Supervised Industrial Training</a></li>
-            <li><a href="#" style="color: #666 !important;">University Information Technology Center</a></li>
-            <li><a href="#" style="color: #666 !important;">University Library</a></li>
+            <li><a href="#!">University Registrar</a></li>
+            <li><a href="#!">University Medical and Dental Clinic</a></li>
+            <li><a href="#!">Supervised Industrial Training</a></li>
+            <li><a href="#!">University Information Technology Center</a></li>
+            <li><a href="#!">University Library</a></li>
         </ul>
 
         @auth
@@ -741,176 +722,12 @@
             @endif
         @endauth
     </ul>
-    <!-- Dropdown Structures (only once, outside nav) -->
 
-    <!-- About TUP Dropdown -->
-    <ul id="about-dropdown" class="dropdown-content">
-        <li><a href="{{ route('about.history') }}">TUP History</a></li>
-        <li><a href="{{ route('about.mission') }}">TUP Mission Vision</a></li>
-        <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
-        <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
-    </ul>
-
-    <!-- Admission Dropdown -->
-    <ul id="admission-dropdown" class="dropdown-content">
-        <li><a href="#">Graduate Programs</a></li>
-        <li><a href="#">Undergraduate Programs</a></li>
-        <li><a href="#">Enrollment Procedure for Freshmen Students</a></li>
-        <li><a href="#">Contact Information</a></li>
-    </ul>
-
-    <!-- Students Dropdown -->
-    <ul id="students-dropdown" class="dropdown-content">
-        <li><a href="#">The Office of Student Affairs</a></li>
-        <li><a href="#">Student Organizations</a></li>
-        <li><a href="#">Enrollment Procedure</a></li>
-        <li><a href="#">TUP Student Handbook</a></li>
-    </ul>
-
-    <!-- Academics Dropdown -->
-    <ul id="academics-dropdown" class="dropdown-content">
-        <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
-        <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
-        <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
-    </ul>
-
-    <!-- Updates Dropdown -->
-    <ul id="updates-dropdown" class="dropdown-content">
-        <li><a href="{{ route('news_events') }}">News and Events</a></li>
-        <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
-        <li><a href="#">Director's Corner</a></li>
-    </ul>
-
-    <!-- Resources and Offices Dropdown -->
-    <ul id="resources-dropdown" class="dropdown-content resources-dropdown">
-        <li class="dropdown-column">
-            <h6 class="dropdown-header">Administration</h6>
-            <ul class="dropdown-sublist">
-                <li><a href="#">Board of Regents</a></li>
-                <li><a href="#">Office of the Director</a></li>
-                <li><a href="#">Assistant Director for Administration and Finance</a></li>
-                <li><a href="#">Assistant Director for Academic Affairs</a></li>
-                <li><a href="#">Assistant Director for Research and Finance</a></li>
-            </ul>
-        </li>
-        <li class="dropdown-column">
-            <h6 class="dropdown-header">Support Services</h6>
-            <ul class="dropdown-sublist">
-                <li><a href="#">University Registrar</a></li>
-                <li><a href="#">University Medical and Dental Clinic</a></li>
-                <li><a href="#">Supervised Industrial Training</a></li>
-                <li><a href="#">University Information Technology Center</a></li>
-                <li><a href="#">University Library</a></li>
-            </ul>
-        </li>
-    </ul>
-    <nav class="z-depth-1 white">
-        <div class="nav-wrapper container">
-            <!-- Hamburger icon for mobile -->
-            <a href="#" data-target="mobile-nav" class="sidenav-trigger left" style="margin-right:10px;">
-                <i class="material-icons" style="color:#C41E3A;">menu</i>
-            </a>
-            <a href="/" class="brand-logo" style="color:#C41E3A; display: flex; align-items: center; height: 56px;">
-                <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" class="responsive-img"
-                    style="height:44px; max-height:44px; margin-right:8px; max-width:40vw; width:auto;">
-                <span class="hide-on-small-only"
-                    style="font-size:1.5rem !important; font-weight:600; line-height:1;">TUP
-                    Visayas</span>
-                <span class="hide-on-med-and-up"
-                    style="font-size:1.1rem !important; font-weight:600; line-height:1;">TUP
-                    Visayas</span>
-            </a>
-            <ul class="right hide-on-med-and-down">
-                @auth
-                    @if(auth()->user()->is_admin)
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="btn-flat"
-                                    style="color: #C41E3A !important; background: none; border: none; padding: 0 15px; height: 56px; line-height: 56px; text-transform: none; font-size: 1rem; cursor: pointer;">Logout</button>
-                            </form>
-                        </li>
-                    @else
-                        <!-- About TUP -->
-                        <li>
-                            <a class="dropdown-trigger" href="#" data-target="about-dropdown">About TUP<i
-                                    class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-
-                        <!-- Admission -->
-                        <li>
-                            <a class="dropdown-trigger" href="#" data-target="admission-dropdown">Admission<i
-                                    class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-
-                        <!-- Students -->
-                        <li>
-                            <a class="dropdown-trigger" href="#" data-target="students-dropdown">Students<i
-                                    class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-
-                        <!-- Academics -->
-                        <li>
-                            <a class="dropdown-trigger" href="#" data-target="academics-dropdown">Academics<i
-                                    class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-
-                        <!-- Updates -->
-                        <li>
-                            <a class="dropdown-trigger" href="#" data-target="updates-dropdown">Updates<i
-                                    class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-
-                        <!-- Resources and Offices -->
-                        <li>
-                            <a class="dropdown-trigger" href="#" data-target="resources-dropdown">Resources and Offices<i
-                                    class="material-icons right">arrow_drop_down</i></a>
-                        </li>
-                    @endif
-                @else
-                    <!-- About TUP -->
-                    <li>
-                        <a class="dropdown-trigger" href="#" data-target="about-dropdown">About TUP<i
-                                class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-
-                    <!-- Admission -->
-                    <li>
-                        <a class="dropdown-trigger" href="#" data-target="admission-dropdown">Admission<i
-                                class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-
-                    <!-- Students -->
-                    <li>
-                        <a class="dropdown-trigger" href="#" data-target="students-dropdown">Students<i
-                                class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-
-                    <!-- Academics -->
-                    <li>
-                        <a class="dropdown-trigger" href="#" data-target="academics-dropdown">Academics<i
-                                class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-
-                    <!-- Updates -->
-                    <li>
-                        <a class="dropdown-trigger" href="#" data-target="updates-dropdown">Updates<i
-                                class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-
-                    <!-- Resources and Offices -->
-                    <li>
-                        <a class="dropdown-trigger" href="#" data-target="resources-dropdown">Resources and Offices<i
-                                class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-                @endauth
-            </ul>
-        </div>
-    </nav>
     <!-- Main Content -->
     <main class="container" style="min-height:70vh;">
         @yield('content')
     </main>
+
     <!-- Footer -->
     <footer class="page-footer white" style="padding-top:0;">
         <div class="container center-align">
@@ -920,99 +737,42 @@
             <p style="color:#888; font-size:0.95rem; margin-top:0.5rem;">Developed by UITC TUPV</p>
         </div>
     </footer>
+
     <!-- Scroll-to-top FAB -->
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large" id="scrollTopBtn"><i class="material-icons">arrow_upward</i></a>
     </div>
+
     <!-- Materialize JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Initialize Materialize Components -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Initialize sidenav
-            var elems = document.querySelectorAll('.sidenav');
-            M.Sidenav.init(elems);
+            var sidenavElems = document.querySelectorAll('.sidenav');
+            var sidenavInstances = M.Sidenav.init(sidenavElems);
 
-            // Initialize desktop dropdowns only (not mobile)
-            var desktopDropdowns = document.querySelectorAll('.hide-on-med-and-down .dropdown-trigger');
-            console.log('Found desktop dropdowns:', desktopDropdowns.length);
-            if (desktopDropdowns.length > 0) {
-                var dropdownInstances = M.Dropdown.init(desktopDropdowns, {
-                    coverTrigger: false,
-                    constrainWidth: false,
-                    hover: false,
-                    alignment: 'left',
-                    autoFocus: false,
-                    closeOnClick: true
-                });
-                console.log('Desktop dropdown instances:', dropdownInstances);
-            }
-
-            // Custom mobile dropdown behavior
-            var mobileDropdowns = document.querySelectorAll('.sidenav .dropdown-trigger');
-            console.log('Found mobile dropdowns:', mobileDropdowns.length);
-            mobileDropdowns.forEach(function (trigger) {
-                trigger.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    var targetId = this.getAttribute('data-target');
-                    var dropdown = document.getElementById(targetId);
-                    console.log('Mobile dropdown clicked:', targetId, dropdown);
-
-                    if (dropdown) {
-                        // Close other mobile dropdowns
-                        var allMobileDropdowns = document.querySelectorAll('.sidenav .dropdown-content');
-                        allMobileDropdowns.forEach(function (dd) {
-                            if (dd !== dropdown) {
-                                dd.classList.remove('active');
-                                dd.style.display = 'none';
-                            }
-                        });
-
-                        // Toggle current dropdown
-                        dropdown.classList.toggle('active');
-                        if (dropdown.classList.contains('active')) {
-                            dropdown.style.display = 'block';
-                            // Force all child links to be gray and visible
-                            var childLinks = dropdown.querySelectorAll('a');
-                            childLinks.forEach(function (link) {
-                                link.style.color = '#666';
-                                link.style.display = 'block';
-                                link.style.visibility = 'visible';
-                                link.style.opacity = '1';
-                            });
-                        } else {
-                            dropdown.style.display = 'none';
-                        }
-                        console.log('Mobile dropdown toggled:', dropdown.classList.contains('active'));
-                    }
-                });
+            // Initialize dropdowns
+            var dropdownElems = document.querySelectorAll('.dropdown-trigger');
+            var dropdownInstances = M.Dropdown.init(dropdownElems, {
+                constrainWidth: false,
+                hover: false,
+                coverTrigger: false,
+                closeOnClick: true
             });
 
-            // Scroll to top
-            document.getElementById('scrollTopBtn').onclick = function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-        });
-
-        // Additional initialization for desktop dropdowns if needed
-        $(document).ready(function () {
-            setTimeout(function () {
-                var desktopDropdowns = document.querySelectorAll('.hide-on-med-and-down .dropdown-trigger');
-                if (desktopDropdowns.length > 0) {
-                    M.Dropdown.init(desktopDropdowns, {
-                        coverTrigger: false,
-                        constrainWidth: false,
-                        hover: false,
-                        alignment: 'left',
-                        autoFocus: false,
-                        closeOnClick: true
-                    });
-                }
-            }, 100);
+            // Scroll to top functionality
+            var scrollTopBtn = document.getElementById("scrollTopBtn");
+            if (scrollTopBtn) {
+                scrollTopBtn.onclick = function () {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                };
+            }
         });
     </script>
+
     @yield('scripts')
     <script src="https://cdn.tiny.cloud/1/hs2vg824j6roaf09c4zbod91ua2vy8gy4slpjztc5rjuosx6/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>

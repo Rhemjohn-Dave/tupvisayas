@@ -268,6 +268,52 @@
             }
         }
 
+        /* Brand logo positioning */
+        .brand-logo {
+            position: absolute !important;
+            left: 15px !important;
+            z-index: 1001 !important;
+        }
+
+        /* Ensure nav-wrapper doesn't interfere with logo positioning */
+        .nav-wrapper {
+            position: relative !important;
+        }
+
+        /* Responsive logo behavior */
+        @media (max-width: 1200px) {
+            .brand-logo .hide-on-small-only {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .brand-logo .hide-on-small-only {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brand-logo img {
+                display: none !important;
+            }
+
+            .brand-logo .hide-on-med-and-up {
+                display: block !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .brand-logo {
+                display: none !important;
+            }
+
+            .sidenav-trigger {
+                display: block !important;
+                visibility: visible !important;
+            }
+        }
+
         /* Ensure desktop navbar has proper z-index */
         nav.z-depth-1.white {
             z-index: 1000 !important;
@@ -337,25 +383,7 @@
             }
         }
 
-        /* Ensure sidenav trigger is hidden on desktop */
-        .sidenav-trigger {
-            display: none !important;
-            visibility: hidden !important;
-        }
 
-        /* Show sidenav trigger only on mobile screens */
-        @media (max-width: 992px) {
-            .sidenav-trigger {
-                display: block !important;
-                visibility: visible !important;
-            }
-        }
-
-        /* Ensure desktop navbar has proper z-index */
-        nav.z-depth-1.white {
-            z-index: 1000 !important;
-            position: relative !important;
-        }
 
         /* Ensure desktop navigation links are clickable */
         .nav-wrapper .right.hide-on-med-and-down {
@@ -380,12 +408,48 @@
             }
 
             nav .brand-logo {
+                position: absolute !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
                 margin-left: 0 !important;
-                padding-left: 15px !important;
+                padding-left: 0 !important;
             }
 
             nav .sidenav-trigger {
                 margin-right: 15px !important;
+            }
+        }
+
+        /* Ensure sidenav trigger is properly positioned */
+        .sidenav-trigger {
+            position: absolute !important;
+            right: 15px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+
+        /* Responsive navigation menu */
+        @media (max-width: 1200px) {
+            .nav-wrapper .right.hide-on-med-and-down li:nth-child(n+6) {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .nav-wrapper .right.hide-on-med-and-down li:nth-child(n+5) {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .nav-wrapper .right.hide-on-med-and-down li:nth-child(n+4) {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav-wrapper .right.hide-on-med-and-down li:nth-child(n+3) {
+                display: none !important;
             }
         }
     </style>
@@ -429,9 +493,9 @@
 
     <!-- Main Navigation -->
     <nav class="z-depth-1 white">
-        <div class="nav-wrapper container">
+        <div class="nav-wrapper">
             <!-- Brand Logo -->
-            <a href="/" class="brand-logo" style="color:#C41E3A;">
+            <a href="/" class="brand-logo" style="color:#C41E3A; position: absolute; left: 15px;">
                 <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas Logo" class="responsive-img">
                 <span class="hide-on-small-only">TUP Visayas</span>
                 <span class="hide-on-med-and-up">TUP Visayas</span>
@@ -532,6 +596,13 @@
                         </a>
                     </li>
 
+                    <!-- Procurement -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="procurement-dropdown">
+                            Procurement<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+
                     <!-- Resources and Offices -->
                     <li>
                         <a class="dropdown-trigger" href="#!" data-target="resources-dropdown">
@@ -580,6 +651,12 @@
         <li><a href="{{ route('news_events') }}">News and Events</a></li>
         <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
         <li><a href="#!">Director's Corner</a></li>
+    </ul>
+
+    <!-- Procurement Dropdown -->
+    <ul id="procurement-dropdown" class="dropdown-content">
+        <li><a href="https://www.philgeps.gov.ph/" target="_blank" rel="noopener noreferrer">PhilGEPS Posting</a></li>
+        <li><a href="#!">Bid Opportunities</a></li>
     </ul>
 
     <!-- Resources and Offices Dropdown -->
@@ -671,6 +748,18 @@
             <li><a href="{{ route('news_events') }}">News and Events</a></li>
             <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
             <li><a href="#!">Director's Corner</a></li>
+        </ul>
+
+        <!-- Procurement -->
+        <li>
+            <a class="dropdown-trigger" href="#!" data-target="procurement-mobile-dropdown">
+                Procurement<i class="material-icons right">arrow_drop_down</i>
+            </a>
+        </li>
+        <ul id="procurement-mobile-dropdown" class="dropdown-content">
+            <li><a href="https://www.philgeps.gov.ph/" target="_blank" rel="noopener noreferrer">PhilGEPS Posting</a>
+            </li>
+            <li><a href="#!">Bid Opportunities</a></li>
         </ul>
 
         <!-- Resources and Offices -->

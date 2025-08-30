@@ -746,7 +746,7 @@
                 <li><a href="#!">University Registrar</a></li>
                 <li><a href="#!">University Medical and Dental Clinic</a></li>
                 <li><a href="#!">Supervised Industrial Training</a></li>
-                <li><a href="#!">University Information Technology Center</a></li>
+                <li><a href="{{ route('technology') }}">University Information Technology Center</a></li>
                 <li><a href="#!">University Library</a></li>
             </ul>
         </li>
@@ -852,7 +852,7 @@
             <li><a href="#!">University Registrar</a></li>
             <li><a href="#!">University Medical and Dental Clinic</a></li>
             <li><a href="#!">Supervised Industrial Training</a></li>
-            <li><a href="#!">University Information Technology Center</a></li>
+            <li><a href="{{ route('technology') }}">University Information Technology Center</a></li>
             <li><a href="#!">University Library</a></li>
                                 </ul>
 

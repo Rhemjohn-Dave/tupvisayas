@@ -243,10 +243,22 @@
     <!-- Hero Section -->
     <section class="transparency-hero">
         <div class="container">
-            <h1>Transparency Seal</h1>
-            <p>The Technological University of the Philippines Visayas is committed to transparency and accountability in
-                all its operations. This page provides access to important documents and information as required by the
-                Philippine government's transparency initiatives.</p>
+            <div class="row" style="align-items: center;">
+                <div class="col s12 m8">
+                    <h1>Transparency Seal</h1>
+                    <p>The Technological University of the Philippines Visayas is committed to transparency and
+                        accountability in
+                        all its operations. This page provides access to important documents and information as required by
+                        the
+                        Philippine government's transparency initiatives.</p>
+                </div>
+                <div class="col s12 m4 center-align">
+                    <img src="https://legacy.doe.gov.ph/sites/default/files/icons/transparency_seal_small.png"
+                        alt="Transparency Seal"
+                        style="max-width: 200px; height: auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Official Transparency Seal</p>
+                </div>
+            </div>
         </div>
     </section>
 

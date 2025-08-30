@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Technology & Information Center Page
+Route::get('/technology', function () {
+    return view('technology');
+})->name('technology');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

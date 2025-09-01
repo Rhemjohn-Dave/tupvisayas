@@ -553,6 +553,9 @@
                     <li><a href="{{ route('jobs') }}">Careers</a></li>
                     <li><a href="https://www.gov.ph/feedback" target="_blank">Feedback</a></li>
                     <li><a href="https://www.gov.ph/contact" target="_blank">Contact Us</a></li>
+                    @guest
+                        <li><a href="{{ route('login') }}">Admin Login</a></li>
+                    @endguest
                 </ul>
             </div>
         </div>

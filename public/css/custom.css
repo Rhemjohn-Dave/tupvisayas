@@ -37,6 +37,20 @@ nav.white .nav-wrapper .right > li > a {
     font-weight: 500;
 }
 
+/* Auth pages helpers */
+.auth-container {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.auth-card .card-content {
+    padding-top: 24px;
+}
+
+.auth-card .card-action {
+    padding-bottom: 24px;
+}
+
 .page-footer.white a,
 .page-footer.white p,
 .page-footer.white .material-icons {

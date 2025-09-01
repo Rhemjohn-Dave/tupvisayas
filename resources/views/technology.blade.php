@@ -663,10 +663,10 @@
                                                 <img src="{{ asset('images/faciolan-chris.jpg') }}"
                                                     alt="Christopher Faciolan">
                                             </div>
-                                            <h5 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">UITC
-                                                Administrator</h5>
+                                            <h5 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">Engr.
+                                                Christopher Faciolan PECE</h5>
                                             <p style="color: #666; margin: 0; font-size: 0.9rem; font-weight: 500;">
-                                                Christopher Faciolan</p>
+                                                UITC Administrator</p>
                                         </div>
                                     </div>
 

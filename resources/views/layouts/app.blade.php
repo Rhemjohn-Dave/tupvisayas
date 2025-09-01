@@ -316,9 +316,9 @@
             }
         }
 
-        /* Ensure desktop navbar has proper z-index */
+        /* Ensure desktop navbar sits below admin sidebar when admin UI is present */
         nav.z-depth-1.white {
-            z-index: 1000 !important;
+            z-index: 900 !important;
             position: relative !important;
         }
 
@@ -527,7 +527,7 @@
     @yield('head')
 </head>
 
-<body>
+<body class="@yield('body_class')">
     <!-- Top Utility Bar -->
     <div class="utility-bar">
         <div class="container">
@@ -725,7 +725,7 @@
     <!-- Procurement Dropdown -->
     <ul id="procurement-dropdown" class="dropdown-content">
         <li><a href="https://www.philgeps.gov.ph/" target="_blank" rel="noopener noreferrer">PhilGEPS Posting</a></li>
-        <li><a href="#!">Bid Opportunities</a></li>
+        <li><a href="{{ route('procurement.bid') }}">Bid Opportunities</a></li>
     </ul>
 
     <!-- Resources and Offices Dropdown -->
@@ -828,7 +828,7 @@
         <ul id="procurement-mobile-dropdown" class="dropdown-content">
             <li><a href="https://www.philgeps.gov.ph/" target="_blank" rel="noopener noreferrer">PhilGEPS Posting</a>
             </li>
-            <li><a href="#!">Bid Opportunities</a></li>
+            <li><a href="{{ route('procurement.bid') }}">Bid Opportunities</a></li>
         </ul>
 
                     <!-- Resources and Offices -->

@@ -1,11 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProcurementController;
 
 // Technology & Information Center Page
 Route::get('/technology', function () {
     return view('technology');
 })->name('technology');
+
+// Procurement section
+Route::get('bid-opportunities', [ProcurementController::class, 'bidOpportunities'])->name('procurement.bid');
+Route::get('philgeps-posting', [ProcurementController::class, 'philgepsPosting'])->name('procurement.philgeps');
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +67,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('categories', [App\Http\Controllers\Admin\PostController::class, 'indexCategory'])->name('categories.index');
     Route::get('categories/create', [App\Http\Controllers\Admin\PostController::class, 'createCategory'])->name('categories.create');
     Route::post('categories', [App\Http\Controllers\Admin\PostController::class, 'storeCategory'])->name('categories.store');
+
+    // Procurement management
+    Route::get('procurements', [App\Http\Controllers\Admin\ProcurementController::class, 'index'])->name('procurements.index');
+    Route::get('procurements/create', [App\Http\Controllers\Admin\ProcurementController::class, 'create'])->name('procurements.create');
+    Route::post('procurements', [App\Http\Controllers\Admin\ProcurementController::class, 'store'])->name('procurements.store');
+    Route::get('procurements/{id}/edit', [App\Http\Controllers\Admin\ProcurementController::class, 'edit'])->name('procurements.edit');
+    Route::put('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'update'])->name('procurements.update');
+    Route::delete('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'destroy'])->name('procurements.destroy');
 });
 
 require __DIR__ . '/auth.php';

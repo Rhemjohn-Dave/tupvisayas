@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
+@section('admin_content')
     <div class="section">
         <h4>Add New Carousel Image</h4>
         <form action="{{ route('admin.carousel-images.store') }}" method="POST" enctype="multipart/form-data">

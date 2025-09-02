@@ -18,6 +18,16 @@ a,
     color: var(--cardinal-red) !important;
 }
 
+/* Ensure button text stays readable on red buttons */
+a.btn,
+a.btn-large,
+a.btn-small,
+.btn,
+.btn-large,
+.btn-small {
+    color: #fff !important;
+}
+
 h1,
 h2,
 h3,

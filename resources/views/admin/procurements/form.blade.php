@@ -77,6 +77,42 @@
         </div>
 
         <div class="input-field">
+            <select name="status" required>
+                <option value="pending" {{ old('status', $procurement->status ?? 'pending') === 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="awarded" {{ old('status', $procurement->status ?? 'pending') === 'awarded' ? 'selected' : '' }}>Awarded</option>
+            </select>
+            <label>Status</label>
+        </div>
+
+        <div class="file-field input-field">
+            <div class="btn red">
+                <span>Purchase Orders</span>
+                <input type="file" name="po_files[]" multiple>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload one or more PO files">
+            </div>
+        </div>
+
+        @php($existingPoFiles = is_array($procurement->po_files) ? $procurement->po_files : (empty($procurement->po_file_url) ? [] : [$procurement->po_file_url]))
+        @if(!empty($existingPoFiles))
+            <div style="margin-top:8px;">
+                <span>Existing PO files:</span>
+                <ul style="margin:6px 0 0 16px;">
+                    @foreach($existingPoFiles as $idx => $poUrl)
+                        <li style="display:flex;align-items:center;gap:8px;">
+                            <a href="{{ $poUrl }}" target="_blank">PO {{ $idx + 1 }}</a>
+                            <button type="button" class="btn-flat red-text" title="Remove"
+                                onclick="deletePoFile({{ $procurement->id }}, {{ $idx }}, event)">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="input-field">
             <select name="type" required>
                 <option value="" disabled {{ old('type', $procurement->type) ? '' : 'selected' }}>Choose type
                 </option>
@@ -104,5 +140,26 @@
             var pickers = document.querySelectorAll('.datepicker');
             M.Datepicker.init(pickers, { format: 'yyyy-mm-dd' });
         });
+
+        function deletePoFile(id, index, evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+            if (!confirm('Delete this PO file?')) return;
+            fetch(`{{ url('admin/procurements') }}/${id}/po`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': `{{ csrf_token() }}`,
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                    'Accept': 'text/html',
+                },
+                credentials: 'same-origin',
+                body: new URLSearchParams({
+                    _method: 'DELETE',
+                    index: String(index),
+                })
+            }).then(() => {
+                location.reload();
+            });
+        }
     </script>
 @endsection

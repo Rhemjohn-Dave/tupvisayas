@@ -641,10 +641,11 @@
                                             <div class="org-photo director">
                                                 <img src="{{ asset('images/Malo-oy, Eric A-2154.jpg') }}" alt="Eric Malooy">
                                             </div>
-                                            <h5 style="color: #C41E3A; margin: 0.5rem 0; font-weight: 600;">Campus Director
+                                            <h5 style="color: #C41E3A; margin: 0.5rem 0; font-weight: 600;">Dr. Eric A.
+                                                Malo-oy
                                             </h5>
-                                            <p style="color: #666; margin: 0; font-size: 0.9rem; font-weight: 500;">Eric
-                                                Malooy</p>
+                                            <p style="color: #666; margin: 0; font-size: 0.9rem; font-weight: 500;">Campus
+                                                Director</p>
                                         </div>
                                     </div>
 
@@ -664,7 +665,7 @@
                                                     alt="Christopher Faciolan">
                                             </div>
                                             <h5 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">Engr.
-                                                Christopher Faciolan PECE</h5>
+                                                Christopher Faciolan, PECE</h5>
                                             <p style="color: #666; margin: 0; font-size: 0.9rem; font-weight: 500;">
                                                 UITC Administrator</p>
                                         </div>

@@ -17,5 +17,12 @@ class Procurement extends Model
         'closing_date',
         'file_url',
         'type',
+        'status',
+        'po_file_url',
+        'po_files',
+    ];
+
+    protected $casts = [
+        'po_files' => 'array',
     ];
 }

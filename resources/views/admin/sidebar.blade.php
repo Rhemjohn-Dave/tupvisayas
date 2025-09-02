@@ -14,6 +14,12 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('admin.users.index') }}"
+                class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <i class="material-icons">supervisor_account</i>Users
+            </a>
+        </li>
+        <li>
             <a href="{{ route('admin.officials.index') }}"
                 class="{{ request()->routeIs('admin.officials.*') ? 'active' : '' }}">
                 <i class="material-icons">people</i>Officials

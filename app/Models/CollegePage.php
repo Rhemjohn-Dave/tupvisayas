@@ -21,4 +21,9 @@ class CollegePage extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function departments()
+    {
+        return $this->hasMany(Department::class);
+    }
 }

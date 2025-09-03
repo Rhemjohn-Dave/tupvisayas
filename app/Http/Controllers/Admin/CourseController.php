@@ -93,8 +93,15 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($id);
         $collegeId = $course->college_page_id;
+        // Also delete the corresponding Department (auto-created on course create)
+        Department::where('college_page_id', $collegeId)
+            ->whereRaw('LOWER(TRIM(name)) = ?', [strtolower(trim($course->name))])
+            ->get()
+            ->each(function (Department $department) {
+                $department->delete(); // cascades to faculties via FK onDelete('cascade')
+            });
         $course->delete();
         return redirect()->route('admin.college-pages.edit', $collegeId)
-            ->with('success', 'Course deleted successfully.');
+            ->with('success', 'Course and related department deleted successfully.');
     }
 }

@@ -1,5 +1,30 @@
 @extends('layouts.app')
 
+@section('head')
+    <style>
+        .tabs .tab a {
+            color: #C41E3A;
+            font-weight: 600;
+        }
+
+        .tabs .tab a:hover {
+            color: #fff !important;
+            background: #C41E3A !important;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .tabs .tab a.active {
+            color: #fff !important;
+            background: #C41E3A !important;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .tabs .indicator {
+            background-color: #C41E3A;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="section">
         @if($collegePage->cover_photo)

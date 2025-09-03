@@ -22,6 +22,13 @@
                         <td>
                             <a href="{{ route('admin.college-pages.edit', $college->id) }}"
                                 class="btn orange white-text">Edit</a>
+                            <form action="{{ route('admin.college-pages.destroy', $college->id) }}" method="POST"
+                                style="display:inline-block;margin-left:6px;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn red white-text"
+                                    onclick="return confirm('Delete this college page?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

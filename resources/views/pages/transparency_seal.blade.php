@@ -266,7 +266,7 @@
     <div class="container">
         <!-- Agency Profile and Mandate -->
         <section class="transparency-section" id="agency-profile">
-            <h2>Agency Profile and Mandate</h2>
+            <h2>I. Agency Profile and Mandate</h2>
             <div class="document-grid">
                 <div class="document-card">
                     <h4>Agency Profile</h4>
@@ -304,32 +304,34 @@
 
         <!-- Financial Documents -->
         <section class="transparency-section" id="financial-documents">
-            <h2>Approved Budget and Corresponding Targets</h2>
+            <h2>II. Approved Budget and Corresponding Targets</h2>
             <h3>Budget Documents</h3>
             <div class="document-grid">
                 <div class="document-card">
-                    <h4>Annual Budget <span class="status-badge status-compliant">Updated</span></h4>
-                    <p>Fiscal Year 2024 approved budget and financial plan.</p>
+                    <h4>FY 2025 <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Fiscal Year 2025 approved budget.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="https://drive.google.com/file/d/1s6OTIVCK4wxTBhX5zG46z-hqHaSZ6Ge3/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download PDF
                         </a>
                     </div>
                 </div>
                 <div class="document-card">
-                    <h4>Annual Budget <span class="status-badge status-compliant">Updated</span></h4>
-                    <p>Fiscal Year 2024 approved budget and financial plan.</p>
+                    <h4>FY 2024 <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Fiscal Year 2024 approved budget.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="https://drive.google.com/file/d/1pMwrmuHq6Pf5r2ytD8FIdMaD-fqx5kNW/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download PDF
                         </a>
                     </div>
                 </div>
                 <div class="document-card">
-                    <h4>Budget Execution Documents <span class="status-badge status-compliant">Updated</span></h4>
-                    <p>Monthly and quarterly budget execution reports.</p>
+                    <h4>FY 2023 <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Fiscal Year 2023 approved budget.</p>
                     <div class="document-links">
                         <a href="#" class="document-link">
                             <i class="material-icons">picture_as_pdf</i>

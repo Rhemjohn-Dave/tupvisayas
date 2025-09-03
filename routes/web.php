@@ -64,6 +64,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('college-pages', App\Http\Controllers\Admin\CollegePageController::class);
     Route::resource('courses', App\Http\Controllers\Admin\CourseController::class)->except(['show']);
     Route::resource('faculties', App\Http\Controllers\Admin\FacultyController::class)->except(['show']);
+    Route::delete('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'destroy'])->name('departments.destroy');
     Route::get('categories', [App\Http\Controllers\Admin\PostController::class, 'indexCategory'])->name('categories.index');
     Route::get('categories/create', [App\Http\Controllers\Admin\PostController::class, 'createCategory'])->name('categories.create');
     Route::post('categories', [App\Http\Controllers\Admin\PostController::class, 'storeCategory'])->name('categories.store');

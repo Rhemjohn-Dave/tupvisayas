@@ -58,7 +58,7 @@ class CollegePageController extends Controller
      */
     public function edit($id)
     {
-        $college = CollegePage::findOrFail($id);
+        $college = CollegePage::with(['departments.faculties', 'courses'])->findOrFail($id);
         return view('admin.college_pages.edit', compact('college'));
     }
 
@@ -91,6 +91,12 @@ class CollegePageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $college = CollegePage::findOrFail($id);
+        if ($college->cover_photo) {
+            Storage::disk('public')->delete($college->cover_photo);
+        }
+        $college->delete();
+        return redirect()->route('admin.college-pages.index')
+            ->with('success', 'College page deleted successfully.');
     }
 }

@@ -713,9 +713,13 @@
 
     <!-- Academics Dropdown -->
     <ul id="academics-dropdown" class="dropdown-content">
-        <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
-        <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
-        <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
+        @if(isset($navbarCollegePages) && $navbarCollegePages->count())
+            @foreach($navbarCollegePages as $college)
+                <li><a href="{{ route('academics.show', $college->college) }}">{{ strtoupper($college->college) }}</a></li>
+            @endforeach
+        @else
+            <li><a href="#">No colleges available</a></li>
+        @endif
     </ul>
 
     <!-- Updates Dropdown -->
@@ -805,9 +809,13 @@
             </a>
         </li>
         <ul id="academics-mobile-dropdown" class="dropdown-content">
-                            <li><a href="{{ route('academics.coe') }}">College of Engineering</a></li>
-                            <li><a href="{{ route('academics.coac') }}">College of Automation and Control</a></li>
-                            <li><a href="{{ route('academics.coet') }}">College of Engineering Technology</a></li>
+                            @if(isset($navbarCollegePages) && $navbarCollegePages->count())
+                                @foreach($navbarCollegePages as $college)
+                                    <li><a href="{{ route('academics.show', $college->college) }}">{{ strtoupper($college->college) }}</a></li>
+                                @endforeach
+                            @else
+                                <li><a href="#">No colleges available</a></li>
+                            @endif
                         </ul>
 
                     <!-- Updates -->

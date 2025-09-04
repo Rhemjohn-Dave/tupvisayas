@@ -15,8 +15,8 @@
                         <div class="card-content center-align">
                             <span class="card-title">{{ $official->name }}</span>
                             <p>{{ $official->position }}</p>
-                            <a href="{{ route('officials.show', $official->id) }}" class="btn-small"
-                                style="margin-top:10px;">View Profile</a>
+                            <!-- <a href="{{ route('officials.show', $official->id) }}" class="btn-small"
+                                                                style="margin-top:10px;">View Profile</a> -->
                         </div>
                     </div>
                 </div>

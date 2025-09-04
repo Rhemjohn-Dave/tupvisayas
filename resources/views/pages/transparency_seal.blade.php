@@ -449,7 +449,7 @@
                     <h4>Invitation to Bid <span class="status-badge status-updated">Current</span></h4>
                     <p>Current bidding opportunities and requirements.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="{{ route('procurement.bid') }}" class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             View Bids
                         </a>
@@ -458,46 +458,51 @@
             </div>
         </section>
 
-        <!-- Citizen's Charter -->
-        <section class="transparency-section" id="citizens-charter">
-            <h2>Citizen's Charter</h2>
-            <div class="document-grid">
-                <div class="document-card">
-                    <h4>Citizen's Charter <span class="status-badge status-compliant">Updated</span></h4>
-                    <p>Comprehensive guide to university services, requirements, and procedures.</p>
-                    <div class="document-links">
-                        <a href="#" class="document-link">
-                            <i class="material-icons">picture_as_pdf</i>
-                            Download PDF
-                        </a>
-                        <a href="#" class="document-link">
-                            <i class="material-icons">language</i>
-                            View Online
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- Freedom of Information -->
         <section class="transparency-section" id="freedom-of-information">
-            <h2>Freedom of Information</h2>
+            <h2>VIII. People's Freedom of Information</h2>
             <div class="document-grid">
                 <div class="document-card">
                     <h4>FOI Manual <span class="status-badge status-compliant">Updated</span></h4>
                     <p>Manual on Freedom of Information implementation and procedures.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="https://drive.google.com/file/d/1DvIEHIMgGwIL_-uchO4oNtQpkLahZFlH/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download PDF
                         </a>
                     </div>
                 </div>
                 <div class="document-card">
-                    <h4>FOI Request Form <span class="status-badge status-compliant">Updated</span></h4>
-                    <p>Standard form for submitting Freedom of Information requests.</p>
+                    <h4>Approval of FOI <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Apporoval form of Freedom of Information.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="https://drive.google.com/file/d/1CrQiHjNL8KtdVOXOCeBENNWlIh3PZVNg/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download Form
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>Modified One-Page FOI <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Modified one-page Freedom of Information.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1WqjT8RdLX5RC9zThtNu52_86oCEfir7U/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download Form
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>Modified One-Page FOI in Filipino<span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Modified one-page Freedom of Information in Filipino.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1CGhVBCDct_eELVzpAcAEEuhaK0jKIZaI/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download Form
                         </a>
@@ -506,6 +511,28 @@
             </div>
         </section>
 
+        <!-- Citizen's Charter -->
+        <section class="transparency-section" id="citizens-charter">
+            <h2>XIII. Citizen's Charter</h2>
+            <div class="document-grid">
+                <div class="document-card">
+                    <h4>TUP Visayas Citizen's Charter <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Comprehensive guide to university services, requirements, and procedures.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1u_I6kqTajs8CYbA7dKqp3LqL4NgPxL6w/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                        <a href="https://drive.google.com/file/d/1u_I6kqTajs8CYbA7dKqp3LqL4NgPxL6w/view?usp=drive_link"
+                            class="document-link" target="_blank" rel="noopener noreferrer">
+                            <i class="material-icons">language</i>
+                            View Online
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Contact Information -->
         <section class="transparency-section" id="contact-information">
             <h2>Contact Information</h2>
@@ -519,18 +546,18 @@
         </section>
 
         <!-- Accessibility Features -->
-        <section class="accessibility-features">
-            <h3>Accessibility Features</h3>
-            <ul class="accessibility-list">
-                <li>High contrast color scheme for better visibility</li>
-                <li>Semantic HTML structure for screen readers</li>
-                <li>Keyboard navigation support</li>
-                <li>Alt text for all images</li>
-                <li>Responsive design for all device sizes</li>
-                <li>Clear typography and spacing</li>
-                <li>Downloadable documents in accessible formats</li>
-            </ul>
-        </section>
+        <!-- <section class="accessibility-features">
+                <h3>Accessibility Features</h3>
+                <ul class="accessibility-list">
+                    <li>High contrast color scheme for better visibility</li>
+                    <li>Semantic HTML structure for screen readers</li>
+                    <li>Keyboard navigation support</li>
+                    <li>Alt text for all images</li>
+                    <li>Responsive design for all device sizes</li>
+                    <li>Clear typography and spacing</li>
+                    <li>Downloadable documents in accessible formats</li>
+                </ul>
+            </section> -->
 
         <!-- Last Updated -->
         <div class="last-updated">

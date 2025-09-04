@@ -27,7 +27,7 @@
                     $item->type === 'News' ? route('news.show', $item->slug) :
                     ($item->type === 'Event' ? route('events.show', $item->slug) :
                         route('announcements.show', $item->slug))
-                                                                                            }}" style="width:350px;">
+                                                                                                        }}" style="width:350px;">
                             <div class="card hoverable" style="overflow:hidden;position:relative;">
                                 <!-- Category Label -->
                                 <span

@@ -8,7 +8,7 @@
                 @foreach($carouselImages as $img)
                     <a class="carousel-item" href="#carousel-{{ $img->id }}">
                         <img src="{{ asset('storage/' . $img->image_path) }}" alt="Carousel Image"
-                            style="max-height:420px;width:100%;object-fit:cover;">
+                            style="max-height:1080px;width:100%;object-fit:cover;">
                     </a>
                 @endforeach
             </div>
@@ -23,11 +23,13 @@
                 style="position:absolute;left:-30px;top:40%;z-index:2;"><i class="material-icons">chevron_left</i></a>
             <div class="carousel" id="updatesCarousel">
                 @foreach($latestUpdates as $item)
-                        <a class="carousel-item" href="{{
+                        <a class="carousel-item"
+                            href="{{
                     $item->type === 'News' ? route('news.show', $item->slug) :
                     ($item->type === 'Event' ? route('events.show', $item->slug) :
                         route('announcements.show', $item->slug))
-                                                                                                        }}" style="width:350px;">
+                                                                                                                                                                                                                                                                                }}"
+                            style="width:350px;">
                             <div class="card hoverable" style="overflow:hidden;position:relative;">
                                 <!-- Category Label -->
                                 <span

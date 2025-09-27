@@ -341,7 +341,47 @@
                 </div>
             </div>
 
-            <h3>Financial Reports</h3>
+        </section>
+        <!-- Financial Documents -->
+        <section class="transparency-section" id="financial-documents">
+            <h2>IV. Annual Financial Reports</h2>
+            <h3>Budget Documents</h3>
+            <div class="document-grid">
+                <div class="document-card">
+                    <h4>FY 2025 <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Fiscal Year 2025 approved budget.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1s6OTIVCK4wxTBhX5zG46z-hqHaSZ6Ge3/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>FY 2024 <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Fiscal Year 2024 approved budget.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1pMwrmuHq6Pf5r2ytD8FIdMaD-fqx5kNW/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>FY 2023 <span class="status-badge status-compliant">Updated</span></h4>
+                    <p>Fiscal Year 2023 approved budget.</p>
+                    <div class="document-links">
+                        <a href="#" class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Annual Financial Reports</h3>
             <div class="document-grid">
                 <div class="document-card">
                     <h4>Statement of Allotments, Obligations and Balances <span
@@ -547,17 +587,17 @@
 
         <!-- Accessibility Features -->
         <!-- <section class="accessibility-features">
-                <h3>Accessibility Features</h3>
-                <ul class="accessibility-list">
-                    <li>High contrast color scheme for better visibility</li>
-                    <li>Semantic HTML structure for screen readers</li>
-                    <li>Keyboard navigation support</li>
-                    <li>Alt text for all images</li>
-                    <li>Responsive design for all device sizes</li>
-                    <li>Clear typography and spacing</li>
-                    <li>Downloadable documents in accessible formats</li>
-                </ul>
-            </section> -->
+                                    <h3>Accessibility Features</h3>
+                                    <ul class="accessibility-list">
+                                        <li>High contrast color scheme for better visibility</li>
+                                        <li>Semantic HTML structure for screen readers</li>
+                                        <li>Keyboard navigation support</li>
+                                        <li>Alt text for all images</li>
+                                        <li>Responsive design for all device sizes</li>
+                                        <li>Clear typography and spacing</li>
+                                        <li>Downloadable documents in accessible formats</li>
+                                    </ul>
+                                </section> -->
 
         <!-- Last Updated -->
         <div class="last-updated">

@@ -12,6 +12,7 @@ class Department extends Model
     protected $fillable = [
         'college_page_id',
         'name',
+        'course_id',
     ];
 
     public function collegePage()
@@ -22,5 +23,10 @@ class Department extends Model
     public function faculties()
     {
         return $this->hasMany(Faculty::class);
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }

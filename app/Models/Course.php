@@ -13,10 +13,16 @@ class Course extends Model
         'college_page_id',
         'name',
         'description',
+        'logo',
     ];
 
     public function collegePage()
     {
         return $this->belongsTo(CollegePage::class);
+    }
+
+    public function department()
+    {
+        return $this->hasOne(Department::class);
     }
 }

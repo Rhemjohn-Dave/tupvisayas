@@ -345,13 +345,13 @@
         <!-- Financial Documents -->
         <section class="transparency-section" id="financial-documents">
             <h2>IV. Annual Financial Reports</h2>
-            <h3>Budget Documents</h3>
+            <h3>I. BAR No. 1: Quarterly Physical Report of Operations/Physical Plan </h3>
             <div class="document-grid">
                 <div class="document-card">
                     <h4>FY 2025 <span class="status-badge status-compliant">Updated</span></h4>
-                    <p>Fiscal Year 2025 approved budget.</p>
+                    <p>Quarterly Physical Report of Operations/Physical Plan</p>
                     <div class="document-links">
-                        <a href="https://drive.google.com/file/d/1s6OTIVCK4wxTBhX5zG46z-hqHaSZ6Ge3/view?usp=drive_link"
+                        <a href="https://drive.google.com/file/d/1tcRXgygic-5rvmSaQAdwgZzMW_RTp5Ih/view?usp=drive_link"
                             class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download PDF
@@ -360,12 +360,28 @@
                 </div>
                 <div class="document-card">
                     <h4>FY 2024 <span class="status-badge status-compliant">Updated</span></h4>
-                    <p>Fiscal Year 2024 approved budget.</p>
+                    <p>Quarterly Physical Report of Operations/Physical Plan</p>
                     <div class="document-links">
-                        <a href="https://drive.google.com/file/d/1pMwrmuHq6Pf5r2ytD8FIdMaD-fqx5kNW/view?usp=drive_link"
+                        <a href="https://drive.google.com/file/d/1C0ejGRosgEci8z8rLbNEUxofLmHk-S1a/view?usp=drive_link"
                             class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
-                            Download PDF
+                            4th Quarter
+                        </a>
+                        <a href="https://drive.google.com/file/d/1OSTAeTxJhO8OBZ6juGn8rNMIGVQUhFt8/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            3rd Quarter
+                        </a>
+
+                        <a href="https://drive.google.com/file/d/1EN4JVHh_bjRVxYsiKEDrR6cG2jpHaj_y/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            2nd Quarter
+                        </a>
+                        <a href="https://drive.google.com/file/d/1RS56NgGPKzHYT8THUFepoqJp4TIFwCK2/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            1st Quarter
                         </a>
                     </div>
                 </div>
@@ -421,7 +437,8 @@
                     <h4>Annual Performance Report <span class="status-badge status-compliant">Updated</span></h4>
                     <p>Comprehensive report on university performance and achievements.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="https://drive.google.com/file/d/1Je_IQEWLACKCGTI2xjThee-xHrRC5yHh/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download PDF
                         </a>
@@ -457,25 +474,74 @@
 
         <!-- Procurement Documents -->
         <section class="transparency-section" id="procurement-documents">
-            <h2>Procurement Documents</h2>
+            <h2>VI. Annual Procurement Plan, Contracts Award and the Names of Contractors/Suppliers/Consultants</h2>
 
-            <h3>Annual Procurement Plan</h3>
+            <h3>1. Annual Procurement Plan - Visayas Campus</h3>
             <div class="document-grid">
                 <div class="document-card">
-                    <h4>Annual Procurement Plan <span class="status-badge status-compliant">Updated</span></h4>
+                    <h4>Annual Procurement Plan 2025 (Non-CSE)
+                    </h4>
                     <p>Comprehensive procurement plan for the current fiscal year.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="https://drive.google.com/file/d/1Je_IQEWLACKCGTI2xjThee-xHrRC5yHh/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download PDF
                         </a>
                     </div>
                 </div>
                 <div class="document-card">
-                    <h4>Procurement Monitoring Report <span class="status-badge status-compliant">Updated</span></h4>
+                    <h4>Annual Procurement Plan 2025 (CSE)</h4>
                     <p>Monthly and quarterly procurement monitoring reports.</p>
                     <div class="document-links">
-                        <a href="#" class="document-link">
+                        <a href="https://drive.google.com/file/d/1_FqD2EglHb6OuGi24dUpG36fkn5c9tky/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>Annual Procurement Plan 2024 (Non-CSE)
+                    </h4>
+                    <p>Comprehensive procurement plan for the current fiscal year.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1VTvY9gV4rktXtS4YlDC7zUOfMIaMI8n4/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>Annual Procurement Plan 2024 (CSE)</h4>
+                    <p>Monthly and quarterly procurement monitoring reports.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1TbQrpu09VyrZ4xfNZHd55vrhvjAZ3yIZ/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>Annual Procurement Plan 2023 (Non-CSE)
+                    </h4>
+                    <p>Comprehensive procurement plan for the current fiscal year.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/1R0af9-4BFNk_ZpCcZS4_s6uQ1c9yFu1x/view?usp=drive_link"
+                            class="document-link">
+                            <i class="material-icons">picture_as_pdf</i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="document-card">
+                    <h4>Annual Procurement Plan 2023 (CSE)</h4>
+                    <p>Monthly and quarterly procurement monitoring reports.</p>
+                    <div class="document-links">
+                        <a href="https://drive.google.com/file/d/10gfpsvuiSl37cvNQLvhqwBH6rceAVsL-/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
                             Download PDF
                         </a>
@@ -483,22 +549,41 @@
                 </div>
             </div>
 
-            <h3>Bidding Documents</h3>
+            <!-- <h3>Bidding Documents</h3>
+                                        <div class="document-grid">
+                                            <div class="document-card">
+                                                <h4>Invitation to Bid <span class="status-badge status-updated">Current</span></h4>
+                                                <p>Current bidding opportunities and requirements.</p>
+                                                <div class="document-links">
+                                                    <a href="{{ route('procurement.bid') }}" class="document-link">
+                                                        <i class="material-icons">picture_as_pdf</i>
+                                                        View Bids
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div> -->
+        </section>
+
+        <!-- QMS Certificate -->
+        <section class="transparency-section" id="financial-documents">
+            <h2>VII.QMS Certificate</h2>
+            <h3>TUP Visayas QMS Certificate</h3>
             <div class="document-grid">
                 <div class="document-card">
-                    <h4>Invitation to Bid <span class="status-badge status-updated">Current</span></h4>
-                    <p>Current bidding opportunities and requirements.</p>
+                    <h4>ISO 9001:2015</h4>
+                    <p>TUP Visayas’ QMS certificate (ISO 9001:2015) confirms its commitment to quality education and
+                        continuous improvement in engineering and technology.</p>
                     <div class="document-links">
-                        <a href="{{ route('procurement.bid') }}" class="document-link">
+                        <a href="https://drive.google.com/file/d/1wu_RMIcH-wrzgyWqBpfrnAb_-LCoZfqi/view?usp=drive_link"
+                            class="document-link">
                             <i class="material-icons">picture_as_pdf</i>
-                            View Bids
+                            Download PDF
                         </a>
                     </div>
                 </div>
             </div>
+
         </section>
-
-
 
         <!-- Freedom of Information -->
         <section class="transparency-section" id="freedom-of-information">
@@ -587,17 +672,17 @@
 
         <!-- Accessibility Features -->
         <!-- <section class="accessibility-features">
-                                    <h3>Accessibility Features</h3>
-                                    <ul class="accessibility-list">
-                                        <li>High contrast color scheme for better visibility</li>
-                                        <li>Semantic HTML structure for screen readers</li>
-                                        <li>Keyboard navigation support</li>
-                                        <li>Alt text for all images</li>
-                                        <li>Responsive design for all device sizes</li>
-                                        <li>Clear typography and spacing</li>
-                                        <li>Downloadable documents in accessible formats</li>
-                                    </ul>
-                                </section> -->
+                                                                                                                                                                                            <h3>Accessibility Features</h3>
+                                                                                                                                                                                            <ul class="accessibility-list">
+                                                                                                                                                                                                <li>High contrast color scheme for better visibility</li>
+                                                                                                                                                                                                <li>Semantic HTML structure for screen readers</li>
+                                                                                                                                                                                                <li>Keyboard navigation support</li>
+                                                                                                                                                                                                <li>Alt text for all images</li>
+                                                                                                                                                                                                <li>Responsive design for all device sizes</li>
+                                                                                                                                                                                                <li>Clear typography and spacing</li>
+                                                                                                                                                                                                <li>Downloadable documents in accessible formats</li>
+                                                                                                                                                                                            </ul>
+                                                                                                                                                                                        </section> -->
 
         <!-- Last Updated -->
         <div class="last-updated">

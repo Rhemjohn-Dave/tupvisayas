@@ -51,6 +51,10 @@ Route::get('/jobs/{job}', [App\Http\Controllers\JobController::class, 'show'])->
 Route::get('/events/{event}', [App\Http\Controllers\EventController::class, 'show'])->name('events.show');
 Route::get('/academics/{college}', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->name('academics.show');
 
+// Assistant Director for Research and Extension Routes
+Route::get('/assistant-director-research-extension', [App\Http\Controllers\ADREController::class, 'index'])->name('adre');
+Route::get('/tiptto/posts/{id}', [App\Http\Controllers\ADREController::class, 'showPost'])->name('tiptto.post.show');
+
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\PostController::class, 'index'])->name('dashboard');
     Route::get('posts/create', [App\Http\Controllers\Admin\PostController::class, 'create'])->name('posts.create');
@@ -80,6 +84,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'update'])->name('procurements.update');
     Route::delete('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'destroy'])->name('procurements.destroy');
     Route::delete('procurements/{id}/po', [App\Http\Controllers\Admin\ProcurementController::class, 'destroyPoFile'])->name('procurements.po.destroy');
+
+    // TIPTTO Posts Management
+    Route::resource('tiptto_posts', App\Http\Controllers\Admin\TIPTTOPostController::class);
 });
 
 require __DIR__ . '/auth.php';

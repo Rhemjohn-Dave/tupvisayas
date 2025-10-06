@@ -744,7 +744,7 @@
                 <li><a href="#!">Office of the Director</a></li>
                 <li><a href="#!">Assistant Director for Administration and Finance</a></li>
                 <li><a href="#!">Assistant Director for Academic Affairs</a></li>
-                <li><a href="#!">Assistant Director for Research and Finance</a></li>
+                <li><a href="{{ route('adre') }}">Assistant Director for Research and Extension</a></li>
             </ul>
         </li>
         <li class="dropdown-column">
@@ -857,8 +857,8 @@
                     Administration and Finance</a></li>
             <li><a href="#!" style="white-space: normal; line-height: 1.4; padding: 12px 32px;">Assistant Director for
                     Academic Affairs</a></li>
-            <li><a href="#!" style="white-space: normal; line-height: 1.4; padding: 12px 32px;">Assistant Director for
-                    Research and Finance</a></li>
+            <li><a href="{{ route('adre') }}" style="white-space: normal; line-height: 1.4; padding: 12px 32px;">Assistant Director for
+                    Research and Extension</a></li>
             <li class="section-header"><span>Support Services</span></li>
             <li><a href="#!">University Registrar</a></li>
             <li><a href="#!">University Medical and Dental Clinic</a></li>

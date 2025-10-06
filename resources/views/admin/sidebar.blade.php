@@ -54,6 +54,16 @@
                 <li><a href="{{ route('admin.procurements.index') }}?type=philgeps_posting">PhilGEPS Posting</a></li>
             </ul>
         </li>
+        <li>
+            <a href="{{ route('admin.tiptto_posts.index') }}"
+                class="{{ request()->routeIs('admin.tiptto_posts.*') ? 'active' : '' }}">
+                <i class="material-icons">science</i>TIPTTO Posts
+            </a>
+            <ul class="sub-menu">
+                <li><a href="{{ route('admin.tiptto_posts.create') }}">Create New Post</a></li>
+                <li><a href="{{ route('admin.tiptto_posts.index') }}">Manage Posts</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
 <div class="admin-sidebar-overlay"></div>

@@ -547,7 +547,7 @@
                                     <p>{{ $post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($post->content), 150) }}</p>
                                 </div>
                                 <div class="card-action">
-                                    <a href="{{ route('tiptto.post.show', $post->id) }}" class="red-text">
+                                    <a href="{{ route('tiptto.post.show', $post->slug) }}" class="red-text">
                                         Read More <i class="material-icons tiny">arrow_forward</i>
                                     </a>
                                 </div>

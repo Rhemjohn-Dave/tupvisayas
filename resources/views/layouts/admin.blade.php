@@ -24,14 +24,14 @@
 @section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Sidebar toggle functionality
-            var toggle = document.getElementById('adminMenuToggle');
+            // Mobile sidebar toggle functionality
+            var mobileToggle = document.getElementById('adminMenuToggle');
             var sidebar = document.querySelector('.admin-sidebar');
             var overlay = document.querySelector('.admin-sidebar-overlay');
 
-            if (toggle && sidebar && overlay) {
-                // Toggle sidebar on button click
-                toggle.addEventListener('click', function (e) {
+            if (mobileToggle && sidebar && overlay) {
+                // Toggle sidebar on mobile button click
+                mobileToggle.addEventListener('click', function (e) {
                     e.preventDefault();
                     sidebar.classList.toggle('open');
                     overlay.classList.toggle('active');
@@ -41,6 +41,42 @@
                 overlay.addEventListener('click', function () {
                     sidebar.classList.remove('open');
                     overlay.classList.remove('active');
+                });
+            }
+
+            // Desktop sidebar collapse functionality
+            var collapseToggle = document.getElementById('sidebarToggle');
+            var expandToggle = document.getElementById('expandToggle');
+
+            function toggleSidebar() {
+                sidebar.classList.toggle('collapsed');
+                document.body.classList.toggle('sidebar-collapsed');
+
+                // Save state to localStorage
+                var isNowCollapsed = sidebar.classList.contains('collapsed');
+                localStorage.setItem('adminSidebarCollapsed', isNowCollapsed);
+            }
+
+            if (collapseToggle && sidebar) {
+                // Check for saved state in localStorage
+                var isCollapsed = localStorage.getItem('adminSidebarCollapsed') === 'true';
+                if (isCollapsed) {
+                    sidebar.classList.add('collapsed');
+                    document.body.classList.add('sidebar-collapsed');
+                }
+
+                // Toggle sidebar collapse on desktop (collapse button)
+                collapseToggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    toggleSidebar();
+                });
+            }
+
+            if (expandToggle && sidebar) {
+                // Toggle sidebar expand on desktop (expand button)
+                expandToggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    toggleSidebar();
                 });
             }
         });

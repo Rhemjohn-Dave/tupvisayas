@@ -84,7 +84,7 @@
                                     <i class="material-icons left">arrow_back</i>
                                     Back to Posts
                                 </a>
-                                <a href="{{ route('tiptto.post.show', $tipttoPost->id) }}" class="btn blue white-text"
+                                <a href="{{ route('tiptto.post.show', $tipttoPost->slug) }}" class="btn blue white-text"
                                     target="_blank">
                                     <i class="material-icons left">open_in_new</i>
                                     View on Website

@@ -16,9 +16,9 @@ class ADREController extends Controller
         return view('pages.tiptto', compact('posts'));
     }
 
-    public function showPost($id)
+    public function showPost($slug)
     {
-        $post = TIPTTOPost::where('id', $id)
+        $post = TIPTTOPost::where('slug', $slug)
             ->where('is_published', true)
             ->firstOrFail();
 

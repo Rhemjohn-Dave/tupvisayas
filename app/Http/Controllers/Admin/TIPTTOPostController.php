@@ -28,6 +28,7 @@ class TIPTTOPostController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:t_i_p_t_t_o_posts,slug',
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -65,6 +66,7 @@ class TIPTTOPostController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:t_i_p_t_t_o_posts,slug,' . $tipttoPost->id,
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

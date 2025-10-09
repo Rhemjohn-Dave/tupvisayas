@@ -14,7 +14,8 @@
 
 @section('content')
     <div class="section" style="max-width:1200px;margin:0 auto;">
-        <h2 style="color:#C41E3A;font-weight:800;text-align:left;margin-bottom:2rem;letter-spacing:1px;">TIPTTO Product</h2>
+        <h2 style="color:#C41E3A;font-weight:800;text-align:left;margin-bottom:2rem;letter-spacing:1px;">TIPTTO Technologies
+        </h2>
         <div class="row">
             <!-- Main TIPTTO Post Content -->
             <div class="col s12 m9">

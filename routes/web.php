@@ -53,7 +53,7 @@ Route::get('/academics/{college}', [App\Http\Controllers\CollegePageController::
 
 // Assistant Director for Research and Extension Routes
 Route::get('/assistant-director-research-extension', [App\Http\Controllers\ADREController::class, 'index'])->name('adre');
-Route::get('/tiptto/posts/{id}', [App\Http\Controllers\ADREController::class, 'showPost'])->name('tiptto.post.show');
+Route::get('/tiptto/posts/{slug}', [App\Http\Controllers\ADREController::class, 'showPost'])->name('tiptto.post.show');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\PostController::class, 'index'])->name('dashboard');

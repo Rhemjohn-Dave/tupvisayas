@@ -29,6 +29,18 @@
                             <div class="row">
                                 <div class="col s12">
                                     <div class="input-field">
+                                        <input id="slug" name="slug" type="text" class="validate" value="{{ old('slug') }}">
+                                        <label for="slug">Slug (optional - auto-generated from title)</label>
+                                        @error('slug')
+                                            <span class="helper-text red-text">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="input-field">
                                         <textarea id="excerpt" name="excerpt"
                                             class="materialize-textarea">{{ old('excerpt') }}</textarea>
                                         <label for="excerpt">Excerpt (Optional)</label>

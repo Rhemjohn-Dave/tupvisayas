@@ -222,10 +222,10 @@
         <div class="container">
             <div class="row" style="align-items: center;">
                 <div class="col s12 m8">
-                    <h1>Assistant Director for Research and Extension</h1>
-                    <p>Leading innovation, research excellence, and community engagement through cutting-edge research
-                        initiatives, technology transfer, and extension services that drive regional development and
-                        academic advancement.</p>
+                    <h1>Assistant Director for Research and Extension (ADRE)</h1>
+                    <p>The ADRE Division spearheads innovation, research excellence, and community engagement by leading
+                        initiatives in research, technology transfer and extension services that promote regional
+                        development and academic growth.</p>
                 </div>
                 <div class="col s12 m4 center-align">
                     <i class="material-icons"
@@ -256,10 +256,11 @@
                 <section class="adre-section">
                     <h2>TUP Visayas Intellectual Property and Technology Transfer Office</h2>
                     <div class="tiptto-motto">
-                        "Taking ideas into market"
+                        "Empowering Innovators through IP and Technology Transfer"
                     </div>
-                    <p>Transforming innovative research into market-ready solutions through comprehensive intellectual
-                        property management and technology transfer services.</p>
+                    <p>The TIPTTO serves as the university's hub for protecting intellectual roperty, fostering innovation,
+                        and facilitating the transfer and commercialization of technologies from research to real-world
+                        application and commercialization.</p>
 
                     <div class="service-grid">
                         <div class="service-card">
@@ -313,7 +314,7 @@
                             <ul class="collection">
                                 <li class="collection-item">
                                     <i class="material-icons tiny red-text">foundation</i>
-                                    IP Foundation
+                                    IP Foundation Course
                                 </li>
                                 <li class="collection-item">
                                     <i class="material-icons tiny red-text">search</i>
@@ -326,6 +327,12 @@
                                 <li class="collection-item">
                                     <i class="material-icons tiny red-text">attach_money</i>
                                     IP Valuation
+                                    <ul class="collection">
+                                        <li class="collection-item">
+                                            <i class="material-icons tiny red-text">attach_money</i>
+                                            Technology Licensing Agreement
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="collection-item">
                                     <i class="material-icons tiny red-text">store</i>
@@ -361,11 +368,17 @@
                             <ul class="collection">
                                 <li class="collection-item">
                                     <i class="material-icons tiny red-text">attach_money</i>
-                                    IP Valuation
+                                    IP Policy Drafting
                                 </li>
                                 <li class="collection-item">
                                     <i class="material-icons tiny red-text">manage_accounts</i>
-                                    IP Management and Other IP related Services
+                                    IP Management and Consultation
+                                    <ul class="collection">
+                                        <li class="collection-item">
+                                            <i class="material-icons tiny red-text">attach_money</i>
+                                            IP Pitching for Investors
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -498,7 +511,7 @@
                             <div class="contact-info">
                                 <h4><i class="material-icons red-text">location_on</i> Office Location</h4>
                                 <p><strong>Assistant Director for Research and Extension</strong></p>
-                                <p>TUP Visayas Campus<br>Miagao, Iloilo</p>
+                                <p>TUP Visayas Campus<br>Talisay City, Negros Occidental</p>
                             </div>
                         </div>
 
@@ -506,7 +519,7 @@
                             <div class="contact-info">
                                 <h4><i class="material-icons red-text">contact_phone</i> Contact Details</h4>
                                 <p><strong>Email:</strong> <a href="mailto:adre@tupv.edu.ph">adre@tupv.edu.ph</a></p>
-                                <p><strong>Phone:</strong> (033) 315-8134</p>
+                                <p><strong>Phone:</strong> </p>
                                 <p><strong>Office Hours:</strong> Monday - Friday, 8:00 AM - 5:00 PM</p>
                             </div>
                         </div>
@@ -517,8 +530,8 @@
 
         <!-- TIPTTO Products Blog Section -->
         <section class="adre-section">
-            <h2>TIPTTO Products & Innovations</h2>
-            <p>Discover the latest innovations and products developed through our technology transfer and intellectual
+            <h2>TUPV Technologies</h2>
+            <p>Discover the latest technological innovations owned by TUP Visayas
                 property services.</p>
 
             @auth

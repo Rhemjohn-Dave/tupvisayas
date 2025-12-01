@@ -190,6 +190,12 @@
                                 @if($course->description)
                                     <p class="course-desc">{{ $course->description }}</p>
                                 @endif
+                                <div style="margin-top:1rem;">
+                                    <a href="{{ route('accreditation.course.show', $course) }}"
+                                        class="btn-small waves-effect waves-light red darken-2">
+                                        View Accreditation
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     @endforeach

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProcurementController;
+use App\Http\Controllers\AccreditationController;
 
 // Technology & Information Center Page
 Route::get('/technology', function () {
@@ -50,6 +51,11 @@ Route::get('/announcements/{announcement}', [App\Http\Controllers\AnnouncementCo
 Route::get('/jobs/{job}', [App\Http\Controllers\JobController::class, 'show'])->name('jobs.show');
 Route::get('/events/{event}', [App\Http\Controllers\EventController::class, 'show'])->name('events.show');
 Route::get('/academics/{college}', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->name('academics.show');
+
+// Program Accreditation
+Route::get('/accreditation', [AccreditationController::class, 'index'])->name('accreditation.index');
+Route::get('/accreditation/course/{course}', [AccreditationController::class, 'show'])->name('accreditation.course.show');
+Route::post('/accreditation/course/{course}', [AccreditationController::class, 'verify'])->name('accreditation.course.verify');
 
 // Assistant Director for Research and Extension Routes
 Route::get('/assistant-director-research-extension', [App\Http\Controllers\ADREController::class, 'index'])->name('adre');

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'password' => env('ACCREDITATION_PASSWORD', 'tupv-accreditation'),
+    'password' => env('ACCREDITATION_PASSWORD', 'G688WZ>%>8(A'),
 ];
 
 

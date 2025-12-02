@@ -268,7 +268,7 @@
                             </li>
                             <li>
                                 Research –
-                                <a href="https://docs.google.com/document/d/1vJhDHhfiwIvjf_YzJk7NPWi1zbw5Si8J/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                <a href="https://docs.google.com/document/d/1wXpCF5Voq1c80Eluu_vmCBydTZQ4oTNk/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
                                     target="_blank" rel="noopener">
                                     View narrative
                                 </a>

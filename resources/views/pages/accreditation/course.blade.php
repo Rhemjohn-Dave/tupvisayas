@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', $course->name . ' Accreditation - TUP Visayas')
+@section('title', $course->name . ' Accreditation TUP Visayas')
 
 @section('content')
     <div class="section">
-        <h4 style="color:#C41E3A;font-weight:700;">{{ $course->name }} - Accreditation</h4>
+        <h4 style="color:#C41E3A;font-weight:700;">{{ $course->name }} Accreditation</h4>
 
         @if(session('status'))
             <div class="card-panel green lighten-4 green-text text-darken-4">
@@ -42,7 +42,7 @@
                 {{-- Customized content for BS Mechanical Engineering accreditation --}}
                 <div class="card">
                     <div class="card-content">
-                        <span class="card-title">Bachelor of Science in Mechanical Engineering - Accreditation</span>
+                        <!-- <span class="card-title">Bachelor of Science in Mechanical Engineering Accreditation</span> -->
 
                         {{-- 1. Certification of Authenticity & Veracity --}}
                         <h5 style="margin-top:1.5rem;">1. Certification of Authenticity &amp; Veracity</h5>
@@ -66,12 +66,13 @@
                             </li>
                         </ul>
 
-                        {{-- 3. Exhibits / Additional Documents --}}
-                        <h5 style="margin-top:1.5rem;">3. Exhibits / Additional Documents</h5>
+                        {{-- 3. Supporting Documents/Additional Documents --}}
+                        <h5 style="margin-top:1.5rem;">3. Supporting Documents/Additional Documents</h5>
                         <ul class="browser-default">
                             <li>
                                 Community Service –
-                                <a href="https://drive.google.com/your-community-service-link" target="_blank" rel="noopener">
+                                <a href="https://drive.google.com/file/d/1i4LOufHA59KKufXeIxZxRso0kveycc5q/view?usp=drive_link"
+                                    target="_blank" rel="noopener">
                                     View files
                                 </a>
                             </li>
@@ -83,13 +84,37 @@
                             </li>
                             <li>
                                 Planning Process –
-                                <a href="https://drive.google.com/your-planning-process-link" target="_blank" rel="noopener">
-                                    View files
-                                </a>
+                                <ul class="browser-default" style="margin-top:0.5rem;">
+                                    <li>
+                                        <a href="https://drive.google.com/file/d/1FfyWccqlLnbqNLLlfZMxsxCcmrAAw-0D/view?usp=drive_link"
+                                            target="_blank" rel="noopener">
+                                            TUP Visayas Annual Report 2021
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://docs.google.com/presentation/d/1dvosA0Y5MGP6pPvK9bsQLJesCG4L7jcs/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                            target="_blank" rel="noopener">
+                                            TUP Visayas Annual Report 2023
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://docs.google.com/presentation/d/18keFKuvl2J3Lv88PTLSLfi0JeTgrF0dj/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                            target="_blank" rel="noopener">
+                                            TUP Visayas Annual Report December 2024
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://drive.google.com/file/d/1BYpCfZRBAYmoSNebNMKv-Wo4S1n1xPBB/view?usp=drive_link"
+                                            target="_blank" rel="noopener">
+                                            TUP Visayas Annual Report 2025 4th Quarter
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 Research –
-                                <a href="https://drive.google.com/your-research-link" target="_blank" rel="noopener">
+                                <a href="https://drive.google.com/file/d/15emHjTbsac3K1NWYgFp6Isgf4f0fzKJq/view?usp=drive_link"
+                                    target="_blank" rel="noopener">
                                     View files
                                 </a>
                             </li>
@@ -222,14 +247,14 @@
                         <ul class="browser-default">
                             <li>
                                 Community Service –
-                                <a href="https://docs.google.com/document/d/1DR1Cy18P12esL21BtL5twZRWNcHlS7mq/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                <a href="https://docs.google.com/document/d/1dVHdsPOQKsfY3T8tKguEgurhbrbjmZDl/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
                                     target="_blank" rel="noopener">
                                     View narrative
                                 </a>
                             </li>
                             <li>
                                 International Linkages and Consortia –
-                                <a href="https://docs.google.com/document/d/14kmFHK32iPH-fhEiGx378xVQKgiV2Y5L/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                <a href="https://drive.google.com/file/d/1ImVaZXbsUjYkwpSnsZjbSzufpZiPALZu/view?usp=drive_link"
                                     target="_blank" rel="noopener">
                                     View narrative
                                 </a>
@@ -243,17 +268,33 @@
                             </li>
                             <li>
                                 Research –
-                                <a href="https://docs.google.com/document/d/1siLUBC_fqRlUWttle0vyRfUm-ZnAapMR/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                <a href="https://docs.google.com/document/d/1vJhDHhfiwIvjf_YzJk7NPWi1zbw5Si8J/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
                                     target="_blank" rel="noopener">
                                     View narrative
                                 </a>
                             </li>
                             <li>
                                 Teaching and Learning –
-                                <a href="https://drive.google.com/your-narrative-teaching-learning-link" target="_blank"
-                                    rel="noopener">
-                                    View narrative
-                                </a>
+                                <ul class="browser-default" style="margin-top:0.5rem;">
+                                    <li>
+                                        <a href="https://docs.google.com/document/d/1Yu_SoC75Z8XnGacgHLHdnotVp4yG4lnc/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                            target="_blank" rel="noopener">
+                                            Continuing Assessment of Student Achievement
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://docs.google.com/document/d/1s6ZhQpjD5ksVYWBmike-FmjK7BOMvffk/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                            target="_blank" rel="noopener">
+                                            Performance of Graduates in Licensure Examination
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://docs.google.com/document/d/120UKiOdAtoXtsoj-QqMgueWbsUwcqFAb/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                            target="_blank" rel="noopener">
+                                            Tracer Studies
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
 
@@ -262,21 +303,33 @@
                         <ul class="browser-default">
                             <li>
                                 Level III PHASE 2 –
-                                <a href="https://drive.google.com/your-level3-phase2-link" target="_blank" rel="noopener">
+                                <a href="https://drive.google.com/file/d/180daIALSpGuqVyOKwJYbgFP9kZUySO0H/view?usp=drive_link"
+                                    target="_blank" rel="noopener">
                                     View documents
                                 </a>
                             </li>
                             <li>
                                 Level IV PHASE 1 –
-                                <a href="https://drive.google.com/your-level4-phase1-link" target="_blank" rel="noopener">
+                                <a href="https://docs.google.com/document/d/15gbE7S085ZH1x-1nD42eN_ne2IglK7Ma/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                    target="_blank" rel="noopener">
                                     View documents
                                 </a>
                             </li>
                             <li>
                                 Level IV PHASE 2 –
-                                <a href="https://drive.google.com/your-level4-phase2-link" target="_blank" rel="noopener">
+                                <a href="https://drive.google.com/file/d/1Mnw15SEHWjC4n3aVuUJckxonONJC3dEV/view?usp=drive_link"
+                                    target="_blank" rel="noopener">
                                     View documents
                                 </a>
+                            </li>
+                        </ul>
+                        {{-- 7. Working Checklist --}}
+                        <h5 style="margin-top:1.5rem;">7. Working Checklist</h5>
+                        <ul class="browser-default">
+                            <li>
+                                Working Checklist and Accreditators Reports– <a
+                                    href="https://docs.google.com/document/d/1ZwzkiqBhQUwPO0Utv2rngbwqzWfkL5VM/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
+                                    target="_blank" rel="noopener">View documents</a>
                             </li>
                         </ul>
                     </div>

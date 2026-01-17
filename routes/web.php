@@ -37,6 +37,8 @@ Route::get('/academics/coe', [App\Http\Controllers\CollegePageController::class,
 Route::get('/academics/coac', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coac')->name('academics.coac');
 Route::get('/academics/coet', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coet')->name('academics.coet');
 Route::view('/admissions', 'pages.admissions')->name('admissions');
+Route::get('/admissions/undergraduate-programs', [App\Http\Controllers\AdmissionsController::class, 'undergraduatePrograms'])->name('admissions.undergraduate');
+Route::view('/admissions/enrollment-procedure', 'pages.admissions.enrollment_procedure')->name('admissions.enrollment');
 Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
 Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');

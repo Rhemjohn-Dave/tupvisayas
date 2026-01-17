@@ -698,8 +698,8 @@
     <!-- Admission Dropdown -->
     <ul id="admission-dropdown" class="dropdown-content">
         <li><a href="#!">Graduate Programs</a></li>
-        <li><a href="#!">Undergraduate Programs</a></li>
-        <li><a href="#!">Enrollment Procedure for Freshmen Students</a></li>
+        <li><a href="{{ route('admissions.undergraduate') }}">Undergraduate Programs</a></li>
+        <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure for Freshmen Students</a></li>
         <li><a href="#!">Contact Information</a></li>
     </ul>
 
@@ -784,8 +784,8 @@
                     </li>
         <ul id="admission-mobile-dropdown" class="dropdown-content">
             <li><a href="#!">Graduate Programs</a></li>
-            <li><a href="#!">Undergraduate Programs</a></li>
-            <li><a href="#!">Enrollment Procedure for Freshmen Students</a></li>
+            <li><a href="{{ route('admissions.undergraduate') }}">Undergraduate Programs</a></li>
+            <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure for Freshmen Students</a></li>
             <li><a href="#!">Contact Information</a></li>
         </ul>
 

@@ -661,15 +661,17 @@
                                     <div class="org-level">
                                         <div class="org-position">
                                             <div class="org-photo admin">
-                                                <img src="{{ asset('images/faciolan-chris.jpg') }}"
-                                                    alt="Christopher Faciolan">
+                                                <img src="{{ asset('images/tupan,jofred.jpg') }}" alt="Jofred S. Tupan">
                                             </div>
-                                            <h5 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">Engr.
-                                                Christopher Faciolan, PECE</h5>
+
+                                            <h5 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">Jofred S. Tupan
+                                            </h5>
                                             <p style="color: #666; margin: 0; font-size: 0.9rem; font-weight: 500;">
                                                 UITC Administrator</p>
                                         </div>
                                     </div>
+
+
 
                                     <!-- Connecting Line -->
                                     <div
@@ -684,12 +686,13 @@
                                         style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
                                         <!-- Jofred Tupan -->
                                         <div class="org-position">
-                                            <div class="org-photo placeholder">
-                                                <i class="fa-solid fa-user"></i>
+                                            <div class="org-photo admin">
+                                                <img src="{{ asset('images/faciolan-chris.jpg') }}" alt="Jofres S. Tupan">
                                             </div>
-                                            <h6 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">Jofred Tupan
+                                            <h6 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">Engr.
+                                                Christopher Faciolan, PECE
                                             </h6>
-                                            <p style="color: #666; margin: 0; font-size: 0.85rem;">UITC Staff</p>
+                                            <p style="color: #666; margin: 0; font-size: 0.85rem;">Network Administrator</p>
                                         </div>
 
                                         <!-- Ricardo Suela -->
@@ -711,7 +714,7 @@
                                             </div>
                                             <h6 style="color: #8B1538; margin: 0.5rem 0; font-weight: 600;">Engr. Rhemjohn
                                                 Dave N. Pitong</h6>
-                                            <p style="color: #666; margin: 0; font-size: 0.85rem;">Electronics Engineer</p>
+                                            <p style="color: #666; margin: 0; font-size: 0.85rem;">Web Administrator</p>
                                         </div>
                                     </div>
 

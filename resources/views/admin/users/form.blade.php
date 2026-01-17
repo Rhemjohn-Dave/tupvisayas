@@ -3,8 +3,8 @@
 @section('title', 'Admin - Users')
 
 @section('admin_content')
-    <div class="section" style="max-width: 700px;">
-        <h5 class="red-text text-darken-2">{{ $user->id ? 'Edit User' : 'Add User' }}</h5>
+    <div class="section">
+        <h4 style="color:#C41E3A; font-weight:700;">{{ $user->id ? 'Edit User' : 'Add User' }}</h4>
 
         @if ($errors->any())
             <div class="card-panel red lighten-4 red-text text-darken-4">
@@ -44,10 +44,9 @@
                 </label>
             </p>
 
-            <div class="section right-align">
-                <a href="{{ route('admin.users.index') }}" class="btn-flat">Cancel</a>
-                <button type="submit" class="btn waves-effect waves-light red">Save</button>
-            </div>
+            <button type="submit" class="btn waves-effect waves-light"
+                style="background-color:#C41E3A;">{{ $user->id ? 'Update User' : 'Save User' }}</button>
+            <a href="{{ route('admin.users.index') }}" class="btn waves-effect waves-light grey">Cancel</a>
         </form>
     </div>
 @endsection

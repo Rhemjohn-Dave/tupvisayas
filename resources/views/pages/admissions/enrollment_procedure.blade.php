@@ -159,6 +159,85 @@
             color: #856404;
         }
 
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule-table thead {
+            background: #C41E3A;
+            color: white;
+        }
+
+        .schedule-table thead th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .schedule-table tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.2s ease;
+        }
+
+        .schedule-table tbody tr:hover {
+            background-color: #fff6f7;
+        }
+
+        .schedule-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-table tbody td {
+            padding: 1rem;
+            color: #333;
+            vertical-align: top;
+        }
+
+        .schedule-table tbody td:first-child {
+            font-weight: 600;
+            color: #C41E3A;
+            width: 15%;
+        }
+
+        .schedule-table tbody td:nth-child(2) {
+            width: 15%;
+        }
+
+        .schedule-table tbody td:nth-child(3) {
+            width: 20%;
+        }
+
+        .schedule-table tbody td:nth-child(4) {
+            width: 50%;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .schedule-item-note {
+            color: #ff6b00;
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            font-weight: 600;
+        }
+
+        .schedule-note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            color: #1565c0;
+            font-size: 0.95rem;
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 1.75rem;
@@ -175,6 +254,15 @@
 
             .procedure-section {
                 padding: 1.5rem;
+            }
+
+            .schedule-table {
+                font-size: 0.9rem;
+            }
+
+            .schedule-table thead th,
+            .schedule-table tbody td {
+                padding: 0.75rem 0.5rem;
             }
         }
     </style>
@@ -258,6 +346,100 @@
             <div class="step-content">
                 <p>Save a screenshot of your <strong>Account Details (USERNAME and PASSWORD)</strong> or print a copy of
                     your application form.</p>
+            </div>
+        </div>
+
+        <!-- TESTING SCHEDULE -->
+        <div class="procedure-section">
+            <h3 style="color: #C41E3A; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem;">
+                ADMISSION TEST SCHEDULE
+            </h3>
+            <div style="overflow-x: auto;">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Venue</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>JANUARY 22</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>TUP Visayas Gymnasium</td>
+                            <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>JANUARY 23</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>TUP Visayas Gymnasium</td>
+                            <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>JANUARY 24</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>TUP Visayas Gymnasium</td>
+                            <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>JANUARY 28</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>Negros Occidental High School<br><span class="schedule-item-note">Exclusive to their SHS
+                                    students only</span></td>
+                            <td>Araneta Street, Barangay 39, Bacolod City, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>JANUARY 31</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>Eva J. Montilla Farm School</td>
+                            <td>Barangay Inayawan, Mun. of Cauayan, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>FEBRUARY 7</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>Hinigaran National High School</td>
+                            <td>Rizal Street., Brgy. III, Mun. of Hinigaran, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>FEBRUARY 11</td>
+                            <td>8 AM</td>
+                            <td>Bacolod City National High School<br><span class="schedule-item-note">Exclusive to their SHS
+                                    students only</span></td>
+                            <td>P. Hernandez Extension, Brgy. Taculing, Bacolod City, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>FEBRUARY 13</td>
+                            <td>8 AM</td>
+                            <td>Don Bosco Technical Institute<br><span class="schedule-item-note">Exclusive to their SHS
+                                    students only</span></td>
+                            <td>Victorias Milling Company (VMC) Compound, Victorias City, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>FEBRUARY 21</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>Doña Hortencia Salas Benedicto National High School - SHS Building</td>
+                            <td>Gurrea Street, Barangay 1, La Carlota City, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>FEBRUARY 24</td>
+                            <td>8 AM</td>
+                            <td>Pulupandan Municipal Auditorium</td>
+                            <td>Municipality of Pulupandan, Negros Occidental</td>
+                        </tr>
+                        <tr>
+                            <td>MARCH 7</td>
+                            <td>8 AM<br>1 PM</td>
+                            <td>Negros Women for Tomorrow Foundation / Dungganon - San Carlos City</td>
+                            <td>Eco-Tourism Highway, Brgy. Palampas, San Carlos City</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="schedule-note">
+                <strong>Note:</strong> Additional test dates may be announced based on the number of applicants. Please
+                check the website or contact the Admissions Office for updates.
             </div>
         </div>
 

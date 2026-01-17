@@ -2,8 +2,111 @@
 
 @section('head')
     <style>
-        .page-header {
+        .enrollment-banner-image {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .admission-intro {
             margin-bottom: 2.5rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1538 100%);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .admission-intro-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .admission-intro-image {
+            flex: 0 0 300px;
+            position: relative;
+        }
+
+        .admission-intro-image img {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            background: #C41E3A;
+        }
+
+        .admission-intro-content {
+            flex: 1;
+            color: white;
+        }
+
+        .admission-intro-content h2 {
+            color: white;
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .admission-intro-content h2 .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .admission-intro-content p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .admission-intro-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 992px) {
+            .admission-intro {
+                padding: 2rem 1.5rem;
+            }
+
+            .admission-intro-wrapper {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .admission-intro-image {
+                flex: 0 0 auto;
+                order: 1;
+            }
+
+            .admission-intro-content {
+                order: 2;
+            }
+
+            .admission-intro-image img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .admission-intro-content h2 {
+                font-size: 2rem;
+            }
         }
 
         .page-title {
@@ -17,6 +120,12 @@
             color: #666;
             font-size: 1.1rem;
             font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .enrollment-banner-image {
+                max-height: 400px;
+            }
         }
 
         .procedure-section {
@@ -269,207 +378,246 @@
 @endsection
 
 @section('content')
-    <div class="section">
-        <div class="page-header">
-            <h3 class="page-title">Enrollment Procedure for Freshmen Students</h3>
-            <p class="page-subtitle">TUP Visayas Admission Test (TUPSTAT) - Application for School Year 2026–2027</p>
+    <!-- Banner Image Section -->
+    <div class="section" style="padding-top: 2rem; padding-bottom: 0;">
+        <img src="{{ asset('images/admission-banner.jpg') }}"
+            alt="TUP Visayas Admission Test S.Y 2026-2027 - Be a Haligi ng Bayan, Be a TUPVIAN"
+            class="enrollment-banner-image"
+            onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x600/C41E3A/FFFFFF?text=TUP+Visayas+Admission+Test';">
+    </div>
+
+    <!-- Admission Introduction Section -->
+    <div class="admission-intro">
+        <div class="admission-intro-wrapper">
+            <div class="admission-intro-image">
+                <img src="{{ asset('images/admission-student.jpg') }}" alt="TUP Visayas Student"
+                    onerror="this.onerror=null; this.src='https://via.placeholder.com/350x350/1565c0/FFFFFF?text=TUPV+Student';">
+            </div>
+            <div class="admission-intro-content">
+                <h2>Be Haligi ng Bayan.<br><span class="highlight">Build Skills, Shape the Nation.</span></h2>
+
+                <p>The Technological University of the Philippines Visayas (TUPV) admits a select number of freshmen each
+                    academic year who demonstrate the potential to succeed in rigorous technological and professional
+                    programs. The Undergraduate Admissions section provides comprehensive information on academic
+                    preparation, application requirements, admission procedures, and frequently asked questions to guide
+                    prospective students.</p>
+
+                <p>Admission to the Technological University of the Philippines Visayas is a privilege. As a state
+                    university committed to excellence, service, and nation-building, TUPV reserves the right to deny
+                    admission or require the withdrawal of students whose conduct or presence is deemed inconsistent with
+                    the University's mission, objectives, and regulations.</p>
+
+                <p>Applicants who, in the judgment of the admissions committee, show the capacity to benefit from the
+                    academic and technical programs of the University may be admitted. In evaluating applicants, due
+                    consideration is given to previous scholastic records, aptitude and readiness for higher education,
+                    character and conduct, recommendations, and the applicant's commitment to uphold the mission, vision,
+                    core values, and policies of the Technological University of the Philippines Visayas.</p>
+            </div>
         </div>
+    </div>
 
-        <div class="procedure-section">
-            <div
-                style="background: #C41E3A; color: white; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; text-align: center;">
-                <strong style="font-size: 1.1rem;">Application is NOW OPEN!</strong>
-            </div>
-            <p style="color: #555; font-size: 1.05rem; line-height: 1.8;">
-                Kindly follow the steps below and read the instructions carefully:
-            </p>
-        </div>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="section">
 
-        <!-- STEP 1 -->
-        <div class="procedure-section">
-            <div class="step-header">
-                <span class="step-number">1</span>
-                <h3 class="step-title">STEP 1</h3>
+            <div class="procedure-section">
+                <p style="color: #555; font-size: 1.05rem; line-height: 1.8;">
+                    Kindly follow the steps below and read the instructions carefully:
+                </p>
             </div>
-            <div class="step-content">
-                <p>Visit <a href="https://ers.tup.edu.ph/aims/applicants/" target="_blank"
-                        class="qr-link">ers.tup.edu.ph/aims/applicants/</a>, then click <strong>"Apply."</strong></p>
-            </div>
-        </div>
 
-        <!-- STEP 2 -->
-        <div class="procedure-section">
-            <div class="step-header">
-                <span class="step-number">2</span>
-                <h3 class="step-title">STEP 2</h3>
+            <!-- STEP 1 -->
+            <div class="procedure-section">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <h3 class="step-title">STEP 1</h3>
+                </div>
+                <div class="step-content">
+                    <p>Visit <a href="https://ers.tup.edu.ph/aims/applicants/" target="_blank"
+                            class="qr-link">ers.tup.edu.ph/aims/applicants/</a>, then click <strong>"Apply."</strong></p>
+                </div>
             </div>
-            <div class="step-content">
-                <p><strong>Complete the Profile Verification Form:</strong></p>
-                <ul>
-                    <li>Select <strong>"Visayas Campus"</strong>, then click <strong>"Continue."</strong></li>
-                    <li>Fill out all required information.</li>
-                </ul>
 
-                <div class="highlight-box">
-                    <p style="margin-top: 0; font-weight: 600; color: #C41E3A;">Important reminders:</p>
+            <!-- STEP 2 -->
+            <div class="procedure-section">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <h3 class="step-title">STEP 2</h3>
+                </div>
+                <div class="step-content">
+                    <p><strong>Complete the Profile Verification Form:</strong></p>
                     <ul>
-                        <li>Make sure to complete the <strong>Family Background</strong> and <strong>Educational
-                                Attainment</strong> sections.</li>
-                        <li>Upload a low-resolution <strong>2x2 photo</strong> in <strong>.jpeg</strong> or
-                            <strong>.jpg</strong> format.
-                        </li>
-                        <li>Skip the <strong>Employment Background</strong> section, but ensure that the <strong>Data
-                                Subject Consent Form</strong> is checked.</li>
+                        <li>Select <strong>"Visayas Campus"</strong>, then click <strong>"Continue."</strong></li>
+                        <li>Fill out all required information.</li>
                     </ul>
+
+                    <div class="highlight-box">
+                        <p style="margin-top: 0; font-weight: 600; color: #C41E3A;">Important reminders:</p>
+                        <ul>
+                            <li>Make sure to complete the <strong>Family Background</strong> and <strong>Educational
+                                    Attainment</strong> sections.</li>
+                            <li>Upload a low-resolution <strong>2x2 photo</strong> in <strong>.jpeg</strong> or
+                                <strong>.jpg</strong> format.
+                            </li>
+                            <li>Skip the <strong>Employment Background</strong> section, but ensure that the <strong>Data
+                                    Subject Consent Form</strong> is checked.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="procedure-section">
+                <div class="step-header">
+                    <span class="step-number">3</span>
+                    <h3 class="step-title">STEP 3</h3>
+                </div>
+                <div class="step-content">
+                    <p>Click the <strong>"Exam Schedule"</strong> button at the top of the page and select your preferred
+                        Admission Test schedule.</p>
+                </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="procedure-section">
+                <div class="step-header">
+                    <span class="step-number">4</span>
+                    <h3 class="step-title">STEP 4</h3>
+                </div>
+                <div class="step-content">
+                    <p>Save a screenshot of your <strong>Account Details (USERNAME and PASSWORD)</strong> or print a copy of
+                        your application form.</p>
+                </div>
+            </div>
+
+            <!-- TESTING SCHEDULE -->
+            <div class="procedure-section">
+                <h3 style="color: #C41E3A; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem;">
+                    ADMISSION TEST SCHEDULE
+                </h3>
+                <div style="overflow-x: auto;">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Venue</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>JANUARY 22</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>TUP Visayas Gymnasium</td>
+                                <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>JANUARY 23</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>TUP Visayas Gymnasium</td>
+                                <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>JANUARY 24</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>TUP Visayas Gymnasium</td>
+                                <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>JANUARY 28</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>Negros Occidental High School<br><span class="schedule-item-note">Exclusive to their SHS
+                                        students only</span></td>
+                                <td>Araneta Street, Barangay 39, Bacolod City, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>JANUARY 31</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>Eva J. Montilla Farm School</td>
+                                <td>Barangay Inayawan, Mun. of Cauayan, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>FEBRUARY 7</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>Hinigaran National High School</td>
+                                <td>Rizal Street., Brgy. III, Mun. of Hinigaran, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>FEBRUARY 11</td>
+                                <td>8 AM</td>
+                                <td>Bacolod City National High School<br><span class="schedule-item-note">Exclusive to their
+                                        SHS
+                                        students only</span></td>
+                                <td>P. Hernandez Extension, Brgy. Taculing, Bacolod City, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>FEBRUARY 13</td>
+                                <td>8 AM</td>
+                                <td>Don Bosco Technical Institute<br><span class="schedule-item-note">Exclusive to their SHS
+                                        students only</span></td>
+                                <td>Victorias Milling Company (VMC) Compound, Victorias City, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>FEBRUARY 21</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>Doña Hortencia Salas Benedicto National High School - SHS Building</td>
+                                <td>Gurrea Street, Barangay 1, La Carlota City, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>FEBRUARY 24</td>
+                                <td>8 AM</td>
+                                <td>Pulupandan Municipal Auditorium</td>
+                                <td>Municipality of Pulupandan, Negros Occidental</td>
+                            </tr>
+                            <tr>
+                                <td>MARCH 7</td>
+                                <td>8 AM<br>1 PM</td>
+                                <td>Negros Women for Tomorrow Foundation / Dungganon - San Carlos City</td>
+                                <td>Eco-Tourism Highway, Brgy. Palampas, San Carlos City</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="schedule-note">
+                    <strong>Note:</strong> Additional test dates may be announced based on the number of applicants. Please
+                    check the website or contact the Admissions Office for updates.
+                </div>
+            </div>
+
+            <!-- ON THE DAY OF THE ADMISSION TEST -->
+            <div class="procedure-section">
+                <h3 style="color: #C41E3A; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem;">
+                    ON THE DAY OF THE ADMISSION TEST:
+                </h3>
+                <div class="info-box">
+                    <ul>
+                        <li>Present a screenshot or printed copy of your application form.</li>
+                        <li>Memorize your contact number, email address, and Applicant ID number as indicated on your proof
+                            of
+                            registration.</li>
+                        <li>Bring <strong>two (2) sharpened pencils</strong>.</li>
+                        <li>Dress appropriately: <strong>no shorts, sleeveless tops, or slippers</strong>.</li>
+                        <li><strong>Watches are not allowed</strong>.</li>
+                        <li>Ensure that <strong>cellphones and other electronic devices are turned off</strong> upon
+                            entering
+                            the venue.</li>
+                        <li><strong>Arrive at least 30 minutes before</strong> your scheduled test time.</li>
+                        <li>Walk-in applicants may be accommodated depending on available slots.</li>
+                        <li><strong>Parents, guardians, and companions are not allowed</strong> to enter the testing venue.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="warning-note">
+                    <p style="margin: 0;">
+                        <strong>Important:</strong> In accordance with the policy on universal access to education,
+                        <strong>NO
+                            admission testing fee shall be collected</strong>.
+                    </p>
                 </div>
             </div>
         </div>
-
-        <!-- STEP 3 -->
-        <div class="procedure-section">
-            <div class="step-header">
-                <span class="step-number">3</span>
-                <h3 class="step-title">STEP 3</h3>
-            </div>
-            <div class="step-content">
-                <p>Click the <strong>"Exam Schedule"</strong> button at the top of the page and select your preferred
-                    Admission Test schedule.</p>
-            </div>
-        </div>
-
-        <!-- STEP 4 -->
-        <div class="procedure-section">
-            <div class="step-header">
-                <span class="step-number">4</span>
-                <h3 class="step-title">STEP 4</h3>
-            </div>
-            <div class="step-content">
-                <p>Save a screenshot of your <strong>Account Details (USERNAME and PASSWORD)</strong> or print a copy of
-                    your application form.</p>
-            </div>
-        </div>
-
-        <!-- TESTING SCHEDULE -->
-        <div class="procedure-section">
-            <h3 style="color: #C41E3A; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem;">
-                ADMISSION TEST SCHEDULE
-            </h3>
-            <div style="overflow-x: auto;">
-                <table class="schedule-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Venue</th>
-                            <th>Address</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>JANUARY 22</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>TUP Visayas Gymnasium</td>
-                            <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>JANUARY 23</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>TUP Visayas Gymnasium</td>
-                            <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>JANUARY 24</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>TUP Visayas Gymnasium</td>
-                            <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>JANUARY 28</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>Negros Occidental High School<br><span class="schedule-item-note">Exclusive to their SHS
-                                    students only</span></td>
-                            <td>Araneta Street, Barangay 39, Bacolod City, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>JANUARY 31</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>Eva J. Montilla Farm School</td>
-                            <td>Barangay Inayawan, Mun. of Cauayan, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>FEBRUARY 7</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>Hinigaran National High School</td>
-                            <td>Rizal Street., Brgy. III, Mun. of Hinigaran, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>FEBRUARY 11</td>
-                            <td>8 AM</td>
-                            <td>Bacolod City National High School<br><span class="schedule-item-note">Exclusive to their SHS
-                                    students only</span></td>
-                            <td>P. Hernandez Extension, Brgy. Taculing, Bacolod City, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>FEBRUARY 13</td>
-                            <td>8 AM</td>
-                            <td>Don Bosco Technical Institute<br><span class="schedule-item-note">Exclusive to their SHS
-                                    students only</span></td>
-                            <td>Victorias Milling Company (VMC) Compound, Victorias City, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>FEBRUARY 21</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>Doña Hortencia Salas Benedicto National High School - SHS Building</td>
-                            <td>Gurrea Street, Barangay 1, La Carlota City, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>FEBRUARY 24</td>
-                            <td>8 AM</td>
-                            <td>Pulupandan Municipal Auditorium</td>
-                            <td>Municipality of Pulupandan, Negros Occidental</td>
-                        </tr>
-                        <tr>
-                            <td>MARCH 7</td>
-                            <td>8 AM<br>1 PM</td>
-                            <td>Negros Women for Tomorrow Foundation / Dungganon - San Carlos City</td>
-                            <td>Eco-Tourism Highway, Brgy. Palampas, San Carlos City</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="schedule-note">
-                <strong>Note:</strong> Additional test dates may be announced based on the number of applicants. Please
-                check the website or contact the Admissions Office for updates.
-            </div>
-        </div>
-
-        <!-- ON THE DAY OF THE ADMISSION TEST -->
-        <div class="procedure-section">
-            <h3 style="color: #C41E3A; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem;">
-                ON THE DAY OF THE ADMISSION TEST:
-            </h3>
-            <div class="info-box">
-                <ul>
-                    <li>Present a screenshot or printed copy of your application form.</li>
-                    <li>Memorize your contact number, email address, and Applicant ID number as indicated on your proof of
-                        registration.</li>
-                    <li>Bring <strong>two (2) sharpened pencils</strong>.</li>
-                    <li>Dress appropriately: <strong>no shorts, sleeveless tops, or slippers</strong>.</li>
-                    <li><strong>Watches are not allowed</strong>.</li>
-                    <li>Ensure that <strong>cellphones and other electronic devices are turned off</strong> upon entering
-                        the venue.</li>
-                    <li><strong>Arrive at least 30 minutes before</strong> your scheduled test time.</li>
-                    <li>Walk-in applicants may be accommodated depending on available slots.</li>
-                    <li><strong>Parents, guardians, and companions are not allowed</strong> to enter the testing venue.</li>
-                </ul>
-            </div>
-
-            <div class="warning-note">
-                <p style="margin: 0;">
-                    <strong>Important:</strong> In accordance with the policy on universal access to education, <strong>NO
-                        admission testing fee shall be collected</strong>.
-                </p>
-            </div>
-        </div>
+    </div>
     </div>
 @endsection

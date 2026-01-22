@@ -139,17 +139,33 @@
                 text-align: left;
             }
         }
+
+        .academics-banner-image {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .academics-banner-image {
+                max-height: 400px;
+            }
+        }
     </style>
 @endsection
 
 @section('content')
+    <!-- Banner Image Section -->
+    @if($collegePage->cover_photo)
+        <div class="section" style="padding-top: 2rem; padding-bottom: 0;">
+            <img src="{{ asset('storage/' . $collegePage->cover_photo) }}" alt="Cover Photo" class="academics-banner-image"
+                onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x600/C41E3A/FFFFFF?text=Academics';">
+        </div>
+    @endif
+
     <div class="section">
-        @if($collegePage->cover_photo)
-            <div style="width:100%;height:420px;overflow:hidden;border-radius:12px;margin-bottom:2rem;">
-                <img src="{{ asset('storage/' . $collegePage->cover_photo) }}" alt="Cover Photo"
-                    style="width:100%;height:100%;object-fit:cover;">
-            </div>
-        @endif
         <h3 style="color:#C41E3A;font-weight:700;">{{ ucwords(str_replace('_', ' ', $collegePage->college)) }}</h3>
         <div class="row">
             <div class="col s12">

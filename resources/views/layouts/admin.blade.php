@@ -1,82 +1,137 @@
 @extends('layouts.app')
 
+@section('main_class', 'admin-main-root')
 @section('body_class', 'admin')
 
 @section('head')
+    {{-- Inter: readable UI font; Material Icons kept for sidebar/actions --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{-- Outlined icons in sidebar only (consistent weight with SaaS patterns) --}}
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link href="{{ asset('css/admin.css?v=' . time()) }}" rel="stylesheet">
     @yield('admin_head')
 @endsection
 
 @section('content')
-    <!-- Include sidebar component -->
-    @include('admin.sidebar')
+    {{-- Admin app: sidebar | topbar + scrollable content --}}
+    <div class="admin-app" id="adminApp">
+        @include('admin.sidebar')
 
-    <div class="admin-main">
-        <!-- Mobile menu toggle -->
-        <button class="admin-toggle-btn hide-on-large-only" id="adminMenuToggle">
-            <i class="material-icons">menu</i>
-        </button>
+        <div class="admin-sidebar-overlay" id="adminSidebarOverlay" aria-hidden="true"></div>
 
-        @yield('admin_content')
+        <div class="admin-shell">
+            @include('admin.partials.topbar')
+
+            <div class="admin-main">
+                <div class="admin-content">
+                    {{-- Flash → toast (also visible as banner for no-JS) --}}
+                    @if(session('success'))
+                        <div class="admin-flash admin-flash--success" role="status" data-admin-flash>{{ session('success') }}</div>
+                    @endif
+                    @if(session('status'))
+                        <div class="admin-flash admin-flash--success" role="status" data-admin-flash>{{ session('status') }}</div>
+                    @endif
+
+                    @yield('admin_content')
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/admin-ui.js?v=' . time()) }}" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Mobile sidebar toggle functionality
-            var mobileToggle = document.getElementById('adminMenuToggle');
-            var sidebar = document.querySelector('.admin-sidebar');
-            var overlay = document.querySelector('.admin-sidebar-overlay');
+            var menuToggle = document.getElementById('adminMenuToggle');
+            var sidebar = document.getElementById('adminSidebar');
+            var overlay = document.getElementById('adminSidebarOverlay');
 
-            if (mobileToggle && sidebar && overlay) {
-                // Toggle sidebar on mobile button click
-                mobileToggle.addEventListener('click', function (e) {
+            function isMobileSidebar() {
+                return window.matchMedia('(max-width: 992px)').matches;
+            }
+
+            var railToggle = document.getElementById('sidebarRailToggle');
+
+            function updateMenuToggleAria() {
+                if (!menuToggle || !sidebar) return;
+                if (isMobileSidebar()) {
+                    var open = sidebar.classList.contains('open');
+                    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+                } else {
+                    var collapsed = sidebar.classList.contains('collapsed');
+                    menuToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                    menuToggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+                }
+            }
+
+            function updateRailToggleAria() {
+                if (!railToggle || !sidebar || isMobileSidebar()) return;
+                var collapsed = sidebar.classList.contains('collapsed');
+                railToggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+                railToggle.setAttribute('title', collapsed ? 'Widen sidebar' : 'Narrow sidebar');
+            }
+
+            function toggleDesktopCollapse() {
+                if (!sidebar) return;
+                var collapsed = sidebar.classList.toggle('collapsed');
+                document.body.classList.toggle('sidebar-collapsed', collapsed);
+                localStorage.setItem('adminSidebarCollapsed', collapsed ? 'true' : 'false');
+                updateRailToggleAria();
+            }
+
+            function toggleMobileDrawer() {
+                if (!sidebar || !overlay) return;
+                var open = sidebar.classList.toggle('open');
+                overlay.classList.toggle('active', open);
+                overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+            }
+
+            if (menuToggle && sidebar && overlay) {
+                menuToggle.addEventListener('click', function (e) {
                     e.preventDefault();
-                    sidebar.classList.toggle('open');
-                    overlay.classList.toggle('active');
+                    if (isMobileSidebar()) {
+                        toggleMobileDrawer();
+                    } else {
+                        toggleDesktopCollapse();
+                    }
+                    updateMenuToggleAria();
                 });
 
-                // Close sidebar when clicking overlay
                 overlay.addEventListener('click', function () {
                     sidebar.classList.remove('open');
                     overlay.classList.remove('active');
+                    overlay.setAttribute('aria-hidden', 'true');
+                    updateMenuToggleAria();
                 });
-            }
 
-            // Desktop sidebar collapse functionality
-            var collapseToggle = document.getElementById('sidebarToggle');
-            var expandToggle = document.getElementById('expandToggle');
-
-            function toggleSidebar() {
-                sidebar.classList.toggle('collapsed');
-                document.body.classList.toggle('sidebar-collapsed');
-
-                // Save state to localStorage
-                var isNowCollapsed = sidebar.classList.contains('collapsed');
-                localStorage.setItem('adminSidebarCollapsed', isNowCollapsed);
-            }
-
-            if (collapseToggle && sidebar) {
-                // Check for saved state in localStorage
-                var isCollapsed = localStorage.getItem('adminSidebarCollapsed') === 'true';
-                if (isCollapsed) {
+                if (localStorage.getItem('adminSidebarCollapsed') === 'true' && !isMobileSidebar()) {
                     sidebar.classList.add('collapsed');
                     document.body.classList.add('sidebar-collapsed');
                 }
+                updateMenuToggleAria();
+                updateRailToggleAria();
 
-                // Toggle sidebar collapse on desktop (collapse button)
-                collapseToggle.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    toggleSidebar();
-                });
-            }
+                if (railToggle) {
+                    railToggle.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        if (isMobileSidebar()) return;
+                        toggleDesktopCollapse();
+                        updateMenuToggleAria();
+                    });
+                }
 
-            if (expandToggle && sidebar) {
-                // Toggle sidebar expand on desktop (expand button)
-                expandToggle.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    toggleSidebar();
+                window.addEventListener('resize', function () {
+                    if (!isMobileSidebar()) {
+                        sidebar.classList.remove('open');
+                        overlay.classList.remove('active');
+                        overlay.setAttribute('aria-hidden', 'true');
+                    }
+                    updateMenuToggleAria();
+                    updateRailToggleAria();
                 });
             }
         });

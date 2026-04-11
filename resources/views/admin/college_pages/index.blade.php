@@ -1,38 +1,52 @@
 @extends('layouts.admin')
 
+@section('title', 'Admin — Academics pages')
+
 @section('admin_content')
-    <div class="section" style="max-width:700px;margin:0 auto;">
-        <h4 style="color:#C41E3A;font-weight:700;">Manage Academics Pages</h4>
-        <a href="{{ route('admin.college-pages.create') }}" class="btn red white-text" style="margin-bottom:20px;">Create
-            College Page</a>
-        @if(session('success'))
-            <div class="card-panel green lighten-4 green-text">{{ session('success') }}</div>
-        @endif
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>College</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($colleges as $college)
+    <x-admin.page-header title="Academics pages" subtitle="College landing pages linked from the public Academics menu.">
+        <x-slot name="actions">
+            <a href="{{ route('admin.college-pages.create') }}" class="admin-btn admin-btn--primary">
+                <i class="material-icons" aria-hidden="true">add</i>
+                New college page
+            </a>
+        </x-slot>
+    </x-admin.page-header>
+
+    <div class="admin-table-card">
+        <div class="admin-table-scroll">
+            <table class="admin-table">
+                <thead>
                     <tr>
-                        <td style="text-transform:uppercase;font-weight:600;">{{ strtoupper($college->college) }}</td>
-                        <td>
-                            <a href="{{ route('admin.college-pages.edit', $college->id) }}"
-                                class="btn orange white-text">Edit</a>
-                            <form action="{{ route('admin.college-pages.destroy', $college->id) }}" method="POST"
-                                style="display:inline-block;margin-left:6px;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn red white-text"
-                                    onclick="return confirm('Delete this college page?')">Delete</button>
-                            </form>
-                        </td>
+                        <th scope="col">College</th>
+                        <th scope="col" class="admin-table__actions">Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse($colleges as $college)
+                        <tr>
+                            <td class="admin-table__cell-title" style="text-transform:uppercase;">{{ strtoupper($college->college) }}</td>
+                            <td class="admin-table__actions">
+                                <div class="admin-actions-row">
+                                    <a href="{{ route('admin.college-pages.edit', $college->id) }}" class="admin-btn admin-btn--icon admin-btn--secondary" title="Edit" aria-label="Edit">
+                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                    </a>
+                                    <form action="{{ route('admin.college-pages.destroy', $college->id) }}" method="POST" class="admin-inline-form" onsubmit="return confirm('Delete this college page?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="admin-btn admin-btn--icon admin-btn--danger" title="Delete" aria-label="Delete">
+                                            <i class="material-icons" aria-hidden="true">delete</i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="2" class="admin-table__empty">No college pages found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection

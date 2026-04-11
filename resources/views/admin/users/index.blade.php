@@ -1,58 +1,67 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin - Users')
+@section('title', 'Admin — Users')
 
 @section('admin_content')
-    <div class="row" style="align-items:center;">
-        <div class="col s12 m8">
-            <h5 class="red-text text-darken-2">Users</h5>
-        </div>
-        <div class="col s12 m4 right-align">
-            <a href="{{ route('admin.users.create') }}" class="btn waves-effect waves-light white-text red">
-                <i class="material-icons left">add</i> Add User
+    <x-admin.page-header title="Users" subtitle="Manage administrator and staff accounts.">
+        <x-slot name="actions">
+            <a href="{{ route('admin.users.create') }}" class="admin-btn admin-btn--primary">
+                <i class="material-icons" aria-hidden="true">person_add</i>
+                Add user
             </a>
+        </x-slot>
+    </x-admin.page-header>
+
+    <div class="admin-table-card">
+        <div class="admin-table-scroll">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col" class="admin-table__actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($users as $u)
+                        <tr>
+                            <td class="admin-table__cell-title">{{ $u->name }}</td>
+                            <td>{{ $u->email }}</td>
+                            <td>
+                                @if($u->is_admin)
+                                    <span class="admin-badge admin-badge--published">Admin</span>
+                                @else
+                                    <span class="admin-badge admin-badge--draft">User</span>
+                                @endif
+                            </td>
+                            <td class="admin-table__actions">
+                                <div class="admin-actions-row">
+                                    <a href="{{ route('admin.users.edit', $u->id) }}" class="admin-btn admin-btn--icon admin-btn--secondary" title="Edit user" aria-label="Edit user">
+                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                    </a>
+                                    <form action="{{ route('admin.users.destroy', $u->id) }}" method="POST" class="admin-inline-form" onsubmit="return confirm('Delete this user?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="admin-btn admin-btn--icon admin-btn--danger" title="Delete user" aria-label="Delete user">
+                                            <i class="material-icons" aria-hidden="true">delete</i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="admin-table__empty">No users found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
+        @if($users->hasPages())
+            <div class="admin-pagination-wrap">
+                {{ $users->links('pagination.admin') }}
+            </div>
+        @endif
     </div>
-
-    @if(session('status'))
-        <div class="card-panel green lighten-4 green-text text-darken-4">{{ session('status') }}</div>
-    @endif
-
-    <div class="responsive-table" style="overflow-x:auto;">
-        <table class="highlight striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th class="right-align">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($users as $u)
-                    <tr>
-                        <td>{{ $u->name }}</td>
-                        <td>{{ $u->email }}</td>
-                        <td>{{ $u->is_admin ? 'Admin' : 'User' }}</td>
-                        <td class="right-align">
-                            <a href="{{ route('admin.users.edit', $u->id) }}" class="btn-small waves-effect">Edit</a>
-                            <form action="{{ route('admin.users.destroy', $u->id) }}" method="POST" style="display:inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-small red lighten-1 waves-effect"
-                                    onclick="return confirm('Delete this user?')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="center-align">No users found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section">{{ $users->links() }}</div>
-
 @endsection

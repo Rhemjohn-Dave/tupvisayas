@@ -880,8 +880,8 @@
                 @endauth
             </ul>
 
-    <!-- Main Content -->
-    <main class="container" style="min-height:70vh;">
+    <!-- Main Content (admin uses full-width shell via @section('main_class')) -->
+    <main class="@yield('main_class', 'container')" style="min-height:70vh;">
         @yield('content')
     </main>
 

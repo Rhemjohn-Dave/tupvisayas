@@ -1,0 +1,72 @@
+@extends('layouts.admin')
+
+@section('admin_content')
+    <div class="admin-content">
+        <div class="admin-page-head">
+            <div>
+                <h1 class="admin-page-title">Edit Event Post</h1>
+            </div>
+        </div>
+
+        <div class="admin-form-card">
+            <form method="POST" action="{{ route('admin.events.update', $event->slug) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="input-field">
+                    <label for="category_id" class="active">Category</label>
+                    <select name="category_id" id="category_id" required class="browser-default">
+                        <option value="" disabled>Select Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ $event->category_id == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <input type="text" name="title" id="title" value="{{ $event->title }}" required>
+                    <label for="title" class="active">Title</label>
+                </div>
+
+                <div class="input-field">
+                    <textarea name="content" id="content"
+                        class="materialize-textarea wysiwyg">{{ $event->content }}</textarea>
+                    <label for="content" class="active">Content</label>
+                </div>
+
+                <div class="file-field input-field">
+                    <div class="btn admin-btn--primary">
+                        <span>Upload Image</span>
+                        <input type="file" name="picture" accept="image/*">
+                    </div>
+
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload an image (optional)">
+                    </div>
+
+                    @if($event->picture)
+                        <div style="margin-top: 10px;">
+                            <p><strong>Current Image:</strong></p>
+                            <img src="{{ asset('storage/' . $event->picture) }}" alt="Current Image"
+                                style="max-width: 200px; max-height: 200px; border: 1px solid #ddd;">
+                        </div>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn waves-effect waves-light" style="background-color:#C41E3A;">Update
+                    Event</button>
+                <a href="{{ route('admin.dashboard') }}" class="btn waves-effect waves-light grey">Cancel</a>
+            </form>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            M.textareaAutoResize(document.getElementById('content'));
+        });
+    </script>
+@endsection

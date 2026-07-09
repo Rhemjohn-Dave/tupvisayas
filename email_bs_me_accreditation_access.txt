@@ -1,0 +1,105 @@
+Subject: Access Instructions for Bachelor of Science in Mechanical Engineering (BS ME) Accreditation
+
+Dear [Recipient Name],
+
+We are pleased to provide you with access to the Bachelor of Science in Mechanical Engineering (BS ME) accreditation documents and information. Please follow the step-by-step instructions below to access the accreditation portal.
+
+---
+
+STEP-BY-STEP ACCESS INSTRUCTIONS:
+
+Step 1: Open Your Web Browser
+   - Open any modern web browser (Google Chrome, Mozilla Firefox, Microsoft Edge, Safari, etc.)
+
+Step 2: Navigate to the Accreditation Page
+   - Go to the following URL: [YOUR_WEBSITE_URL]/accreditation
+   - Example: https://www.yoursite.com/accreditation
+
+Step 3: Locate the BS ME Program
+   - On the Program Accreditation page, you will see a list of programs organized by college
+   - Scroll through the list to find "Bachelor of Science in Mechanical Engineering"
+   - It will be listed under the appropriate college section
+
+Step 4: Click "View Accreditation"
+   - Click the red "View Accreditation" button next to "Bachelor of Science in Mechanical Engineering"
+   - This will take you to the password-protected accreditation page
+
+Step 5: Enter the Accreditation Password
+   - You will see a password field labeled "Accreditation Password"
+   - Enter the following password: [ACCREDITATION_PASSWORD]
+   - Note: The password is case-sensitive, so enter it exactly as provided
+
+Step 6: Unlock Access
+   - Click the "Unlock Accreditation" button
+   - If the password is correct, you will be granted access to view all accreditation documents
+
+Step 7: Browse Accreditation Documents
+   Once access is granted, you will be able to view the following sections:
+   
+   • Certification of Authenticity & Veracity
+   • COPC (Certificate of Program Compliance)
+   • Supporting Documents/Additional Documents
+     - Community Service
+     - International Linkages and Consortia
+     - Planning Process
+     - Research
+     - Teaching and Learning
+   
+   • Mandatory Compliance Reports (Areas I-X)
+   • Special Areas Compliance Reports
+   • Narrative Profiles
+   • Technical Review and Board Action
+   • Working Checklist
+
+   All documents are accessible via Google Drive links that will open in new tabs.
+
+---
+
+IMPORTANT NOTES:
+
+• Password Security: Please keep the accreditation password confidential and do not share it with unauthorized individuals.
+
+• Session Access: Once you enter the password, your access will remain active for the duration of your browser session. If you close your browser or clear your session, you will need to re-enter the password.
+
+• Document Access: All accreditation documents are hosted on Google Drive. You may need to request access if you encounter permission issues. If so, please contact us.
+
+• Browser Compatibility: For the best experience, please use the latest version of your web browser.
+
+• Troubleshooting: If you experience any issues accessing the accreditation portal or documents, please contact our technical support team.
+
+---
+
+ALTERNATIVE ACCESS METHOD:
+
+If you are unable to access the program through the main accreditation page, you can directly access the BS ME accreditation page using this URL:
+   [YOUR_WEBSITE_URL]/accreditation/course/[COURSE_ID]
+
+Note: You will still need to enter the accreditation password when accessing directly.
+
+---
+
+SUPPORT AND CONTACT INFORMATION:
+
+If you have any questions or encounter any difficulties accessing the accreditation documents, please do not hesitate to contact us:
+
+   Email: [SUPPORT_EMAIL]
+   Phone: [SUPPORT_PHONE]
+   Office Hours: [OFFICE_HOURS]
+
+---
+
+Thank you for your interest in TUP Visayas' Bachelor of Science in Mechanical Engineering program accreditation.
+
+Best regards,
+
+[Your Name]
+[Your Title]
+[Your Department]
+Technological University of the Philippines - Visayas
+[Contact Information]
+
+---
+
+CONFIDENTIALITY NOTICE:
+This email and the accreditation password contained herein are confidential and intended solely for the use of the recipient. If you have received this email in error, please notify the sender immediately and delete this message.
+

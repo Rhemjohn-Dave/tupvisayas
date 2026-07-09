@@ -3,7 +3,11 @@
 @section('title', 'Admin — Officials')
 
 @section('admin_content')
+<<<<<<< HEAD
     <x-admin.page-header title="Officials" subtitle="University leadership shown on the public site.">
+=======
+    <x-admin.page-header title="Officials" subtitle="University leadership profiles shown on the public site.">
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         <x-slot name="actions">
             <a href="{{ route('admin.officials.create') }}" class="admin-btn admin-btn--primary">
                 <i class="material-icons" aria-hidden="true">person_add</i>

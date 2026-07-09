@@ -1,9 +1,47 @@
 /**
+<<<<<<< HEAD
  * Admin UI: toast for flash messages, disclosure cleanup, sidebar groups.
+=======
+ * Admin UI: theme persistence, toast for flash messages, disclosure cleanup.
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
  */
 (function () {
     "use strict";
 
+<<<<<<< HEAD
+=======
+    var THEME_KEY = "adminTheme";
+
+    function applyTheme(theme) {
+        if (!document.body.classList.contains("admin")) return;
+        if (theme === "dark") {
+            document.body.setAttribute("data-theme", "dark");
+        } else {
+            document.body.setAttribute("data-theme", "light");
+        }
+    }
+
+    function initTheme() {
+        var stored = localStorage.getItem(THEME_KEY);
+        if (stored === "dark" || stored === "light") {
+            applyTheme(stored);
+            return;
+        }
+        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            applyTheme("dark");
+        } else {
+            applyTheme("light");
+        }
+    }
+
+    function toggleTheme() {
+        var next =
+            document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        localStorage.setItem(THEME_KEY, next);
+        applyTheme(next);
+    }
+
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     function flashToToast() {
         var el = document.querySelector("[data-admin-flash]");
         if (!el) return;
@@ -63,9 +101,19 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+<<<<<<< HEAD
         if (document.body.classList.contains("admin")) {
             document.body.removeAttribute("data-theme");
             localStorage.removeItem("adminTheme");
+=======
+        initTheme();
+
+        var themeBtn = document.getElementById("adminThemeToggle");
+        if (themeBtn) {
+            themeBtn.addEventListener("click", function () {
+                toggleTheme();
+            });
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         }
 
         flashToToast();

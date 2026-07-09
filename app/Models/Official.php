@@ -13,6 +13,12 @@ class Official extends Model
         'name',
         'position',
         'photo',
+<<<<<<< HEAD
         'order',
+=======
+        'bio',
+        'order',
+        'social_links'
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     ];
 }

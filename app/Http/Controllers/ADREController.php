@@ -18,6 +18,7 @@ class ADREController extends Controller
 
     public function showPost($slug)
     {
+<<<<<<< HEAD
         $post = TIPTTOPost::with('author')
             ->where('slug', $slug)
             ->where('is_published', true)
@@ -31,5 +32,12 @@ class ADREController extends Controller
             ->get();
 
         return view('pages.tiptto_post_show', compact('post', 'relatedPosts'));
+=======
+        $post = TIPTTOPost::where('slug', $slug)
+            ->where('is_published', true)
+            ->firstOrFail();
+
+        return view('pages.tiptto_post_show', compact('post'));
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 }

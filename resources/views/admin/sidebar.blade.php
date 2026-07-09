@@ -12,16 +12,26 @@
 @endphp
 
 {{--
+<<<<<<< HEAD
 Admin sidebar — light institutional rail, brand red accents (matches public site).
+=======
+Admin sidebar — dark #1f2937 rail, red accent for active only.
+Collapsible groups (Content, Management, Procurement) + icon-only rail when collapsed.
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 --}}
 <aside class="admin-sidebar" id="adminSidebar" aria-label="Admin navigation">
     <div class="admin-sidebar__brand">
         <a href="{{ route('admin.dashboard') }}" class="admin-sidebar__logo">
+<<<<<<< HEAD
             <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas" class="admin-sidebar__logo-img" width="44" height="44">
             <span class="admin-sidebar__logo-text">
                 <span class="admin-sidebar__logo-title">TUP Visayas</span>
                 <span class="admin-sidebar__logo-sub">Administration</span>
             </span>
+=======
+            <span class="admin-sidebar__logo-mark" aria-hidden="true"></span>
+            <span class="admin-sidebar__logo-text">TUPV Admin</span>
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         </a>
     </div>
 

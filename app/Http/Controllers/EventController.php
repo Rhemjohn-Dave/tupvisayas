@@ -72,10 +72,14 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+<<<<<<< HEAD
         $categories = \App\Models\Category::all();
         $search = trim((string) request('search', ''));
 
         return view('pages.event_show', compact('event', 'categories', 'search'));
+=======
+        return view('pages.event_show', compact('event'));
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 
     /**

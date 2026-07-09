@@ -14,7 +14,10 @@ class AnnouncementController extends Controller
     {
         $categories = \App\Models\Category::all();
         $category = null;
+<<<<<<< HEAD
         $search = trim((string) $request->get('search', ''));
+=======
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         $announcements = \App\Models\Announcement::query();
 
         // Handle category filtering
@@ -26,7 +29,12 @@ class AnnouncementController extends Controller
         }
 
         // Handle search functionality
+<<<<<<< HEAD
         if ($search !== '') {
+=======
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             $announcements->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
                     ->orWhere('content', 'like', '%' . $search . '%');
@@ -35,7 +43,11 @@ class AnnouncementController extends Controller
 
         $announcements = $announcements->with('category')->orderBy('created_at', 'desc')->get();
 
+<<<<<<< HEAD
         return view('pages.announcements', compact('announcements', 'categories', 'category', 'search'));
+=======
+        return view('pages.announcements', compact('announcements', 'categories', 'category'));
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 
     /**
@@ -75,9 +87,13 @@ class AnnouncementController extends Controller
     public function show(Announcement $announcement)
     {
         $categories = \App\Models\Category::all();
+<<<<<<< HEAD
         $search = trim((string) request('search', ''));
 
         return view('pages.announcement_show', compact('announcement', 'categories', 'search'));
+=======
+        return view('pages.announcement_show', compact('announcement', 'categories'));
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 
     /**

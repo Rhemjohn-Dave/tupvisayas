@@ -25,7 +25,11 @@
             @include('admin.partials.topbar')
 
             <div class="admin-main">
+<<<<<<< HEAD
                 <div class="admin-content site-content">
+=======
+                <div class="admin-content">
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                     {{-- Flash → toast (also visible as banner for no-JS) --}}
                     @if(session('success'))
                         <div class="admin-flash admin-flash--success" role="status" data-admin-flash>{{ session('success') }}</div>

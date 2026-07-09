@@ -14,10 +14,14 @@ class CollegePageController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $colleges = CollegePage::withCount('courses')
             ->orderBy('college')
             ->get();
 
+=======
+        $colleges = CollegePage::all();
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         return view('admin.college_pages.index', compact('colleges'));
     }
 
@@ -39,15 +43,24 @@ class CollegePageController extends Controller
             'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
             'history' => 'nullable|string',
             'department_faculty' => 'nullable|string',
+<<<<<<< HEAD
+=======
+            'student_organization' => 'nullable|string',
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         ]);
         if ($request->hasFile('cover_photo')) {
             $data['cover_photo'] = $request->file('cover_photo')->store('college_covers', 'public');
         }
+<<<<<<< HEAD
         $college = CollegePage::create($data);
 
         return redirect()
             ->route('admin.college-pages.edit', $college->id)
             ->with('success', 'College page created. Add courses and content below.');
+=======
+        CollegePage::create($data);
+        return redirect()->route('admin.college-pages.index')->with('success', 'College page created successfully.');
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 
     /**
@@ -63,7 +76,11 @@ class CollegePageController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $college = CollegePage::with(['departments.faculties', 'courses', 'studentOrganizations'])->findOrFail($id);
+=======
+        $college = CollegePage::with(['departments.faculties', 'courses'])->findOrFail($id);
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         return view('admin.college_pages.edit', compact('college'));
     }
 
@@ -73,6 +90,7 @@ class CollegePageController extends Controller
     public function update(Request $request, $id)
     {
         $college = CollegePage::findOrFail($id);
+<<<<<<< HEAD
         $section = $request->input('section', 'info');
         $tab = $request->input('tab', 'admin-college-info');
 
@@ -105,6 +123,24 @@ class CollegePageController extends Controller
         return redirect()
             ->to(route('admin.college-pages.edit', $college->id) . '?tab=' . urlencode($tab))
             ->with('success', $message);
+=======
+        $data = $request->validate([
+            'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'history' => 'nullable|string',
+            'department_faculty' => 'nullable|string',
+            'student_organization' => 'nullable|string',
+        ]);
+        if ($request->hasFile('cover_photo')) {
+            // Delete old photo if exists
+            if ($college->cover_photo) {
+                Storage::disk('public')->delete($college->cover_photo);
+            }
+            $path = $request->file('cover_photo')->store('college_covers', 'public');
+            $data['cover_photo'] = $path;
+        }
+        $college->update($data);
+        return redirect()->route('admin.college-pages.index')->with('success', 'College page updated successfully.');
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 
     /**

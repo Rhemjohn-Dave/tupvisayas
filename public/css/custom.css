@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Materialize bridge — keeps component chrome on-brand.
  * Tokens live in site.css (:root). No global heading overrides here
@@ -14,6 +15,29 @@
     background-color: var(--color-brand, #9e1b32) !important;
 }
 
+=======
+:root {
+    --cardinal-red: #c41e3a;
+}
+
+/* Materialize CSS overrides */
+nav.materialize-nav,
+.btn,
+.card-panel,
+.pagination .active,
+.tabs .tab a.active {
+    background-color: var(--cardinal-red) !important;
+}
+
+a,
+.btn-flat,
+.breadcrumb,
+.pagination li.active a {
+    color: var(--cardinal-red) !important;
+}
+
+/* Ensure button text stays readable on red buttons */
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 a.btn,
 a.btn-large,
 a.btn-small,
@@ -23,6 +47,7 @@ a.btn-small,
     color: #fff !important;
 }
 
+<<<<<<< HEAD
 .btn-flat,
 .breadcrumb,
 .pagination li.active a {
@@ -142,4 +167,71 @@ nav {
 
 .auth-card .card-action {
     padding-bottom: var(--space-6, 1.5rem);
+=======
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--cardinal-red);
+}
+
+/* Footer styles */
+.page-footer.white {
+    background: #fff !important;
+}
+
+nav.white .nav-wrapper .right > li > a {
+    color: #c41e3a !important;
+    font-weight: 500;
+}
+
+/* Auth pages helpers */
+.auth-container {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.auth-card .card-content {
+    padding-top: 24px;
+}
+
+.auth-card .card-action {
+    padding-bottom: 24px;
+}
+
+.page-footer.white a,
+.page-footer.white p,
+.page-footer.white .material-icons {
+    color: #c41e3a !important;
+}
+
+/* Dropdown styles */
+nav.z-depth-1.white .dropdown-content {
+    margin-top: 0.5rem;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+nav.z-depth-1.white .dropdown-content li > a {
+    color: #c41e3a !important;
+    padding: 10px 18px;
+    font-size: 1rem;
+}
+
+nav.z-depth-1.white .dropdown-trigger i.material-icons {
+    vertical-align: middle;
+    font-size: 1.2em;
+    margin-left: 2px;
+}
+
+/* Responsive navigation adjustments */
+@media (max-width: 992px) {
+    /* Hide desktop navigation on mobile - handled in app.blade.php */
+    nav.z-depth-1.white .nav-wrapper .right {
+        display: none !important;
+    }
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 }

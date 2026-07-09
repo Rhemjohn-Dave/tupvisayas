@@ -14,8 +14,15 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('position');
+<<<<<<< HEAD
             $table->string('photo')->nullable();
             $table->integer('order')->default(0);
+=======
+            $table->string('photo')->nullable(); // path to photo
+            $table->text('bio')->nullable();
+            $table->integer('order')->default(0); // for sorting from highest to lowest
+            $table->json('social_links')->nullable(); // optional: for future social/profile links
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             $table->timestamps();
         });
     }

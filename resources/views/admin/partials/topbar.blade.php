@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 {{-- Sticky top bar: mobile menu, search (posts), notifications, profile --}}
+=======
+{{-- Sticky top bar: mobile menu, search (posts), notifications, theme, profile --}}
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 <header class="admin-topbar">
     <div class="admin-topbar__left">
         {{-- Desktop: narrow/widen sidebar. Mobile: open/close drawer (same control). --}}
@@ -6,8 +10,11 @@
             <i class="material-icons" aria-hidden="true">menu</i>
         </button>
 
+<<<<<<< HEAD
         <p class="admin-topbar__title">TUP Visayas Admin</p>
 
+=======
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         <form class="admin-topbar-search" action="{{ route('admin.dashboard') }}" method="get" role="search">
             <label class="visually-hidden" for="adminGlobalSearch">Search posts</label>
             <span class="admin-topbar-search__icon" aria-hidden="true"><i class="material-icons">search</i></span>
@@ -36,6 +43,14 @@
             </div>
         </details>
 
+<<<<<<< HEAD
+=======
+        <button type="button" class="admin-icon-btn" id="adminThemeToggle" aria-label="Toggle dark mode" title="Toggle theme">
+            <i class="material-icons admin-theme-icon-light" aria-hidden="true">dark_mode</i>
+            <i class="material-icons admin-theme-icon-dark" aria-hidden="true">light_mode</i>
+        </button>
+
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         <details class="admin-disclosure admin-disclosure--profile">
             <summary class="admin-profile-trigger" aria-label="Account menu">
                 <span class="admin-avatar" aria-hidden="true">{{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}</span>

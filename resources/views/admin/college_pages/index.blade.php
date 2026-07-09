@@ -12,21 +12,28 @@
         </x-slot>
     </x-admin.page-header>
 
+<<<<<<< HEAD
     <h2 class="site-section-title admin-section-title">All colleges</h2>
 
+=======
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     <div class="admin-table-card">
         <div class="admin-table-scroll">
             <table class="admin-table">
                 <thead>
                     <tr>
                         <th scope="col">College</th>
+<<<<<<< HEAD
                         <th scope="col">Courses</th>
+=======
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <th scope="col" class="admin-table__actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($colleges as $college)
                         <tr>
+<<<<<<< HEAD
                             <td class="admin-table__cell-title" title="{{ $college->college }}">{{ $college->college }}</td>
                             <td>{{ $college->courses_count }}</td>
                             <td class="admin-table__actions">
@@ -48,6 +55,18 @@
                                         @method('DELETE')
                                         <button type="submit" class="admin-btn admin-btn--icon admin-btn--danger"
                                             title="Delete" aria-label="Delete">
+=======
+                            <td class="admin-table__cell-title" style="text-transform:uppercase;">{{ strtoupper($college->college) }}</td>
+                            <td class="admin-table__actions">
+                                <div class="admin-actions-row">
+                                    <a href="{{ route('admin.college-pages.edit', $college->id) }}" class="admin-btn admin-btn--icon admin-btn--secondary" title="Edit" aria-label="Edit">
+                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                    </a>
+                                    <form action="{{ route('admin.college-pages.destroy', $college->id) }}" method="POST" class="admin-inline-form" onsubmit="return confirm('Delete this college page?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="admin-btn admin-btn--icon admin-btn--danger" title="Delete" aria-label="Delete">
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                                             <i class="material-icons" aria-hidden="true">delete</i>
                                         </button>
                                     </form>
@@ -56,7 +75,11 @@
                         </tr>
                     @empty
                         <tr>
+<<<<<<< HEAD
                             <td colspan="3" class="admin-table__empty">No college pages found.</td>
+=======
+                            <td colspan="2" class="admin-table__empty">No college pages found.</td>
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         </tr>
                     @endforelse
                 </tbody>

@@ -44,9 +44,13 @@ class FacultyController extends Controller
         }
         $faculty = Faculty::create($data);
         $collegeId = $faculty->department->college_page_id;
+<<<<<<< HEAD
 
         return redirect()
             ->to(route('admin.college-pages.edit', $collegeId) . '?tab=admin-college-dept')
+=======
+        return redirect()->route('admin.college-pages.edit', $collegeId)
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             ->with('success', 'Faculty added successfully.');
     }
 
@@ -87,9 +91,13 @@ class FacultyController extends Controller
         }
         $faculty->update($data);
         $collegeId = $faculty->department->college_page_id;
+<<<<<<< HEAD
 
         return redirect()
             ->to(route('admin.college-pages.edit', $collegeId) . '?tab=admin-college-dept')
+=======
+        return redirect()->route('admin.college-pages.edit', $collegeId)
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             ->with('success', 'Faculty updated successfully.');
     }
 
@@ -104,9 +112,13 @@ class FacultyController extends Controller
             Storage::disk('public')->delete($faculty->photo);
         }
         $faculty->delete();
+<<<<<<< HEAD
 
         return redirect()
             ->to(route('admin.college-pages.edit', $collegeId) . '?tab=admin-college-dept')
+=======
+        return redirect()->route('admin.college-pages.edit', $collegeId)
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             ->with('success', 'Faculty deleted successfully.');
     }
 }

@@ -42,7 +42,11 @@
                 @enderror
             </div>
             <button type="submit" class="btn orange">Update Image</button>
+<<<<<<< HEAD
             <a href="{{ route('admin.carousel-images.index') }}" class="btn">Cancel</a>
+=======
+            <a href="{{ route('admin.carousel-images.index') }}" class="btn red white-text">Cancel</a>
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         </form>
     </div>
 @endsection

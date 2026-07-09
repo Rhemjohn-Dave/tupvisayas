@@ -12,7 +12,11 @@
                     <span class="red-text">{{ $message }}</span>
                 @enderror
             </div>
+<<<<<<< HEAD
             <button type="submit" class="btn">Add Category</button>
+=======
+            <button type="submit" class="btn red">Add Category</button>
+>>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             <a href="{{ route('admin.categories.index') }}" class="btn grey" style="color:#fff !important;">Cancel</a>
         </form>
     </div>

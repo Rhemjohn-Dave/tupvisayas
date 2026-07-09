@@ -3924,6 +3924,7 @@ body {
 .procurement-pagination .pagination {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-2);
     list-style: none;
     margin: 0;
@@ -3933,22 +3934,29 @@ body {
 .site-pagination .pagination li,
 .procurement-pagination .pagination li {
     margin: 0;
+    background: transparent !important;
+    float: none;
 }
 
 .site-pagination .pagination a,
 .site-pagination .pagination span,
 .procurement-pagination .pagination a,
 .procurement-pagination .pagination span {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-width: 2.25rem;
+    min-height: 2.25rem;
     padding: var(--space-2) var(--space-3);
     font-size: var(--text-sm);
     font-weight: 600;
+    line-height: 1;
     text-align: center;
     color: var(--color-brand);
     text-decoration: none;
     border: 1px solid var(--color-border);
     background: var(--color-surface);
+    box-sizing: border-box;
 }
 
 .site-pagination .pagination li.active span,

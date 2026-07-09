@@ -202,9 +202,7 @@
                 </div>
 
                 @if ($posts->hasPages())
-                    <nav class="procurement-pagination" aria-label="TIPTTO posts pagination">
-                        {{ $posts->links() }}
-                    </nav>
+                    {{ $posts->links('pagination.public') }}
                 @endif
             @else
                 <p class="adre-empty">No technologies are listed at this time. Please check back later.</p>

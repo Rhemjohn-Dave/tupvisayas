@@ -3909,15 +3909,18 @@ body {
     background: var(--color-surface);
 }
 
+.site-pagination,
 .procurement-pagination {
     margin-top: var(--space-6);
 }
 
+.site-pagination,
 .procurement-pagination nav {
     display: flex;
     justify-content: center;
 }
 
+.site-pagination .pagination,
 .procurement-pagination .pagination {
     display: flex;
     flex-wrap: wrap;
@@ -3927,10 +3930,13 @@ body {
     padding: 0;
 }
 
+.site-pagination .pagination li,
 .procurement-pagination .pagination li {
     margin: 0;
 }
 
+.site-pagination .pagination a,
+.site-pagination .pagination span,
 .procurement-pagination .pagination a,
 .procurement-pagination .pagination span {
     display: inline-block;
@@ -3945,12 +3951,14 @@ body {
     background: var(--color-surface);
 }
 
+.site-pagination .pagination li.active span,
 .procurement-pagination .pagination li.active span {
     background: var(--color-brand);
     color: var(--color-on-brand);
     border-color: var(--color-brand);
 }
 
+.site-pagination .pagination li.disabled span,
 .procurement-pagination .pagination li.disabled span {
     color: var(--color-text-muted);
 }

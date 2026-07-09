@@ -115,9 +115,7 @@
         </div>
 
         @if ($procurements->hasPages())
-            <nav class="procurement-pagination" aria-label="Pagination">
-                {{ $procurements->links() }}
-            </nav>
+            {{ $procurements->links('pagination.public') }}
         @endif
     </div>
 @endsection

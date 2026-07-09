@@ -38,7 +38,7 @@
             <div class="admin-form__group">
                 <label class="admin-label" for="photo">Photo</label>
                 <input class="admin-file" type="file" name="photo" id="photo" accept="image/*">
-                <p class="admin-form__hint">Optional. JPEG or PNG, up to 4 MB.</p>
+                <x-admin.image-spec type="faculty" />
                 @error('photo')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

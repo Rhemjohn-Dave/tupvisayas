@@ -33,6 +33,7 @@
                             style="width:150px; height:150px; object-fit:cover; border-radius:8px;">
                     </div>
                 @endif
+                <x-admin.image-spec type="official" />
             </div>
             <button type="submit" class="btn orange">Update Official</button>
             <a href="{{ route('admin.officials.index') }}" class="btn grey">Cancel</a>

@@ -25,6 +25,7 @@
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
                 </div>
+                <x-admin.image-spec type="official" />
             </div>
             <button type="submit" class="btn">Create Official</button>
             <a href="{{ route('admin.officials.index') }}" class="btn grey">Cancel</a>

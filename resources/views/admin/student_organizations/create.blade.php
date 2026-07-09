@@ -30,7 +30,7 @@
             <div class="admin-form__group">
                 <label class="admin-label" for="logo">Logo</label>
                 <input class="admin-file" type="file" name="logo" id="logo" accept="image/*">
-                <p class="admin-form__hint">Optional. Shown on the public college page.</p>
+                <x-admin.image-spec type="org-logo" />
                 @error('logo')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

@@ -23,6 +23,7 @@
             <div class="admin-form__group">
                 <label class="admin-label" for="cover_photo">Cover photo</label>
                 <input class="admin-file" type="file" name="cover_photo" id="cover_photo" accept="image/*">
+                <x-admin.image-spec type="college-cover" />
                 @error('cover_photo')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

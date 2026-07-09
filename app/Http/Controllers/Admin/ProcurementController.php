@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Procurement;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ProcurementController extends Controller
 {
@@ -59,6 +60,8 @@ class ProcurementController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData($request, null);
+        $data['file_url'] = null;
+
         if ($request->hasFile('file')) {
             $path = $request->file('file')->store('procurements', 'public');
             $data['file_url'] = Storage::url($path);
@@ -157,7 +160,9 @@ class ProcurementController extends Controller
             $hasNewSingle = $request->hasFile('po_file');
             $hasExisting = $existing && ((is_array($existing->po_files) && count($existing->po_files) > 0) || !empty($existing->po_file_url));
             if (!$hasNewMultiple && !$hasNewSingle && !$hasExisting) {
-                abort(422, 'At least one Purchase Order file is required for awarded procurements.');
+                throw ValidationException::withMessages([
+                    'po_files' => 'At least one purchase order file is required when status is Awarded.',
+                ]);
             }
         }
 

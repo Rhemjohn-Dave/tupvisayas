@@ -49,6 +49,7 @@
                 <input class="admin-file" type="file" name="featured_image" id="featured_image" accept="image/*">
                 <img id="featuredImagePreview" class="admin-preview-img" src="#" alt="Featured image preview"
                     style="display:none;margin-top:var(--admin-space-3);max-width:320px;">
+                <x-admin.image-spec type="tiptto-featured" />
                 @error('featured_image')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

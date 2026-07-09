@@ -35,6 +35,7 @@
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Upload an image (optional)">
                 </div>
+                <x-admin.image-spec type="article" />
                 @if($announcement->picture)
                     <div style="margin-top: 10px;">
                         <p><strong>Current Image:</strong></p>

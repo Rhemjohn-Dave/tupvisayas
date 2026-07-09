@@ -1614,6 +1614,19 @@ body.admin .admin-form-card .btn:not(.grey):not(.btn-flat) {
     box-sizing: border-box;
 }
 
+body.admin select.admin-select,
+body.admin select.browser-default {
+    display: block !important;
+    position: relative;
+    z-index: 1;
+    min-height: 44px;
+    cursor: pointer;
+    pointer-events: auto;
+    appearance: auto;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+}
+
 .admin-input:focus,
 .admin-textarea:focus,
 .admin-select:focus {
@@ -1636,6 +1649,68 @@ body.admin .admin-form-card .btn:not(.grey):not(.btn-flat) {
     margin-top: var(--admin-space-2);
     font-size: 0.8125rem;
     color: var(--color-text-muted);
+}
+
+.admin-image-spec {
+    margin-top: var(--admin-space-3);
+    padding: var(--admin-space-4);
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-brand);
+    border-radius: var(--radius-sm);
+}
+
+.admin-image-spec__title {
+    margin: 0 0 var(--admin-space-3);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-brand);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.admin-image-spec__list {
+    margin: 0;
+    display: grid;
+    gap: var(--admin-space-2);
+}
+
+.admin-image-spec__item {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: var(--admin-space-2);
+    font-size: 0.8125rem;
+    line-height: 1.45;
+}
+
+.admin-image-spec__item dt {
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.admin-image-spec__item dd {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+.admin-image-spec__tips {
+    margin: var(--admin-space-3) 0 0;
+    padding-left: 1.1rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.admin-image-spec__tips li + li {
+    margin-top: var(--admin-space-1);
+}
+
+@media (max-width: 520px) {
+    .admin-image-spec__item {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
 }
 
 .admin-form__error {
@@ -1713,6 +1788,48 @@ body.admin .admin-form-card .btn:not(.grey):not(.btn-flat) {
 .admin-dept-rename__row .admin-input {
     flex: 1 1 200px;
     min-width: 0;
+}
+
+.admin-form__group--split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--admin-space-4);
+}
+
+@media (max-width: 640px) {
+    .admin-form__group--split {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-po-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--admin-space-2);
+}
+
+.admin-po-list__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--admin-space-3);
+    padding: var(--admin-space-3) var(--admin-space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-alt);
+}
+
+.admin-po-list__item a {
+    font-weight: 600;
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.admin-po-list__item a:hover {
+    text-decoration: underline;
 }
 
 /* ——— Loading skeleton (optional) ——— */

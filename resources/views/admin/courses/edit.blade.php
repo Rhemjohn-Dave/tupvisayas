@@ -42,7 +42,7 @@
                     <img class="admin-preview-img" src="{{ asset('storage/' . $course->logo) }}" alt="Current logo"
                         style="width:120px;height:120px;object-fit:contain;background:var(--color-surface-alt);">
                 @endif
-                <p class="admin-form__hint">Optional. Shown on the public college page.</p>
+                <x-admin.image-spec type="course-logo" />
                 @error('logo')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

@@ -36,6 +36,7 @@
                         alt="{{ $organization->name }} logo"
                         style="width:120px;height:120px;object-fit:contain;background:var(--color-surface-alt);">
                 @endif
+                <x-admin.image-spec type="org-logo" />
                 @error('logo')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

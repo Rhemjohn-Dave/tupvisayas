@@ -40,6 +40,7 @@
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Upload an image (optional)">
                 </div>
+                <x-admin.image-spec type="article" />
             </div>
             <button type="submit" class="btn waves-effect waves-light" style="background-color:#C41E3A;">Create
                 Post</button>

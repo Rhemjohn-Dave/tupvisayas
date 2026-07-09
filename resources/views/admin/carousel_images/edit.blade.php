@@ -25,6 +25,7 @@
                 @error('image_path')
                     <span class="red-text">{{ $message }}</span>
                 @enderror
+                <x-admin.image-spec type="carousel" />
             </div>
             <div class="input-field">
                 <input type="text" name="caption" id="caption" value="{{ old('caption', $carouselImage->caption) }}">

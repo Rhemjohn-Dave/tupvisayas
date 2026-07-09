@@ -20,8 +20,8 @@ class ProcurementController extends Controller
             $query->where('category', $category);
         }
         $procurements = $query->orderByDesc('posting_date')->paginate(10)->withQueryString();
-        $categories = Procurement::where('type', 'bid_opportunity')->select('category')->distinct()->pluck('category');
-        return view('procurement.bid-opportunities', compact('procurements', 'categories'));
+
+        return view('procurement.bid-opportunities', compact('procurements'));
     }
 
     public function philgepsPosting(Request $request)

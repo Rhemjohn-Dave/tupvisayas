@@ -71,7 +71,7 @@
                                 <img class="admin-preview-img" src="{{ asset('storage/' . $college->cover_photo) }}"
                                     alt="Current cover photo">
                             @endif
-                            <p class="admin-form__hint">Optional banner at the top of the public college page.</p>
+                            <x-admin.image-spec type="college-cover" />
                             @error('cover_photo')
                                 <span class="admin-form__error">{{ $message }}</span>
                             @enderror

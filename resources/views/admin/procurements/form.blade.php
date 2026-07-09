@@ -1,150 +1,203 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin - Procurement')
+@section('title', $procurement->id ? 'Admin — Edit procurement' : 'Admin — Add procurement')
 
 @section('admin_content')
-<div class="section" style="max-width: 900px;">
-    <h5 class="red-text text-darken-2">{{ $procurement->id ? 'Edit Procurement' : 'Add Procurement' }}</h5>
+    @php
+        $postingDate = old('posting_date', $procurement->posting_date);
+        $closingDate = old('closing_date', $procurement->closing_date);
 
-    @if ($errors->any())
-        <div class="card-panel red lighten-4 red-text text-darken-4">
-            <ul style="margin:0;">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+        if ($postingDate && !$postingDate instanceof \Illuminate\Support\Carbon) {
+            $postingDate = \Illuminate\Support\Carbon::parse($postingDate)->format('Y-m-d');
+        } elseif ($postingDate instanceof \Illuminate\Support\Carbon) {
+            $postingDate = $postingDate->format('Y-m-d');
+        }
 
-    <form
-        action="{{ $procurement->id ? route('admin.procurements.update', $procurement->id) : route('admin.procurements.store') }}"
-        method="POST" enctype="multipart/form-data">
-        @csrf
-        @if($procurement->id)
-            @method('PUT')
-        @endif
+        if ($closingDate && !$closingDate instanceof \Illuminate\Support\Carbon) {
+            $closingDate = \Illuminate\Support\Carbon::parse($closingDate)->format('Y-m-d');
+        } elseif ($closingDate instanceof \Illuminate\Support\Carbon) {
+            $closingDate = $closingDate->format('Y-m-d');
+        }
 
-        <div class="input-field">
-            <input id="title" name="title" type="text" value="{{ old('title', $procurement->title) }}" required>
-            <label for="title">Title</label>
-        </div>
+        $categories = ['Goods', 'Services', 'Infrastructure', 'Consulting'];
+        $selectedType = old('type', $procurement->type ?: 'bid_opportunity');
+        $selectedCategory = old('category', $procurement->category ?: 'Goods');
+        $selectedStatus = old('status', $procurement->status ?? 'pending');
+        $existingPoFiles = is_array($procurement->po_files)
+            ? $procurement->po_files
+            : (empty($procurement->po_file_url) ? [] : [$procurement->po_file_url]);
+    @endphp
 
-        <div class="input-field">
-            <input id="reference_no" name="reference_no" type="text"
-                value="{{ old('reference_no', $procurement->reference_no) }}" required>
-            <label for="reference_no">Reference No.</label>
-        </div>
+    <x-admin.page-header :title="$procurement->id ? 'Edit procurement' : 'Add procurement'"
+        subtitle="Bid opportunities and PhilGEPS postings for the public site.">
+        <x-slot name="actions">
+            <a href="{{ route('admin.procurements.index') }}" class="admin-btn admin-btn--ghost">
+                <i class="material-icons" aria-hidden="true">arrow_back</i>
+                Back to procurement
+            </a>
+        </x-slot>
+    </x-admin.page-header>
 
-        <div class="input-field">
-            <select name="category" required>
-                @php($categories = ['Goods', 'Services', 'Infrastructure', 'Consulting'])
-                <option value="" disabled {{ old('category', $procurement->category) ? '' : 'selected' }}>Choose
-                    category</option>
-                @foreach($categories as $cat)
-                    <option value="{{ $cat }}" {{ old('category', $procurement->category) === $cat ? 'selected' : '' }}>
-                        {{ $cat }}
-                    </option>
-                @endforeach
-            </select>
-            <label>Category</label>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s12 m6">
-                <input id="posting_date" name="posting_date" type="text" class="datepicker"
-                    value="{{ old('posting_date', $procurement->posting_date) }}" required>
-                <label for="posting_date">Posting Date</label>
-            </div>
-            <div class="input-field col s12 m6">
-                <input id="closing_date" name="closing_date" type="text" class="datepicker"
-                    value="{{ old('closing_date', $procurement->closing_date) }}">
-                <label for="closing_date">Closing Date</label>
-            </div>
-        </div>
-
-        <div class="file-field input-field">
-            <div class="btn">
-                <span>File</span>
-                <input type="file" name="file">
-            </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" placeholder="Upload procurement file">
-            </div>
-            @if($procurement->file_url)
-                <p style="margin-top:8px;">Current: <a href="{{ $procurement->file_url }}" target="_blank">Download</a>
-                </p>
+    <div class="admin-form-card admin-form">
+        <form method="POST"
+            action="{{ $procurement->id ? route('admin.procurements.update', $procurement->id) : route('admin.procurements.store') }}"
+            enctype="multipart/form-data">
+            @csrf
+            @if ($procurement->id)
+                @method('PUT')
             @endif
-        </div>
 
-        <div class="input-field">
-            <select name="status" required>
-                <option value="pending" {{ old('status', $procurement->status ?? 'pending') === 'pending' ? 'selected' : '' }}>Pending</option>
-                <option value="awarded" {{ old('status', $procurement->status ?? 'pending') === 'awarded' ? 'selected' : '' }}>Awarded</option>
-            </select>
-            <label>Status</label>
-        </div>
-
-        <div class="file-field input-field">
-            <div class="btn">
-                <span>Purchase Orders</span>
-                <input type="file" name="po_files[]" multiple>
+            <div class="admin-form__group">
+                <label class="admin-label" for="title">Title</label>
+                <input class="admin-input" type="text" name="title" id="title"
+                    value="{{ old('title', $procurement->title) }}" required>
+                @error('title')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" placeholder="Upload one or more PO files">
-            </div>
-        </div>
 
-        @php($existingPoFiles = is_array($procurement->po_files) ? $procurement->po_files : (empty($procurement->po_file_url) ? [] : [$procurement->po_file_url]))
-        @if(!empty($existingPoFiles))
-            <div style="margin-top:8px;">
-                <span>Existing PO files:</span>
-                <ul style="margin:6px 0 0 16px;">
-                    @foreach($existingPoFiles as $idx => $poUrl)
-                        <li style="display:flex;align-items:center;gap:8px;">
-                            <a href="{{ $poUrl }}" target="_blank">PO {{ $idx + 1 }}</a>
-                            <button type="button" class="btn-flat red-text" title="Remove"
-                                onclick="deletePoFile({{ $procurement->id }}, {{ $idx }}, event)">
-                                <i class="material-icons">close</i>
-                            </button>
-                        </li>
+            <div class="admin-form__group">
+                <label class="admin-label" for="reference_no">Reference number</label>
+                <input class="admin-input" type="text" name="reference_no" id="reference_no"
+                    value="{{ old('reference_no', $procurement->reference_no) }}" required>
+                @error('reference_no')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="type">Type</label>
+                <select class="admin-select browser-default" name="type" id="type" required>
+                    <option value="bid_opportunity" {{ $selectedType === 'bid_opportunity' ? 'selected' : '' }}>
+                        Bid opportunity
+                    </option>
+                    <option value="philgeps_posting" {{ $selectedType === 'philgeps_posting' ? 'selected' : '' }}>
+                        PhilGEPS posting
+                    </option>
+                </select>
+                @error('type')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="category">Category</label>
+                <select class="admin-select browser-default" name="category" id="category" required>
+                    @foreach ($categories as $cat)
+                        <option value="{{ $cat }}" {{ $selectedCategory === $cat ? 'selected' : '' }}>
+                            {{ $cat }}
+                        </option>
                     @endforeach
-                </ul>
+                </select>
+                @error('category')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-        @endif
 
-        <div class="input-field">
-            <select name="type" required>
-                <option value="" disabled {{ old('type', $procurement->type) ? '' : 'selected' }}>Choose type
-                </option>
-                <option value="bid_opportunity" {{ old('type', $procurement->type) === 'bid_opportunity' ? 'selected' : '' }}>Bid Opportunity</option>
-                <option value="philgeps_posting" {{ old('type', $procurement->type) === 'philgeps_posting' ? 'selected' : '' }}>PhilGEPS Posting</option>
-            </select>
-            <label>Type</label>
-        </div>
+            <div class="admin-form__group admin-form__group--split">
+                <div>
+                    <label class="admin-label" for="posting_date">Posting date</label>
+                    <input class="admin-input" type="date" name="posting_date" id="posting_date"
+                        value="{{ $postingDate }}" required>
+                    @error('posting_date')
+                        <span class="admin-form__error">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <label class="admin-label" for="closing_date">Closing date</label>
+                    <input class="admin-input" type="date" name="closing_date" id="closing_date"
+                        value="{{ $closingDate }}">
+                    <p class="admin-form__hint">Optional for open postings.</p>
+                    @error('closing_date')
+                        <span class="admin-form__error">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
 
-        <div class="section right-align">
-            <a href="{{ route('admin.procurements.index') }}" class="btn-flat">Cancel</a>
-            <button type="submit" class="btn waves-effect waves-light red">Save</button>
-        </div>
-    </form>
-</div>
-</div>
+            <div class="admin-form__group">
+                <label class="admin-label" for="status">Status</label>
+                <select class="admin-select browser-default" name="status" id="status" required>
+                    <option value="pending" {{ $selectedStatus === 'pending' ? 'selected' : '' }}>
+                        Pending
+                    </option>
+                    <option value="awarded" {{ $selectedStatus === 'awarded' ? 'selected' : '' }}>
+                        Awarded
+                    </option>
+                </select>
+                <p class="admin-form__hint">Awarded records require at least one purchase order file.</p>
+                @error('status')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="file">Procurement document</label>
+                <input class="admin-file" type="file" name="file" id="file"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx">
+                <p class="admin-form__hint">Optional for pending postings. PDF, Word, Excel, or PowerPoint · max 10 MB.</p>
+                @if ($procurement->file_url)
+                    <p class="admin-form__hint">
+                        Current file:
+                        <a href="{{ $procurement->file_url }}" target="_blank" rel="noopener noreferrer">Download</a>
+                    </p>
+                @endif
+                @error('file')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="po_files">Purchase order files</label>
+                <input class="admin-file" type="file" name="po_files[]" id="po_files" multiple
+                    accept=".pdf,.doc,.docx,.xls,.xlsx">
+                <p class="admin-form__hint">Required when status is Awarded. You can select multiple files.</p>
+                @error('po_files')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+                @error('po_files.*')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+                @error('po_file')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            @if (!empty($existingPoFiles) && $procurement->id)
+                <div class="admin-form__group">
+                    <span class="admin-label">Existing purchase orders</span>
+                    <ul class="admin-po-list">
+                        @foreach ($existingPoFiles as $idx => $poUrl)
+                            <li class="admin-po-list__item">
+                                <a href="{{ $poUrl }}" target="_blank" rel="noopener noreferrer">PO {{ $idx + 1 }}</a>
+                                <button type="button" class="admin-btn admin-btn--icon admin-btn--danger"
+                                    title="Remove PO file" aria-label="Remove PO file"
+                                    onclick="deletePoFile({{ $procurement->id }}, {{ $idx }}, event)">
+                                    <i class="material-icons" aria-hidden="true">delete</i>
+                                </button>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <div class="admin-form__actions">
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i class="material-icons" aria-hidden="true">save</i>
+                    {{ $procurement->id ? 'Save changes' : 'Create record' }}
+                </button>
+                <a href="{{ route('admin.procurements.index') }}" class="admin-btn admin-btn--ghost">Cancel</a>
+            </div>
+        </form>
+    </div>
 @endsection
 
 @section('admin_scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize Materialize form elements
-            var selects = document.querySelectorAll('select');
-            M.FormSelect.init(selects);
-            var pickers = document.querySelectorAll('.datepicker');
-            M.Datepicker.init(pickers, { format: 'yyyy-mm-dd' });
-        });
-
         function deletePoFile(id, index, evt) {
             evt.preventDefault();
             evt.stopPropagation();
             if (!confirm('Delete this PO file?')) return;
+
             fetch(`{{ url('admin/procurements') }}/${id}/po`, {
                 method: 'POST',
                 headers: {
@@ -157,7 +210,7 @@
                     _method: 'DELETE',
                     index: String(index),
                 })
-            }).then(() => {
+            }).then(function() {
                 location.reload();
             });
         }

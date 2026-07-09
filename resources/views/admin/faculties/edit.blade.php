@@ -43,7 +43,7 @@
                     <img class="admin-preview-img" src="{{ asset('storage/' . $faculty->photo) }}" alt="Current photo"
                         style="width:120px;height:120px;object-fit:cover;">
                 @endif
-                <p class="admin-form__hint">Upload a new image to replace the current photo.</p>
+                <x-admin.image-spec type="faculty" />
                 @error('photo')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

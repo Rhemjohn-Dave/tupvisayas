@@ -33,7 +33,7 @@ a.btn-small,
 :is(.site-main.container, body.admin .admin-content)
     a:not(.btn):not(.btn-large):not(.btn-small):not(.site-cta):not(
         .home-card
-    ):not(.home-quick a):not(.site-btn-share):not(.grey):not(.black-text) {
+    ):not(.home-quick a):not(.site-btn-share):not(.director-filters__link):not(.grey):not(.black-text) {
     color: var(--color-brand, #9e1b32);
 }
 

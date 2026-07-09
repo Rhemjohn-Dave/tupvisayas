@@ -90,7 +90,7 @@
                         <ul id="desk-updates" class="site-nav__panel" hidden>
                             <li><a href="{{ route('news_events') }}">News &amp; Events</a></li>
                             <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
-                            <li><a href="{{ route('officials') }}">Leadership</a></li>
+                            <li><a href="{{ route('directors.corner') }}">Director's Corner</a></li>
                         </ul>
                     </li>
                     @if ($showProcurement)
@@ -123,7 +123,7 @@
                                     <h3>Administration</h3>
                                     <ul>
                                         <li><a href="{{ route('officials') }}">Board of Regents</a></li>
-                                        <li><a href="{{ route('officials') }}">Office of the Director</a></li>
+                                        <li><a href="{{ route('directors.corner') }}">Office of the Director</a></li>
                                         <li><a href="{{ route('adre') }}">Assistant Director for Research &amp; Extension</a></li>
                                     </ul>
                                 </div>
@@ -230,7 +230,7 @@
                 <ul class="site-drawer__sub">
                     <li><a href="{{ route('news_events') }}">News &amp; Events</a></li>
                     <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
-                    <li><a href="{{ route('officials') }}">Leadership</a></li>
+                    <li><a href="{{ route('directors.corner') }}">Director's Corner</a></li>
                 </ul>
             </details>
             @if ($showProcurement)
@@ -246,7 +246,7 @@
             <details>
                 <summary>Resources &amp; Offices</summary>
                 <ul class="site-drawer__sub">
-                    <li><a href="{{ route('officials') }}">Office of the Director</a></li>
+                    <li><a href="{{ route('directors.corner') }}">Office of the Director</a></li>
                     <li><a href="{{ route('adre') }}">Assistant Director for Research &amp; Extension</a></li>
                     <li><a href="{{ route('technology') }}">University IT Center</a></li>
                     <li><a href="{{ route('student_services') }}">Student Services</a></li>

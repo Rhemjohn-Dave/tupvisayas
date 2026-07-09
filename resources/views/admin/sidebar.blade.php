@@ -3,7 +3,8 @@
     $openContent = request()->routeIs('admin.dashboard')
         || request()->routeIs('admin.categories.*')
         || request()->routeIs('admin.carousel-images.*')
-        || request()->routeIs('admin.tiptto_posts.*');
+        || request()->routeIs('admin.tiptto_posts.*')
+        || request()->routeIs('admin.director_posts.*');
 
     $openManagement = request()->routeIs('admin.users.*')
         || request()->routeIs('admin.officials.*');
@@ -52,6 +53,11 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
             <li>
                 <x-admin.sidebar-nav-link href="{{ route('admin.tiptto_posts.index') }}" label="TIPTTO" icon="science"
                     :active="request()->routeIs('admin.tiptto_posts.*')" class="admin-sidebar__link--nested" />
+            </li>
+            <li>
+                <x-admin.sidebar-nav-link href="{{ route('admin.director_posts.index') }}" label="Director's Corner"
+                    icon="record_voice_over" :active="request()->routeIs('admin.director_posts.*')"
+                    class="admin-sidebar__link--nested" />
             </li>
         </x-admin.sidebar-collapsible>
 

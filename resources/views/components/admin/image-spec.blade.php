@@ -42,6 +42,16 @@
                 'Center the product or subject; wide images are cropped.',
             ],
         ],
+        'director-post-featured' => [
+            'ratio' => '4:3 (listings), 16:9 (post page)',
+            'size' => '800 × 600 px for listings · 1600 × 900 px for the post header',
+            'format' => 'JPG, PNG, or WebP',
+            'max' => '4 MB',
+            'tips' => [
+                'Shown on the Director\'s Corner list and the article page.',
+                'Landscape photos work best for news and blog posts.',
+            ],
+        ],
         'official' => [
             'ratio' => '1:1 square',
             'size' => '600 × 600 px',

@@ -43,6 +43,8 @@ Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
 Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');
 Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');
+Route::get('/directors-corner', [App\Http\Controllers\DirectorCornerController::class, 'index'])->name('directors.corner');
+Route::get('/directors-corner/posts/{slug}', [App\Http\Controllers\DirectorCornerController::class, 'show'])->name('directors.corner.post.show');
 Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index'])->name('news_events');
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
@@ -98,6 +100,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // TIPTTO Posts Management
     Route::resource('tiptto_posts', App\Http\Controllers\Admin\TIPTTOPostController::class);
+
+    // Director's Corner posts
+    Route::resource('director_posts', App\Http\Controllers\Admin\DirectorPostController::class)->except(['show']);
 });
 
 require __DIR__ . '/auth.php';

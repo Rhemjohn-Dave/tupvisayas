@@ -17,13 +17,6 @@
                 <label for="order">Order</label>
                 <input type="number" name="order" id="order" value="{{ old('order', 0) }}">
             </div>
-<<<<<<< HEAD
-=======
-            <div class="input-field">
-                <label for="bio">Bio</label>
-                <textarea name="bio" id="bio" class="materialize-textarea">{{ old('bio') }}</textarea>
-            </div>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Photo</span>
@@ -33,26 +26,8 @@
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-<<<<<<< HEAD
             <button type="submit" class="btn">Create Official</button>
             <a href="{{ route('admin.officials.index') }}" class="btn grey">Cancel</a>
         </form>
     </div>
 @endsection
-=======
-            <div class="input-field">
-                <label for="social_links[facebook]">Facebook</label>
-                <input type="url" name="social_links[facebook]" id="social_links[facebook]"
-                    value="{{ old('social_links.facebook') }}">
-            </div>
-            <div class="input-field">
-                <label for="social_links[linkedin]">LinkedIn</label>
-                <input type="url" name="social_links[linkedin]" id="social_links[linkedin]"
-                    value="{{ old('social_links.linkedin') }}">
-            </div>
-            <button type="submit" class="btn red darken-2">Create Official</button>
-            <a href="{{ route('admin.officials.index') }}" class="btn grey">Cancel</a>
-        </form>
-    </div>
-@endsection
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff

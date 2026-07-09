@@ -19,13 +19,6 @@
                 <label for="order">Order</label>
                 <input type="number" name="order" id="order" value="{{ old('order', $official->order) }}">
             </div>
-<<<<<<< HEAD
-=======
-            <div class="input-field">
-                <label for="bio">Bio</label>
-                <textarea name="bio" id="bio" class="materialize-textarea">{{ old('bio', $official->bio) }}</textarea>
-            </div>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Photo</span>
@@ -34,36 +27,15 @@
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
                 </div>
-<<<<<<< HEAD
                 @if ($official->photo)
-=======
-                @if($official->photo)
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                     <div style="margin-top:10px;">
                         <img src="{{ asset('storage/' . $official->photo) }}" alt="Current Photo"
                             style="width:150px; height:150px; object-fit:cover; border-radius:8px;">
                     </div>
                 @endif
             </div>
-<<<<<<< HEAD
-=======
-            <div class="input-field">
-                <label for="social_links[facebook]">Facebook</label>
-                <input type="url" name="social_links[facebook]" id="social_links[facebook]"
-                    value="{{ old('social_links.facebook', optional(json_decode($official->social_links))->facebook) }}">
-            </div>
-            <div class="input-field">
-                <label for="social_links[linkedin]">LinkedIn</label>
-                <input type="url" name="social_links[linkedin]" id="social_links[linkedin]"
-                    value="{{ old('social_links.linkedin', optional(json_decode($official->social_links))->linkedin) }}">
-            </div>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             <button type="submit" class="btn orange">Update Official</button>
             <a href="{{ route('admin.officials.index') }}" class="btn grey">Cancel</a>
         </form>
     </div>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff

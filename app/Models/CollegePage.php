@@ -26,7 +26,6 @@ class CollegePage extends Model
     {
         return $this->hasMany(Department::class);
     }
-<<<<<<< HEAD
 
     public function studentOrganizations()
     {
@@ -34,6 +33,4 @@ class CollegePage extends Model
             ->orderBy('sort_order')
             ->orderBy('name');
     }
-=======
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 }

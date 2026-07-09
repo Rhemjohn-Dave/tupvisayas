@@ -4,11 +4,7 @@
 
 @section('content')
     <div class="section">
-<<<<<<< HEAD
         <h1 class="site-page-title">{{ $course->name }} accreditation</h1>
-=======
-        <h4 style="color:#C41E3A;font-weight:700;">{{ $course->name }} Accreditation</h4>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 
         @if(session('status'))
             <div class="card-panel green lighten-4 green-text text-darken-4">
@@ -20,11 +16,7 @@
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">Restricted Access</span>
-<<<<<<< HEAD
                     <p class="grey-text text-darken-1">
-=======
-                    <p class="grey-text text-darken-1" style="margin-bottom:1rem;">
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         Please enter the accreditation password to view the details for this program.
                     </p>
                     <form method="POST" action="{{ route('accreditation.course.verify', $course) }}">
@@ -53,11 +45,7 @@
                         <!-- <span class="card-title">Bachelor of Science in Mechanical Engineering Accreditation</span> -->
 
                         {{-- 1. Certification of Authenticity & Veracity --}}
-<<<<<<< HEAD
                         <h5 class="site-doc-heading">1. Certification of Authenticity &amp; Veracity</h5>
-=======
-                        <h5 style="margin-top:1.5rem;">1. Certification of Authenticity &amp; Veracity</h5>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 <a href="https://drive.google.com/file/d/1dWubuzL_c-eYBzQeQIfujEL3QWtmTzC6/view?usp=drive_link"
@@ -68,11 +56,7 @@
                         </ul>
 
                         {{-- 2. COPC --}}
-<<<<<<< HEAD
                         <h5 class="site-doc-heading">2. COPC</h5>
-=======
-                        <h5 style="margin-top:1.5rem;">2. COPC</h5>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 <a href="https://docs.google.com/document/d/1I5RnmY9aV78cvVOfRJyJOJsMGMlArDNN/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
@@ -83,11 +67,7 @@
                         </ul>
 
                         {{-- 3. Supporting Documents/Additional Documents --}}
-<<<<<<< HEAD
                         <h5 class="site-doc-heading">3. Supporting Documents/Additional Documents</h5>
-=======
-                        <h5 style="margin-top:1.5rem;">3. Supporting Documents/Additional Documents</h5>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 Community Service –
@@ -104,11 +84,7 @@
                             </li>
                             <li>
                                 Planning Process –
-<<<<<<< HEAD
                                 <ul class="browser-default site-list-tight">
-=======
-                                <ul class="browser-default" style="margin-top:0.5rem;">
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                                     <li>
                                         <a href="https://drive.google.com/file/d/1FfyWccqlLnbqNLLlfZMxsxCcmrAAw-0D/view?usp=drive_link"
                                             target="_blank" rel="noopener">
@@ -151,15 +127,9 @@
                         </ul>
 
                         {{-- 4. Mandatory Compliance Reports --}}
-<<<<<<< HEAD
                         <h5 class="site-doc-heading">4. Mandatory Compliance Reports</h5>
 
                         <h6 class="site-doc-subheading">Areas I–X</h6>
-=======
-                        <h5 style="margin-top:1.5rem;">4. Mandatory Compliance Reports</h5>
-
-                        <h6 style="margin-top:1rem;">Areas I–X</h6>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 Area I Compliance Reports Level IV Phase 2 –
@@ -233,11 +203,7 @@
                             </li>
                         </ul>
 
-<<<<<<< HEAD
                         <h6 class="site-doc-subheading">Special Areas</h6>
-=======
-                        <h6 style="margin-top:1rem;">Special Areas</h6>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 Community Service –
@@ -277,11 +243,7 @@
                         </ul>
 
                         {{-- 5. Narrative Profiles --}}
-<<<<<<< HEAD
                         <h5 class="site-doc-heading">5. Narrative Profiles</h5>
-=======
-                        <h5 style="margin-top:1.5rem;">5. Narrative Profiles</h5>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 Community Service –
@@ -313,11 +275,7 @@
                             </li>
                             <li>
                                 Teaching and Learning –
-<<<<<<< HEAD
                                 <ul class="browser-default site-list-tight">
-=======
-                                <ul class="browser-default" style="margin-top:0.5rem;">
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                                     <li>
                                         <a href="https://docs.google.com/document/d/1Yu_SoC75Z8XnGacgHLHdnotVp4yG4lnc/edit?usp=drive_link&ouid=118193976169173204719&rtpof=true&sd=true"
                                             target="_blank" rel="noopener">
@@ -341,11 +299,7 @@
                         </ul>
 
                         {{-- 6. Technical Review and Board Action --}}
-<<<<<<< HEAD
                         <h5 class="site-doc-heading">6. Technical Review and Board Action</h5>
-=======
-                        <h5 style="margin-top:1.5rem;">6. Technical Review and Board Action</h5>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 Level III PHASE 2 –
@@ -370,11 +324,7 @@
                             </li>
                         </ul>
                         {{-- 7. Working Checklist --}}
-<<<<<<< HEAD
                         <h5 class="site-doc-heading">7. Working Checklist</h5>
-=======
-                        <h5 style="margin-top:1.5rem;">7. Working Checklist</h5>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                         <ul class="browser-default">
                             <li>
                                 Working Checklist and Accreditators Reports– <a
@@ -389,11 +339,7 @@
                 <div class="card">
                     <div class="card-content">
                         <span class="card-title">Accreditation Information</span>
-<<<<<<< HEAD
                         <p class="grey-text text-darken-1">
-=======
-                        <p class="grey-text text-darken-1" style="margin-bottom:1rem;">
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                             This section contains accreditation documents, status, certificates, and related
                             information specific to <strong>{{ $course->name }}</strong>.
                         </p>

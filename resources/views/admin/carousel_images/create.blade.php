@@ -6,11 +6,7 @@
         <form action="{{ route('admin.carousel-images.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="file-field input-field">
-<<<<<<< HEAD
                 <div class="btn">
-=======
-                <div class="btn red">
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                     <span>Image <span style="color:red">*</span></span>
                     <input type="file" name="image_path" id="image_path" required accept="image/*">
                 </div>
@@ -35,11 +31,7 @@
                     <span class="red-text">{{ $message }}</span>
                 @enderror
             </div>
-<<<<<<< HEAD
             <button type="submit" class="btn">Add Image</button>
-=======
-            <button type="submit" class="btn red">Add Image</button>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             <a href="{{ route('admin.carousel-images.index') }}" class="btn grey">Cancel</a>
         </form>
     </div>

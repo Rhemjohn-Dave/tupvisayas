@@ -53,12 +53,8 @@ class CourseController extends Controller
             $department->course_id = $course->id;
             $department->save();
         }
-<<<<<<< HEAD
         return redirect()
             ->to(route('admin.college-pages.edit', $data['college_page_id']) . '?tab=admin-college-courses')
-=======
-        return redirect()->route('admin.college-pages.edit', $data['college_page_id'])
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             ->with('success', 'Course and department added/linked successfully.');
     }
 
@@ -140,13 +136,9 @@ class CourseController extends Controller
         }
 
         $course->update($data);
-<<<<<<< HEAD
 
         return redirect()
             ->to(route('admin.college-pages.edit', $course->college_page_id) . '?tab=admin-college-courses')
-=======
-        return redirect()->route('admin.college-pages.edit', $course->college_page_id)
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             ->with('success', 'Course and department updated successfully.');
     }
 
@@ -168,13 +160,9 @@ class CourseController extends Controller
             $department->delete();
         }
         $course->delete();
-<<<<<<< HEAD
 
         return redirect()
             ->to(route('admin.college-pages.edit', $collegeId) . '?tab=admin-college-courses')
-=======
-        return redirect()->route('admin.college-pages.edit', $collegeId)
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             ->with('success', 'Course and related department deleted successfully.');
     }
 }

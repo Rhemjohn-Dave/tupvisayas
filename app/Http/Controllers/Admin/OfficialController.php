@@ -33,16 +33,8 @@ class OfficialController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-<<<<<<< HEAD
             'order' => 'nullable|integer',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-=======
-            'bio' => 'nullable|string',
-            'order' => 'nullable|integer',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'social_links' => 'nullable|array',
-            'social_links.*' => 'nullable|string',
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         ]);
 
         if ($request->hasFile('photo')) {
@@ -60,13 +52,6 @@ class OfficialController extends Controller
             $data['photo'] = 'photos/officials/' . $filename;
         }
 
-<<<<<<< HEAD
-=======
-        if (isset($data['social_links'])) {
-            $data['social_links'] = json_encode($data['social_links']);
-        }
-
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         Official::create($data);
         return redirect()->route('admin.officials.index')->with('success', 'Official created successfully.');
     }
@@ -97,16 +82,8 @@ class OfficialController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-<<<<<<< HEAD
             'order' => 'nullable|integer',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-=======
-            'bio' => 'nullable|string',
-            'order' => 'nullable|integer',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'social_links' => 'nullable|array',
-            'social_links.*' => 'nullable|string',
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         ]);
 
         if ($request->hasFile('photo')) {
@@ -129,13 +106,6 @@ class OfficialController extends Controller
             $data['photo'] = 'photos/officials/' . $filename;
         }
 
-<<<<<<< HEAD
-=======
-        if (isset($data['social_links'])) {
-            $data['social_links'] = json_encode($data['social_links']);
-        }
-
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         $official->update($data);
         return redirect()->route('admin.officials.index')->with('success', 'Official updated successfully.');
     }

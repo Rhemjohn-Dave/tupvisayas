@@ -63,11 +63,7 @@
         </div>
 
         <div class="file-field input-field">
-<<<<<<< HEAD
             <div class="btn">
-=======
-            <div class="btn red">
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                 <span>File</span>
                 <input type="file" name="file">
             </div>
@@ -89,11 +85,7 @@
         </div>
 
         <div class="file-field input-field">
-<<<<<<< HEAD
             <div class="btn">
-=======
-            <div class="btn red">
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
                 <span>Purchase Orders</span>
                 <input type="file" name="po_files[]" multiple>
             </div>

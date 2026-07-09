@@ -6,11 +6,7 @@ use App\Http\Controllers\AccreditationController;
 
 // Technology & Information Center Page
 Route::get('/technology', function () {
-<<<<<<< HEAD
     return view('pages.technology');
-=======
-    return view('technology');
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 })->name('technology');
 
 // Procurement section
@@ -47,10 +43,6 @@ Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
 Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');
 Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');
-<<<<<<< HEAD
-=======
-Route::get('/officials/{id}', [App\Http\Controllers\OfficialController::class, 'show'])->name('officials.show');
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index'])->name('news_events');
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
@@ -83,13 +75,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('college-pages', App\Http\Controllers\Admin\CollegePageController::class);
     Route::resource('courses', App\Http\Controllers\Admin\CourseController::class)->except(['show']);
     Route::resource('faculties', App\Http\Controllers\Admin\FacultyController::class)->except(['show']);
-<<<<<<< HEAD
     Route::resource('student-organizations', App\Http\Controllers\Admin\StudentOrganizationController::class)
         ->except(['show', 'index'])
         ->parameters(['student-organizations' => 'student_organization']);
     Route::put('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'update'])->name('departments.update');
-=======
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     Route::delete('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'destroy'])->name('departments.destroy');
     Route::get('categories', [App\Http\Controllers\Admin\PostController::class, 'indexCategory'])->name('categories.index');
     Route::get('categories/create', [App\Http\Controllers\Admin\PostController::class, 'createCategory'])->name('categories.create');

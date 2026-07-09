@@ -11,20 +11,13 @@ class TIPTTOPost extends Model
 
     protected $fillable = [
         'title',
-<<<<<<< HEAD
         'slug',
-=======
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         'content',
         'excerpt',
         'featured_image',
         'is_published',
         'published_at',
-<<<<<<< HEAD
         'author_id',
-=======
-        'author_id'
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     ];
 
     protected $casts = [

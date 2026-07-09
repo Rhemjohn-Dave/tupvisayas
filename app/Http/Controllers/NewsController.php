@@ -14,7 +14,6 @@ class NewsController extends Controller
     {
         $categories = \App\Models\Category::all();
         $category = null;
-<<<<<<< HEAD
         $search = trim((string) $request->get('search', ''));
 
         $applySearch = function ($query) use ($search) {
@@ -27,13 +26,10 @@ class NewsController extends Controller
 
             return $query->orderBy('created_at', 'desc')->get();
         };
-=======
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 
         if ($request->has('category')) {
             $category = \App\Models\Category::where('slug', $request->category)->first();
             if ($category) {
-<<<<<<< HEAD
                 $news = $applySearch(\App\Models\News::where('category_id', $category->id));
                 $events = $applySearch(\App\Models\Event::where('category_id', $category->id));
                 $announcements = $applySearch(\App\Models\Announcement::where('category_id', $category->id));
@@ -64,20 +60,6 @@ class NewsController extends Controller
         $updates = $updates->sortByDesc('created_at')->values();
 
         return view('pages.news_events', compact('updates', 'categories', 'category', 'search'));
-=======
-                $news = \App\Models\News::where('category_id', $category->id)->orderBy('created_at', 'desc')->get();
-                $announcements = \App\Models\Announcement::where('category_id', $category->id)->orderBy('created_at', 'desc')->get();
-            } else {
-                $news = collect();
-                $announcements = collect();
-            }
-        } else {
-            $news = \App\Models\News::orderBy('created_at', 'desc')->get();
-            $announcements = \App\Models\Announcement::orderBy('created_at', 'desc')->get();
-        }
-
-        return view('pages.news_events', compact('news', 'announcements', 'categories', 'category'));
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 
     /**
@@ -137,13 +119,9 @@ class NewsController extends Controller
     public function show(News $news)
     {
         $categories = \App\Models\Category::all();
-<<<<<<< HEAD
         $search = trim((string) request('search', ''));
 
         return view('pages.news_show', compact('news', 'categories', 'search'));
-=======
-        return view('pages.news_show', compact('news', 'categories'));
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     }
 
     /**

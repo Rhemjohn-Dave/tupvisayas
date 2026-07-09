@@ -37,11 +37,8 @@
         <x-admin.stat-card label="Officials" :value="$stats['officials']" icon="badge" />
     </div>
 
-<<<<<<< HEAD
     <h2 class="site-section-title admin-section-title">Posts</h2>
 
-=======
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
     {{-- Filters: type + preserved query for search/sort --}}
     <form method="get" action="{{ route('admin.dashboard') }}" class="admin-toolbar">
         @if($filters['q'] ?? null)
@@ -53,11 +50,7 @@
         @if($filters['dir'] ?? null)
             <input type="hidden" name="dir" value="{{ $filters['dir'] }}">
         @endif
-<<<<<<< HEAD
         <label class="admin-toolbar__label" for="filterType">Type</label>
-=======
-        <label class="visually-hidden" for="filterType">Filter by type</label>
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         <select class="admin-select" id="filterType" name="type" onchange="this.form.submit()">
             <option value="">All types</option>
             <option value="news" @selected(($filters['type'] ?? '') === 'news')>News</option>

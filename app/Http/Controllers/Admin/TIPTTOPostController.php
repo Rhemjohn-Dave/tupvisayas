@@ -26,16 +26,11 @@ class TIPTTOPostController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $validated = $request->validate([
-=======
-        $request->validate([
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:t_i_p_t_t_o_posts,slug',
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
-<<<<<<< HEAD
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'is_published' => 'nullable|boolean',
         ]);
@@ -48,14 +43,6 @@ class TIPTTOPostController extends Controller
             'author_id' => auth()->id(),
             'is_published' => $request->boolean('is_published'),
         ];
-=======
-            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'is_published' => 'boolean'
-        ]);
-
-        $data = $request->all();
-        $data['author_id'] = auth()->id();
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 
         if ($request->hasFile('featured_image')) {
             $data['featured_image'] = $request->file('featured_image')->store('tiptto_posts', 'public');
@@ -83,16 +70,11 @@ class TIPTTOPostController extends Controller
 
     public function update(Request $request, TIPTTOPost $tipttoPost)
     {
-<<<<<<< HEAD
         $validated = $request->validate([
-=======
-        $request->validate([
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:t_i_p_t_t_o_posts,slug,' . $tipttoPost->id,
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
-<<<<<<< HEAD
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'is_published' => 'nullable|boolean',
         ]);
@@ -110,15 +92,6 @@ class TIPTTOPostController extends Controller
             $data['slug'] = $this->resolveSlug(null, $validated['title'], $tipttoPost->id);
         }
 
-=======
-            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'is_published' => 'boolean'
-        ]);
-
-        $data = $request->all();
-
-        // Handle remove featured image
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         if ($request->boolean('remove_featured_image')) {
             if ($tipttoPost->featured_image) {
                 Storage::disk('public')->delete($tipttoPost->featured_image);
@@ -127,10 +100,6 @@ class TIPTTOPostController extends Controller
         }
 
         if ($request->hasFile('featured_image')) {
-<<<<<<< HEAD
-=======
-            // Delete old image
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
             if ($tipttoPost->featured_image) {
                 Storage::disk('public')->delete($tipttoPost->featured_image);
             }
@@ -141,13 +110,10 @@ class TIPTTOPostController extends Controller
             $data['published_at'] = now();
         }
 
-<<<<<<< HEAD
         if (!$data['is_published']) {
             $data['published_at'] = null;
         }
 
-=======
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         $tipttoPost->update($data);
 
         return redirect()->route('admin.tiptto_posts.index')
@@ -156,10 +122,6 @@ class TIPTTOPostController extends Controller
 
     public function destroy(TIPTTOPost $tipttoPost)
     {
-<<<<<<< HEAD
-=======
-        // Delete featured image if exists
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
         if ($tipttoPost->featured_image) {
             Storage::disk('public')->delete($tipttoPost->featured_image);
         }
@@ -169,7 +131,6 @@ class TIPTTOPostController extends Controller
         return redirect()->route('admin.tiptto_posts.index')
             ->with('success', 'TIPTTO post deleted successfully.');
     }
-<<<<<<< HEAD
 
     private function resolveSlug(?string $slug, string $title, ?int $ignoreId = null): string
     {
@@ -187,6 +148,4 @@ class TIPTTOPostController extends Controller
 
         return $candidate;
     }
-=======
->>>>>>> bcfd8bf21e0e5e2ff67aba160986ac94d71a47ff
 }

@@ -15,8 +15,11 @@
 @endsection
 
 @section('content')
-    <div class="section site-page site-page--article">
-        <div class="news-layout">
+    <div class="section site-page site-page--article site-page--director-article">
+        <p class="article-mobile-back">
+            <a href="{{ route('directors.corner') }}">&larr; Back to Director's Corner</a>
+        </p>
+        <div class="news-layout news-layout--article">
             <article class="article-detail">
                 <header class="article-detail__header">
                     <p class="article-detail__kicker">Director's Corner</p>

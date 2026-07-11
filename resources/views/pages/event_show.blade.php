@@ -14,7 +14,10 @@
 
 @section('content')
     <div class="section site-page site-page--article">
-        <div class="news-layout">
+        <p class="article-mobile-back">
+            <a href="{{ route('news_events') }}">&larr; Back to news &amp; events</a>
+        </p>
+        <div class="news-layout news-layout--article">
             <article class="article-detail">
                 <header class="article-detail__header">
                     <p class="article-detail__kicker">University events</p>
@@ -34,7 +37,7 @@
                     </figure>
                 @endif
 
-                <div class="article-detail__body wysiwyg-content">
+                <div class="article-detail__body site-prose wysiwyg-content">
                     {!! clean($event->content) !!}
                 </div>
 

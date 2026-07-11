@@ -38,7 +38,11 @@ class AccreditationController extends Controller
 
         $expectedPassword = config('accreditation.password');
 
-        if ($request->input('password') !== $expectedPassword) {
+        if (
+            ! is_string($expectedPassword)
+            || $expectedPassword === ''
+            || ! hash_equals($expectedPassword, $request->input('password'))
+        ) {
             return back()
                 ->withErrors(['password' => 'Incorrect password. Please try again.'])
                 ->withInput();
@@ -51,5 +55,3 @@ class AccreditationController extends Controller
             ->with('status', 'Access granted.');
     }
 }
-
-

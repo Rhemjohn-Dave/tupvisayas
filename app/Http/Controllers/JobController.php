@@ -12,7 +12,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = \App\Models\Job::orderBy('created_at', 'desc')->get();
+        $jobs = \App\Models\Job::orderBy('created_at', 'desc')->paginate(12);
+
         return view('pages.jobs', compact('jobs'));
     }
 
@@ -33,13 +34,10 @@ class JobController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);
-
-        // Generate slug from title
-        $data['slug'] = \Illuminate\Support\Str::slug($request->title);
 
         if ($request->hasFile('picture')) {
             $data['picture'] = $request->file('picture')->store('uploads', 'public');
@@ -76,18 +74,12 @@ class JobController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);
 
-        // Update slug if title changed
-        if ($job->title !== $request->title) {
-            $data['slug'] = \Illuminate\Support\Str::slug($request->title);
-        }
-
         if ($request->hasFile('picture')) {
-            // Delete old image if exists
             if ($job->picture) {
                 \Storage::disk('public')->delete($job->picture);
             }

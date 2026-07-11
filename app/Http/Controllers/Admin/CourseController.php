@@ -38,7 +38,7 @@ class CourseController extends Controller
             'college_page_id' => 'required|exists:college_pages,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
         ]);
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('course_logos', 'public');
@@ -85,7 +85,7 @@ class CourseController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
         ]);
         if ($request->hasFile('logo')) {
             if ($course->logo) {

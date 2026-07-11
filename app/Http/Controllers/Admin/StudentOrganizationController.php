@@ -25,7 +25,7 @@ class StudentOrganizationController extends Controller
             'description' => 'nullable|string',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:4096',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'sort_order' => 'nullable|integer|min:0',
         ]);
 
@@ -59,7 +59,7 @@ class StudentOrganizationController extends Controller
             'description' => 'nullable|string',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:4096',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'sort_order' => 'nullable|integer|min:0',
         ]);
 

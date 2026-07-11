@@ -27,6 +27,12 @@
                 </div>
             @endforeach
         </div>
+
+        @if ($jobs->hasPages())
+            <div class="section">
+                {{ $jobs->links('pagination.public') }}
+            </div>
+        @endif
     </div>
 
     <div id="imgModal" class="site-modal-overlay" role="dialog" aria-modal="true" aria-label="Image preview">

@@ -73,7 +73,7 @@
                                 <h6>Content:</h6>
                                 <div class="post-content"
                                     style="border: 1px solid #e0e0e0; padding: 20px; border-radius: 4px;">
-                                    {!! $tipttoPost->content !!}
+                                    {!! clean($tipttoPost->content) !!}
                                 </div>
                             </div>
                         </div>

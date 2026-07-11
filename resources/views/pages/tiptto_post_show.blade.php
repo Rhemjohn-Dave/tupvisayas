@@ -41,7 +41,7 @@
                 @endif
 
                 <div class="article-detail__body site-prose">
-                    {!! $post->content !!}
+                    {!! clean($post->content) !!}
                 </div>
 
                 <footer class="article-detail__footer">

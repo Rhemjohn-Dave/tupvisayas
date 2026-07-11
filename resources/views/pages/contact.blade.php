@@ -37,6 +37,14 @@
                         <strong>University IT Center</strong>
                         <span><a href="mailto:visayas.uitc@tup.edu.ph">visayas.uitc@tup.edu.ph</a></span>
                     </li>
+                    <li>
+                        <strong>Data Protection Officer</strong>
+                        <span>
+                            {{ config('privacy.dpo_name') }} —
+                            <a href="mailto:{{ config('privacy.dpo_email') }}">{{ config('privacy.dpo_email') }}</a>
+                            · <a href="{{ route('privacy.notice') }}">Privacy Notice</a>
+                        </span>
+                    </li>
                 </ul>
 
                 <p class="contact-note">For official government inquiries, you may also visit the links on the utility bar above (Transparency Seal, FOI, Citizen&rsquo;s Charter).</p>

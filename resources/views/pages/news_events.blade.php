@@ -43,6 +43,10 @@
                 @empty
                     <p class="news-empty">No news, events, or announcements found{{ $search ? ' for your search' : '' }}.</p>
                 @endforelse
+
+                @if ($updates->hasPages())
+                    {{ $updates->links('pagination.public') }}
+                @endif
             </main>
 
             <aside class="news-sidebar" aria-label="Filter news and events">

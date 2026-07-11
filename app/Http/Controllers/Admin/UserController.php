@@ -23,8 +23,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData($request);
-        $data['is_admin'] = $request->boolean('is_admin');
-        User::create($data);
+        $isAdmin = $request->boolean('is_admin');
+        unset($data['is_admin']);
+
+        $user = User::create($data);
+        $user->forceFill(['is_admin' => $isAdmin])->save();
+
         return redirect()->route('admin.users.index')->with('status', 'User created.');
     }
 
@@ -38,11 +42,16 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $data = $this->validateData($request, $user->id);
-        $data['is_admin'] = $request->boolean('is_admin');
+        $isAdmin = $request->boolean('is_admin');
+        unset($data['is_admin']);
+
         if (empty($data['password'])) {
             unset($data['password']);
         }
+
         $user->update($data);
+        $user->forceFill(['is_admin' => $isAdmin])->save();
+
         return redirect()->route('admin.users.index')->with('status', 'User updated.');
     }
 

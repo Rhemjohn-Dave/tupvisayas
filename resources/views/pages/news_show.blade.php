@@ -35,7 +35,7 @@
                 @endif
 
                 <div class="article-detail__body wysiwyg-content">
-                    {!! $news->content !!}
+                    {!! clean($news->content) !!}
                 </div>
 
                 <footer class="article-detail__footer">

@@ -36,7 +36,7 @@
                     <h2 id="college-history-heading" class="site-section-title">History</h2>
                     @if (filled($collegePage->history))
                         <div class="site-prose site-prose--justify mission-card">
-                            {!! $collegePage->history !!}
+                            {!! clean($collegePage->history) !!}
                         </div>
                     @else
                         <p class="program-empty">College history will be published here soon.</p>
@@ -77,7 +77,7 @@
                                     <div class="college-course-card__body">
                                         <h3 class="college-course-card__title">{{ $course->name }}</h3>
                                         @if ($course->description)
-                                            <div class="site-prose college-course-card__desc">{!! $course->description !!}</div>
+                                            <div class="site-prose college-course-card__desc">{!! clean($course->description) !!}</div>
                                         @endif
                                         <a class="college-course-card__link"
                                             href="{{ route('accreditation.course.show', $course) }}">View accreditation</a>
@@ -179,7 +179,7 @@
                                     <div class="college-org-card__body">
                                         <h3 class="college-org-card__title">{{ $organization->name }}</h3>
                                         @if ($organization->description)
-                                            <div class="site-prose college-org-card__desc">{!! $organization->description !!}</div>
+                                            <div class="site-prose college-org-card__desc">{!! clean($organization->description) !!}</div>
                                         @endif
                                         @if ($organization->email || $organization->website)
                                             <div class="college-org-card__links">
@@ -199,7 +199,7 @@
                         </div>
                     @elseif (filled($collegePage->student_organization))
                         <div class="site-prose site-prose--justify mission-card">
-                            {!! $collegePage->student_organization !!}
+                            {!! clean($collegePage->student_organization) !!}
                         </div>
                     @else
                         <p class="program-empty">Student organization information will be published here soon.</p>

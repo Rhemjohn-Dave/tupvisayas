@@ -30,12 +30,16 @@
                 <li><a href="https://www.foi.gov.ph/agencies/tup/" target="_blank" rel="noopener noreferrer">Freedom of
                         Information</a></li>
                 <li><a href="{{ route('contact') }}">Contact</a></li>
+                <li><a href="{{ route('privacy.notice') }}">Privacy Notice</a></li>
                 <li><a href="{{ route('jobs') }}">Careers</a></li>
             </ul>
         </div>
     </div>
     <div class="site-footer__bottom">
         <p>&copy; {{ date('Y') }} Technological University of the Philippines Visayas. All rights reserved.</p>
-        <p>Developed by UITC TUPV</p>
+        <p>
+            <a href="{{ route('privacy.notice') }}">Privacy Notice (RA 10173)</a>
+            · Developed by UITC TUPV
+        </p>
     </div>
 </footer>

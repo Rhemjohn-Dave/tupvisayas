@@ -49,6 +49,8 @@ Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index']
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
 Route::view('/contact', 'pages.contact')->name('contact');
+Route::view('/privacy-notice', 'pages.privacy_notice')->name('privacy.notice');
+Route::redirect('/privacy-policy', '/privacy-notice');
 Route::get('/news/{news}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
 Route::get('/announcements/{announcement}', [App\Http\Controllers\AnnouncementController::class, 'show'])->name('announcements.show');
 Route::get('/jobs/{job}', [App\Http\Controllers\JobController::class, 'show'])->name('jobs.show');
@@ -58,7 +60,9 @@ Route::get('/academics/{college}', [App\Http\Controllers\CollegePageController::
 // Program Accreditation
 Route::get('/accreditation', [AccreditationController::class, 'index'])->name('accreditation.index');
 Route::get('/accreditation/course/{course}', [AccreditationController::class, 'show'])->name('accreditation.course.show');
-Route::post('/accreditation/course/{course}', [AccreditationController::class, 'verify'])->name('accreditation.course.verify');
+Route::post('/accreditation/course/{course}', [AccreditationController::class, 'verify'])
+    ->middleware('throttle:5,1')
+    ->name('accreditation.course.verify');
 
 // Assistant Director for Research and Extension Routes
 Route::get('/assistant-director-research-extension', [App\Http\Controllers\ADREController::class, 'index'])->name('adre');
@@ -103,6 +107,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Director's Corner posts
     Route::resource('director_posts', App\Http\Controllers\Admin\DirectorPostController::class)->except(['show']);
+
+    // Activity / audit logs
+    Route::get('activity-logs', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])
+        ->name('activity-logs.index');
 });
 
 require __DIR__ . '/auth.php';

@@ -33,7 +33,7 @@ class AnnouncementController extends Controller
             });
         }
 
-        $announcements = $announcements->with('category')->orderBy('created_at', 'desc')->get();
+        $announcements = $announcements->with('category')->orderBy('created_at', 'desc')->paginate(12)->withQueryString();
 
         return view('pages.announcements', compact('announcements', 'categories', 'category', 'search'));
     }
@@ -55,7 +55,7 @@ class AnnouncementController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);
@@ -98,7 +98,7 @@ class AnnouncementController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);

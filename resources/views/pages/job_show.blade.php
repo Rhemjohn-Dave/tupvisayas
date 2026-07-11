@@ -34,7 +34,7 @@
                     </div>
                 @endif
                 <div class="job-content wysiwyg-content site-article-body">
-                    {!! $job->content !!}
+                    {!! clean($job->content) !!}
                 </div>
                 <div class="site-share">
                     <p class="site-share__title">Share this job</p>

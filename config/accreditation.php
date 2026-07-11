@@ -6,14 +6,10 @@ return [
     | Accreditation Access Password
     |--------------------------------------------------------------------------
     |
-    | This password is required before a visitor can view a specific program's
-    | accreditation page. Change it in your .env file:
-    |
-    |   ACCREDITATION_PASSWORD=your-secure-password-here
+    | Required before a visitor can view a program accreditation page.
+    | Set ACCREDITATION_PASSWORD in your .env — there is no default secret.
     |
     */
 
-    'password' => env('ACCREDITATION_PASSWORD', 'G688WZ>%>8(A'),
+    'password' => env('ACCREDITATION_PASSWORD'),
 ];
-
-

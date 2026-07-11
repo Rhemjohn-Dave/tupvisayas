@@ -7,7 +7,8 @@
         || request()->routeIs('admin.director_posts.*');
 
     $openManagement = request()->routeIs('admin.users.*')
-        || request()->routeIs('admin.officials.*');
+        || request()->routeIs('admin.officials.*')
+        || request()->routeIs('admin.activity-logs.*');
 
     $openProcurement = request()->routeIs('admin.procurements.*');
 @endphp
@@ -70,6 +71,11 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
             <li>
                 <x-admin.sidebar-nav-link href="{{ route('admin.officials.index') }}" label="Officials" icon="badge"
                     :active="request()->routeIs('admin.officials.*')" class="admin-sidebar__link--nested" />
+            </li>
+            <li>
+                <x-admin.sidebar-nav-link href="{{ route('admin.activity-logs.index') }}" label="Activity logs"
+                    icon="history" :active="request()->routeIs('admin.activity-logs.*')"
+                    class="admin-sidebar__link--nested" />
             </li>
         </x-admin.sidebar-collapsible>
 

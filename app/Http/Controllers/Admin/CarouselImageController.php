@@ -30,7 +30,7 @@ class CarouselImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             // 'caption' => 'nullable|string|max:255', // Temporarily commented out
             'order' => 'required|integer',
         ]);
@@ -69,7 +69,7 @@ class CarouselImageController extends Controller
     {
         $carouselImage = \App\Models\CarouselImage::findOrFail($id);
         $request->validate([
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'caption' => 'nullable|string|max:255',
             'order' => 'required|integer',
         ]);

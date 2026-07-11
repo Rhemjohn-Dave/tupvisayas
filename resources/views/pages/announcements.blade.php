@@ -39,6 +39,10 @@
                 @empty
                     <p class="news-empty">No announcements found{{ !empty($search) ? ' for your search' : '' }}.</p>
                 @endforelse
+
+                @if ($announcements->hasPages())
+                    {{ $announcements->links('pagination.public') }}
+                @endif
             </main>
 
             @include('pages.partials.announcements_sidebar', [

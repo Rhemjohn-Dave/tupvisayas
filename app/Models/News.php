@@ -2,15 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\LogsModelActivity;
+use App\Models\Concerns\SanitizesHtmlAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class News extends Model
 {
-    use HasFactory;
+    use HasFactory, SanitizesHtmlAttributes, LogsModelActivity;
+
+    protected string $activityLogName = 'news';
 
     protected $fillable = ['title', 'slug', 'content', 'picture', 'category_id'];
+
+    protected array $htmlAttributes = ['content'];
+
+    protected array $activityLogAttributes = ['title', 'slug', 'content', 'picture', 'category_id'];
 
     protected static function boot()
     {

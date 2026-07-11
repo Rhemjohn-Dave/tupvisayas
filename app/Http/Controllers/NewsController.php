@@ -12,52 +12,24 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = \App\Models\Category::all();
+        $categories = \App\Models\Category::orderBy('name')->get();
         $category = null;
         $search = trim((string) $request->get('search', ''));
 
-        $applySearch = function ($query) use ($search) {
-            if ($search !== '') {
-                $query->where(function ($q) use ($search) {
-                    $q->where('title', 'like', '%' . $search . '%')
-                        ->orWhere('content', 'like', '%' . $search . '%');
-                });
-            }
-
-            return $query->orderBy('created_at', 'desc')->get();
-        };
-
-        if ($request->has('category')) {
+        if ($request->filled('category')) {
             $category = \App\Models\Category::where('slug', $request->category)->first();
-            if ($category) {
-                $news = $applySearch(\App\Models\News::where('category_id', $category->id));
-                $events = $applySearch(\App\Models\Event::where('category_id', $category->id));
-                $announcements = $applySearch(\App\Models\Announcement::where('category_id', $category->id));
-            } else {
-                $news = collect();
-                $events = collect();
-                $announcements = collect();
+            if (! $category) {
+                $updates = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 12);
+
+                return view('pages.news_events', compact('updates', 'categories', 'category', 'search'));
             }
-        } else {
-            $news = $applySearch(\App\Models\News::query());
-            $events = $applySearch(\App\Models\Event::query());
-            $announcements = $applySearch(\App\Models\Announcement::query());
         }
 
-        $updates = collect();
-        foreach ($news as $item) {
-            $item->type = 'News';
-            $updates->push($item);
-        }
-        foreach ($events as $item) {
-            $item->type = 'Event';
-            $updates->push($item);
-        }
-        foreach ($announcements as $item) {
-            $item->type = 'Announcement';
-            $updates->push($item);
-        }
-        $updates = $updates->sortByDesc('created_at')->values();
+        $updates = \App\Support\ContentFeed::paginateUpdates(
+            $category?->id,
+            $search,
+            12
+        );
 
         return view('pages.news_events', compact('updates', 'categories', 'category', 'search'));
     }
@@ -79,7 +51,7 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);
@@ -142,7 +114,7 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);

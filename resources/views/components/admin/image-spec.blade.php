@@ -80,6 +80,7 @@
             'tips' => [
                 'Shown in a 120 × 120 px box; the full logo is kept visible.',
                 'Leave padding around the logo — nothing is cropped.',
+                'SVG uploads are not allowed (security). Use PNG with transparency.',
             ],
         ],
         'org-logo' => [
@@ -90,6 +91,7 @@
             'tips' => [
                 'Student organization logo on the college page.',
                 'Square format; entire logo stays visible (not cropped).',
+                'SVG uploads are not allowed (security). Use PNG with transparency.',
             ],
         ],
     ];

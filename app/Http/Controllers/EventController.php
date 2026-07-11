@@ -12,7 +12,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = \App\Models\Event::orderBy('created_at', 'desc')->get();
+        $events = \App\Models\Event::orderBy('created_at', 'desc')->paginate(12);
+
         return view('pages.events', compact('events'));
     }
 
@@ -33,7 +34,7 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);
@@ -96,7 +97,7 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);

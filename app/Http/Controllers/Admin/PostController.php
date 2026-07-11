@@ -10,64 +10,29 @@ use App\Models\Job;
 use App\Models\News;
 use App\Models\Official;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $rows = $this->collectDashboardRows();
-
         $type = $request->query('type');
-        if ($type && in_array($type, ['news', 'announcement', 'job', 'event'], true)) {
-            $rows = $rows->where('type', $type);
+        if ($type && ! in_array($type, ['news', 'announcement', 'job', 'event'], true)) {
+            $type = null;
         }
 
-        $q = $request->query('q');
-        if (is_string($q) && $q !== '') {
-            $qLower = mb_strtolower($q);
-            $rows = $rows->filter(function (array $r) use ($qLower) {
-                return str_contains(mb_strtolower($r['title']), $qLower)
-                    || str_contains(mb_strtolower($r['category']), $qLower);
-            });
-        }
-
-        $rows = $rows->values();
-
+        $q = is_string($request->query('q')) ? trim($request->query('q')) : '';
         $sort = $request->query('sort', 'created_at');
         if (! in_array($sort, ['title', 'type', 'category', 'created_at'], true)) {
             $sort = 'created_at';
         }
         $dir = $request->query('dir', 'desc') === 'asc' ? 'asc' : 'desc';
 
-        if ($sort === 'created_at') {
-            $sorted = $dir === 'desc'
-                ? $rows->sortByDesc(fn (array $r) => $r['created_at']->timestamp)
-                : $rows->sortBy(fn (array $r) => $r['created_at']->timestamp);
-        } else {
-            $sorted = $rows->sortBy(fn (array $r) => mb_strtolower((string) $r[$sort]));
-            if ($dir === 'desc') {
-                $sorted = $sorted->reverse();
-            }
-        }
-        $sorted = $sorted->values();
-
-        $perPage = 15;
-        $page = LengthAwarePaginator::resolveCurrentPage();
-        $slice = $sorted->slice(($page - 1) * $perPage, $perPage)->values();
-
-        $dashboardPaginator = new LengthAwarePaginator(
-            $slice,
-            $sorted->count(),
-            $perPage,
-            $page,
-            [
-                'path' => $request->url(),
-                'query' => $request->query(),
-            ]
-        );
+        $dashboardPaginator = $this->paginateDashboard($request, $type, $q, $sort, $dir);
 
         $stats = [
             'posts' => News::count() + Announcement::count() + Job::count() + Event::count(),
@@ -86,66 +51,151 @@ class PostController extends Controller
         return view('admin.dashboard', compact('dashboardPaginator', 'stats', 'filters'));
     }
 
-    /**
-     * @return Collection<int, array<string, mixed>>
-     */
-    private function collectDashboardRows(): Collection
+    private function paginateDashboard(Request $request, ?string $type, string $q, string $sort, string $dir): LengthAwarePaginator
     {
-        $rows = collect();
+        $perPage = 15;
+        $page = LengthAwarePaginator::resolveCurrentPage();
 
-        foreach (News::with('category')->get() as $item) {
-            $rows->push([
-                'title' => $item->title,
-                'type' => 'news',
-                'type_label' => 'News',
-                'category' => $item->category?->name ?? '—',
-                'created_at' => $item->created_at,
-                'view_url' => route('news.show', $item->slug),
-                'edit_url' => route('admin.news.edit', $item->slug),
-                'destroy_url' => route('admin.news.destroy', $item->slug),
-            ]);
+        if ($type) {
+            return $this->paginateSingleType($request, $type, $q, $sort, $dir, $perPage, $page);
         }
 
-        foreach (Announcement::with('category')->get() as $item) {
-            $rows->push([
-                'title' => $item->title,
-                'type' => 'announcement',
-                'type_label' => 'Announcement',
-                'category' => $item->category?->name ?? '—',
-                'created_at' => $item->created_at,
-                'view_url' => route('announcements.show', $item->slug),
-                'edit_url' => route('admin.announcements.edit', $item->slug),
-                'destroy_url' => route('admin.announcements.destroy', $item->slug),
-            ]);
+        $news = $this->dashboardSelect(News::query(), 'news', 'News', 'news.show', 'admin.news.edit', 'admin.news.destroy', $q);
+        $announcements = $this->dashboardSelect(Announcement::query(), 'announcement', 'Announcement', 'announcements.show', 'admin.announcements.edit', 'admin.announcements.destroy', $q);
+        $jobs = $this->dashboardSelect(Job::query(), 'job', 'Job', 'jobs.show', 'admin.jobs.edit', 'admin.jobs.destroy', $q);
+        $events = $this->dashboardSelect(Event::query(), 'event', 'Event', 'events.show', 'admin.events.edit', 'admin.events.destroy', $q);
+
+        $union = $news->unionAll($announcements)->unionAll($jobs)->unionAll($events);
+
+        $orderColumn = match ($sort) {
+            'title' => 'title',
+            'type' => 'type_label',
+            'category' => 'category',
+            default => 'created_at',
+        };
+
+        $total = DB::query()->fromSub($union, 'dashboard_posts')->count();
+
+        $rows = DB::query()
+            ->fromSub($union, 'dashboard_posts')
+            ->orderBy($orderColumn, $dir)
+            ->forPage($page, $perPage)
+            ->get()
+            ->map(fn ($row) => $this->mapDashboardRow($row));
+
+        return new LengthAwarePaginator($rows, $total, $perPage, $page, [
+            'path' => $request->url(),
+            'query' => $request->query(),
+        ]);
+    }
+
+    private function paginateSingleType(
+        Request $request,
+        string $type,
+        string $q,
+        string $sort,
+        string $dir,
+        int $perPage,
+        int $page
+    ): LengthAwarePaginator {
+        [$model, $typeKey, $typeLabel, $showRoute, $editRoute, $destroyRoute] = match ($type) {
+            'news' => [News::class, 'news', 'News', 'news.show', 'admin.news.edit', 'admin.news.destroy'],
+            'announcement' => [Announcement::class, 'announcement', 'Announcement', 'announcements.show', 'admin.announcements.edit', 'admin.announcements.destroy'],
+            'job' => [Job::class, 'job', 'Job', 'jobs.show', 'admin.jobs.edit', 'admin.jobs.destroy'],
+            default => [Event::class, 'event', 'Event', 'events.show', 'admin.events.edit', 'admin.events.destroy'],
+        };
+
+        $query = $model::query()->with('category');
+
+        if ($q !== '') {
+            $query->where(function (Builder $builder) use ($q) {
+                $builder->where('title', 'like', '%' . $q . '%')
+                    ->orWhereHas('category', fn (Builder $c) => $c->where('name', 'like', '%' . $q . '%'));
+            });
         }
 
-        foreach (Job::with('category')->get() as $item) {
-            $rows->push([
-                'title' => $item->title,
-                'type' => 'job',
-                'type_label' => 'Job',
-                'category' => $item->category?->name ?? '—',
-                'created_at' => $item->created_at,
-                'view_url' => route('jobs.show', $item->slug),
-                'edit_url' => route('admin.jobs.edit', $item->slug),
-                'destroy_url' => route('admin.jobs.destroy', $item->slug),
-            ]);
+        if ($sort === 'category') {
+            $query->leftJoin('categories', 'categories.id', '=', $query->getModel()->getTable() . '.category_id')
+                ->select($query->getModel()->getTable() . '.*')
+                ->orderBy('categories.name', $dir);
+        } elseif ($sort === 'title') {
+            $query->orderBy('title', $dir);
+        } elseif ($sort === 'type') {
+            $query->orderBy('created_at', $dir);
+        } else {
+            $query->orderBy('created_at', $dir);
         }
 
-        foreach (Event::with('category')->get() as $item) {
-            $rows->push([
+        $paginator = $query->paginate($perPage, ['*'], 'page', $page)->withQueryString();
+
+        $mapped = $paginator->getCollection()->map(function ($item) use ($typeKey, $typeLabel, $showRoute, $editRoute, $destroyRoute) {
+            return [
                 'title' => $item->title,
-                'type' => 'event',
-                'type_label' => 'Event',
+                'type' => $typeKey,
+                'type_label' => $typeLabel,
                 'category' => $item->category?->name ?? '—',
                 'created_at' => $item->created_at,
-                'view_url' => route('events.show', $item->slug),
-                'edit_url' => route('admin.events.edit', $item->slug),
-                'destroy_url' => route('admin.events.destroy', $item->slug),
-            ]);
+                'view_url' => route($showRoute, $item->slug),
+                'edit_url' => route($editRoute, $item->slug),
+                'destroy_url' => route($destroyRoute, $item->slug),
+            ];
+        });
+
+        $paginator->setCollection($mapped);
+
+        return $paginator;
+    }
+
+    private function dashboardSelect(
+        Builder $query,
+        string $type,
+        string $typeLabel,
+        string $showRoute,
+        string $editRoute,
+        string $destroyRoute,
+        string $q
+    ): Builder {
+        $table = $query->getModel()->getTable();
+
+        if ($q !== '') {
+            $query->where(function (Builder $builder) use ($q, $table) {
+                $builder->where("{$table}.title", 'like', '%' . $q . '%')
+                    ->orWhereExists(function ($sub) use ($q, $table) {
+                        $sub->select(DB::raw(1))
+                            ->from('categories')
+                            ->whereColumn('categories.id', "{$table}.category_id")
+                            ->where('categories.name', 'like', '%' . $q . '%');
+                    });
+            });
         }
 
-        return $rows;
+        return $query
+            ->leftJoin('categories', 'categories.id', '=', "{$table}.category_id")
+            ->select([
+                "{$table}.title",
+                "{$table}.slug",
+                "{$table}.created_at",
+            ])
+            ->selectRaw('? as type', [$type])
+            ->selectRaw('? as type_label', [$typeLabel])
+            ->selectRaw('COALESCE(categories.name, ?) as category', ['—'])
+            ->selectRaw('? as show_route', [$showRoute])
+            ->selectRaw('? as edit_route', [$editRoute])
+            ->selectRaw('? as destroy_route', [$destroyRoute]);
+    }
+
+    private function mapDashboardRow(object $row): array
+    {
+        return [
+            'title' => $row->title,
+            'type' => $row->type,
+            'type_label' => $row->type_label,
+            'category' => $row->category ?: '—',
+            'created_at' => Carbon::parse($row->created_at),
+            'view_url' => route($row->show_route, $row->slug),
+            'edit_url' => route($row->edit_route, $row->slug),
+            'destroy_url' => route($row->destroy_route, $row->slug),
+        ];
     }
 
     public function create()
@@ -162,7 +212,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $data = $request->only(['title', 'content', 'category_id']);

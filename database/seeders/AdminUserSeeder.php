@@ -10,13 +10,22 @@ class AdminUserSeeder extends Seeder
 {
     public function run()
     {
-        User::updateOrCreate(
+        $password = env('ADMIN_SEED_PASSWORD');
+
+        if (! is_string($password) || $password === '') {
+            $this->command?->warn('ADMIN_SEED_PASSWORD is not set — skipping admin user seed.');
+
+            return;
+        }
+
+        $user = User::updateOrCreate(
             ['email' => 'admin@tupv.edu.ph'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('password'), // Change this password after first login
-                'is_admin' => true,
+                'password' => Hash::make($password),
             ]
         );
+
+        $user->forceFill(['is_admin' => true])->save();
     }
 }

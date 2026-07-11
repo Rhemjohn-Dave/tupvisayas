@@ -47,11 +47,11 @@
             </div>
 
             @auth
-                @if (auth()->user()->is_admin)
+                @can(\App\Support\CmsPermissions::MANAGE_DIRECTOR_POSTS)
                     <p class="director-admin-link">
                         <a href="{{ route('admin.director_posts.create') }}" class="site-cta">Create new post</a>
                     </p>
-                @endif
+                @endcan
             @endauth
 
             @if ($posts->count())

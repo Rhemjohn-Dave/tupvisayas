@@ -27,5 +27,9 @@ class AdminUserSeeder extends Seeder
         );
 
         $user->forceFill(['is_admin' => true])->save();
+
+        if (method_exists($user, 'syncRoles')) {
+            $user->syncRoles(['Administrator']);
+        }
     }
 }

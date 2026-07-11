@@ -171,11 +171,11 @@
             <p class="uitc-block__intro">Latest technological innovations and research outputs from TUP Visayas.</p>
 
             @auth
-                @if (auth()->user()->is_admin)
+                @can(\App\Support\CmsPermissions::MANAGE_TIPTTO)
                     <p class="adre-admin-link">
                         <a href="{{ route('admin.tiptto_posts.create') }}" class="site-cta">Create new TIPTTO post</a>
                     </p>
-                @endif
+                @endcan
             @endauth
 
             @if ($posts->count())

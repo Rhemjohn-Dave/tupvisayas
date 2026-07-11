@@ -1,5 +1,5 @@
 @php
-    $isAdmin = auth()->check() && auth()->user()->is_admin;
+    $isAdmin = auth()->check() && auth()->user()->canAccessAdmin();
     $showProcurement = !auth()->check();
 @endphp
 

@@ -69,47 +69,68 @@ Route::get('/assistant-director-research-extension', [App\Http\Controllers\ADREC
 Route::get('/tiptto/posts/{slug}', [App\Http\Controllers\ADREController::class, 'showPost'])->name('tiptto.post.show');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Admin\PostController::class, 'index'])->name('dashboard');
-    Route::get('posts/create', [App\Http\Controllers\Admin\PostController::class, 'create'])->name('posts.create');
-    Route::post('posts', [App\Http\Controllers\Admin\PostController::class, 'store'])->name('posts.store');
-    Route::resource('news', App\Http\Controllers\NewsController::class);
-    Route::resource('announcements', App\Http\Controllers\AnnouncementController::class);
-    Route::resource('jobs', App\Http\Controllers\JobController::class);
-    Route::resource('events', App\Http\Controllers\EventController::class);
-    Route::resource('officials', App\Http\Controllers\Admin\OfficialController::class);
-    Route::resource('carousel-images', App\Http\Controllers\Admin\CarouselImageController::class);
-    Route::resource('college-pages', App\Http\Controllers\Admin\CollegePageController::class);
-    Route::resource('courses', App\Http\Controllers\Admin\CourseController::class)->except(['show']);
-    Route::resource('faculties', App\Http\Controllers\Admin\FacultyController::class)->except(['show']);
-    Route::resource('student-organizations', App\Http\Controllers\Admin\StudentOrganizationController::class)
-        ->except(['show', 'index'])
-        ->parameters(['student-organizations' => 'student_organization']);
-    Route::put('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'update'])->name('departments.update');
-    Route::delete('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'destroy'])->name('departments.destroy');
-    Route::get('categories', [App\Http\Controllers\Admin\PostController::class, 'indexCategory'])->name('categories.index');
-    Route::get('categories/create', [App\Http\Controllers\Admin\PostController::class, 'createCategory'])->name('categories.create');
-    Route::post('categories', [App\Http\Controllers\Admin\PostController::class, 'storeCategory'])->name('categories.store');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\PostController::class, 'index'])
+        ->middleware('permission:manage posts')
+        ->name('dashboard');
 
-    // Users management
-    Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except(['show']);
+    Route::middleware('permission:manage posts')->group(function () {
+        Route::get('posts/create', [App\Http\Controllers\Admin\PostController::class, 'create'])->name('posts.create');
+        Route::post('posts', [App\Http\Controllers\Admin\PostController::class, 'store'])->name('posts.store');
+        Route::resource('news', App\Http\Controllers\NewsController::class);
+        Route::resource('announcements', App\Http\Controllers\AnnouncementController::class);
+        Route::resource('jobs', App\Http\Controllers\JobController::class);
+        Route::resource('events', App\Http\Controllers\EventController::class);
+    });
 
-    // Procurement management
-    Route::get('procurements', [App\Http\Controllers\Admin\ProcurementController::class, 'index'])->name('procurements.index');
-    Route::get('procurements/create', [App\Http\Controllers\Admin\ProcurementController::class, 'create'])->name('procurements.create');
-    Route::post('procurements', [App\Http\Controllers\Admin\ProcurementController::class, 'store'])->name('procurements.store');
-    Route::get('procurements/{id}/edit', [App\Http\Controllers\Admin\ProcurementController::class, 'edit'])->name('procurements.edit');
-    Route::put('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'update'])->name('procurements.update');
-    Route::delete('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'destroy'])->name('procurements.destroy');
-    Route::delete('procurements/{id}/po', [App\Http\Controllers\Admin\ProcurementController::class, 'destroyPoFile'])->name('procurements.po.destroy');
+    Route::middleware('permission:manage categories')->group(function () {
+        Route::get('categories', [App\Http\Controllers\Admin\PostController::class, 'indexCategory'])->name('categories.index');
+        Route::get('categories/create', [App\Http\Controllers\Admin\PostController::class, 'createCategory'])->name('categories.create');
+        Route::post('categories', [App\Http\Controllers\Admin\PostController::class, 'storeCategory'])->name('categories.store');
+    });
 
-    // TIPTTO Posts Management
-    Route::resource('tiptto_posts', App\Http\Controllers\Admin\TIPTTOPostController::class);
+    Route::middleware('permission:manage officials')->group(function () {
+        Route::resource('officials', App\Http\Controllers\Admin\OfficialController::class);
+    });
 
-    // Director's Corner posts
-    Route::resource('director_posts', App\Http\Controllers\Admin\DirectorPostController::class)->except(['show']);
+    Route::middleware('permission:manage carousel')->group(function () {
+        Route::resource('carousel-images', App\Http\Controllers\Admin\CarouselImageController::class);
+    });
 
-    // Activity / audit logs
+    Route::middleware('permission:manage academics')->group(function () {
+        Route::resource('college-pages', App\Http\Controllers\Admin\CollegePageController::class);
+        Route::resource('courses', App\Http\Controllers\Admin\CourseController::class)->except(['show']);
+        Route::resource('faculties', App\Http\Controllers\Admin\FacultyController::class)->except(['show']);
+        Route::resource('student-organizations', App\Http\Controllers\Admin\StudentOrganizationController::class)
+            ->except(['show', 'index'])
+            ->parameters(['student-organizations' => 'student_organization']);
+        Route::put('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'update'])->name('departments.update');
+        Route::delete('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'destroy'])->name('departments.destroy');
+    });
+
+    Route::middleware('permission:manage users')->group(function () {
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except(['show']);
+    });
+
+    Route::middleware('permission:manage procurements')->group(function () {
+        Route::get('procurements', [App\Http\Controllers\Admin\ProcurementController::class, 'index'])->name('procurements.index');
+        Route::get('procurements/create', [App\Http\Controllers\Admin\ProcurementController::class, 'create'])->name('procurements.create');
+        Route::post('procurements', [App\Http\Controllers\Admin\ProcurementController::class, 'store'])->name('procurements.store');
+        Route::get('procurements/{id}/edit', [App\Http\Controllers\Admin\ProcurementController::class, 'edit'])->name('procurements.edit');
+        Route::put('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'update'])->name('procurements.update');
+        Route::delete('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'destroy'])->name('procurements.destroy');
+        Route::delete('procurements/{id}/po', [App\Http\Controllers\Admin\ProcurementController::class, 'destroyPoFile'])->name('procurements.po.destroy');
+    });
+
+    Route::middleware('permission:manage tiptto')->group(function () {
+        Route::resource('tiptto_posts', App\Http\Controllers\Admin\TIPTTOPostController::class);
+    });
+
+    Route::middleware('permission:manage director posts')->group(function () {
+        Route::resource('director_posts', App\Http\Controllers\Admin\DirectorPostController::class)->except(['show']);
+    });
+
     Route::get('activity-logs', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])
+        ->middleware('permission:view activity logs')
         ->name('activity-logs.index');
 });
 

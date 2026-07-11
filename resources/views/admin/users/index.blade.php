@@ -29,11 +29,11 @@
                             <td class="admin-table__cell-title">{{ $u->name }}</td>
                             <td>{{ $u->email }}</td>
                             <td>
-                                @if($u->is_admin)
-                                    <span class="admin-badge admin-badge--published">Admin</span>
-                                @else
-                                    <span class="admin-badge admin-badge--draft">User</span>
-                                @endif
+                                @forelse($u->roles as $role)
+                                    <span class="admin-badge admin-badge--published" style="margin:0.1rem;">{{ $role->name }}</span>
+                                @empty
+                                    <span class="admin-badge admin-badge--draft">No role</span>
+                                @endforelse
                             </td>
                             <td class="admin-table__actions">
                                 <div class="admin-actions-row">

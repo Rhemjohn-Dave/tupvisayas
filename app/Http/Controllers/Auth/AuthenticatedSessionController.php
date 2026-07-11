@@ -42,8 +42,8 @@ class AuthenticatedSessionController extends Controller
                 ->log('User logged in');
         }
 
-        if ($user && ($user->is_admin ?? false)) {
-            return redirect()->intended(route('admin.dashboard'));
+        if ($user && $user->canAccessAdmin()) {
+            return redirect()->intended($user->adminHomeRoute());
         }
 
         return redirect()->intended(route('home'));

@@ -125,6 +125,17 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
             </ul>
         @endcan
 
+        @can(CmsPermissions::MANAGE_ADMISSIONS)
+            <ul class="admin-sidebar__list admin-sidebar__list--root">
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.admission-schedules.index') }}"
+                        label="Admission schedules" icon="event_available"
+                        :active="request()->routeIs('admin.admission-schedules.*')"
+                        class="admin-sidebar__link--root" />
+                </li>
+            </ul>
+        @endcan
+
         @can(CmsPermissions::MANAGE_PROCUREMENTS)
             <x-admin.sidebar-collapsible title="Procurement" icon="assignment" group-id="sb-group-procurement"
                 :open="$openProcurement">

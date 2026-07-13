@@ -80,86 +80,41 @@
 
             <section class="enrollment-block" aria-labelledby="schedule-heading">
                 <h2 id="schedule-heading" class="site-section-title">Admission test schedule</h2>
-                <div class="site-table-scroll">
-                    <table class="enrollment-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Venue</th>
-                                <th scope="col">Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>January 22</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>TUP Visayas Gymnasium</td>
-                                <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>January 23</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>TUP Visayas Gymnasium</td>
-                                <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>January 24</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>TUP Visayas Gymnasium</td>
-                                <td>Capt. Sabi, Brgy Zone 12, Talisay City, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>January 28</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>Negros Occidental High School<br><span class="enrollment-table__note">Exclusive to their SHS students only</span></td>
-                                <td>Araneta Street, Barangay 39, Bacolod City, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>January 31</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>Eva J. Montilla Farm School</td>
-                                <td>Barangay Inayawan, Mun. of Cauayan, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>February 7</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>Hinigaran National High School</td>
-                                <td>Rizal Street, Brgy. III, Mun. of Hinigaran, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>February 11</td>
-                                <td>8 AM</td>
-                                <td>Bacolod City National High School<br><span class="enrollment-table__note">Exclusive to their SHS students only</span></td>
-                                <td>P. Hernandez Extension, Brgy. Taculing, Bacolod City, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>February 13</td>
-                                <td>8 AM</td>
-                                <td>Don Bosco Technical Institute<br><span class="enrollment-table__note">Exclusive to their SHS students only</span></td>
-                                <td>Victorias Milling Company (VMC) Compound, Victorias City, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>February 21</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>Do&ntilde;a Hortencia Salas Benedicto National High School — SHS Building</td>
-                                <td>Gurrea Street, Barangay 1, La Carlota City, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>February 24</td>
-                                <td>8 AM</td>
-                                <td>Pulupandan Municipal Auditorium</td>
-                                <td>Municipality of Pulupandan, Negros Occidental</td>
-                            </tr>
-                            <tr>
-                                <td>March 7</td>
-                                <td>8 AM<br>1 PM</td>
-                                <td>Negros Women for Tomorrow Foundation / Dungganon — San Carlos City</td>
-                                <td>Eco-Tourism Highway, Brgy. Palampas, San Carlos City</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                @if ($schedules->count())
+                    <div class="site-table-scroll">
+                        <table class="enrollment-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Venue</th>
+                                    <th scope="col">Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($schedules as $schedule)
+                                    <tr>
+                                        <td>{{ $schedule->exam_date->format('F j') }}</td>
+                                        <td>
+                                            @foreach ($schedule->timeLines() as $line)
+                                                {{ $line }}@if (!$loop->last)<br>@endif
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $schedule->venue }}
+                                            @if ($schedule->venue_note)
+                                                <br><span class="enrollment-table__note">{{ $schedule->venue_note }}</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $schedule->address }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p class="enrollment-note">Admission test dates will be posted here when available. Please check back or contact the Admissions Office.</p>
+                @endif
                 <p class="enrollment-note">Additional test dates may be announced based on the number of applicants. Please check the website or contact the Admissions Office for updates.</p>
             </section>
 

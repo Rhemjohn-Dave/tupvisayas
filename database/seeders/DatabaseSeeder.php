@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             AdminUserSeeder::class,
             CollegeAndCoursesSeeder::class,
+            AdmissionTestScheduleSeeder::class,
         ]);
 
         // Create test categories

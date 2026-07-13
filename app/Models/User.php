@@ -57,9 +57,18 @@ class User extends Authenticatable
      */
     public function canAccessAdmin(): bool
     {
-        return $this->can(CmsPermissions::ACCESS_ADMIN)
-            || $this->hasRole('Administrator')
-            || (bool) $this->is_admin;
+        // Legacy flag first — avoids Spatie permission cache writes failing
+        // hard when storage/ is not writable by the web server user.
+        if ((bool) $this->is_admin) {
+            return true;
+        }
+
+        try {
+            return $this->hasRole('Administrator')
+                || $this->can(CmsPermissions::ACCESS_ADMIN);
+        } catch (\Throwable) {
+            return false;
+        }
     }
 
     /**
@@ -73,6 +82,10 @@ class User extends Authenticatable
 
         if ($this->can(CmsPermissions::MANAGE_PROCUREMENTS)) {
             return route('admin.procurements.index', ['type' => 'bid_opportunity']);
+        }
+
+        if ($this->can(CmsPermissions::MANAGE_ADMISSIONS)) {
+            return route('admin.admission-schedules.index');
         }
 
         if ($this->can(CmsPermissions::MANAGE_ACADEMICS)) {

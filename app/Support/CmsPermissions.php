@@ -26,6 +26,8 @@ final class CmsPermissions
 
     public const MANAGE_PROCUREMENTS = 'manage procurements';
 
+    public const MANAGE_ADMISSIONS = 'manage admissions';
+
     /**
      * @return list<string>
      */
@@ -43,6 +45,7 @@ final class CmsPermissions
             self::VIEW_ACTIVITY_LOGS,
             self::MANAGE_ACADEMICS,
             self::MANAGE_PROCUREMENTS,
+            self::MANAGE_ADMISSIONS,
         ];
     }
 
@@ -65,6 +68,7 @@ final class CmsPermissions
             self::VIEW_ACTIVITY_LOGS => 'Activity logs',
             self::MANAGE_ACADEMICS => 'Academics pages',
             self::MANAGE_PROCUREMENTS => 'Bidding / procurement',
+            self::MANAGE_ADMISSIONS => 'Admission test schedules',
         ];
     }
 }

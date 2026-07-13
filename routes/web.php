@@ -38,7 +38,7 @@ Route::get('/academics/coac', [App\Http\Controllers\CollegePageController::class
 Route::get('/academics/coet', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coet')->name('academics.coet');
 Route::view('/admissions', 'pages.admissions')->name('admissions');
 Route::get('/admissions/undergraduate-programs', [App\Http\Controllers\AdmissionsController::class, 'undergraduatePrograms'])->name('admissions.undergraduate');
-Route::view('/admissions/enrollment-procedure', 'pages.admissions.enrollment_procedure')->name('admissions.enrollment');
+Route::get('/admissions/enrollment-procedure', [App\Http\Controllers\AdmissionsController::class, 'enrollmentProcedure'])->name('admissions.enrollment');
 Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
 Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');
@@ -119,6 +119,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::put('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'update'])->name('procurements.update');
         Route::delete('procurements/{id}', [App\Http\Controllers\Admin\ProcurementController::class, 'destroy'])->name('procurements.destroy');
         Route::delete('procurements/{id}/po', [App\Http\Controllers\Admin\ProcurementController::class, 'destroyPoFile'])->name('procurements.po.destroy');
+    });
+
+    Route::middleware('permission:manage admissions')->group(function () {
+        Route::resource('admission-schedules', App\Http\Controllers\Admin\AdmissionTestScheduleController::class)
+            ->except(['show']);
     });
 
     Route::middleware('permission:manage tiptto')->group(function () {

@@ -17,7 +17,7 @@
         <div class="site-footer__col">
             <h2>Quick links</h2>
             <ul>
-                <li><a href="{{ route('admissions.undergraduate') }}">Admissions</a></li>
+                <li><a href="{{ route('admissions.enrollment') }}">Admissions</a></li>
                 <li><a href="{{ route('academics') }}">Academics</a></li>
                 <li><a href="{{ route('news_events') }}">News &amp; Events</a></li>
                 <li><a href="{{ route('student_services') }}">Student services</a></li>

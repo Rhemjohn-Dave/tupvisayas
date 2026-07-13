@@ -33,7 +33,9 @@ a.btn-small,
 :is(.site-main.container, body.admin .admin-content)
     a:not(.btn):not(.btn-large):not(.btn-small):not(.site-cta):not(
         .home-card
-    ):not(.home-quick a):not(.site-btn-share):not(.director-filters__link):not(.grey):not(.black-text) {
+    ):not(.home-quick a):not(.site-btn-share):not(.director-filters__link):not(.grey):not(.black-text):not(
+        .program-card__cta
+    ):not(.college-course-card__cta):not(.enrollment-actions__cta):not(.program-hero__cta) {
     color: var(--color-brand, #9e1b32);
 }
 

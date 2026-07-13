@@ -40,7 +40,12 @@
                                     <p class="program-card__description">{{ Str::limit(strip_tags($course->description), 160) }}</p>
                                 @endif
 
-                                <a class="program-card__link" href="{{ route('academics.show', $college->college) }}">View college page</a>
+                                <div class="program-card__actions">
+                                    <a class="program-card__link"
+                                        href="{{ route('academics.program', [$collegeRouteMap[$college->college] ?? $college->routeSlug(), $course->slug]) }}">Learn more</a>
+                                    <a class="program-card__cta"
+                                        href="{{ route('admissions.enrollment') }}">Apply Now</a>
+                                </div>
                             </article>
                         @endforeach
                     </div>

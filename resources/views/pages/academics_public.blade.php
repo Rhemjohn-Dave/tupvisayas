@@ -51,7 +51,7 @@
                     @if ($collegePage->courses->count())
                         <div class="college-course-list">
                             @foreach ($collegePage->courses as $course)
-                                <article class="college-course-card mission-card">
+                                <article class="college-course-card mission-card" id="course-{{ $course->id }}">
                                     <div class="college-course-card__media">
                                         @if ($course->logo)
                                             <img class="college-course-card__logo"
@@ -79,8 +79,12 @@
                                         @if ($course->description)
                                             <div class="site-prose college-course-card__desc">{!! clean($course->description) !!}</div>
                                         @endif
-                                        <a class="college-course-card__link"
-                                            href="{{ route('accreditation.course.show', $course) }}">View accreditation</a>
+                                        <div class="college-course-card__actions">
+                                            <a class="college-course-card__link"
+                                                href="{{ route('academics.program', [$collegePage->routeSlug(), $course->slug]) }}">Learn more</a>
+                                            <a class="college-course-card__cta"
+                                                href="{{ route('admissions.enrollment') }}">Apply Now</a>
+                                        </div>
                                     </div>
                                 </article>
                             @endforeach

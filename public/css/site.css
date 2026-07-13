@@ -2707,8 +2707,15 @@ body {
     flex: 1;
 }
 
-.ug-programs .program-card__link {
+.ug-programs .program-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
     margin-top: auto;
+}
+
+.ug-programs .program-card__link {
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-brand);
@@ -2723,6 +2730,35 @@ body {
 .ug-programs .program-card__link:focus-visible {
     box-shadow: var(--focus-ring);
     border-radius: 2px;
+}
+
+.ug-programs .program-card__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    background: var(--color-brand);
+    color: var(--color-on-brand);
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.ug-programs .program-card__cta:visited {
+    color: var(--color-on-brand);
+}
+
+.ug-programs .program-card__cta:hover {
+    background: var(--color-brand-hover);
+    color: var(--color-on-brand);
+}
+
+.ug-programs .program-card__cta:focus-visible {
+    box-shadow: var(--focus-ring);
 }
 
 .ug-programs .program-empty {
@@ -2764,6 +2800,66 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--space-10) var(--space-4) 0;
+}
+
+.enrollment-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3) var(--space-5);
+    margin: 0 0 var(--space-8);
+}
+
+.enrollment-actions__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-5);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    background: var(--color-brand);
+    color: #fff;
+    white-space: nowrap;
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+.enrollment-actions__cta:hover {
+    background: var(--color-brand-hover);
+    color: #fff;
+}
+
+.enrollment-actions__cta:focus-visible {
+    box-shadow: var(--focus-ring);
+}
+
+.enrollment-actions__cta:active {
+    transform: translateY(1px);
+}
+
+.enrollment-actions__link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.enrollment-actions__link:hover {
+    color: var(--color-brand-hover);
+    text-decoration: underline;
+}
+
+.enrollment-actions__link:focus-visible {
+    box-shadow: var(--focus-ring);
+    border-radius: 2px;
 }
 
 .enrollment-about {
@@ -4937,6 +5033,13 @@ body {
     margin: 0 0 var(--space-4);
 }
 
+.college-course-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+}
+
 .college-course-card__link {
     display: inline-flex;
     align-items: center;
@@ -4949,6 +5052,40 @@ body {
 .college-course-card__link:hover {
     color: var(--color-brand-hover);
     text-decoration: underline;
+}
+
+.college-course-card__link:focus-visible {
+    box-shadow: var(--focus-ring);
+    border-radius: 2px;
+}
+
+.college-course-card__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    background: var(--color-brand);
+    color: var(--color-on-brand);
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.college-course-card__cta:visited {
+    color: var(--color-on-brand);
+}
+
+.college-course-card__cta:hover {
+    background: var(--color-brand-hover);
+    color: var(--color-on-brand);
+}
+
+.college-course-card__cta:focus-visible {
+    box-shadow: var(--focus-ring);
 }
 
 .college-dept.mission-card {
@@ -5328,5 +5465,177 @@ body {
     .privacy-consent__link {
         flex: 1;
         text-align: center;
+    }
+}
+
+/* --- Public program page --- */
+.site-page--program {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-bottom: var(--space-10);
+}
+
+.program-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.program-breadcrumb a {
+    color: var(--color-brand);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.program-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.program-hero {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-5);
+    align-items: start;
+    margin: 0 0 var(--space-8);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.program-hero__logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    display: block;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-alt);
+}
+
+.program-hero__logo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--text-xl);
+    color: var(--color-brand);
+    background: var(--color-brand-muted);
+}
+
+.program-hero__college {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.program-hero__title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: var(--color-brand);
+    line-height: var(--leading-tight);
+}
+
+.program-hero__actions,
+.program-requirements__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+}
+
+.program-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-5);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    background: var(--color-brand);
+    color: #fff;
+    white-space: nowrap;
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+.program-hero__cta:hover {
+    background: var(--color-brand-hover);
+    color: #fff;
+}
+
+.program-hero__cta:focus-visible {
+    box-shadow: var(--focus-ring);
+}
+
+.program-hero__link {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.program-hero__link:hover {
+    text-decoration: underline;
+}
+
+.program-section {
+    margin: 0 0 var(--space-8);
+}
+
+.program-requirements p {
+    margin: 0 0 var(--space-4);
+}
+
+.program-requirements__note {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+.program-apply {
+    margin: var(--space-8) 0 0;
+    padding: var(--space-6);
+    border-top: 3px solid var(--color-brand);
+    background: var(--color-surface-alt);
+    text-align: center;
+}
+
+.program-apply__title {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-brand);
+}
+
+.program-apply__text {
+    margin: 0 0 var(--space-4);
+    color: var(--color-text-muted);
+}
+
+.program-apply .program-hero__actions {
+    justify-content: center;
+}
+
+@media (max-width: 640px) {
+    .program-hero {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .program-hero__actions,
+    .program-requirements__actions {
+        justify-content: center;
     }
 }

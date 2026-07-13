@@ -20,11 +20,7 @@ class AdmissionsController extends Controller
             ->get();
 
         // Map full college names to route short codes
-        $collegeRouteMap = [
-            'College of Engineering' => 'coe',
-            'College of Engineering Technology' => 'coet',
-            'College of Automation and Control' => 'coac',
-        ];
+        $collegeRouteMap = CollegePage::ROUTE_SLUGS;
 
         return view('pages.admissions.undergraduate_programs', compact('colleges', 'collegeRouteMap'));
     }

@@ -27,6 +27,18 @@
             </div>
 
             <div class="admin-form__group">
+                <label class="admin-label" for="slug">URL slug</label>
+                <input class="admin-input" type="text" name="slug" id="slug"
+                    value="{{ old('slug', $course->slug) }}" pattern="[a-z0-9]+(?:-[a-z0-9]+)*">
+                <p class="admin-form__hint">Public URL:
+                    /academics/{{ $college->routeSlug() }}/programs/<strong>{{ old('slug', $course->slug) ?: '…' }}</strong>
+                </p>
+                @error('slug')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="admin-form__group">
                 <label class="admin-label" for="description">Description</label>
                 <textarea name="description" id="description"
                     class="admin-textarea wysiwyg">{{ old('description', $course->description) }}</textarea>
@@ -34,6 +46,8 @@
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror
             </div>
+
+            @include('admin.courses.partials.microsite-fields', ['course' => $course])
 
             <div class="admin-form__group">
                 <label class="admin-label" for="logo">Course logo</label>

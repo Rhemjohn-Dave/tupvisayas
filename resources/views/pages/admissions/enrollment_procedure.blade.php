@@ -13,6 +13,14 @@
             <h1 class="site-page-title site-page-title--center">Enrollment procedure</h1>
             <p class="site-page-intro">Freshmen admission application and testing guidelines for TUP Visayas.</p>
 
+            <div class="enrollment-actions" role="group" aria-label="Quick links">
+                <a class="enrollment-actions__cta"
+                    href="https://ers.tup.edu.ph/aims/applicants/"
+                    target="_blank"
+                    rel="noopener noreferrer">Apply on ERS</a>
+                <a class="enrollment-actions__link" href="#admission-test-schedule">View admission test schedule</a>
+            </div>
+
             <section class="enrollment-about" aria-labelledby="enrollment-about-heading">
                 <div class="enrollment-about__content">
                     <h2 id="enrollment-about-heading" class="enrollment-about__title">Be Haligi ng Bayan. Build skills, shape the nation.</h2>
@@ -78,7 +86,7 @@
                 </div>
             </article>
 
-            <section class="enrollment-block" aria-labelledby="schedule-heading">
+            <section id="admission-test-schedule" class="enrollment-block" aria-labelledby="schedule-heading">
                 <h2 id="schedule-heading" class="site-section-title">Admission test schedule</h2>
                 @if ($schedules->count())
                     <div class="site-table-scroll">

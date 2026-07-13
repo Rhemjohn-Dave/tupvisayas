@@ -38,9 +38,10 @@
                             </svg>
                         </button>
                         <ul id="desk-admission" class="site-nav__panel" hidden>
-                            <li><a href="{{ route('admissions') }}">Graduate Programs</a></li>
-                            <li><a href="{{ route('admissions.undergraduate') }}">Undergraduate Programs</a></li>
                             <li><a href="{{ route('admissions.enrollment') }}">Enrollment (Freshmen)</a></li>
+                            <li><a href="{{ route('admissions.enrollment') }}#admission-test-schedule">Admission test schedule</a></li>
+                            <li><a href="https://ers.tup.edu.ph/aims/applicants/" target="_blank"
+                                    rel="noopener noreferrer">Apply on ERS</a></li>
                             <li><a href="{{ route('contact') }}">Contact Information</a></li>
                         </ul>
                     </li>
@@ -68,6 +69,7 @@
                             </svg>
                         </button>
                         <ul id="desk-academics" class="site-nav__panel" hidden>
+                            <li><a href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a></li>
                             @if (isset($navbarCollegePages) && $navbarCollegePages->count())
                                 @foreach ($navbarCollegePages as $college)
                                     <li><a
@@ -165,7 +167,7 @@
     </div>
 
     @unless ($isAdmin)
-        <a href="{{ route('admissions.undergraduate') }}" class="site-cta">Apply Now</a>
+        <a href="{{ route('admissions.enrollment') }}" class="site-cta">Apply Now</a>
     @endunless
 </div>
 
@@ -196,9 +198,10 @@
             <details>
                 <summary>Admission</summary>
                 <ul class="site-drawer__sub">
-                    <li><a href="{{ route('admissions') }}">Graduate Programs</a></li>
-                    <li><a href="{{ route('admissions.undergraduate') }}">Undergraduate Programs</a></li>
                     <li><a href="{{ route('admissions.enrollment') }}">Enrollment (Freshmen)</a></li>
+                    <li><a href="{{ route('admissions.enrollment') }}#admission-test-schedule">Admission test schedule</a></li>
+                    <li><a href="https://ers.tup.edu.ph/aims/applicants/" target="_blank"
+                            rel="noopener noreferrer">Apply on ERS</a></li>
                     <li><a href="{{ route('contact') }}">Contact Information</a></li>
                 </ul>
             </details>
@@ -214,6 +217,7 @@
             <details>
                 <summary>Academics</summary>
                 <ul class="site-drawer__sub">
+                    <li><a href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a></li>
                     @if (isset($navbarCollegePages) && $navbarCollegePages->count())
                         @foreach ($navbarCollegePages as $college)
                             <li><a

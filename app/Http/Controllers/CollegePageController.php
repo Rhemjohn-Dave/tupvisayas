@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CollegePage;
 use App\Models\Course;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CollegePageController extends Controller
 {
@@ -17,32 +19,44 @@ class CollegePageController extends Controller
         return view('pages.academics.index', compact('colleges'));
     }
 
-    public function showPublic($college)
+    public function showPublic(string $college): View|RedirectResponse
     {
-        $collegeName = CollegePage::nameFromRouteSlug($college);
+        $collegePage = CollegePage::findByRouteParam($college);
+        if (! $collegePage) {
+            abort(404);
+        }
 
-        $collegePage = CollegePage::where('college', $collegeName)
-            ->with(['courses', 'studentOrganizations'])
-            ->firstOrFail();
+        $canonical = $collegePage->routeSlug();
+        if ($college !== $canonical) {
+            return redirect()->route('academics.show', $canonical, 301);
+        }
+
+        $collegePage->load(['courses', 'studentOrganizations']);
 
         return view('pages.academics_public', compact('collegePage'));
     }
 
-    public function showProgram(string $college, Course $course)
+    public function showProgram(string $college, Course $course): View|RedirectResponse
     {
-        $collegeName = CollegePage::nameFromRouteSlug($college);
-
-        $collegePage = CollegePage::where('college', $collegeName)->firstOrFail();
+        $collegePage = CollegePage::findByRouteParam($college);
+        if (! $collegePage) {
+            abort(404);
+        }
 
         if ((int) $course->college_page_id !== (int) $collegePage->id) {
             abort(404);
+        }
+
+        $canonical = $collegePage->routeSlug();
+        if ($college !== $canonical) {
+            return redirect()->route('academics.program', [$canonical, $course->slug], 301);
         }
 
         $course->load(['department.faculties']);
 
         return view('pages.academics.program', [
             'collegePage' => $collegePage,
-            'collegeSlug' => $collegePage->routeSlug(),
+            'collegeSlug' => $canonical,
             'course' => $course,
             'faculties' => $course->department?->faculties ?? collect(),
         ]);

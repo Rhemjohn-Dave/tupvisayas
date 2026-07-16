@@ -9,17 +9,19 @@ class AdmissionsController extends Controller
 {
     public function undergraduatePrograms()
     {
-        // Get all undergraduate programs from COE, COET, and COAC
-        // Note: The database stores full college names, not short codes
-        $colleges = CollegePage::whereIn('college', [
-            'College of Engineering',
-            'College of Engineering Technology',
-            'College of Automation and Control'
-        ])
+        $colleges = CollegePage::query()
+            ->where(function ($query) {
+                $query->whereIn('college', [
+                    'College of Engineering',
+                    'College of Engineering Technology',
+                    'College of Automation and Control',
+                    'College of Automation and Control Engineering',
+                ])->orWhere('college', 'like', 'College of Automation and Control%');
+            })
             ->with('courses')
+            ->orderBy('college')
             ->get();
 
-        // Map full college names to route short codes
         $collegeRouteMap = CollegePage::ROUTE_SLUGS;
 
         return view('pages.admissions.undergraduate_programs', compact('colleges', 'collegeRouteMap'));

@@ -6,7 +6,7 @@
     <x-admin.page-header :title="'Edit academics: ' . $college->college"
         subtitle="Manage the public college page shown under Academics in the site menu.">
         <x-slot name="actions">
-            <a href="{{ route('academics.show', $college->college) }}" class="admin-btn admin-btn--ghost"
+            <a href="{{ route('academics.show', $college->routeSlug()) }}" class="admin-btn admin-btn--ghost"
                 target="_blank" rel="noopener noreferrer">
                 <i class="material-icons" aria-hidden="true">open_in_new</i>
                 View on site
@@ -58,8 +58,8 @@
                         <div class="admin-form__group">
                             <span class="admin-label">Public page URL</span>
                             <p class="admin-form__hint" style="margin-top:0;">
-                                <a href="{{ route('academics.show', $college->college) }}" target="_blank" rel="noopener noreferrer">
-                                    {{ route('academics.show', $college->college) }}
+                                <a href="{{ route('academics.show', $college->routeSlug()) }}" target="_blank" rel="noopener noreferrer">
+                                    {{ route('academics.show', $college->routeSlug()) }}
                                 </a>
                             </p>
                         </div>

@@ -5551,6 +5551,11 @@ body {
     gap: var(--space-3) var(--space-5);
 }
 
+.program-hero__actions--center {
+    justify-content: center;
+    margin: 0 0 var(--space-8);
+}
+
 .program-hero__cta {
     display: inline-flex;
     align-items: center;
@@ -5625,6 +5630,62 @@ body {
 
 .program-apply .program-hero__actions {
     justify-content: center;
+}
+
+.site-page--academics-hub,
+.site-page--facilities,
+.site-page--student-services {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-bottom: var(--space-10);
+}
+
+.academics-hub-college {
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.academics-hub-college:last-child {
+    border-bottom: none;
+}
+
+.academics-hub-college__title {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    line-height: var(--leading-tight);
+}
+
+.academics-hub-college__title a {
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.academics-hub-college__title a:hover {
+    text-decoration: underline;
+}
+
+.academics-hub-college__meta {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.academics-hub-college__text {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-width: 42rem;
+}
+
+.facilities-note {
+    margin-top: var(--space-6);
+}
+
+.mission-card .program-requirements__actions {
+    margin-top: var(--space-4);
 }
 
 @media (max-width: 640px) {

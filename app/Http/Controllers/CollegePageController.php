@@ -7,6 +7,16 @@ use App\Models\Course;
 
 class CollegePageController extends Controller
 {
+    public function index()
+    {
+        $colleges = CollegePage::query()
+            ->withCount('courses')
+            ->orderBy('college')
+            ->get();
+
+        return view('pages.academics.index', compact('colleges'));
+    }
+
     public function showPublic($college)
     {
         $collegeName = CollegePage::nameFromRouteSlug($college);

@@ -2,6 +2,22 @@
 
 @section('title', $collegePage->college . ' - TUP Visayas')
 
+@section('head')
+    @php
+        $metaDescription = 'Programs, faculty, and college information for ' . $collegePage->college . ' at TUP Visayas.';
+    @endphp
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta property="og:title" content="{{ $collegePage->college }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @if ($collegePage->cover_photo)
+        <meta property="og:image" content="{{ asset('storage/' . $collegePage->cover_photo) }}">
+    @else
+        <meta property="og:image" content="{{ asset('images/tup-logo.png') }}">
+    @endif
+@endsection
+
 @section('content')
     <div class="section site-page site-page--college">
         @if ($collegePage->cover_photo)
@@ -81,7 +97,7 @@
                                         @endif
                                         <div class="college-course-card__actions">
                                             <a class="college-course-card__link"
-                                                href="{{ route('academics.program', [$collegePage->routeSlug(), $course->slug]) }}">Learn more</a>
+                                                href="{{ route('academics.program', [$collegePage->routeSlug(), $course->slug]) }}">Program details</a>
                                             <a class="college-course-card__cta"
                                                 href="{{ route('admissions.enrollment') }}">Apply Now</a>
                                         </div>

@@ -54,10 +54,9 @@
                             </svg>
                         </button>
                         <ul id="desk-students" class="site-nav__panel" hidden>
-                            <li><a href="{{ route('student_services') }}">Office of Student Affairs</a></li>
                             <li><a href="{{ route('student_services') }}">Student Services</a></li>
+                            <li><a href="{{ route('student_services') }}#osa">Office of Student Affairs</a></li>
                             <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure</a></li>
-                            <li><a href="{{ route('student_services') }}">Student Handbook</a></li>
                         </ul>
                     </li>
                     <li class="site-nav__item">
@@ -69,15 +68,14 @@
                             </svg>
                         </button>
                         <ul id="desk-academics" class="site-nav__panel" hidden>
+                            <li><a href="{{ route('academics') }}">Academics overview</a></li>
                             <li><a href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a></li>
                             @if (isset($navbarCollegePages) && $navbarCollegePages->count())
                                 @foreach ($navbarCollegePages as $college)
                                     <li><a
-                                            href="{{ route('academics.show', $college->college) }}">{{ $college->college }}</a>
+                                            href="{{ route('academics.show', $college->routeSlug()) }}">{{ $college->college }}</a>
                                     </li>
                                 @endforeach
-                            @else
-                                <li><a href="{{ route('academics') }}">Programs overview</a></li>
                             @endif
                         </ul>
                     </li>
@@ -208,24 +206,22 @@
             <details>
                 <summary>Students</summary>
                 <ul class="site-drawer__sub">
-                    <li><a href="{{ route('student_services') }}">Office of Student Affairs</a></li>
                     <li><a href="{{ route('student_services') }}">Student Services</a></li>
+                    <li><a href="{{ route('student_services') }}#osa">Office of Student Affairs</a></li>
                     <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure</a></li>
-                    <li><a href="{{ route('student_services') }}">Student Handbook</a></li>
                 </ul>
             </details>
             <details>
                 <summary>Academics</summary>
                 <ul class="site-drawer__sub">
+                    <li><a href="{{ route('academics') }}">Academics overview</a></li>
                     <li><a href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a></li>
                     @if (isset($navbarCollegePages) && $navbarCollegePages->count())
                         @foreach ($navbarCollegePages as $college)
                             <li><a
-                                    href="{{ route('academics.show', $college->college) }}">{{ $college->college }}</a>
+                                    href="{{ route('academics.show', $college->routeSlug()) }}">{{ $college->college }}</a>
                             </li>
                         @endforeach
-                    @else
-                        <li><a href="{{ route('academics') }}">Programs overview</a></li>
                     @endif
                 </ul>
             </details>

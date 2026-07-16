@@ -2,6 +2,24 @@
 
 @section('title', $course->name . ' - ' . $collegePage->college . ' - TUP Visayas')
 
+@section('head')
+    @php
+        $metaDescription = $course->hasSection('description')
+            ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($course->description))), 155)
+            : $course->name . ' undergraduate program at ' . $collegePage->college . ', TUP Visayas.';
+    @endphp
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta property="og:title" content="{{ $course->name }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @if ($course->logo)
+        <meta property="og:image" content="{{ asset('storage/' . $course->logo) }}">
+    @else
+        <meta property="og:image" content="{{ asset('images/tup-logo.png') }}">
+    @endif
+@endsection
+
 @section('content')
     <div class="section site-page site-page--program">
         <nav class="program-breadcrumb" aria-label="Breadcrumb">

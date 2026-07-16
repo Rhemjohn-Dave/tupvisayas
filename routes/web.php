@@ -25,14 +25,14 @@ Route::get('philgeps-posting', [ProcurementController::class, 'philgepsPosting']
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('/about', 'pages.about')->name('about');
+Route::redirect('/about', '/about/history', 301)->name('about');
 Route::view('/about/history', 'pages.about.history')->name('about.history');
 Route::view('/about/mission', 'pages.about.mission')->name('about.mission');
 Route::view('/about/values', 'pages.about.values')->name('about.values');
 Route::view('/about/goals', 'pages.about.goals')->name('about.goals');
 Route::view('/about/mandate', 'pages.about.mandate')->name('about.mandate');
 Route::view('/about/hymn', 'pages.about.hymn')->name('about.hymn');
-Route::view('/academics', 'pages.programs')->name('academics');
+Route::get('/academics', [App\Http\Controllers\CollegePageController::class, 'index'])->name('academics');
 Route::get('/academics/undergraduate-programs', [App\Http\Controllers\AdmissionsController::class, 'undergraduatePrograms'])->name('academics.undergraduate');
 Route::get('/academics/coe', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coe')->name('academics.coe');
 Route::get('/academics/coac', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coac')->name('academics.coac');

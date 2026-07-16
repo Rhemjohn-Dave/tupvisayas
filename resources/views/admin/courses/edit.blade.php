@@ -5,12 +5,55 @@
 @section('admin_content')
     <x-admin.page-header title="Edit course" :subtitle="$college->college">
         <x-slot name="actions">
+            @if ($course->slug)
+                <a href="{{ route('academics.program', [$college->routeSlug(), $course->slug]) }}"
+                    class="admin-btn admin-btn--ghost" target="_blank" rel="noopener noreferrer">
+                    <i class="material-icons" aria-hidden="true">open_in_new</i>
+                    View on site
+                </a>
+            @endif
             <a href="{{ route('admin.college-pages.edit', $college->id) }}?tab=admin-college-courses" class="admin-btn admin-btn--ghost">
                 <i class="material-icons" aria-hidden="true">arrow_back</i>
                 Back to college page
             </a>
         </x-slot>
     </x-admin.page-header>
+
+    @php
+        $sectionStatus = [
+            'description' => 'Overview',
+            'curriculum' => 'Curriculum',
+            'facilities_labs' => 'Labs & facilities',
+            'accreditation_info' => 'Accreditation',
+            'board_performance' => 'Board performance',
+            'scholarships' => 'Scholarships',
+        ];
+    @endphp
+
+    <div class="admin-form-card admin-form admin-course-status">
+        <h2 class="admin-section-title">Program page content</h2>
+        <p class="admin-form__hint">Empty sections stay hidden on the public program page until you add content.</p>
+        <ul class="admin-section-checklist">
+            @foreach ($sectionStatus as $field => $label)
+                <li class="admin-section-checklist__item">
+                    @if ($course->hasSection($field))
+                        <span class="admin-badge admin-badge--published">Filled</span>
+                    @else
+                        <span class="admin-badge admin-badge--draft">Empty</span>
+                    @endif
+                    <span>{{ $label }}</span>
+                </li>
+            @endforeach
+            <li class="admin-section-checklist__item">
+                @if ($course->logo)
+                    <span class="admin-badge admin-badge--published">Filled</span>
+                @else
+                    <span class="admin-badge admin-badge--draft">Empty</span>
+                @endif
+                <span>Logo</span>
+            </li>
+        </ul>
+    </div>
 
     <div class="admin-form-card admin-form">
         <form method="POST" action="{{ route('admin.courses.update', $course->id) }}" enctype="multipart/form-data">
@@ -39,7 +82,7 @@
             </div>
 
             <div class="admin-form__group">
-                <label class="admin-label" for="description">Description</label>
+                <label class="admin-label" for="description">Description / overview</label>
                 <textarea name="description" id="description"
                     class="admin-textarea wysiwyg">{{ old('description', $course->description) }}</textarea>
                 @error('description')

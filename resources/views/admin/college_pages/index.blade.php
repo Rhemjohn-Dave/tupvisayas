@@ -31,7 +31,7 @@
                             <td>{{ $college->courses_count }}</td>
                             <td class="admin-table__actions">
                                 <div class="admin-actions-row">
-                                    <a href="{{ route('academics.show', $college->college) }}"
+                                    <a href="{{ route('academics.show', $college->routeSlug()) }}"
                                         class="admin-btn admin-btn--icon admin-btn--primary" target="_blank"
                                         rel="noopener noreferrer" title="View on site" aria-label="View on site">
                                         <i class="material-icons" aria-hidden="true">visibility</i>

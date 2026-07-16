@@ -1466,6 +1466,30 @@ body.admin.sidebar-collapsed .admin-shell {
     color: #b45309;
 }
 
+.admin-section-checklist {
+    list-style: none;
+    margin: var(--admin-space-3) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--admin-space-2) var(--admin-space-4);
+}
+
+.admin-section-checklist__item {
+    display: flex;
+    align-items: center;
+    gap: var(--admin-space-2);
+    font-size: 0.9rem;
+}
+
+.admin-course-status {
+    margin-bottom: var(--admin-space-4);
+}
+
+.admin-course-status .admin-section-title {
+    margin-top: 0;
+}
+
 /* ——— Pagination ——— */
 .admin-pagination-wrap {
     padding: var(--admin-space-4);

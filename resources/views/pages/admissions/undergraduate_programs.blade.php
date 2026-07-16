@@ -1,6 +1,20 @@
 @php use Illuminate\Support\Str; @endphp
 @extends('layouts.app')
 
+@section('title', 'Undergraduate Programs - TUP Visayas')
+
+@section('head')
+    @php
+        $metaDescription = 'Degree programs offered by each college at the Technological University of the Philippines Visayas.';
+    @endphp
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta property="og:title" content="Undergraduate programs - TUP Visayas">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/tup-logo.png') }}">
+@endsection
+
 @section('content')
     <div class="section site-page site-page--programs ug-programs">
         <h1 class="site-page-title site-page-title--center">Undergraduate programs</h1>
@@ -42,7 +56,7 @@
 
                                 <div class="program-card__actions">
                                     <a class="program-card__link"
-                                        href="{{ route('academics.program', [$collegeRouteMap[$college->college] ?? $college->routeSlug(), $course->slug]) }}">Learn more</a>
+                                        href="{{ route('academics.program', [$collegeRouteMap[$college->college] ?? $college->routeSlug(), $course->slug]) }}">Program details</a>
                                     <a class="program-card__cta"
                                         href="{{ route('admissions.enrollment') }}">Apply Now</a>
                                 </div>

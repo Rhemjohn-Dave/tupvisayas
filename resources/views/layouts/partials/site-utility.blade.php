@@ -18,7 +18,7 @@
                     target="_blank" rel="noopener noreferrer">Citizen's Charter</a></li>
             <li><a href="{{ route('jobs') }}">Careers</a></li>
             <li><a href="https://www.gov.ph/feedback" target="_blank" rel="noopener noreferrer">Feedback</a></li>
-            <li><a href="https://www.gov.ph/contact" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
+            <li><a href="{{ route('contact') }}">Contact Us</a></li>
             @guest
                 <li><a href="{{ route('login') }}">Admin Login</a></li>
             @endguest

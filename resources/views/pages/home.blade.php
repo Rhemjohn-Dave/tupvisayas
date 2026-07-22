@@ -53,13 +53,11 @@
             </div>
         </section>
 
-
-
-        {{-- Latest updates --}}
+        {{-- Campus highlights (max 3) --}}
         <section class="home-section" aria-labelledby="updates-heading">
-            <h2 id="updates-heading" class="home-section__title">Latest updates</h2>
+            <h2 id="updates-heading" class="home-section__title">Campus highlights</h2>
             <div class="home-updates">
-                @foreach ($latestUpdates as $item)
+                @forelse ($latestUpdates as $item)
                     @php
                         $href =
                             $item->type === 'News'
@@ -82,16 +80,56 @@
                             </p>
                         </div>
                     </a>
-                @endforeach
+                @empty
+                    <p class="home-empty">No campus highlights posted yet.</p>
+                @endforelse
             </div>
             <a class="home-link-all" href="{{ route('news_events') }}">View all news &amp; events</a>
+        </section>
+
+        {{-- Bid opportunities snippet --}}
+        <section class="home-section" aria-labelledby="bids-heading">
+            <h2 id="bids-heading" class="home-section__title">Bid opportunities</h2>
+            <p class="home-section__lede">Recent public bidding notices from TUP Visayas procurement.</p>
+
+            <div class="home-bids" role="list">
+                @forelse ($bidOpportunities as $bid)
+                    <article class="home-bid" role="listitem">
+                        <div class="home-bid__main">
+                            <p class="home-bid__ref">{{ $bid->reference_no }}</p>
+                            <h3 class="home-bid__title">{{ $bid->title }}</h3>
+                            <p class="home-bid__meta">
+                                <span>{{ $bid->category }}</span>
+                                <span aria-hidden="true">·</span>
+                                <span>
+                                    @if ($bid->closing_date)
+                                        Closes {{ \Carbon\Carbon::parse($bid->closing_date)->format('M j, Y') }}
+                                    @else
+                                        Posted {{ \Carbon\Carbon::parse($bid->posting_date)->format('M j, Y') }}
+                                    @endif
+                                </span>
+                            </p>
+                        </div>
+                        <div class="home-bid__aside">
+                            @if ($bid->status === 'awarded')
+                                <span class="home-bid__status home-bid__status--awarded">Awarded</span>
+                            @else
+                                <span class="home-bid__status home-bid__status--pending">Pending</span>
+                            @endif
+                        </div>
+                    </article>
+                @empty
+                    <p class="home-empty">No bid opportunities posted yet.</p>
+                @endforelse
+            </div>
+            <a class="home-link-all" href="{{ route('procurement.bid') }}">View all bid opportunities</a>
         </section>
 
         {{-- Jobs --}}
         <section class="home-section" aria-labelledby="jobs-heading">
             <h2 id="jobs-heading" class="home-section__title">Career opportunities</h2>
             <div class="home-jobs">
-                @foreach ($jobs as $item)
+                @forelse ($jobs as $item)
                     <article class="home-job-card">
                         @if ($item->picture)
                             <div class="home-job-card__img">
@@ -107,7 +145,9 @@
                             <a href="{{ route('jobs.show', $item->slug) }}">Read more</a>
                         </div>
                     </article>
-                @endforeach
+                @empty
+                    <p class="home-empty">No job postings at this time.</p>
+                @endforelse
             </div>
             <a class="home-link-all" href="{{ route('jobs') }}">View all job postings</a>
         </section>

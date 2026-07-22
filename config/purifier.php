@@ -25,10 +25,20 @@ return [
     'settings'      => [
         'default' => [
             'HTML.Doctype'             => 'HTML 4.01 Transitional',
-            'HTML.Allowed'             => 'div,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src]',
-            'CSS.AllowedProperties'    => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
-            'AutoFormat.AutoParagraph' => true,
-            'AutoFormat.RemoveEmpty'   => true,
+            // Toast UI Editor output: headings, lists, tables, code, images with size
+            'HTML.Allowed'             => 'div[style|class],b,strong,i,em,u,s,del,strike,a[href|title|target|rel],'
+                . 'ul[class],ol[class|start],li[class],p[style|class],br,hr,'
+                . 'h1[style|class],h2[style|class],h3[style|class],h4[style|class],h5[style|class],h6[style|class],'
+                . 'span[style|class],blockquote[style|class],pre[style|class],code[style|class],'
+                . 'figure[class|style],figcaption[class|style],'
+                . 'table[style|class|width|border],thead,tbody,tfoot,tr[style|class],'
+                . 'th[style|class|colspan|rowspan|align|width],td[style|class|colspan|rowspan|align|width],'
+                . 'img[src|alt|title|width|height|style|class]',
+            'CSS.AllowedProperties'    => 'font,font-size,font-weight,font-style,font-family,text-decoration,'
+                . 'padding-left,color,background-color,text-align,width,height,margin,margin-left,margin-right',
+            // Toast UI already emits structured HTML — do not re-wrap into paragraphs
+            'AutoFormat.AutoParagraph' => false,
+            'AutoFormat.RemoveEmpty'   => false,
         ],
         'test'    => [
             'Attr.EnableID' => 'true',

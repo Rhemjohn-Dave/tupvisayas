@@ -50,9 +50,9 @@
                     <img class="admin-preview-img" src="{{ asset('storage/' . $tipttoPost->featured_image) }}"
                         alt="{{ $tipttoPost->title }} featured image"
                         style="max-width:320px;display:block;margin-bottom:var(--admin-space-3);">
-                    <label class="admin-label">
-                        <input type="checkbox" name="remove_featured_image" value="1">
-                        Remove current image
+                    <label class="admin-checkbox" for="remove_featured_image">
+                        <input type="checkbox" name="remove_featured_image" id="remove_featured_image" value="1">
+                        <span>Remove current image</span>
                     </label>
                 </div>
             @endif
@@ -68,7 +68,7 @@
                 @enderror
             </div>
 
-            <div class="admin-form__group">
+            <div class="admin-form__group admin-form__group--editor">
                 <label class="admin-label" for="content">Content</label>
                 <textarea name="content" id="content" class="admin-textarea wysiwyg" data-wysiwyg-required="true">{{ old('content', $tipttoPost->content) }}</textarea>
                 @error('content')
@@ -76,12 +76,13 @@
                 @enderror
             </div>
 
-            <div class="admin-form__group">
-                <label class="admin-label">
-                    <input type="checkbox" name="is_published" value="1"
+            <div class="admin-form__group admin-form__group--checkbox">
+                <label class="admin-checkbox" for="is_published">
+                    <input type="checkbox" name="is_published" id="is_published" value="1"
                         {{ old('is_published', $tipttoPost->is_published) ? 'checked' : '' }}>
-                    Published
+                    <span>Published</span>
                 </label>
+                <p class="admin-form__hint">Uncheck to keep this post as a draft on the public TIPTTO page.</p>
                 @error('is_published')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror

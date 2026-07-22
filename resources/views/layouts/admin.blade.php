@@ -11,6 +11,7 @@
     {{-- Outlined icons in sidebar only (consistent weight with SaaS patterns) --}}
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link href="{{ asset('css/admin.css?v=' . time()) }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/3.2.2/toastui-editor.min.css">
     @yield('admin_head')
 @endsection
 

@@ -77,6 +77,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         ->middleware('permission:manage posts')
         ->name('dashboard');
 
+    // Inline images from Toast UI (any authenticated admin)
+    Route::post('editor/images', [App\Http\Controllers\Admin\EditorUploadController::class, 'store'])
+        ->name('editor.images');
+
     Route::middleware('permission:manage posts')->group(function () {
         Route::get('posts/create', [App\Http\Controllers\Admin\PostController::class, 'create'])->name('posts.create');
         Route::post('posts', [App\Http\Controllers\Admin\PostController::class, 'store'])->name('posts.store');

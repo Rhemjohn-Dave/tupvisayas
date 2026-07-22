@@ -1730,6 +1730,91 @@ body {
     color: var(--color-text);
 }
 
+.site-prose h1,
+.site-prose h2,
+.site-prose h3,
+.site-prose h4,
+.site-prose h5,
+.site-prose h6,
+.article-detail__body h1,
+.article-detail__body h2,
+.article-detail__body h3,
+.article-detail__body h4,
+.article-detail__body h5,
+.article-detail__body h6,
+.wysiwyg-content h1,
+.wysiwyg-content h2,
+.wysiwyg-content h3,
+.wysiwyg-content h4,
+.wysiwyg-content h5,
+.wysiwyg-content h6 {
+    color: var(--color-text, #1a1a1a);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1.25em 0 0.5em;
+}
+
+.site-prose h1,
+.article-detail__body h1,
+.wysiwyg-content h1 { font-size: 1.75rem; }
+
+.site-prose h2,
+.article-detail__body h2,
+.wysiwyg-content h2 { font-size: 1.5rem; }
+
+.site-prose h3,
+.article-detail__body h3,
+.wysiwyg-content h3 { font-size: 1.25rem; }
+
+.site-prose h4,
+.article-detail__body h4,
+.wysiwyg-content h4 { font-size: 1.125rem; }
+
+.site-prose h5,
+.article-detail__body h5,
+.wysiwyg-content h5 { font-size: 1rem; }
+
+.site-prose h6,
+.article-detail__body h6,
+.wysiwyg-content h6 { font-size: 0.9375rem; }
+
+.site-prose img,
+.article-detail__body img,
+.wysiwyg-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.site-prose .editor-figure,
+.article-detail__body .editor-figure,
+.wysiwyg-content .editor-figure {
+    margin: 1.25rem 0;
+    text-align: center;
+}
+
+.site-prose .editor-figure img,
+.article-detail__body .editor-figure img,
+.wysiwyg-content .editor-figure img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}
+
+.site-prose .editor-image-caption,
+.article-detail__body .editor-image-caption,
+.wysiwyg-content .editor-image-caption,
+.site-prose figcaption.editor-image-caption,
+.article-detail__body figcaption.editor-image-caption,
+.wysiwyg-content figcaption.editor-image-caption {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-text-muted, #6b7280);
+    font-style: italic;
+    text-align: center;
+}
+
 .site-prose--lg {
     font-size: var(--text-lg);
 }

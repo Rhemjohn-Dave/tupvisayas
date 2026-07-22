@@ -1,61 +1,74 @@
 @extends('layouts.admin')
 
+@section('title', 'Admin — Edit announcement')
+
 @section('admin_content')
-    <div class="section">
-        <h4 style="color:#C41E3A; font-weight:700;">Edit Announcement Post</h4>
+    <x-admin.page-header title="Edit announcement" subtitle="Update the published announcement.">
+        <x-slot name="actions">
+            <a href="{{ route('admin.dashboard') }}" class="admin-btn admin-btn--ghost">
+                <i class="material-icons" aria-hidden="true">arrow_back</i>
+                Back to dashboard
+            </a>
+        </x-slot>
+    </x-admin.page-header>
+
+    <div class="admin-form-card admin-form">
         <form method="POST" action="{{ route('admin.announcements.update', $announcement->slug) }}"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="input-field">
-                <label for="category_id" class="active">Category</label>
-                <select name="category_id" id="category_id" required class="browser-default">
-                    <option value="" disabled>Select Category</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ $announcement->category_id == $category->id ? 'selected' : '' }}>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="category_id">Category</label>
+                <select class="admin-select browser-default" name="category_id" id="category_id" required>
+                    <option value="" disabled>Select category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            @selected(old('category_id', $announcement->category_id) == $category->id)>
                             {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
+                @error('category_id')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="input-field">
-                <input type="text" name="title" id="title" value="{{ $announcement->title }}" required>
-                <label for="title" class="active">Title</label>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="title">Title</label>
+                <input class="admin-input" type="text" name="title" id="title"
+                    value="{{ old('title', $announcement->title) }}" required>
+                @error('title')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="input-field">
-                <textarea name="content" id="content"
-                    class="materialize-textarea wysiwyg">{{ $announcement->content }}</textarea>
-                <label for="content" class="active">Content</label>
+
+            <div class="admin-form__group admin-form__group--editor">
+                <label class="admin-label" for="content">Content</label>
+                <textarea name="content" id="content" class="admin-textarea wysiwyg"
+                    data-wysiwyg-required="true">{{ old('content', $announcement->content) }}</textarea>
+                @error('content')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="file-field input-field">
-                <div class="btn" style="background-color:#C41E3A;">
-                    <span>Upload Image</span>
-                    <input type="file" name="picture" accept="image/*">
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload an image (optional)">
-                </div>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="picture">Image (optional)</label>
+                <input class="admin-file" type="file" name="picture" id="picture" accept="image/*">
                 <x-admin.image-spec type="article" />
-                @if($announcement->picture)
-                    <div style="margin-top: 10px;">
-                        <p><strong>Current Image:</strong></p>
-                        <img src="{{ asset('storage/' . $announcement->picture) }}" alt="Current Image"
-                            style="max-width: 200px; max-height: 200px; border: 1px solid #ddd;">
-                    </div>
+                @if ($announcement->picture)
+                    <img class="admin-preview-img" src="{{ asset('storage/' . $announcement->picture) }}"
+                        alt="Current image" style="max-width:200px;margin-top:0.75rem;">
                 @endif
+                @error('picture')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <button type="submit" class="btn waves-effect waves-light" style="background-color:#C41E3A;">Update
-                Announcement</button>
-            <a href="{{ route('admin.dashboard') }}" class="btn waves-effect waves-light grey">Cancel</a>
+
+            <div class="admin-form__actions">
+                <button type="submit" class="admin-btn admin-btn--primary">Update announcement</button>
+                <a href="{{ route('admin.dashboard') }}" class="admin-btn admin-btn--ghost">Cancel</a>
+            </div>
         </form>
     </div>
-
-@endsection
-
-@section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            M.textareaAutoResize(document.getElementById('content'));
-        });
-    </script>
 @endsection

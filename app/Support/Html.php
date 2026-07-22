@@ -7,7 +7,7 @@ use Mews\Purifier\Facades\Purifier;
 class Html
 {
     /**
-     * Sanitize HTML for safe storage and display (TinyMCE / rich text).
+     * Sanitize HTML for safe storage and display (Toast UI Editor / rich text).
      */
     public static function clean(?string $html): string
     {

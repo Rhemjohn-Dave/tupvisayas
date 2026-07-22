@@ -65,61 +65,15 @@
     </script>
 
     @yield('scripts')
-    @if (config('services.tinymce.key') && request()->routeIs('admin.*'))
-        <script src="https://cdn.tiny.cloud/1/{{ config('services.tinymce.key') }}/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
+    @if (request()->routeIs('admin.*'))
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                if (typeof tinymce !== 'undefined') {
-                    tinymce.init({
-                        selector: 'textarea.wysiwyg',
-                        plugins: 'lists link image table code',
-                        toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | code',
-                        menubar: false,
-                        height: 350,
-                        init_instance_callback: function(editor) {
-                            var textarea = editor.getElement();
-                            if (!textarea) return;
-
-                            if (textarea.hasAttribute('required')) {
-                                textarea.removeAttribute('required');
-                                textarea.setAttribute('data-wysiwyg-required', 'true');
-                            }
-                        }
-                    });
-                }
-
-                document.addEventListener('submit', function(event) {
-                    var form = event.target;
-                    if (!(form instanceof HTMLFormElement)) return;
-                    if (!form.querySelector('textarea.wysiwyg')) return;
-
-                    if (typeof tinymce !== 'undefined') {
-                        tinymce.triggerSave();
-                    }
-
-                    var requiredFields = form.querySelectorAll('textarea.wysiwyg[data-wysiwyg-required]');
-                    for (var i = 0; i < requiredFields.length; i++) {
-                        var field = requiredFields[i];
-                        var plainText = field.value
-                            .replace(/<[^>]+>/g, '')
-                            .replace(/&nbsp;/gi, ' ')
-                            .trim();
-
-                        if (!plainText) {
-                            event.preventDefault();
-                            var editor = typeof tinymce !== 'undefined' ? tinymce.get(field.id) : null;
-                            if (editor) {
-                                editor.focus();
-                            } else {
-                                field.focus();
-                            }
-                            return;
-                        }
-                    }
-                }, true);
-            });
+            window.TUPV_ADMIN_EDITOR = {
+                uploadUrl: @json(route('admin.editor.images')),
+                csrfToken: @json(csrf_token())
+            };
         </script>
+        <script src="https://uicdn.toast.com/editor/3.2.2/toastui-editor-all.min.js"></script>
+        <script src="{{ asset('js/admin-editor.js?v=' . time()) }}"></script>
     @endif
 </body>
 

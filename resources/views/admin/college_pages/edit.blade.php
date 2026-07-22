@@ -347,16 +347,6 @@
 @section('admin_scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof tinymce !== 'undefined') {
-                tinymce.init({
-                    selector: 'textarea.wysiwyg',
-                    plugins: 'lists link image table code',
-                    toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | code',
-                    menubar: false,
-                    height: 280
-                });
-            }
-
             var root = document.querySelector('[data-uitc-tabs]');
             if (!root) return;
 

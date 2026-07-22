@@ -1,58 +1,80 @@
 @extends('layouts.admin')
 
+@section('title', 'Admin — Create post')
+
 @section('admin_content')
-    <div class="section">
-        <h4 style="color:#C41E3A; font-weight:700;">Create New Post</h4>
+    <x-admin.page-header title="Create post" subtitle="Publish news, announcements, jobs, or events.">
+        <x-slot name="actions">
+            <a href="{{ route('admin.dashboard') }}" class="admin-btn admin-btn--ghost">
+                <i class="material-icons" aria-hidden="true">arrow_back</i>
+                Back to dashboard
+            </a>
+        </x-slot>
+    </x-admin.page-header>
+
+    <div class="admin-form-card admin-form">
         <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
             @csrf
-            <div class="input-field">
-                <label for="category_id" class="active">Category</label>
-                <select name="category_id" id="category_id" required class="browser-default">
-                    <option value="" disabled selected>Select Category</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="category_id">Category</label>
+                <select class="admin-select browser-default" name="category_id" id="category_id" required>
+                    <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Select category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
+                            {{ $category->name }}
+                        </option>
                     @endforeach
                 </select>
+                @error('category_id')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="input-field">
-                <select name="type">
-                    <option value="" disabled selected>Select Post Type</option>
-                    <option value="news">News</option>
-                    <option value="announcement">Announcement</option>
-                    <option value="job">Job Opening</option>
-                    <option value="event">Event</option>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="type">Post type</label>
+                <select class="admin-select browser-default" name="type" id="type" required>
+                    <option value="" disabled {{ old('type') ? '' : 'selected' }}>Select post type</option>
+                    <option value="news" @selected(old('type') === 'news')>News</option>
+                    <option value="announcement" @selected(old('type') === 'announcement')>Announcement</option>
+                    <option value="job" @selected(old('type') === 'job')>Job opening</option>
+                    <option value="event" @selected(old('type') === 'event')>Event</option>
                 </select>
-                <label>Post Type</label>
+                @error('type')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="input-field">
-                <input type="text" name="title" id="title" required>
-                <label for="title">Title</label>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="title">Title</label>
+                <input class="admin-input" type="text" name="title" id="title" value="{{ old('title') }}" required>
+                @error('title')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="input-field">
-                <textarea name="content" id="content" class="materialize-textarea wysiwyg"></textarea>
-                <label for="content">Content</label>
+
+            <div class="admin-form__group admin-form__group--editor">
+                <label class="admin-label" for="content">Content</label>
+                <textarea name="content" id="content" class="admin-textarea wysiwyg"
+                    data-wysiwyg-required="true">{{ old('content') }}</textarea>
+                @error('content')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="file-field input-field">
-                <div class="btn" style="background-color:#C41E3A;">
-                    <span>Upload Image</span>
-                    <input type="file" name="picture" accept="image/*">
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload an image (optional)">
-                </div>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="picture">Image (optional)</label>
+                <input class="admin-file" type="file" name="picture" id="picture" accept="image/*">
                 <x-admin.image-spec type="article" />
+                @error('picture')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
             </div>
-            <button type="submit" class="btn waves-effect waves-light" style="background-color:#C41E3A;">Create
-                Post</button>
+
+            <div class="admin-form__actions">
+                <button type="submit" class="admin-btn admin-btn--primary">Create post</button>
+                <a href="{{ route('admin.dashboard') }}" class="admin-btn admin-btn--ghost">Cancel</a>
+            </div>
         </form>
     </div>
-@endsection
-
-@section('admin_scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('select');
-            M.FormSelect.init(elems);
-        });
-    </script>
 @endsection

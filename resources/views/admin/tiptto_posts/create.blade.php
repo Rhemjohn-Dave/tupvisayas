@@ -55,7 +55,7 @@
                 @enderror
             </div>
 
-            <div class="admin-form__group">
+            <div class="admin-form__group admin-form__group--editor">
                 <label class="admin-label" for="content">Content</label>
                 <textarea name="content" id="content" class="admin-textarea wysiwyg" data-wysiwyg-required="true">{{ old('content') }}</textarea>
                 @error('content')
@@ -63,10 +63,11 @@
                 @enderror
             </div>
 
-            <div class="admin-form__group">
-                <label class="admin-label">
-                    <input type="checkbox" name="is_published" value="1" {{ old('is_published') ? 'checked' : '' }}>
-                    Publish immediately
+            <div class="admin-form__group admin-form__group--checkbox">
+                <label class="admin-checkbox" for="is_published">
+                    <input type="checkbox" name="is_published" id="is_published" value="1"
+                        {{ old('is_published') ? 'checked' : '' }}>
+                    <span>Publish immediately</span>
                 </label>
                 <p class="admin-form__hint">Draft posts are hidden from the public TIPTTO page.</p>
                 @error('is_published')

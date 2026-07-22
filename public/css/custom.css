@@ -39,6 +39,11 @@ a.btn-small,
     color: var(--color-brand, #9e1b32);
 }
 
+/* Keep Toast UI editor chrome / content links on editor defaults */
+body.admin .admin-toast-editor a {
+    color: #00a9ff;
+}
+
 .btn-flat:focus,
 .btn:focus {
     box-shadow: 0 0 0 3px rgba(158, 27, 50, 0.25);

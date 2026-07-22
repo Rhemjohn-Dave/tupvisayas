@@ -1105,8 +1105,10 @@ body.admin.sidebar-collapsed .admin-shell {
 
 .admin-content {
     padding: var(--admin-space-5);
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 @media (max-width: 600px) {
@@ -1596,6 +1598,9 @@ body.admin .admin-form-card {
     border-radius: var(--radius-sm);
     padding: var(--space-6);
     box-shadow: none;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
 }
 
 body.admin .admin-form-card .btn.red,
@@ -1605,11 +1610,16 @@ body.admin .admin-form-card .btn:not(.grey):not(.btn-flat) {
 }
 
 .admin-form {
-    max-width: 48rem;
+    max-width: none;
+    width: 100%;
 }
 
 .admin-form--wide {
     max-width: none;
+}
+
+.admin-form--narrow {
+    max-width: 48rem;
 }
 
 .admin-form__group {
@@ -1627,33 +1637,599 @@ body.admin .admin-checkbox {
     color: var(--color-text);
 }
 
-body.admin .admin-checkbox input[type="checkbox"] {
-    -webkit-appearance: checkbox;
-    appearance: checkbox;
-    position: relative;
-    opacity: 1;
-    pointer-events: auto;
-    width: 1.125rem;
-    height: 1.125rem;
-    margin: 0;
+/* Use a single native checkbox — kill Materialize's fake :before/:after box */
+body.admin .admin-checkbox input[type="checkbox"],
+body.admin .admin-form__group--checkbox input[type="checkbox"] {
+    -webkit-appearance: checkbox !important;
+    appearance: checkbox !important;
+    position: static !important;
+    left: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    width: 1.125rem !important;
+    height: 1.125rem !important;
+    margin: 0 !important;
     cursor: pointer;
     flex-shrink: 0;
+    z-index: auto !important;
+}
+
+body.admin .admin-checkbox input[type="checkbox"] + span::before,
+body.admin .admin-checkbox input[type="checkbox"] + span::after,
+body.admin .admin-form__group--checkbox input[type="checkbox"] + span::before,
+body.admin .admin-form__group--checkbox input[type="checkbox"] + span::after {
+    content: none !important;
+    display: none !important;
+    border: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+body.admin .admin-checkbox input[type="checkbox"] + span,
+body.admin .admin-form__group--checkbox input[type="checkbox"] + span {
+    padding-left: 0 !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    display: inline !important;
 }
 
 body.admin .admin-form__group--editor {
     position: relative;
-    z-index: 0;
-    isolation: isolate;
+    /* Above following form fields so heading/image popups stay clickable */
+    z-index: 30;
+    overflow: visible !important;
 }
 
-body.admin .admin-form__group--editor .tox-tinymce {
+body.admin .admin-field--richtext {
+    position: relative;
+    z-index: 30;
+    overflow: visible !important;
+    margin-top: var(--admin-space-5, 1.25rem);
+    margin-bottom: var(--admin-space-5, 1.25rem);
+}
+
+body.admin .input-field.admin-field--richtext {
+    margin-top: 1.5rem;
+    margin-bottom: 1.75rem;
+    padding-top: 0;
+}
+
+body.admin .admin-field--richtext > .admin-richtext-label,
+body.admin .admin-richtext-label {
+    position: static !important;
+    display: block !important;
+    float: none !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 0 var(--admin-space-2, 0.5rem) !important;
+    padding: 0 !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    color: var(--color-brand, #9e1b32) !important;
+    pointer-events: none;
+    opacity: 1 !important;
+}
+
+body.admin .admin-form__group--editor .admin-toast-editor,
+body.admin .admin-form__group .admin-toast-editor,
+body.admin .admin-field--richtext .admin-toast-editor,
+body.admin .admin-toast-editor {
     max-width: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    clear: both;
+    overflow: visible !important;
 }
 
-body.admin .admin-form__group--checkbox,
+body.admin textarea.wysiwyg.admin-toast-editor__source {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI {
+    border: 1px solid var(--admin-border, #d1d5db);
+    border-radius: var(--admin-radius, 6px);
+    background: #fff;
+    overflow: visible !important;
+    position: relative;
+}
+
+body.admin .admin-toast-editor .toastui-editor-main,
+body.admin .admin-toast-editor .toastui-editor-ww-container,
+body.admin .admin-toast-editor .toastui-editor-md-container {
+    overflow: hidden;
+}
+
+body.admin .admin-toast-editor .toastui-editor-ww-container .toastui-editor,
+body.admin .admin-toast-editor .toastui-editor-contents {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI .ProseMirror,
+body.admin .admin-toast-editor .toastui-editor-contents {
+    font-family: inherit;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text, #1f2937);
+}
+
+/* Undo Materialize heading sizes inside the editor */
+body.admin .admin-toast-editor .toastui-editor-contents h1,
+body.admin .admin-toast-editor .ProseMirror h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    margin: 1.25rem 0 0.75rem !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents h2,
+body.admin .admin-toast-editor .ProseMirror h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    margin: 1.1rem 0 0.65rem !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents h3,
+body.admin .admin-toast-editor .ProseMirror h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.35 !important;
+    font-weight: 700 !important;
+    margin: 1rem 0 0.5rem !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents h4,
+body.admin .admin-toast-editor .ProseMirror h4 {
+    font-size: 1.125rem !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    margin: 0.85rem 0 0.4rem !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents h5,
+body.admin .admin-toast-editor .ProseMirror h5 {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    margin: 0.75rem 0 0.35rem !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents h6,
+body.admin .admin-toast-editor .ProseMirror h6 {
+    font-size: 0.9375rem !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    margin: 0.65rem 0 0.3rem !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents img,
+body.admin .admin-toast-editor .ProseMirror img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Task-list checkboxes inside Toast UI — one native box, no Materialize duplicate */
+body.admin .admin-toast-editor .ProseMirror input[type="checkbox"],
+body.admin .admin-toast-editor .toastui-editor-contents input[type="checkbox"] {
+    -webkit-appearance: checkbox !important;
+    appearance: checkbox !important;
+    position: static !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    width: 1rem !important;
+    height: 1rem !important;
+    min-width: 1rem !important;
+    margin: 0 0.4rem 0 0 !important;
+    vertical-align: middle;
+    float: none !important;
+    left: auto !important;
+}
+
+body.admin .admin-toast-editor .ProseMirror input[type="checkbox"] + span::before,
+body.admin .admin-toast-editor .ProseMirror input[type="checkbox"] + span::after,
+body.admin .admin-toast-editor .toastui-editor-contents input[type="checkbox"] + span::before,
+body.admin .admin-toast-editor .toastui-editor-contents input[type="checkbox"] + span::after,
+body.admin .admin-toast-editor li input[type="checkbox"] + span::before,
+body.admin .admin-toast-editor li input[type="checkbox"] + span::after {
+    content: none !important;
+    display: none !important;
+}
+
+body.admin .admin-toast-editor .ProseMirror li,
+body.admin .admin-toast-editor .toastui-editor-contents li {
+    list-style-position: outside;
+}
+
+body.admin .admin-toast-editor .ProseMirror li[data-task],
+body.admin .admin-toast-editor .toastui-editor-contents li.task-list-item {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    overflow: visible;
+}
+
+body.admin .admin-toast-editor .toastui-editor-toolbar {
+    background: var(--color-surface-alt, #f8fafc);
+}
+
+/* Restore Toast UI Scroll-sync switch (Materialize must not unhide this input) */
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync {
+    color: #81858f;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    width: 70px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync::before,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync::before {
+    content: "Scroll";
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: inherit;
+    pointer-events: none;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync.active::before,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync.active::before {
+    color: #00a9ff;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync input,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync input {
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync .switch,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync .switch {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    margin-left: auto;
+    background-color: #d6d8de;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync.active .switch,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync.active .switch {
+    background-color: rgba(0, 169, 255, 0.35);
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync .switch::before,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync .switch::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #d6d8de;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+}
+
+body.admin .admin-toast-editor .toastui-editor-defaultUI-toolbar .scroll-sync.active .switch::before,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar .scroll-sync.active .switch::before {
+    transform: translateX(12px);
+    border-color: #00a9ff;
+    background-color: #00a9ff;
+}
+
+/* Popups must sit above following form fields / Materialize chrome */
+body.admin .admin-toast-editor .toastui-editor-popup,
+body.admin .admin-toast-editor .toastui-editor-context-menu,
+body.admin .admin-toast-editor .toastui-editor-dropdown-toolbar {
+    z-index: 50 !important;
+    pointer-events: auto !important;
+}
+
+/* Neutralize Materialize form styles inside Toast UI popups */
+body.admin .admin-toast-editor .toastui-editor-popup-body label {
+    position: static !important;
+    display: block !important;
+    float: none !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    height: auto !important;
+    width: auto !important;
+    margin: 20px 0 5px !important;
+    padding: 0 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #555 !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-body input[type="text"],
+body.admin .admin-toast-editor .toastui-editor-popup-body input[type="url"] {
+    box-sizing: border-box !important;
+    background-color: #fff !important;
+    border: 1px solid #e1e3e9 !important;
+    border-radius: 2px !important;
+    border-bottom: 1px solid #e1e3e9 !important;
+    box-shadow: none !important;
+    color: #333 !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    width: 100% !important;
+    font-size: 13px !important;
+    outline: none !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-body input[type="text"]:focus,
+body.admin .admin-toast-editor .toastui-editor-popup-body input[type="url"]:focus {
+    border-color: transparent !important;
+    outline: 1px solid #00a9ff !important;
+    box-shadow: none !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-body input[type="file"] {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: auto !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-body button,
+body.admin .admin-toast-editor .toastui-editor-defaultUI button {
+    box-shadow: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 5px 0 !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading ul li {
+    cursor: pointer !important;
+    padding: 4px 12px !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h1,
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h2,
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h3,
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h4,
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h5,
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h6,
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+    font-weight: 600 !important;
+}
+
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h1 { font-size: 24px !important; }
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h2 { font-size: 22px !important; }
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h3 { font-size: 20px !important; }
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h4 { font-size: 18px !important; }
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h5 { font-size: 16px !important; }
+body.admin .admin-toast-editor .toastui-editor-popup-add-heading h6 { font-size: 14px !important; }
+
+body.admin .admin-toast-editor .toastui-editor-file-select-button,
+body.admin .admin-toast-editor .toastui-editor-ok-button,
+body.admin .admin-toast-editor .toastui-editor-close-button {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* Inline image resize chrome */
+body.admin .admin-toast-editor {
+    position: relative;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents img {
+    cursor: pointer;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: outline-color 0.15s ease;
+}
+
+body.admin .admin-toast-editor .toastui-editor-contents img:hover {
+    outline-color: rgba(0, 169, 255, 0.45);
+}
+
+body.admin .admin-toast-img-tools {
+    display: none;
+    position: absolute;
+    z-index: 60;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    max-width: min(100%, 28rem);
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+    font-size: 0.75rem;
+    color: #374151;
+}
+
+body.admin .admin-toast-img-tools__label {
+    font-weight: 600;
+    margin-right: 0.15rem;
+}
+
+body.admin .admin-toast-img-tools button {
+    appearance: none;
+    border: 1px solid #d1d5db;
+    background: #f8fafc;
+    color: #111827;
+    border-radius: 4px;
+    padding: 0.2rem 0.45rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    cursor: pointer;
+    height: auto;
+    min-width: 0;
+    box-shadow: none;
+    text-transform: none;
+}
+
+body.admin .admin-toast-img-tools button:hover {
+    border-color: #00a9ff;
+    color: #0284c7;
+    background: #f0f9ff;
+}
+
+body.admin .admin-toast-img-tools__range {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    position: static;
+    transform: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #374151;
+    height: auto;
+    float: none;
+}
+
+body.admin .admin-toast-img-tools__range input[type="range"] {
+    width: 5.5rem;
+    margin: 0;
+    vertical-align: middle;
+}
+
+body.admin .admin-toast-img-tools__caption {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex: 1 1 100%;
+    margin: 0.15rem 0 0;
+    padding: 0;
+    position: static;
+    transform: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #374151;
+    height: auto;
+    float: none;
+}
+
+body.admin .admin-toast-img-tools__caption input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 10rem;
+    height: 1.75rem !important;
+    min-height: 1.75rem !important;
+    margin: 0 !important;
+    padding: 0 0.5rem !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    font-size: 0.8125rem !important;
+    box-sizing: border-box !important;
+}
+
+body.admin .admin-toast-img-tools__hint {
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+body.admin .admin-toast-img-caption {
+    position: absolute;
+    z-index: 55;
+    box-sizing: border-box;
+    padding: 0.15rem 0.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: #4b5563;
+    font-style: italic;
+    text-align: center;
+    pointer-events: none;
+}
+
+body.admin .admin-toast-img-handle {
+    display: none;
+    position: absolute;
+    z-index: 61;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: #00a9ff;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.35);
+    cursor: nwse-resize;
+    box-sizing: border-box;
+}
+
+/* Prevent Materialize from fighting the rich-text field */
+body.admin .input-field.admin-field--richtext textarea.materialize-textarea {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.admin .admin-form__group--checkbox {
+    position: relative;
+    z-index: 3;
+}
+
 body.admin .admin-form__actions {
     position: relative;
     z-index: 2;
+}
+
+body.admin .admin-form__group--checkbox .admin-form__hint {
+    margin-top: var(--admin-space-2);
+    margin-left: calc(1.125rem + var(--admin-space-2));
 }
 
 .admin-label {

@@ -128,7 +128,10 @@
                     <h3 class="enrollment-step__subtitle">3.4 Save your account details</h3>
                     <p>Save a screenshot of your <strong>Account Details (USERNAME and PASSWORD)</strong> or print a copy of your application form.</p>
 
-                    <p><a class="enrollment-actions__cta" href="https://ers.tup.edu.ph/aims/applicants/" target="_blank" rel="noopener noreferrer">Go to ERS apply</a></p>
+                    <p>
+                        <a class="enrollment-actions__cta" href="https://ers.tup.edu.ph/aims/applicants/" target="_blank"
+                            rel="noopener noreferrer">Go to ERS apply</a>
+                    </p>
                 </div>
             </article>
 

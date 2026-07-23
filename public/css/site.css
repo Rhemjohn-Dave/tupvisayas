@@ -3165,6 +3165,14 @@ body {
     color: var(--color-brand);
 }
 
+.enrollment-step__body a.enrollment-actions__cta,
+.enrollment-step__body a.enrollment-actions__cta:visited,
+.enrollment-step__body a.enrollment-actions__cta:hover,
+.enrollment-step__body a.enrollment-actions__cta:active,
+.enrollment-step__body a.enrollment-actions__cta:focus {
+    color: #fff;
+}
+
 .enrollment-callout {
     margin-top: var(--space-4);
     padding: var(--space-4) var(--space-5);

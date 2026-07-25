@@ -74,6 +74,33 @@
             @endif
         </section>
 
+        @if ($course->hasSection('career_opportunities'))
+            <section class="program-section" aria-labelledby="program-careers-heading">
+                <h2 id="program-careers-heading" class="site-section-title">Career opportunities</h2>
+                <div class="site-prose site-prose--justify mission-card">
+                    {!! clean($course->career_opportunities) !!}
+                </div>
+            </section>
+        @endif
+
+        @if ($course->hasSection('program_objectives'))
+            <section class="program-section" aria-labelledby="program-peo-heading">
+                <h2 id="program-peo-heading" class="site-section-title">Program educational objectives</h2>
+                <div class="site-prose site-prose--justify mission-card">
+                    {!! clean($course->program_objectives) !!}
+                </div>
+            </section>
+        @endif
+
+        @if ($course->hasSection('program_outcomes'))
+            <section class="program-section" aria-labelledby="program-outcomes-heading">
+                <h2 id="program-outcomes-heading" class="site-section-title">Program outcomes</h2>
+                <div class="site-prose site-prose--justify mission-card">
+                    {!! clean($course->program_outcomes) !!}
+                </div>
+            </section>
+        @endif
+
         <section class="program-section" aria-labelledby="program-requirements-heading">
             <h2 id="program-requirements-heading" class="site-section-title">Admission requirements</h2>
             <div class="mission-card program-requirements">
@@ -81,13 +108,13 @@
                 <ul class="mission-list">
                     <li>Be a senior high school graduate (or ALS / equivalent completer) eligible for college admission</li>
                     <li>Submit an online application through the TUP Electronic Registration System (ERS)</li>
-                    <li>Take the TUP Visayas admission test on a scheduled date</li>
+                    <li>Take the TUP Visayas Admission Test (TUPSTAT) on a scheduled date</li>
                     <li>Comply with documentary requirements announced by the Admissions Office after the exam</li>
                 </ul>
                 <p class="program-requirements__note">Full steps, reminders, and the current admission test schedule are on
-                    the enrollment guide.</p>
+                    the Freshmen Admission (TUPSTAT) guide.</p>
                 <div class="program-requirements__actions">
-                    <a class="program-hero__cta" href="{{ route('admissions.enrollment') }}">View enrollment guide</a>
+                    <a class="program-hero__cta" href="{{ route('admissions.enrollment') }}">View TUPSTAT guide</a>
                     <a class="program-hero__link" href="{{ route('admissions.enrollment') }}#admission-test-schedule">Admission
                         test schedule</a>
                 </div>
@@ -108,33 +135,6 @@
                 <h2 id="program-labs-heading" class="site-section-title">Labs &amp; facilities</h2>
                 <div class="site-prose site-prose--justify mission-card">
                     {!! clean($course->facilities_labs) !!}
-                </div>
-            </section>
-        @endif
-
-        @if ($course->hasSection('accreditation_info'))
-            <section class="program-section" aria-labelledby="program-accreditation-heading">
-                <h2 id="program-accreditation-heading" class="site-section-title">Accreditation</h2>
-                <div class="site-prose site-prose--justify mission-card">
-                    {!! clean($course->accreditation_info) !!}
-                </div>
-            </section>
-        @endif
-
-        @if ($course->hasSection('board_performance'))
-            <section class="program-section" aria-labelledby="program-board-heading">
-                <h2 id="program-board-heading" class="site-section-title">Board performance</h2>
-                <div class="site-prose site-prose--justify mission-card">
-                    {!! clean($course->board_performance) !!}
-                </div>
-            </section>
-        @endif
-
-        @if ($course->hasSection('scholarships'))
-            <section class="program-section" aria-labelledby="program-scholarships-heading">
-                <h2 id="program-scholarships-heading" class="site-section-title">Scholarships</h2>
-                <div class="site-prose site-prose--justify mission-card">
-                    {!! clean($course->scholarships) !!}
                 </div>
             </section>
         @endif
@@ -170,9 +170,45 @@
             </section>
         @endif
 
+        @if ($course->hasSection('accreditation_info'))
+            <section class="program-section" aria-labelledby="program-accreditation-heading">
+                <h2 id="program-accreditation-heading" class="site-section-title">Accreditation</h2>
+                <div class="site-prose site-prose--justify mission-card">
+                    {!! clean($course->accreditation_info) !!}
+                </div>
+            </section>
+        @endif
+
+        @if ($course->hasSection('board_performance'))
+            <section class="program-section" aria-labelledby="program-board-heading">
+                <h2 id="program-board-heading" class="site-section-title">Board performance</h2>
+                <div class="site-prose site-prose--justify mission-card">
+                    {!! clean($course->board_performance) !!}
+                </div>
+            </section>
+        @endif
+
+        @if ($course->hasSection('scholarships'))
+            <section class="program-section" aria-labelledby="program-scholarships-heading">
+                <h2 id="program-scholarships-heading" class="site-section-title">Scholarships</h2>
+                <div class="site-prose site-prose--justify mission-card">
+                    {!! clean($course->scholarships) !!}
+                </div>
+            </section>
+        @endif
+
+        @if ($course->hasSection('faq'))
+            <section class="program-section" aria-labelledby="program-faq-heading">
+                <h2 id="program-faq-heading" class="site-section-title">Frequently asked questions</h2>
+                <div class="site-prose site-prose--justify mission-card">
+                    {!! clean($course->faq) !!}
+                </div>
+            </section>
+        @endif
+
         <aside class="program-apply" aria-labelledby="program-apply-heading">
             <h2 id="program-apply-heading" class="program-apply__title">Ready to apply?</h2>
-            <p class="program-apply__text">Follow the freshmen enrollment guide, then submit your application on ERS.</p>
+            <p class="program-apply__text">Follow the Freshmen Admission (TUPSTAT) guide, then submit your application on ERS.</p>
             <div class="program-hero__actions">
                 <a class="program-hero__cta" href="{{ route('admissions.enrollment') }}">Apply Now</a>
                 <a class="program-hero__link" href="https://ers.tup.edu.ph/aims/applicants/" target="_blank"

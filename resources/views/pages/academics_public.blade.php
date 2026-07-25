@@ -20,50 +20,74 @@
 
 @section('content')
     <div class="section site-page site-page--college">
-        @if ($collegePage->cover_photo)
-            <figure class="college-hero">
-                <img src="{{ asset('storage/' . $collegePage->cover_photo) }}" alt="{{ $collegePage->college }} cover photo"
-                    loading="eager">
-            </figure>
-        @endif
+        <header class="college-masthead{{ $dean ? ' college-masthead--with-dean' : '' }}">
+            <div class="college-masthead__media{{ $collegePage->cover_photo ? '' : ' college-masthead__media--fallback' }}">
+                @if ($collegePage->cover_photo)
+                    <img src="{{ asset('storage/' . $collegePage->cover_photo) }}"
+                        alt="{{ $collegePage->college }} cover photo" loading="eager">
+                @endif
+                <div class="college-masthead__media-shade" aria-hidden="true"></div>
+            </div>
 
-        <h1 class="site-page-title site-page-title--center">{{ $collegePage->college }}</h1>
-        <p class="site-page-intro">Programs, faculty, and college information at TUP Visayas.</p>
+            <div class="college-masthead__panel">
+                <div class="college-masthead__identity">
+                    <p class="college-masthead__eyebrow">TUP Visayas · Academics</p>
+                    <h1 class="college-masthead__title">{{ $collegePage->college }}</h1>
+                    <p class="college-masthead__lede">
+                        Explore degree programs, meet the faculty, and learn about student life in this college.
+                    </p>
+                </div>
 
-        <div class="uitc-tabs" data-uitc-tabs>
+                @if ($dean)
+                    @php
+                        $deanParts = collect(preg_split('/\s+/', trim($dean->name)))->filter();
+                        $deanInitials = $deanParts->take(2)->map(fn ($p) => strtoupper(mb_substr($p, 0, 1)))->implode('');
+                        $deanSaying = filled($dean->quote)
+                            ? $dean->quote
+                            : 'Technology for a better life — shaping skilled, ethical graduates for Visayas and the nation.';
+                    @endphp
+                    <aside class="college-masthead__dean" aria-labelledby="college-dean-heading">
+                        <div class="college-masthead__dean-photo">
+                            @if ($dean->photo)
+                                <img src="{{ asset('storage/' . $dean->photo) }}" alt="{{ $dean->name }}" loading="eager">
+                            @else
+                                <span class="college-masthead__dean-placeholder" aria-hidden="true">{{ $deanInitials ?: 'TUP' }}</span>
+                            @endif
+                        </div>
+                        <div class="college-masthead__dean-copy">
+                            <p class="college-masthead__dean-label" id="college-dean-heading">College dean</p>
+                            <h2 class="college-masthead__dean-name">{{ $dean->name }}</h2>
+                            <p class="college-masthead__dean-role">{{ $dean->position }}</p>
+                            <blockquote class="college-masthead__dean-quote">
+                                <p>{{ $deanSaying }}</p>
+                            </blockquote>
+                        </div>
+                    </aside>
+                @endif
+            </div>
+        </header>
+
+        <div class="college-body">
+        <div class="uitc-tabs college-tabs" data-uitc-tabs>
             <div class="uitc-tabs__nav" role="tablist" aria-label="{{ $collegePage->college }} sections">
                 <button type="button" class="uitc-tabs__btn is-active" role="tab" aria-selected="true"
-                    aria-controls="college-panel-history" id="college-tab-history"
-                    data-uitc-tab="college-panel-history">History</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
                     aria-controls="college-panel-courses" id="college-tab-courses"
-                    data-uitc-tab="college-panel-courses">Courses offered</button>
+                    data-uitc-tab="college-panel-courses">Programs</button>
                 <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
                     aria-controls="college-panel-dept" id="college-tab-dept"
-                    data-uitc-tab="college-panel-dept">Department &amp; faculty</button>
+                    data-uitc-tab="college-panel-dept">Faculty</button>
                 <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
                     aria-controls="college-panel-org" id="college-tab-org"
-                    data-uitc-tab="college-panel-org">Student organizations</button>
+                    data-uitc-tab="college-panel-org">Organizations</button>
+                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
+                    aria-controls="college-panel-history" id="college-tab-history"
+                    data-uitc-tab="college-panel-history">About</button>
             </div>
 
-            <div id="college-panel-history" class="uitc-tabs__panel is-active" role="tabpanel"
-                aria-labelledby="college-tab-history">
-                <section class="uitc-block" aria-labelledby="college-history-heading">
-                    <h2 id="college-history-heading" class="site-section-title">History</h2>
-                    @if (filled($collegePage->history))
-                        <div class="site-prose site-prose--justify mission-card">
-                            {!! clean($collegePage->history) !!}
-                        </div>
-                    @else
-                        <p class="program-empty">College history will be published here soon.</p>
-                    @endif
-                </section>
-            </div>
-
-            <div id="college-panel-courses" class="uitc-tabs__panel" role="tabpanel"
-                aria-labelledby="college-tab-courses" hidden>
+            <div id="college-panel-courses" class="uitc-tabs__panel is-active" role="tabpanel"
+                aria-labelledby="college-tab-courses">
                 <section class="uitc-block" aria-labelledby="college-courses-heading">
-                    <h2 id="college-courses-heading" class="site-section-title">Courses offered</h2>
+                    <h2 id="college-courses-heading" class="site-section-title">Programs offered</h2>
                     @if ($collegePage->courses->count())
                         <div class="college-course-list">
                             @foreach ($collegePage->courses as $course)
@@ -106,7 +130,7 @@
                             @endforeach
                         </div>
                     @else
-                        <p class="program-empty">No courses listed for this college at the moment.</p>
+                        <p class="program-empty">No programs listed for this college at the moment.</p>
                     @endif
                 </section>
             </div>
@@ -114,7 +138,7 @@
             <div id="college-panel-dept" class="uitc-tabs__panel" role="tabpanel" aria-labelledby="college-tab-dept"
                 hidden>
                 <section class="uitc-block" aria-labelledby="college-dept-heading">
-                    <h2 id="college-dept-heading" class="site-section-title">Department &amp; faculty</h2>
+                    <h2 id="college-dept-heading" class="site-section-title">Faculty</h2>
                     @php
                         $departments = \App\Models\Department::where('college_page_id', $collegePage->id)
                             ->with('faculties')
@@ -226,6 +250,21 @@
                     @endif
                 </section>
             </div>
+
+            <div id="college-panel-history" class="uitc-tabs__panel" role="tabpanel"
+                aria-labelledby="college-tab-history" hidden>
+                <section class="uitc-block" aria-labelledby="college-history-heading">
+                    <h2 id="college-history-heading" class="site-section-title">About the college</h2>
+                    @if (filled($collegePage->history))
+                        <div class="site-prose site-prose--justify mission-card">
+                            {!! clean($collegePage->history) !!}
+                        </div>
+                    @else
+                        <p class="program-empty">College history will be published here soon.</p>
+                    @endif
+                </section>
+            </div>
+        </div>
         </div>
     </div>
 @endsection

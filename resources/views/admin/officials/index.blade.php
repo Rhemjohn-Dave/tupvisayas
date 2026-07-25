@@ -19,6 +19,7 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Position</th>
+                        <th scope="col">College</th>
                         <th scope="col">Order</th>
                         <th scope="col">Photo</th>
                         <th scope="col" class="admin-table__actions">Actions</th>
@@ -29,6 +30,7 @@
                         <tr>
                             <td class="admin-table__cell-title">{{ $official->name }}</td>
                             <td>{{ $official->position }}</td>
+                            <td>{{ $official->collegePage?->college ?? '—' }}</td>
                             <td>{{ $official->order }}</td>
                             <td>
                                 @if($official->photo)
@@ -54,7 +56,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="admin-table__empty">No officials yet.</td>
+                            <td colspan="6" class="admin-table__empty">No officials yet.</td>
                         </tr>
                     @endforelse
                 </tbody>

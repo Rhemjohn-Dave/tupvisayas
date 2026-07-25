@@ -15,9 +15,16 @@ class Official extends Model
     protected $fillable = [
         'name',
         'position',
+        'quote',
         'photo',
         'order',
+        'college_page_id',
     ];
 
-    protected array $activityLogAttributes = ['name', 'position', 'photo', 'order'];
+    protected array $activityLogAttributes = ['name', 'position', 'quote', 'photo', 'order', 'college_page_id'];
+
+    public function collegePage()
+    {
+        return $this->belongsTo(CollegePage::class);
+    }
 }

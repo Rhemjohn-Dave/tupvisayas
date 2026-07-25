@@ -39,11 +39,15 @@ class CourseController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:courses,slug',
             'description' => 'nullable|string',
+            'career_opportunities' => 'nullable|string',
+            'program_objectives' => 'nullable|string',
+            'program_outcomes' => 'nullable|string',
             'curriculum' => 'nullable|string',
             'facilities_labs' => 'nullable|string',
             'accreditation_info' => 'nullable|string',
             'board_performance' => 'nullable|string',
             'scholarships' => 'nullable|string',
+            'faq' => 'nullable|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
         ]);
         if (empty($data['slug'])) {
@@ -95,11 +99,15 @@ class CourseController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:courses,slug,' . $course->id,
             'description' => 'nullable|string',
+            'career_opportunities' => 'nullable|string',
+            'program_objectives' => 'nullable|string',
+            'program_outcomes' => 'nullable|string',
             'curriculum' => 'nullable|string',
             'facilities_labs' => 'nullable|string',
             'accreditation_info' => 'nullable|string',
             'board_performance' => 'nullable|string',
             'scholarships' => 'nullable|string',
+            'faq' => 'nullable|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
         ]);
         if (! array_key_exists('slug', $data) || $data['slug'] === null || $data['slug'] === '') {

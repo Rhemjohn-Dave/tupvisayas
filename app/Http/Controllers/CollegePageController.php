@@ -31,9 +31,10 @@ class CollegePageController extends Controller
             return redirect()->route('academics.show', $canonical, 301);
         }
 
-        $collegePage->load(['courses', 'studentOrganizations']);
+        $collegePage->load(['courses', 'studentOrganizations', 'officials']);
+        $dean = $collegePage->dean();
 
-        return view('pages.academics_public', compact('collegePage'));
+        return view('pages.academics_public', compact('collegePage', 'dean'));
     }
 
     public function showProgram(string $college, Course $course): View|RedirectResponse

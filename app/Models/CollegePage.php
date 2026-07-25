@@ -176,4 +176,25 @@ class CollegePage extends Model
             ->orderBy('sort_order')
             ->orderBy('name');
     }
+
+    public function officials()
+    {
+        return $this->hasMany(Official::class)->orderBy('order');
+    }
+
+    /**
+     * College dean for public display (linked official, preferring "Dean" in the title).
+     */
+    public function dean(): ?Official
+    {
+        $linked = $this->officials;
+
+        if ($linked->isEmpty()) {
+            return null;
+        }
+
+        return $linked->first(function (Official $official) {
+            return stripos($official->position, 'dean') !== false;
+        }) ?? $linked->first();
+    }
 }

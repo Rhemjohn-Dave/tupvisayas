@@ -13,11 +13,15 @@ class Course extends Model
 
     protected array $htmlAttributes = [
         'description',
+        'career_opportunities',
+        'program_objectives',
+        'program_outcomes',
         'curriculum',
         'facilities_labs',
         'accreditation_info',
         'board_performance',
         'scholarships',
+        'faq',
     ];
 
     protected $fillable = [
@@ -25,11 +29,15 @@ class Course extends Model
         'name',
         'slug',
         'description',
+        'career_opportunities',
+        'program_objectives',
+        'program_outcomes',
         'curriculum',
         'facilities_labs',
         'accreditation_info',
         'board_performance',
         'scholarships',
+        'faq',
         'logo',
     ];
 
@@ -79,6 +87,27 @@ class Course extends Model
     public function hasSection(string $attribute): bool
     {
         return filled(trim(strip_tags((string) $this->{$attribute})));
+    }
+
+    /**
+     * Labels for optional public program-page sections (admin checklist order).
+     *
+     * @return array<string, string>
+     */
+    public static function micrositeSectionLabels(): array
+    {
+        return [
+            'description' => 'Overview',
+            'career_opportunities' => 'Career opportunities',
+            'program_objectives' => 'Program educational objectives (PEOs)',
+            'program_outcomes' => 'Program outcomes',
+            'curriculum' => 'Curriculum',
+            'facilities_labs' => 'Labs & facilities',
+            'accreditation_info' => 'Accreditation',
+            'board_performance' => 'Board performance',
+            'scholarships' => 'Scholarships',
+            'faq' => 'Frequently asked questions',
+        ];
     }
 
     public function collegePage()

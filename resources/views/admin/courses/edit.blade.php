@@ -20,19 +20,12 @@
     </x-admin.page-header>
 
     @php
-        $sectionStatus = [
-            'description' => 'Overview',
-            'curriculum' => 'Curriculum',
-            'facilities_labs' => 'Labs & facilities',
-            'accreditation_info' => 'Accreditation',
-            'board_performance' => 'Board performance',
-            'scholarships' => 'Scholarships',
-        ];
+        $sectionStatus = \App\Models\Course::micrositeSectionLabels();
     @endphp
 
     <div class="admin-form-card admin-form admin-course-status">
         <h2 class="admin-section-title">Program page content</h2>
-        <p class="admin-form__hint">Empty sections stay hidden on the public program page until you add content.</p>
+        <p class="admin-form__hint">Empty sections stay hidden on the public program page until you add content. Fill sections in any order—publish only what is ready.</p>
         <ul class="admin-section-checklist">
             @foreach ($sectionStatus as $field => $label)
                 <li class="admin-section-checklist__item">

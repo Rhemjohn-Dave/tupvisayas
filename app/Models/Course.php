@@ -119,4 +119,9 @@ class Course extends Model
     {
         return $this->hasOne(Department::class);
     }
+
+    public function programHead(): ?Faculty
+    {
+        return $this->department?->headFaculty;
+    }
 }

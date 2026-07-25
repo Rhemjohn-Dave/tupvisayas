@@ -38,6 +38,7 @@ Route::get('/academics/coe', [App\Http\Controllers\CollegePageController::class,
 Route::get('/academics/coac', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coac')->name('academics.coac');
 Route::get('/academics/coet', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coet')->name('academics.coet');
 Route::get('/academics/{college}/programs/{course:slug}', [App\Http\Controllers\CollegePageController::class, 'showProgram'])->name('academics.program');
+Route::get('/academics/{college}/faculty', [App\Http\Controllers\CollegePageController::class, 'showFaculty'])->name('academics.faculty');
 Route::redirect('/admissions', '/admissions/enrollment-procedure', 301)->name('admissions');
 Route::redirect('/admissions/graduate', '/admissions/enrollment-procedure', 301);
 Route::redirect('/admissions/international', '/admissions/enrollment-procedure', 301);

@@ -68,11 +68,13 @@
                         </button>
                         <ul id="desk-academics" class="site-nav__panel" hidden>
                             <li><a href="{{ route('academics') }}">Academics overview</a></li>
-                            <li><a href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a></li>
+                            <li>
+                                <a href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a>
+                            </li>
                             @if (isset($navbarCollegePages) && $navbarCollegePages->count())
                                 @foreach ($navbarCollegePages as $college)
-                                    <li><a
-                                            href="{{ route('academics.show', $college->routeSlug()) }}">{{ $college->college }}</a>
+                                    <li class="site-nav__nested">
+                                        <a href="{{ route('academics.show', $college->routeSlug()) }}">{{ $college->college }}</a>
                                     </li>
                                 @endforeach
                             @endif
@@ -216,8 +218,8 @@
                     <li><a href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a></li>
                     @if (isset($navbarCollegePages) && $navbarCollegePages->count())
                         @foreach ($navbarCollegePages as $college)
-                            <li><a
-                                    href="{{ route('academics.show', $college->routeSlug()) }}">{{ $college->college }}</a>
+                            <li class="site-drawer__nested-link">
+                                <a href="{{ route('academics.show', $college->routeSlug()) }}">{{ $college->college }}</a>
                             </li>
                         @endforeach
                     @endif

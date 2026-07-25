@@ -13,6 +13,7 @@ class Department extends Model
         'college_page_id',
         'name',
         'course_id',
+        'head_faculty_id',
     ];
 
     public function collegePage()
@@ -28,5 +29,10 @@ class Department extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function headFaculty()
+    {
+        return $this->belongsTo(Faculty::class, 'head_faculty_id');
     }
 }

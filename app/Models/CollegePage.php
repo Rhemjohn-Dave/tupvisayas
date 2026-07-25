@@ -18,16 +18,18 @@ class CollegePage extends Model
         'history',
         'department_faculty',
         'student_organization',
+        'board_exam_ratings',
     ];
 
     protected array $activityLogAttributes = [
-        'college', 'cover_photo', 'history', 'department_faculty', 'student_organization',
+        'college', 'cover_photo', 'history', 'board_exam_ratings', 'department_faculty', 'student_organization',
     ];
 
     protected $fillable = [
         'college',
         'cover_photo',
         'history',
+        'board_exam_ratings',
         'department_faculty',
         'student_organization',
     ];

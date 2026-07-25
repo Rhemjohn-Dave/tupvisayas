@@ -37,9 +37,13 @@
                         {{ $college->courses_count === 1 ? 'program' : 'programs' }}
                     </p>
                     <p class="academics-hub-college__text">
-                        View courses offered, faculty, and college information.
+                        Browse degree programs or meet the departments and faculty who teach them.
                     </p>
-                    <a class="program-hero__link" href="{{ route('academics.show', $college->routeSlug()) }}">Visit college page</a>
+                    <div class="academics-hub-college__links">
+                        <a class="program-hero__link" href="{{ route('academics.show', $college->routeSlug()) }}">Programs</a>
+                        <a class="program-hero__link"
+                            href="{{ route('academics.faculty', $college->routeSlug()) }}">Faculty &amp; Departments</a>
+                    </div>
                 </article>
             @empty
                 <p class="program-empty">College pages will appear here once published.</p>

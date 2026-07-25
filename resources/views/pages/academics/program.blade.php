@@ -30,6 +30,12 @@
             <span aria-current="page">{{ $course->name }}</span>
         </nav>
 
+        <p class="program-college-links">
+            <a href="{{ route('academics.show', $collegeSlug) }}">College programs</a>
+            <span aria-hidden="true">·</span>
+            <a href="{{ route('academics.faculty', $collegeSlug) }}">Faculty &amp; Departments</a>
+        </p>
+
         <header class="program-hero">
             <div class="program-hero__media">
                 @if ($course->logo)
@@ -139,34 +145,64 @@
             </section>
         @endif
 
-        @if ($faculties->isNotEmpty())
+        @if ($faculties->isNotEmpty() || ! empty($programHead))
             <section class="program-section" aria-labelledby="program-faculty-heading">
                 <h2 id="program-faculty-heading" class="site-section-title">Faculty</h2>
-                <div class="college-faculty-grid">
-                    @foreach ($faculties as $faculty)
-                        @php
-                            $parts = collect(preg_split('/\s+/', trim($faculty->name)))->filter();
-                            $initials = $parts->take(2)->map(fn($p) => strtoupper(mb_substr($p, 0, 1)))->implode('');
-                        @endphp
-                        <div class="college-faculty-card">
-                            <div class="college-faculty-card__photo">
-                                @if ($faculty->photo)
-                                    <img src="{{ asset('storage/' . $faculty->photo) }}" alt="{{ $faculty->name }}"
-                                        loading="lazy">
-                                @else
-                                    <span class="college-faculty-card__placeholder"
-                                        aria-hidden="true">{{ $initials ?: 'TUP' }}</span>
-                                @endif
-                            </div>
-                            <div class="college-faculty-card__body">
-                                <p class="college-faculty-card__name">{{ $faculty->name }}</p>
-                                @if ($faculty->rank)
-                                    <p class="college-faculty-card__rank">{{ $faculty->rank }}</p>
-                                @endif
-                            </div>
+
+                @if (! empty($programHead))
+                    @php
+                        $hParts = collect(preg_split('/\s+/', trim($programHead->name)))->filter();
+                        $hInitials = $hParts->take(2)->map(fn ($p) => strtoupper(mb_substr($p, 0, 1)))->implode('');
+                        $roster = $faculties->reject(fn ($f) => (int) $f->id === (int) $programHead->id)->values();
+                    @endphp
+                    <div class="college-faculty-head college-faculty-head--program">
+                        <div class="college-faculty-head__photo">
+                            @if ($programHead->photo)
+                                <img src="{{ asset('storage/' . $programHead->photo) }}" alt="{{ $programHead->name }}"
+                                    loading="lazy">
+                            @else
+                                <span aria-hidden="true">{{ $hInitials ?: 'PH' }}</span>
+                            @endif
                         </div>
-                    @endforeach
-                </div>
+                        <div class="college-faculty-head__copy">
+                            <p class="college-faculty-head__label">Program head</p>
+                            <p class="college-faculty-head__name">{{ $programHead->name }}</p>
+                            @if ($programHead->rank)
+                                <p class="college-faculty-head__rank">{{ $programHead->rank }}</p>
+                            @endif
+                        </div>
+                    </div>
+                @else
+                    @php $roster = $faculties; @endphp
+                @endif
+
+                @if ($roster->isNotEmpty())
+                    <div class="college-faculty-grid">
+                        @foreach ($roster as $faculty)
+                            @php
+                                $parts = collect(preg_split('/\s+/', trim($faculty->name)))->filter();
+                                $initials = $parts->take(2)->map(fn ($p) => strtoupper(mb_substr($p, 0, 1)))->implode('');
+                            @endphp
+                            <div class="college-faculty-card">
+                                <div class="college-faculty-card__photo">
+                                    @if ($faculty->photo)
+                                        <img src="{{ asset('storage/' . $faculty->photo) }}" alt="{{ $faculty->name }}"
+                                            loading="lazy">
+                                    @else
+                                        <span class="college-faculty-card__placeholder"
+                                            aria-hidden="true">{{ $initials ?: 'TUP' }}</span>
+                                    @endif
+                                </div>
+                                <div class="college-faculty-card__body">
+                                    <p class="college-faculty-card__name">{{ $faculty->name }}</p>
+                                    @if ($faculty->rank)
+                                        <p class="college-faculty-card__rank">{{ $faculty->rank }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </section>
         @endif
 

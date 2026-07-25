@@ -63,7 +63,7 @@ class CollegePageController extends Controller
      */
     public function edit($id)
     {
-        $college = CollegePage::with(['departments.faculties', 'courses', 'studentOrganizations'])->findOrFail($id);
+        $college = CollegePage::with(['departments.faculties', 'courses'])->findOrFail($id);
         return view('admin.college_pages.edit', compact('college'));
     }
 
@@ -84,6 +84,9 @@ class CollegePageController extends Controller
             'history' => $request->validate([
                 'history' => 'nullable|string',
             ]),
+            'board_exam_ratings' => $request->validate([
+                'board_exam_ratings' => 'nullable|string',
+            ]),
             default => abort(422),
         };
 
@@ -99,6 +102,7 @@ class CollegePageController extends Controller
         $message = match ($section) {
             'info' => 'College information saved.',
             'history' => 'History saved.',
+            'board_exam_ratings' => 'Board exam ratings saved.',
             default => 'College page updated.',
         };
 

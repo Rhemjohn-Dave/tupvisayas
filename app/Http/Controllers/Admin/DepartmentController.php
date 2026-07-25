@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -14,13 +15,28 @@ class DepartmentController extends Controller
 
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'head_faculty_id' => 'nullable|integer|exists:faculties,id',
         ]);
+
+        if (! empty($data['head_faculty_id'])) {
+            $belongs = Faculty::where('id', $data['head_faculty_id'])
+                ->where('department_id', $department->id)
+                ->exists();
+
+            if (! $belongs) {
+                return redirect()
+                    ->to(route('admin.college-pages.edit', $department->college_page_id) . '?tab=admin-college-dept')
+                    ->with('error', 'Program head must be a faculty member of this department.');
+            }
+        } else {
+            $data['head_faculty_id'] = null;
+        }
 
         $department->update($data);
 
         return redirect()
             ->to(route('admin.college-pages.edit', $department->college_page_id) . '?tab=admin-college-dept')
-            ->with('success', 'Department name updated.');
+            ->with('success', 'Department updated.');
     }
 
     /**

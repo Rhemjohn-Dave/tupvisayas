@@ -30,8 +30,8 @@
                     aria-controls="admin-college-dept" id="admin-college-tab-dept"
                     data-uitc-tab="admin-college-dept">Department &amp; faculty</button>
                 <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="admin-college-org" id="admin-college-tab-org"
-                    data-uitc-tab="admin-college-org">Student organizations</button>
+                    aria-controls="admin-college-board" id="admin-college-tab-board"
+                    data-uitc-tab="admin-college-board">Board exam ratings</button>
             </div>
 
             {{-- College info: name, cover, public URL --}}
@@ -189,8 +189,26 @@
                                         <input class="admin-input" type="text" name="name"
                                             id="dept-name-{{ $department->id }}"
                                             value="{{ old('name', $department->name) }}" required>
-                                        <button type="submit" class="admin-btn admin-btn--secondary">Rename</button>
+                                        <button type="submit" class="admin-btn admin-btn--secondary">Save</button>
                                     </div>
+                                </div>
+
+                                <div class="admin-form__group" style="margin-bottom:var(--admin-space-4);">
+                                    <label class="admin-label" for="dept-head-{{ $department->id }}">Program head</label>
+                                    <select class="admin-select browser-default" name="head_faculty_id"
+                                        id="dept-head-{{ $department->id }}">
+                                        <option value="">— Not assigned —</option>
+                                        @foreach ($department->faculties as $faculty)
+                                            <option value="{{ $faculty->id }}"
+                                                @selected((string) old('head_faculty_id', $department->head_faculty_id) === (string) $faculty->id)>
+                                                {{ $faculty->name }}@if ($faculty->rank) — {{ $faculty->rank }}@endif
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <p class="admin-form__hint">
+                                        Shown on the college Programs tab, Faculty tab, and the program page.
+                                        Add faculty below first if the list is empty.
+                                    </p>
                                 </div>
                             </form>
 
@@ -226,7 +244,12 @@
                                                                 —
                                                             @endif
                                                         </td>
-                                                        <td class="admin-table__cell-title">{{ $faculty->name }}</td>
+                                                        <td class="admin-table__cell-title">
+                                                            {{ $faculty->name }}
+                                                            @if ((int) $department->head_faculty_id === (int) $faculty->id)
+                                                                <span class="admin-badge" style="margin-left:0.35rem;">Program head</span>
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $faculty->rank ?: '—' }}</td>
                                                         <td class="admin-table__actions">
                                                             <div class="admin-actions-row">
@@ -264,80 +287,34 @@
                 @endforelse
             </div>
 
-            {{-- Student organization --}}
-            <div id="admin-college-org" class="uitc-tabs__panel" role="tabpanel"
-                aria-labelledby="admin-college-tab-org" hidden>
-                <div class="admin-form__actions admin-form__actions--toolbar">
-                    <a href="{{ route('admin.student-organizations.create', ['college_page_id' => $college->id]) }}"
-                        class="admin-btn admin-btn--primary">
-                        <i class="material-icons" aria-hidden="true">add</i>
-                        Add organization
-                    </a>
-                </div>
+            {{-- Board exam ratings --}}
+            <div id="admin-college-board" class="uitc-tabs__panel" role="tabpanel"
+                aria-labelledby="admin-college-tab-board" hidden>
+                <div class="admin-form-card admin-form">
+                    <form method="POST" action="{{ route('admin.college-pages.update', $college->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="section" value="board_exam_ratings">
+                        <input type="hidden" name="tab" value="admin-college-board">
 
-                <div class="admin-table-card">
-                    <div class="admin-table-scroll">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Logo</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Contact</th>
-                                    <th scope="col">Order</th>
-                                    <th scope="col" class="admin-table__actions">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($college->studentOrganizations as $organization)
-                                    <tr>
-                                        <td>
-                                            @if ($organization->logo)
-                                                <img src="{{ asset('storage/' . $organization->logo) }}"
-                                                    alt="{{ $organization->name }} logo" width="48" height="48"
-                                                    style="object-fit:contain;border-radius:4px;border:1px solid var(--color-border);background:var(--color-surface-alt);">
-                                            @else
-                                                —
-                                            @endif
-                                        </td>
-                                        <td class="admin-table__cell-title">{{ $organization->name }}</td>
-                                        <td>
-                                            @if ($organization->email)
-                                                <a href="mailto:{{ $organization->email }}">{{ $organization->email }}</a>
-                                            @elseif ($organization->website)
-                                                <a href="{{ $organization->website }}" target="_blank" rel="noopener noreferrer">Website</a>
-                                            @else
-                                                —
-                                            @endif
-                                        </td>
-                                        <td>{{ $organization->sort_order }}</td>
-                                        <td class="admin-table__actions">
-                                            <div class="admin-actions-row">
-                                                <a href="{{ route('admin.student-organizations.edit', $organization->id) }}"
-                                                    class="admin-btn admin-btn--icon admin-btn--secondary" title="Edit"
-                                                    aria-label="Edit">
-                                                    <i class="material-icons" aria-hidden="true">edit</i>
-                                                </a>
-                                                <form action="{{ route('admin.student-organizations.destroy', $organization->id) }}"
-                                                    method="POST" class="admin-inline-form"
-                                                    onsubmit="return confirm('Delete this student organization?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="admin-btn admin-btn--icon admin-btn--danger"
-                                                        title="Delete" aria-label="Delete">
-                                                        <i class="material-icons" aria-hidden="true">delete</i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="admin-table__empty">No student organizations yet. Add one to show it on the public college page.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
+                        <p class="admin-form__hint" style="margin-bottom:var(--admin-space-4);">
+                            Publish college-level licensure / board exam results shown on the public Board exam ratings tab.
+                            Program-specific board notes can still live on each course’s Board performance field.
+                        </p>
+
+                        <div class="admin-form__group">
+                            <label class="admin-label" for="board_exam_ratings">Board exam ratings</label>
+                            <textarea name="board_exam_ratings" id="board_exam_ratings"
+                                class="admin-textarea wysiwyg">{{ old('board_exam_ratings', $college->board_exam_ratings) }}</textarea>
+                            @error('board_exam_ratings')
+                                <span class="admin-form__error">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="admin-form__actions">
+                            <button type="submit" class="admin-btn admin-btn--primary">Save board exam ratings</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

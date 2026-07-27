@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdmissionTestSchedule;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
 class AdmissionTestScheduleController extends Controller
@@ -11,8 +12,30 @@ class AdmissionTestScheduleController extends Controller
     public function index()
     {
         $schedules = AdmissionTestSchedule::query()->ordered()->paginate(20);
+        $tupstatHeroEnabled = SiteSetting::tupstatHeroEnabled();
+        $publishedCount = AdmissionTestSchedule::query()->published()->count();
 
-        return view('admin.admission_schedules.index', compact('schedules'));
+        return view('admin.admission_schedules.index', compact(
+            'schedules',
+            'tupstatHeroEnabled',
+            'publishedCount'
+        ));
+    }
+
+    public function updatePromo(Request $request)
+    {
+        $request->validate([
+            'tupstat_hero_enabled' => ['sometimes', 'boolean'],
+        ]);
+
+        SiteSetting::setBoolean(
+            SiteSetting::TUPSTAT_HERO_ENABLED,
+            $request->boolean('tupstat_hero_enabled')
+        );
+
+        return redirect()
+            ->route('admin.admission-schedules.index')
+            ->with('status', 'Homepage TUPSTAT promo setting saved.');
     }
 
     public function create()

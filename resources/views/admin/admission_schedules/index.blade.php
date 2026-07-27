@@ -4,7 +4,7 @@
 
 @section('admin_content')
     <x-admin.page-header title="Admission test schedules"
-        subtitle="Dates shown on the public Enrollment procedure page.">
+        subtitle="Manage TUPSTAT exam dates and the homepage admission promo.">
         <x-slot name="actions">
             <a href="{{ route('admissions.enrollment') }}" class="admin-btn admin-btn--ghost" target="_blank" rel="noopener noreferrer">
                 <i class="material-icons" aria-hidden="true">open_in_new</i>
@@ -22,6 +22,31 @@
             {{ session('status') }}
         </div>
     @endif
+
+    <div class="admin-form-card admin-form" style="margin-bottom:1.25rem;">
+        <form method="POST" action="{{ route('admin.admission-promo.update') }}">
+            @csrf
+            @method('PUT')
+            <h3 style="margin:0 0 0.5rem; font-size:1.1rem;">Homepage TUPSTAT promo</h3>
+            <p class="grey-text text-darken-1" style="margin:0 0 1rem; font-size:0.9rem; max-width:42rem;">
+                When enabled, the homepage hero shows the TUPSTAT admission message over the carousel.
+                Exam dates still come from the published schedules below.
+                @if ($publishedCount === 0)
+                    <strong>No published schedules yet</strong> — visitors will still see the promo if this is on, with dates marked as to be posted on the admissions page.
+                @else
+                    <strong>{{ $publishedCount }}</strong> published schedule{{ $publishedCount === 1 ? '' : 's' }} currently available.
+                @endif
+            </p>
+            <label class="admin-checkbox" for="tupstat_hero_enabled">
+                <input type="checkbox" name="tupstat_hero_enabled" id="tupstat_hero_enabled" value="1"
+                    {{ old('tupstat_hero_enabled', $tupstatHeroEnabled) ? 'checked' : '' }}>
+                <span>Show TUPSTAT promo on homepage hero</span>
+            </label>
+            <div style="margin-top:1rem;">
+                <button type="submit" class="admin-btn admin-btn--primary">Save promo setting</button>
+            </div>
+        </form>
+    </div>
 
     <div class="admin-table-card">
         <div class="admin-table-scroll">

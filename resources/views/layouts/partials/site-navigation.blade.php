@@ -166,7 +166,7 @@
     </div>
 
     @unless ($isAdmin)
-        <a href="{{ route('admissions.enrollment') }}" class="site-cta">Apply Now</a>
+        <a href="{{ route('login') }}" class="site-cta">Portal Login</a>
     @endunless
 </div>
 

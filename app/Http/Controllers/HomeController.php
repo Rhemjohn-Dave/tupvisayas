@@ -9,6 +9,7 @@ use App\Models\Job;
 use App\Models\News;
 use App\Models\Official;
 use App\Models\Procurement;
+use App\Models\SiteSetting;
 
 class HomeController extends Controller
 {
@@ -19,8 +20,8 @@ class HomeController extends Controller
         $news = News::orderByDesc('created_at')->limit(3)->get();
         $events = Event::orderByDesc('created_at')->limit(3)->get();
         $announcements = Announcement::orderByDesc('created_at')->limit(3)->get();
-        $jobs = Job::orderByDesc('created_at')->limit(3)->get();
-        $officials_preview = Official::orderBy('order')->limit(3)->get();
+        $jobs = Job::orderByDesc('created_at')->limit(1)->get();
+        $officials_preview = Official::orderBy('order')->limit(4)->get();
 
         $latestUpdates = collect()
             ->merge($news->map(function ($item) {
@@ -39,7 +40,7 @@ class HomeController extends Controller
                 return $item;
             }))
             ->sortByDesc('created_at')
-            ->take(4)
+            ->take(1)
             ->values();
 
         $bidOpportunities = Procurement::query()
@@ -49,12 +50,15 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
+        $showTupstatHero = SiteSetting::tupstatHeroEnabled();
+
         return view('pages.home', compact(
             'carouselImages',
             'jobs',
             'officials_preview',
             'latestUpdates',
-            'bidOpportunities'
+            'bidOpportunities',
+            'showTupstatHero'
         ));
     }
 }

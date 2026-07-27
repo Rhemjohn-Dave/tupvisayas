@@ -5,304 +5,308 @@
 @section('main_class', 'site-main--full')
 
 @section('head')
-    <meta name="description" content="Guided freshmen admissions for TUP Visayas (TUPSTAT): choose a program, prepare requirements, take the admission test, enroll, and start orientation.">
+    <meta name="description"
+        content="Apply to TUP Visayas through TUPSTAT: admission journey, required documents, important dates, and FAQs.">
 @endsection
 
 @section('content')
-    <div class="site-page site-page--enrollment">
-        <figure class="enrollment-banner">
-            <img src="{{ asset('images/admission-banner.jpg') }}"
-                alt="TUP Visayas admission test — Be a Haligi ng Bayan, Be a TUPVIAN" loading="eager">
-        </figure>
+    @php
+        $syStart = now()->month >= 6 ? now()->year : now()->year - 1;
+        $syEnd = $syStart + 1;
+        $syLabel = $syStart . '–' . $syEnd;
+        $firstExam = $schedules->first();
+        $lastExam = $schedules->last();
+        $examRange = null;
+        if ($firstExam && $lastExam) {
+            $examRange =
+                $firstExam->id === $lastExam->id
+                    ? $firstExam->exam_date->format('M j, Y')
+                    : $firstExam->exam_date->format('M j') . ' – ' . $lastExam->exam_date->format('M j, Y');
+        }
+    @endphp
 
-        <div class="enrollment-inner">
-            <h1 class="site-page-title site-page-title--center">Freshmen Admission (TUPSTAT)</h1>
-            <p class="site-page-intro">TUP Visayas Admission Test — a step-by-step guide from choosing a program to enrollment.</p>
-
-            <div class="enrollment-actions" role="group" aria-label="Primary admission actions">
-                <a class="enrollment-actions__cta"
-                    href="https://ers.tup.edu.ph/aims/applicants/"
-                    target="_blank"
-                    rel="noopener noreferrer">Apply on ERS</a>
-                <a class="enrollment-actions__link" href="{{ route('academics.undergraduate') }}">Choose a program</a>
-                <a class="enrollment-actions__link" href="#admission-test-schedule">Test schedule</a>
-            </div>
-
-            <nav class="enrollment-journey" aria-label="Admissions journey">
-                <ol class="enrollment-journey__list">
-                    <li><a href="#step-program">1. Choose program</a></li>
-                    <li><a href="#step-requirements">2. Requirements</a></li>
-                    <li><a href="#step-apply">3. Apply online</a></li>
-                    <li><a href="#step-exam">4. Entrance exam</a></li>
-                    <li><a href="#step-enrollment">5. Enrollment</a></li>
-                    <li><a href="#step-orientation">6. Orientation</a></li>
-                </ol>
-            </nav>
-
-            <section class="enrollment-about" aria-labelledby="enrollment-about-heading">
-                <div class="enrollment-about__content">
-                    <h2 id="enrollment-about-heading" class="enrollment-about__title">Be Haligi ng Bayan. Build skills, shape the nation.</h2>
-                    <p>The Technological University of the Philippines Visayas (TUPV) admits a select number of freshmen each academic year who demonstrate the potential to succeed in rigorous technological and professional programs.</p>
-                    <p>Admission to TUP Visayas is a privilege. As a state university committed to excellence, service, and nation-building, TUPV reserves the right to deny admission or require the withdrawal of students whose conduct or presence is deemed inconsistent with the University&rsquo;s mission, objectives, and regulations.</p>
-                    <p class="enrollment-notice enrollment-notice--inline"><strong>Tuition note:</strong> Consistent with universal access to quality tertiary education policies for eligible students in SUCs, <strong>no admission testing fee shall be collected</strong>. Official tuition and other fees (if any) are announced by the campus for each academic year—confirm with the Admissions or Registrar&rsquo;s Office when you enroll.</p>
-                </div>
-                <figure class="enrollment-about__media">
-                    <img src="{{ asset('images/admission-student.jpg') }}" alt="TUP Visayas student" loading="lazy">
-                </figure>
-            </section>
-
-            {{-- Step 1 --}}
-            <article id="step-program" class="enrollment-step">
-                <header class="enrollment-step__head">
-                    <span class="enrollment-step__num" aria-hidden="true">1</span>
-                    <h2 class="enrollment-step__title">Choose a program</h2>
-                </header>
-                <div class="enrollment-step__body">
-                    <p>Review undergraduate programs and college pages, then decide which course you will apply for on ERS.</p>
-                    <ul>
-                        <li><a href="{{ route('academics.undergraduate') }}">Browse undergraduate programs</a></li>
-                        <li><a href="{{ route('academics') }}">Academics overview &amp; colleges</a></li>
-                    </ul>
-                </div>
-            </article>
-
-            {{-- Step 2 --}}
-            <article id="step-requirements" class="enrollment-step">
-                <header class="enrollment-step__head">
-                    <span class="enrollment-step__num" aria-hidden="true">2</span>
-                    <h2 class="enrollment-step__title">Prepare your requirements</h2>
-                </header>
-                <div class="enrollment-step__body">
-                    <p>Have these ready before you start the online application:</p>
-                    <ul class="enrollment-checklist enrollment-checklist--plain">
-                        <li>Recent <strong>2&times;2 photo</strong> in <strong>.jpeg</strong> or <strong>.jpg</strong> (low resolution for upload)</li>
-                        <li>Personal and family background information</li>
-                        <li>Educational attainment details (senior high / ALS / equivalent)</li>
-                        <li>Valid email address and contact number</li>
-                        <li>Preferred admission test schedule (see Step 4)</li>
-                    </ul>
-                    <aside class="enrollment-callout">
-                        <p class="enrollment-callout__title">Downloadable checklist</p>
-                        <p>Use this checklist while preparing your application. You can print this page section for your records.</p>
-                        <ul>
-                            <li>☐ Chose a preferred program</li>
-                            <li>☐ Prepared 2&times;2 photo (.jpg / .jpeg)</li>
-                            <li>☐ Family &amp; educational background details ready</li>
-                            <li>☐ Noted preferred exam date from the schedule below</li>
-                            <li>☐ Saved ERS username &amp; password after applying</li>
-                            <li>☐ Printed or screenshot application form for test day</li>
-                        </ul>
-                    </aside>
-                </div>
-            </article>
-
-            {{-- Step 3 --}}
-            <article id="step-apply" class="enrollment-step">
-                <header class="enrollment-step__head">
-                    <span class="enrollment-step__num" aria-hidden="true">3</span>
-                    <h2 class="enrollment-step__title">Apply online (ERS)</h2>
-                </header>
-                <div class="enrollment-step__body">
-                    <p>Submit your freshman application through the TUP Electronic Registration System (ERS).</p>
-
-                    <h3 class="enrollment-step__subtitle">3.1 Open the applicant portal</h3>
-                    <p>Visit <a href="https://ers.tup.edu.ph/aims/applicants/" target="_blank" rel="noopener noreferrer">ers.tup.edu.ph/aims/applicants/</a>, then click <strong>Apply</strong>.</p>
-
-                    <h3 class="enrollment-step__subtitle">3.2 Complete the profile verification form</h3>
-                    <ul>
-                        <li>Select <strong>Visayas Campus</strong>, then click <strong>Continue</strong>.</li>
-                        <li>Fill out all required information.</li>
-                    </ul>
-                    <aside class="enrollment-callout">
-                        <p class="enrollment-callout__title">Important reminders</p>
-                        <ul>
-                            <li>Complete the <strong>Family Background</strong> and <strong>Educational Attainment</strong> sections.</li>
-                            <li>Upload a low-resolution <strong>2&times;2 photo</strong> in <strong>.jpeg</strong> or <strong>.jpg</strong> format.</li>
-                            <li>Skip the <strong>Employment Background</strong> section, but ensure the <strong>Data Subject Consent Form</strong> is checked.</li>
-                        </ul>
-                    </aside>
-
-                    <h3 class="enrollment-step__subtitle">3.3 Select exam schedule</h3>
-                    <p>Click the <strong>Exam Schedule</strong> button at the top of the page and select your preferred admission test schedule.</p>
-
-                    <h3 class="enrollment-step__subtitle">3.4 Save your account details</h3>
-                    <p>Save a screenshot of your <strong>Account Details (USERNAME and PASSWORD)</strong> or print a copy of your application form.</p>
-
-                    <p>
-                        <a class="enrollment-actions__cta" href="https://ers.tup.edu.ph/aims/applicants/" target="_blank"
-                            rel="noopener noreferrer">Go to ERS apply</a>
+    <div class="site-page site-page--admission">
+        {{-- Hero --}}
+        <section class="adm-hero" aria-labelledby="adm-hero-heading">
+            <div class="adm-hero__inner">
+                <div class="adm-hero__copy">
+                    <p class="adm-hero__badge">{{ $syLabel }} Admission Open</p>
+                    <h1 id="adm-hero-heading" class="adm-hero__title">
+                        Shape Your Future at
+                        <span class="adm-hero__accent">TUPSTAT Admission Test</span>
+                    </h1>
+                    <p class="adm-hero__lede">
+                        The TUP Scholastic and Technical Aptitude Test (TUPSTAT) is your gateway to engineering and
+                        technology programs at TUP Visayas. Apply online, prepare your documents, and take the next step
+                        toward becoming a Haligi ng Bayan.
+                    </p>
+                    <div class="adm-hero__actions">
+                        <a class="adm-btn adm-btn--primary"
+                            href="https://ers.tup.edu.ph/aims/applicants/"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            Apply Online Now
+                            <span aria-hidden="true">→</span>
+                        </a>
+                        <a class="adm-btn adm-btn--ghost" href="#required-documents">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                                stroke-width="1.8" aria-hidden="true">
+                                <path d="M12 4v10M8 10l4 4 4-4M5 18h14" />
+                            </svg>
+                            View Guidelines
+                        </a>
+                    </div>
+                    <p class="adm-hero__note">
+                        <strong>No admission testing fee</strong> is collected, consistent with universal access policies
+                        for eligible students in SUCs.
                     </p>
                 </div>
-            </article>
+                <figure class="adm-hero__media">
+                    <img src="{{ asset('images/admission-student.jpg') }}"
+                        alt="Students at TUP Visayas campus" loading="eager">
+                </figure>
+            </div>
+        </section>
 
-            {{-- Step 4 --}}
-            <article id="step-exam" class="enrollment-step">
-                <header class="enrollment-step__head">
-                    <span class="enrollment-step__num" aria-hidden="true">4</span>
-                    <h2 class="enrollment-step__title">Take the entrance examination</h2>
+        {{-- Journey --}}
+        <section class="adm-section" aria-labelledby="journey-heading">
+            <header class="adm-section__head adm-section__head--center">
+                <h2 id="journey-heading" class="adm-section__title">The Admission Journey</h2>
+                <p class="adm-section__lede">Follow these six steps from online application to enrollment at TUP Visayas.</p>
+            </header>
+
+            <ol class="adm-journey">
+                <li class="adm-journey__card" id="step-apply">
+                    <span class="adm-journey__num" aria-hidden="true">01</span>
+                    <h3 class="adm-journey__title">Online Registration</h3>
+                    <p class="adm-journey__text">Create your applicant account on the TUP ERS portal and select
+                        <strong>Visayas Campus</strong>.</p>
+                </li>
+                <li class="adm-journey__card" id="step-requirements">
+                    <span class="adm-journey__num" aria-hidden="true">02</span>
+                    <h3 class="adm-journey__title">Document Upload</h3>
+                    <p class="adm-journey__text">Upload a low-resolution 2&times;2 photo (.jpg / .jpeg) and complete family
+                        and educational background details.</p>
+                </li>
+                <li class="adm-journey__card">
+                    <span class="adm-journey__num" aria-hidden="true">03</span>
+                    <h3 class="adm-journey__title">Select Schedule</h3>
+                    <p class="adm-journey__text">Choose your preferred admission test date and time in ERS. No testing fee
+                        is collected.</p>
+                </li>
+                <li class="adm-journey__card" id="step-exam">
+                    <span class="adm-journey__num" aria-hidden="true">04</span>
+                    <h3 class="adm-journey__title">The TUPSTAT Exam</h3>
+                    <p class="adm-journey__text">Take the entrance examination on your scheduled date. Arrive early with
+                        your application proof and required materials.</p>
+                </li>
+                <li class="adm-journey__card">
+                    <span class="adm-journey__num" aria-hidden="true">05</span>
+                    <h3 class="adm-journey__title">Results &amp; Advisories</h3>
+                    <p class="adm-journey__text">Check ERS and campus announcements for results and any follow-up
+                        instructions from Admissions.</p>
+                </li>
+                <li class="adm-journey__card" id="step-enrollment">
+                    <span class="adm-journey__num" aria-hidden="true">06</span>
+                    <h3 class="adm-journey__title">Final Enrollment</h3>
+                    <p class="adm-journey__text">Qualified applicants complete enrollment and orientation as announced by
+                        the campus for the academic year.</p>
+                </li>
+            </ol>
+        </section>
+
+        {{-- Documents --}}
+        <section class="adm-section adm-section--docs" id="required-documents" aria-labelledby="docs-heading">
+            <header class="adm-section__head">
+                <h2 id="docs-heading" class="adm-section__title">Required Documents</h2>
+                <p class="adm-section__lede">Prepare these credentials for application and enrollment verification.</p>
+            </header>
+
+            <div class="adm-docs">
+                <aside class="adm-docs__note">
+                    <p class="adm-docs__note-label">Note</p>
+                    <p>Digital uploads on ERS support your application. Original documents may still be required for
+                        physical verification during enrollment. Always follow the latest campus advisory.</p>
+                </aside>
+
+                <div class="adm-docs__col">
+                    <h3 class="adm-docs__col-title">Incoming Freshmen</h3>
+                    <ul class="adm-docs__list">
+                        <li>Recent 2&times;2 photo (.jpg / .jpeg) for ERS upload</li>
+                        <li>Form 138 / Senior High School report card (upon enrollment)</li>
+                        <li>PSA Birth Certificate</li>
+                        <li>Certificate of Good Moral Character</li>
+                        <li>Personal, family, and educational background details</li>
+                    </ul>
+                </div>
+
+                <div class="adm-docs__col">
+                    <h3 class="adm-docs__col-title">Transferees</h3>
+                    <ul class="adm-docs__list">
+                        <li>Official Transcript of Records</li>
+                        <li>Transfer credentials / Honorable Dismissal</li>
+                        <li>Course descriptions (for crediting evaluation)</li>
+                        <li>Certificate of Good Moral Character</li>
+                        <li>Other documents as required in the campus transfer advisory</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="adm-docs__program">
+                Still choosing a course?
+                <a href="{{ route('academics.undergraduate') }}">Browse undergraduate programs</a>
+            </p>
+        </section>
+
+        {{-- Important dates --}}
+        <section class="adm-dates" id="admission-test-schedule" aria-labelledby="dates-heading">
+            <div class="adm-dates__inner">
+                <header class="adm-dates__head">
+                    <div>
+                        <p class="adm-dates__eyebrow">Admission calendar</p>
+                        <h2 id="dates-heading" class="adm-dates__title">Important Dates for {{ $syStart }}–{{ $syEnd }}</h2>
+                    </div>
+                    <p class="adm-dates__lede">Stay updated with the official timeline. Additional test dates may be
+                        announced based on applicant volume.</p>
                 </header>
-                <div class="enrollment-step__body">
-                    <section id="admission-test-schedule" class="enrollment-block enrollment-block--nested" aria-labelledby="schedule-heading">
-                        <h3 id="schedule-heading" class="enrollment-step__subtitle">Admission test schedule</h3>
-                        @if ($schedules->count())
-                            <div class="site-table-scroll">
-                                <table class="enrollment-table">
-                                    <thead>
+
+                <div class="adm-dates__grid">
+                    <div class="adm-dates__item">
+                        <p class="adm-dates__when">Open now</p>
+                        <p class="adm-dates__what">Application starts</p>
+                        <p class="adm-dates__detail">Apply via ERS applicant portal</p>
+                    </div>
+                    <div class="adm-dates__item">
+                        <p class="adm-dates__when">As announced</p>
+                        <p class="adm-dates__what">Deadline</p>
+                        <p class="adm-dates__detail">Follow ERS and campus advisories</p>
+                    </div>
+                    <div class="adm-dates__item">
+                        <p class="adm-dates__when">{{ $examRange ?: 'To be posted' }}</p>
+                        <p class="adm-dates__what">TUPSTAT dates</p>
+                        <p class="adm-dates__detail">Published exam schedules below</p>
+                    </div>
+                    <div class="adm-dates__item">
+                        <p class="adm-dates__when">As announced</p>
+                        <p class="adm-dates__what">Release of results</p>
+                        <p class="adm-dates__detail">Check ERS and announcements</p>
+                    </div>
+                </div>
+
+                @if ($schedules->count())
+                    <div class="adm-dates__table-wrap">
+                        <h3 class="adm-dates__table-title">Published test schedules</h3>
+                        <div class="site-table-scroll">
+                            <table class="adm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Venue</th>
+                                        <th scope="col">Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($schedules as $schedule)
                                         <tr>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Time</th>
-                                            <th scope="col">Venue</th>
-                                            <th scope="col">Address</th>
+                                            <td>{{ $schedule->exam_date->format('F j, Y') }}</td>
+                                            <td>
+                                                @foreach ($schedule->timeLines() as $line)
+                                                    {{ $line }}@if (!$loop->last)<br>@endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                {{ $schedule->venue }}
+                                                @if ($schedule->venue_note)
+                                                    <br><span class="adm-table__note">{{ $schedule->venue_note }}</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $schedule->address }}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($schedules as $schedule)
-                                            <tr>
-                                                <td>{{ $schedule->exam_date->format('F j') }}</td>
-                                                <td>
-                                                    @foreach ($schedule->timeLines() as $line)
-                                                        {{ $line }}@if (!$loop->last)<br>@endif
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    {{ $schedule->venue }}
-                                                    @if ($schedule->venue_note)
-                                                        <br><span class="enrollment-table__note">{{ $schedule->venue_note }}</span>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $schedule->address }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        @else
-                            <p class="enrollment-note">Admission test dates will be posted here when available. Please check back or contact Admissions.</p>
-                        @endif
-                        <p class="enrollment-note">Additional test dates may be announced based on the number of applicants.</p>
-                    </section>
-
-                    <h3 class="enrollment-step__subtitle">On the day of the admission test</h3>
-                    <ul class="enrollment-checklist">
-                        <li>Present a screenshot or printed copy of your application form.</li>
-                        <li>Memorize your contact number, email address, and Applicant ID number as indicated on your proof of registration.</li>
-                        <li>Bring <strong>two (2) sharpened pencils</strong>.</li>
-                        <li>Dress appropriately: <strong>no shorts, sleeveless tops, or slippers</strong>.</li>
-                        <li><strong>Watches are not allowed</strong>.</li>
-                        <li>Ensure that <strong>cellphones and other electronic devices are turned off</strong> upon entering the venue.</li>
-                        <li><strong>Arrive at least 30 minutes before</strong> your scheduled test time.</li>
-                        <li>Walk-in applicants may be accommodated depending on available slots.</li>
-                        <li><strong>Parents, guardians, and companions are not allowed</strong> to enter the testing venue.</li>
-                    </ul>
-                </div>
-            </article>
-
-            {{-- Step 5 --}}
-            <article id="step-enrollment" class="enrollment-step">
-                <header class="enrollment-step__head">
-                    <span class="enrollment-step__num" aria-hidden="true">5</span>
-                    <h2 class="enrollment-step__title">Enrollment</h2>
-                </header>
-                <div class="enrollment-step__body">
-                    <p>After the admission process and release of results, qualified applicants proceed to enrollment as announced by the campus (including documentary requirements and registration windows).</p>
-                    <ul>
-                        <li>Watch this page, campus announcements, and your ERS account for enrollment advisories.</li>
-                        <li>Prepare senior high school credentials and other documents required in the enrollment notice.</li>
-                        <li>For general campus inquiries, see <a href="{{ route('contact') }}">Contact us</a>.</li>
-                    </ul>
-                </div>
-            </article>
-
-            {{-- Step 6 --}}
-            <article id="step-orientation" class="enrollment-step">
-                <header class="enrollment-step__head">
-                    <span class="enrollment-step__num" aria-hidden="true">6</span>
-                    <h2 class="enrollment-step__title">Orientation</h2>
-                </header>
-                <div class="enrollment-step__body">
-                    <p>Newly enrolled freshmen attend campus orientation covering academic policies, student services, and campus life. Dates and venues are announced after enrollment.</p>
-                    <ul>
-                        <li><a href="{{ route('student_services') }}">Student services overview</a></li>
-                        <li><a href="{{ route('announcements.index') }}">Campus announcements</a></li>
-                    </ul>
-                </div>
-            </article>
-
-            {{-- Scholarships --}}
-            <section id="scholarships" class="enrollment-block" aria-labelledby="scholarships-heading">
-                <h2 id="scholarships-heading" class="site-section-title">Scholarships &amp; financial aid</h2>
-                <p>Scholarship and assistance options (including government and campus programs) are published with each academic year&rsquo;s advisories. Check program pages for program-specific notes, and contact Admissions or the Office of Student Affairs for current openings.</p>
-                <ul>
-                    <li><a href="{{ route('academics.undergraduate') }}">Program pages</a> (see scholarships sections when published)</li>
-                    <li><a href="{{ route('student_services') }}">Student services / OSA</a></li>
-                </ul>
-            </section>
-
-            {{-- FAQ --}}
-            <section id="admission-faq" class="enrollment-block" aria-labelledby="faq-heading">
-                <h2 id="faq-heading" class="site-section-title">Frequently asked questions</h2>
-                <div class="enrollment-faq">
-                    <details class="enrollment-faq__item">
-                        <summary>Who can apply as a freshman?</summary>
-                        <p>Incoming first-year undergraduate applicants applying for TUP Visayas through the ERS applicant portal. Select <strong>Visayas Campus</strong> during profile verification.</p>
-                    </details>
-                    <details class="enrollment-faq__item">
-                        <summary>Is there an admission testing fee?</summary>
-                        <p><strong>No.</strong> In accordance with the policy on universal access to education, no admission testing fee shall be collected.</p>
-                    </details>
-                    <details class="enrollment-faq__item">
-                        <summary>What photo should I upload?</summary>
-                        <p>A low-resolution <strong>2&times;2</strong> photo in <strong>.jpeg</strong> or <strong>.jpg</strong> format.</p>
-                    </details>
-                    <details class="enrollment-faq__item">
-                        <summary>Can parents enter the testing venue?</summary>
-                        <p>No. Parents, guardians, and companions are not allowed to enter the testing venue.</p>
-                    </details>
-                    <details class="enrollment-faq__item">
-                        <summary>Where do I see the exam schedule?</summary>
-                        <p>See <a href="#admission-test-schedule">Admission test schedule</a> on this page, and also select your preferred schedule inside ERS.</p>
-                    </details>
-                    <details class="enrollment-faq__item">
-                        <summary>I forgot my ERS username or password. What should I do?</summary>
-                        <p>Use the recovery options on the ERS portal if available, or contact campus Admissions / UITC support with your full name and applicant details for assistance.</p>
-                    </details>
-                </div>
-            </section>
-
-            {{-- Map & contacts --}}
-            <section id="admission-contact" class="enrollment-block" aria-labelledby="contact-heading">
-                <h2 id="contact-heading" class="site-section-title">Campus map &amp; contacts</h2>
-                <div class="enrollment-contact">
-                    <div class="enrollment-contact__info">
-                        <dl class="contact-list">
-                            <div class="contact-list__item">
-                                <dt>Campus</dt>
-                                <dd>Technological University of the Philippines Visayas</dd>
-                            </div>
-                            <div class="contact-list__item">
-                                <dt>Address</dt>
-                                <dd>Capt. Sabi Street, Brgy. Zone 12, Talisay City, Negros Occidental 6115</dd>
-                            </div>
-                            <div class="contact-list__item">
-                                <dt>Telephone</dt>
-                                <dd><a href="tel:+63344953480">(034) 495-3480</a></dd>
-                            </div>
-                            <div class="contact-list__item">
-                                <dt>More contacts</dt>
-                                <dd><a href="{{ route('contact') }}">Full contact page</a></dd>
-                            </div>
-                        </dl>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="enrollment-contact__map site-embed">
-                        <iframe
-                            src="https://maps.google.com/maps?q=Technological+University+of+the+Philippines+Visayas,+Capitan+Sabi+Street,+Talisay+City,+Negros+Occidental&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                            title="TUP Visayas campus map"
-                            allowfullscreen
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                @else
+                    <p class="adm-dates__empty">Admission test dates will appear here when published. Please check back or
+                        contact Admissions.</p>
+                @endif
+            </div>
+        </section>
+
+        {{-- Exam day tips --}}
+        <section class="adm-section" aria-labelledby="examday-heading">
+            <header class="adm-section__head adm-section__head--center">
+                <h2 id="examday-heading" class="adm-section__title">On the day of the admission test</h2>
+                <p class="adm-section__lede">Bring what you need and follow venue rules so your exam day runs smoothly.</p>
+            </header>
+            <ul class="adm-checklist">
+                <li>Present a screenshot or printed copy of your application form.</li>
+                <li>Know your contact number, email, and Applicant ID from your registration proof.</li>
+                <li>Bring <strong>two (2) sharpened pencils</strong>.</li>
+                <li>Dress appropriately: <strong>no shorts, sleeveless tops, or slippers</strong>.</li>
+                <li><strong>Watches are not allowed.</strong> Turn off cellphones and other electronics at the venue.</li>
+                <li><strong>Arrive at least 30 minutes before</strong> your scheduled time.</li>
+                <li><strong>Parents, guardians, and companions are not allowed</strong> inside the testing venue.</li>
+            </ul>
+        </section>
+
+        {{-- FAQ --}}
+        <section class="adm-section" id="admission-faq" aria-labelledby="faq-heading">
+            <header class="adm-section__head adm-section__head--center">
+                <h2 id="faq-heading" class="adm-section__title">Frequently Asked Questions</h2>
+            </header>
+            <div class="adm-faq">
+                <details class="adm-faq__item">
+                    <summary>Can I apply if I haven&rsquo;t graduated yet?</summary>
+                    <p>Yes—incoming senior high completers may apply as freshmen through ERS. Bring final credentials when
+                        enrollment requirements are announced.</p>
+                </details>
+                <details class="adm-faq__item">
+                    <summary>Is there a quota for each course?</summary>
+                    <p>Programs admit a limited number of freshmen each year. Choosing a program early and completing your
+                        ERS application on time improves your chances of securing a preferred schedule and slot.</p>
+                </details>
+                <details class="adm-faq__item">
+                    <summary>How much is the TUPSTAT application fee?</summary>
+                    <p><strong>None.</strong> No admission testing fee shall be collected, consistent with universal access
+                        to quality tertiary education policies for eligible students in SUCs.</p>
+                </details>
+                <details class="adm-faq__item">
+                    <summary>What if I miss my scheduled exam date?</summary>
+                    <p>Contact Admissions as soon as possible. Makeup or alternate schedules depend on available slots and
+                        campus announcements—do not assume a walk-in seat without confirmation.</p>
+                </details>
+                <details class="adm-faq__item">
+                    <summary>What photo should I upload on ERS?</summary>
+                    <p>A low-resolution <strong>2&times;2</strong> photo in <strong>.jpeg</strong> or <strong>.jpg</strong>
+                        format.</p>
+                </details>
+                <details class="adm-faq__item">
+                    <summary>I forgot my ERS username or password. What should I do?</summary>
+                    <p>Use recovery options on the ERS portal if available, or contact campus Admissions / UITC with your
+                        full name and applicant details for assistance.</p>
+                </details>
+            </div>
+        </section>
+
+        {{-- CTA --}}
+        <section class="adm-cta" aria-labelledby="adm-cta-heading">
+            <div class="adm-cta__inner">
+                <h2 id="adm-cta-heading" class="adm-cta__title">
+                    Ready to join the <span class="adm-hero__accent">Technological Elite?</span>
+                </h2>
+                <p class="adm-cta__lede">Start your application on the official TUP ERS portal, or reach the Admissions
+                    Office if you need help.</p>
+                <div class="adm-cta__actions">
+                    <a class="adm-btn adm-btn--primary"
+                        href="https://ers.tup.edu.ph/aims/applicants/"
+                        target="_blank"
+                        rel="noopener noreferrer">Apply Online</a>
+                    <a class="adm-btn adm-btn--muted" href="{{ route('contact') }}">Contact Admission Office</a>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </div>
 @endsection

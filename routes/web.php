@@ -133,6 +133,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::middleware('permission:manage admissions')->group(function () {
         Route::resource('admission-schedules', App\Http\Controllers\Admin\AdmissionTestScheduleController::class)
             ->except(['show']);
+        Route::put('admission-promo', [App\Http\Controllers\Admin\AdmissionTestScheduleController::class, 'updatePromo'])
+            ->name('admission-promo.update');
     });
 
     Route::middleware('permission:manage tiptto')->group(function () {

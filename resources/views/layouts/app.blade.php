@@ -24,7 +24,6 @@
     <a class="site-skip" href="#site-main">Skip to main content</a>
 
     <header class="site-header">
-        @include('layouts.partials.site-utility')
         @include('layouts.partials.site-navigation')
     </header>
 

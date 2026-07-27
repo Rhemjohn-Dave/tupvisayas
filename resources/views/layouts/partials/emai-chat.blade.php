@@ -10,7 +10,7 @@
 <div
     class="emai"
     id="emaiChat"
-    data-ask-url="{{ route('emai.ask') }}"
+    data-ask-url="{{ route('emai.ask', [], false) }}"
     data-csrf="{{ csrf_token() }}"
     data-logo="{{ $emaiLogo }}"
     hidden

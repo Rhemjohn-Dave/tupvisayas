@@ -71,15 +71,21 @@ class EmaiFaqService
    */
   private function dynamicFaqs(): array
   {
-    return Cache::remember('emai.dynamic_faqs', 3600, function () {
-      return array_merge(
-        $this->contactFaqs(),
-        $this->scheduleFaqs(),
-        $this->collegeProgramFaqs(),
-        $this->courseFaqs(),
-        $this->officialFaqs(),
-      );
-    });
+    try {
+      return Cache::remember('emai.dynamic_faqs', 3600, function () {
+        return array_merge(
+          $this->contactFaqs(),
+          $this->scheduleFaqs(),
+          $this->collegeProgramFaqs(),
+          $this->courseFaqs(),
+          $this->officialFaqs(),
+        );
+      });
+    } catch (\Throwable $e) {
+      report($e);
+
+      return [];
+    }
   }
 
   public static function clearCache(): void
@@ -462,7 +468,7 @@ class EmaiFaqService
 
       $resolved[] = [
         'label' => $link['label'],
-        'url' => route($link['route'], $link['params'] ?? []),
+        'url' => route($link['route'], $link['params'] ?? [], false),
       ];
     }
 
@@ -476,7 +482,7 @@ class EmaiFaqService
   {
     return [
       'label' => $label,
-      'url' => route($route),
+      'url' => route($route, [], false),
     ];
   }
 

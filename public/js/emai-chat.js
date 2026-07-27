@@ -14,6 +14,10 @@
     var suggestions = document.getElementById('emaiSuggestions');
     var askUrl = root.getAttribute('data-ask-url');
     var csrf = root.getAttribute('data-csrf');
+    var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    if (!csrf && csrfMeta) {
+        csrf = csrfMeta.getAttribute('content');
+    }
     var logo = root.getAttribute('data-logo');
     var busy = false;
 
@@ -107,6 +111,10 @@
 
     function ask(message) {
         if (!message || busy) return;
+        if (!askUrl) {
+            appendBot('Chat is not configured correctly. Please refresh the page or use the Contact page.');
+            return;
+        }
         appendUser(message);
         if (suggestions) suggestions.hidden = true;
         setBusy(true);
@@ -114,17 +122,29 @@
 
         fetch(askUrl, {
             method: 'POST',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'X-CSRF-TOKEN': csrf,
+                'X-CSRF-TOKEN': csrf || '',
                 'X-Requested-With': 'XMLHttpRequest'
             },
             body: JSON.stringify({ message: message })
         })
             .then(function (res) {
+                var contentType = res.headers.get('content-type') || '';
+                if (contentType.indexOf('application/json') === -1) {
+                    var err = new Error('non_json');
+                    err.status = res.status;
+                    throw err;
+                }
                 return res.json().then(function (data) {
-                    if (!res.ok) throw data;
+                    if (!res.ok) {
+                        var fail = new Error('http_error');
+                        fail.status = res.status;
+                        fail.data = data;
+                        throw fail;
+                    }
                     return data;
                 });
             })
@@ -132,9 +152,20 @@
                 removeTyping();
                 appendBot(data.message || 'Sorry, I could not answer that.', data.links || []);
             })
-            .catch(function () {
+            .catch(function (err) {
                 removeTyping();
-                appendBot('Something went wrong. Please try again in a moment, or use the Contact page for help.');
+                console.error('E-Mai request failed', err);
+                var hint = 'Something went wrong. Please try again in a moment, or use the Contact page for help.';
+                if (err && err.status === 419) {
+                    hint = 'Your session expired. Please refresh the page and try again.';
+                } else if (err && err.status === 404) {
+                    hint = 'The chat service is unavailable on this server. Please contact the site administrator.';
+                } else if (err && err.status === 422 && err.data && err.data.errors) {
+                    hint = 'Please enter a valid question (2–500 characters).';
+                } else if (err && err.status === 429) {
+                    hint = 'Too many messages. Please wait a moment and try again.';
+                }
+                appendBot(hint);
             })
             .finally(function () {
                 setBusy(false);

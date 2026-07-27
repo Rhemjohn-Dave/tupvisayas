@@ -62,7 +62,7 @@
                     </p>
                 </div>
                 <figure class="adm-hero__media">
-                    <img src="{{ asset('images/admission-student.jpg') }}"
+                    <img src="{{ asset('images/admission-student.jpg') }}?v={{ @filemtime(public_path('images/admission-student.jpg')) ?: time() }}"
                         alt="Students at TUP Visayas campus" loading="eager">
                 </figure>
             </div>

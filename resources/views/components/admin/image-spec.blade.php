@@ -16,10 +16,11 @@
             'ratio' => '3:1 to 16:9 landscape',
             'size' => '1920 × 640 px recommended',
             'format' => 'JPG or PNG',
-            'max' => '4 MB',
+            'max' => '4 MB (compress before upload)',
             'tips' => [
                 'Shown at the top of each college academics page.',
                 'Wide banner; max display height is 420 px.',
+                'Phone photos are often 8–12 MB — export/compress to under 4 MB first.',
             ],
         ],
         'article' => [

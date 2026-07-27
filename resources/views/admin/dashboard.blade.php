@@ -31,34 +31,36 @@
     </x-admin.page-header>
 
     <div class="admin-stats">
-        <x-admin.stat-card label="Total posts" :value="$stats['posts']" icon="article" />
-        <x-admin.stat-card label="Users" :value="$stats['users']" icon="group" />
-        <x-admin.stat-card label="Categories" :value="$stats['categories']" icon="category" />
-        <x-admin.stat-card label="Officials" :value="$stats['officials']" icon="badge" />
+        <x-admin.stat-card label="Total posts" :value="$stats['posts']" icon="article" tone="rose" trend="+12%" />
+        <x-admin.stat-card label="Users" :value="$stats['users']" icon="group" tone="gold" />
+        <x-admin.stat-card label="Categories" :value="$stats['categories']" icon="category" tone="violet" />
+        <x-admin.stat-card label="Officials" :value="$stats['officials']" icon="badge" tone="peach" />
     </div>
 
-    <h2 class="site-section-title admin-section-title">Posts</h2>
+    <div class="admin-section-head">
+        <h2 class="site-section-title admin-section-title">Posts</h2>
 
-    {{-- Filters: type + preserved query for search/sort --}}
-    <form method="get" action="{{ route('admin.dashboard') }}" class="admin-toolbar">
-        @if($filters['q'] ?? null)
-            <input type="hidden" name="q" value="{{ $filters['q'] }}">
-        @endif
-        @if($filters['sort'] ?? null)
-            <input type="hidden" name="sort" value="{{ $filters['sort'] }}">
-        @endif
-        @if($filters['dir'] ?? null)
-            <input type="hidden" name="dir" value="{{ $filters['dir'] }}">
-        @endif
-        <label class="admin-toolbar__label" for="filterType">Type</label>
-        <select class="admin-select" id="filterType" name="type" onchange="this.form.submit()">
-            <option value="">All types</option>
-            <option value="news" @selected(($filters['type'] ?? '') === 'news')>News</option>
-            <option value="announcement" @selected(($filters['type'] ?? '') === 'announcement')>Announcements</option>
-            <option value="job" @selected(($filters['type'] ?? '') === 'job')>Jobs</option>
-            <option value="event" @selected(($filters['type'] ?? '') === 'event')>Events</option>
-        </select>
-    </form>
+        {{-- Filters: type + preserved query for search/sort --}}
+        <form method="get" action="{{ route('admin.dashboard') }}" class="admin-toolbar">
+            @if($filters['q'] ?? null)
+                <input type="hidden" name="q" value="{{ $filters['q'] }}">
+            @endif
+            @if($filters['sort'] ?? null)
+                <input type="hidden" name="sort" value="{{ $filters['sort'] }}">
+            @endif
+            @if($filters['dir'] ?? null)
+                <input type="hidden" name="dir" value="{{ $filters['dir'] }}">
+            @endif
+            <label class="admin-toolbar__label" for="filterType">Type</label>
+            <select class="admin-select" id="filterType" name="type" onchange="this.form.submit()">
+                <option value="">All types</option>
+                <option value="news" @selected(($filters['type'] ?? '') === 'news')>News</option>
+                <option value="announcement" @selected(($filters['type'] ?? '') === 'announcement')>Announcements</option>
+                <option value="job" @selected(($filters['type'] ?? '') === 'job')>Jobs</option>
+                <option value="event" @selected(($filters['type'] ?? '') === 'event')>Events</option>
+            </select>
+        </form>
+    </div>
 
     <div class="admin-table-card">
         <div class="admin-table-scroll">

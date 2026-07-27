@@ -27,4 +27,10 @@ class Official extends Model
     {
         return $this->belongsTo(CollegePage::class);
     }
+
+    protected static function booted(): void
+    {
+        static::saved(fn () => \App\Services\EmaiFaqService::clearCache());
+        static::deleted(fn () => \App\Services\EmaiFaqService::clearCache());
+    }
 }

@@ -35,8 +35,8 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
         <a href="{{ $home }}" class="admin-sidebar__logo">
             <img src="{{ asset('images/tup-logo.png') }}" alt="TUP Visayas" class="admin-sidebar__logo-img" width="44" height="44">
             <span class="admin-sidebar__logo-text">
-                <span class="admin-sidebar__logo-title">TUP Visayas</span>
-                <span class="admin-sidebar__logo-sub">Administration</span>
+                <span class="admin-sidebar__logo-title">Admin Central</span>
+                <span class="admin-sidebar__logo-sub">Institutional Portal</span>
             </span>
         </a>
     </div>
@@ -118,7 +118,7 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
         @can(CmsPermissions::MANAGE_ACADEMICS)
             <ul class="admin-sidebar__list admin-sidebar__list--root">
                 <li>
-                    <x-admin.sidebar-nav-link href="{{ route('admin.college-pages.index') }}" label="Academics pages"
+                    <x-admin.sidebar-nav-link href="{{ route('admin.college-pages.index') }}" label="Academics"
                         icon="school" :active="request()->routeIs('admin.college-pages.*')"
                         class="admin-sidebar__link--root" />
                 </li>
@@ -137,7 +137,7 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
         @endcan
 
         @can(CmsPermissions::MANAGE_PROCUREMENTS)
-            <x-admin.sidebar-collapsible title="Procurement" icon="assignment" group-id="sb-group-procurement"
+            <x-admin.sidebar-collapsible title="Procurement" icon="shopping_cart" group-id="sb-group-procurement"
                 :open="$openProcurement">
 
                 <li>
@@ -160,5 +160,17 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
         @endcan
     </div>
 
-
+    <div class="admin-sidebar__footer">
+        <a href="{{ route('home') }}" class="admin-sidebar__footer-link" title="View public site">
+            <span class="material-symbols-outlined admin-sidebar__footer-icon" aria-hidden="true">settings</span>
+            <span class="admin-sidebar__footer-label">Settings</span>
+        </a>
+        <form method="POST" action="{{ route('logout') }}" class="admin-sidebar__footer-form">
+            @csrf
+            <button type="submit" class="admin-sidebar__footer-link admin-sidebar__footer-link--logout" title="Log out">
+                <span class="material-symbols-outlined admin-sidebar__footer-icon" aria-hidden="true">logout</span>
+                <span class="admin-sidebar__footer-label">Logout</span>
+            </button>
+        </form>
+    </div>
 </aside>

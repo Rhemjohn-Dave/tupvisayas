@@ -2,6 +2,8 @@
 
 @section('title', $collegePage->college . ' - TUP Visayas')
 
+@section('main_class', 'site-main--full')
+
 @section('head')
     @php
         $metaDescription = 'Programs, board exam ratings, and college information for ' . $collegePage->college . ' at TUP Visayas.';
@@ -19,7 +21,7 @@
 @endsection
 
 @section('content')
-    <div class="section site-page site-page--college">
+    <div class="site-page site-page--college">
         @include('pages.academics.partials.college-masthead')
 
         <div class="college-body">
@@ -38,75 +40,54 @@
 
                 <div id="college-panel-courses" class="uitc-tabs__panel is-active" role="tabpanel"
                     aria-labelledby="college-tab-courses">
-                    <section class="uitc-block" aria-labelledby="college-courses-heading">
-                        <div class="college-section-head">
-                            <h2 id="college-courses-heading" class="site-section-title">Programs offered</h2>
-                            <p class="college-section-head__lede">
-                                Undergraduate programs under {{ $collegePage->college }}, with pathways to apply.
-                            </p>
-                        </div>
-                        @if ($collegePage->courses->count())
-                            <div class="college-program-grid">
-                                @foreach ($collegePage->courses as $course)
-                                    @php
-                                        $words = preg_split('/\s+/', trim($course->name));
-                                        $initials = '';
-                                        foreach ($words as $w) {
-                                            if ($w !== '') {
-                                                $initials .= strtoupper(mb_substr($w, 0, 1));
-                                                if (strlen($initials) >= 2) {
-                                                    break;
-                                                }
+                    @if ($collegePage->courses->count())
+                        <div class="college-program-grid">
+                            @foreach ($collegePage->courses as $course)
+                                @php
+                                    $words = preg_split('/\s+/', trim($course->name));
+                                    $initials = '';
+                                    foreach ($words as $w) {
+                                        if ($w !== '') {
+                                            $initials .= strtoupper(mb_substr($w, 0, 1));
+                                            if (strlen($initials) >= 2) {
+                                                break;
                                             }
                                         }
-                                        $excerpt = filled($course->description)
-                                            ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($course->description))), 160)
-                                            : null;
-                                    @endphp
-                                    <article class="college-program" id="course-{{ $course->id }}">
-                                        <div class="college-program__top">
-                                            @if ($course->logo)
-                                                <img class="college-program__logo"
-                                                    src="{{ asset('storage/' . $course->logo) }}" alt=""
-                                                    loading="lazy">
-                                            @else
-                                                <div class="college-program__logo college-program__logo--placeholder"
-                                                    aria-hidden="true">{{ $initials ?: 'TUP' }}</div>
-                                            @endif
-                                            <div class="college-program__intro">
-                                                <h3 class="college-program__title">{{ $course->name }}</h3>
-                                                @if ($excerpt)
-                                                    <p class="college-program__excerpt">{{ $excerpt }}</p>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="college-program__actions">
-                                            <a class="college-program__link"
-                                                href="{{ route('academics.program', [$collegePage->routeSlug(), $course->slug]) }}">Program details</a>
-                                            <a class="college-program__cta"
-                                                href="{{ route('admissions.enrollment') }}">Apply Now</a>
-                                        </div>
-                                    </article>
-                                @endforeach
-                            </div>
-                        @else
-                            <p class="program-empty">No programs listed for this college at the moment.</p>
-                        @endif
-                    </section>
+                                    }
+                                    $excerpt = filled($course->description)
+                                        ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($course->description))), 140)
+                                        : 'Learn more about curriculum, outcomes, and how to apply to this program.';
+                                @endphp
+                                <article class="college-program" id="course-{{ $course->id }}">
+                                    @if ($course->logo)
+                                        <img class="college-program__logo"
+                                            src="{{ asset('storage/' . $course->logo) }}" alt="" loading="lazy">
+                                    @else
+                                        <div class="college-program__logo college-program__logo--placeholder"
+                                            aria-hidden="true">{{ $initials ?: 'TUP' }}</div>
+                                    @endif
+                                    <h3 class="college-program__title">{{ $course->name }}</h3>
+                                    <p class="college-program__excerpt">{{ $excerpt }}</p>
+                                    <div class="college-program__actions">
+                                        <a class="college-program__cta"
+                                            href="{{ route('admissions.enrollment') }}">Apply Now</a>
+                                        <a class="college-program__link"
+                                            href="{{ route('academics.program', [$collegePage->routeSlug(), $course->slug]) }}">Details</a>
+                                    </div>
+                                </article>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="program-empty">No programs listed for this college at the moment.</p>
+                    @endif
                 </div>
 
                 <div id="college-panel-board" class="uitc-tabs__panel" role="tabpanel"
                     aria-labelledby="college-tab-board" hidden>
-                    <section class="uitc-block" aria-labelledby="college-board-heading">
-                        <div class="college-section-head">
-                            <h2 id="college-board-heading" class="site-section-title">Board exam ratings</h2>
-                            <p class="college-section-head__lede">
-                                Licensure examination performance for programs under {{ $collegePage->college }}.
-                            </p>
-                        </div>
+                    <section class="college-info-panel" aria-labelledby="college-board-heading">
+                        <h3 id="college-board-heading" class="college-info-panel__title">Board exam ratings</h3>
                         @if (filled($collegePage->board_exam_ratings))
-                            <div class="site-prose site-prose--justify mission-card">
+                            <div class="site-prose site-prose--justify">
                                 {!! clean($collegePage->board_exam_ratings) !!}
                             </div>
                         @else
@@ -117,10 +98,10 @@
 
                 <div id="college-panel-history" class="uitc-tabs__panel" role="tabpanel"
                     aria-labelledby="college-tab-history" hidden>
-                    <section class="uitc-block" aria-labelledby="college-history-heading">
-                        <h2 id="college-history-heading" class="site-section-title">About the college</h2>
+                    <section class="college-info-panel" aria-labelledby="college-history-heading">
+                        <h3 id="college-history-heading" class="college-info-panel__title">About the college</h3>
                         @if (filled($collegePage->history))
-                            <div class="site-prose site-prose--justify mission-card">
+                            <div class="site-prose site-prose--justify">
                                 {!! clean($collegePage->history) !!}
                             </div>
                         @else
@@ -130,6 +111,8 @@
                 </div>
             </div>
         </div>
+
+        @include('pages.academics.partials.college-cta')
     </div>
 @endsection
 

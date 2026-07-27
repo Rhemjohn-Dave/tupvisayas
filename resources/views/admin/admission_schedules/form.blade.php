@@ -21,8 +21,8 @@
     </x-admin.page-header>
 
     @if ($errors->any())
-        <div class="card-panel red lighten-4 red-text text-darken-4" style="margin-bottom:1rem;">
-            <ul style="margin:0;">
+        <div class="admin-flash" role="alert" style="background:#fdeeee;color:#9e1b32;border:1px solid rgba(158,27,50,0.18);margin-bottom:1rem;">
+            <ul style="margin:0;padding-left:1.1rem;">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -48,7 +48,7 @@
                 <label class="admin-label" for="times">Time(s)</label>
                 <textarea class="admin-input" name="times" id="times" rows="3" required
                     placeholder="8 AM&#10;1 PM">{{ old('times', $schedule->times) }}</textarea>
-                <p class="grey-text text-darken-1" style="margin:0.35rem 0 0; font-size:0.85rem;">
+                <p class="admin-form__hint">
                     Put each session on its own line (e.g. 8 AM then 1 PM).
                 </p>
             </div>
@@ -75,20 +75,20 @@
                 <label class="admin-label" for="sort_order">Sort order</label>
                 <input class="admin-input" type="number" name="sort_order" id="sort_order" min="0"
                     value="{{ old('sort_order', $schedule->sort_order ?? 0) }}">
-                <p class="grey-text text-darken-1" style="margin:0.35rem 0 0; font-size:0.85rem;">
+                <p class="admin-form__hint">
                     Used when two rows share the same date. Schedules are ordered by date first.
                 </p>
             </div>
 
             <div class="admin-form__group">
-                <label>
-                    <input type="checkbox" class="filled-in" name="is_published" value="1"
-                        {{ old('is_published', $schedule->is_published ?? true) ? 'checked' : '' }} />
+                <label class="admin-checkbox" for="is_published">
+                    <input type="checkbox" id="is_published" name="is_published" value="1"
+                        {{ old('is_published', $schedule->is_published ?? true) ? 'checked' : '' }}>
                     <span>Published (visible on the public site)</span>
                 </label>
             </div>
 
-            <div class="admin-form__actions" style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <div class="admin-form__actions">
                 <button type="submit" class="admin-btn admin-btn--primary">
                     {{ $schedule->id ? 'Update schedule' : 'Save schedule' }}
                 </button>

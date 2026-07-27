@@ -17,18 +17,12 @@
         </x-slot>
     </x-admin.page-header>
 
-    @if (session('status'))
-        <div class="card-panel green lighten-4 green-text text-darken-4" style="margin-bottom:1rem;">
-            {{ session('status') }}
-        </div>
-    @endif
-
-    <div class="admin-form-card admin-form" style="margin-bottom:1.25rem;">
+    <div class="admin-panel">
         <form method="POST" action="{{ route('admin.admission-promo.update') }}">
             @csrf
             @method('PUT')
-            <h3 style="margin:0 0 0.5rem; font-size:1.1rem;">Homepage TUPSTAT promo</h3>
-            <p class="grey-text text-darken-1" style="margin:0 0 1rem; font-size:0.9rem; max-width:42rem;">
+            <h3 class="admin-panel__title">Homepage TUPSTAT promo</h3>
+            <p class="admin-panel__text">
                 When enabled, the homepage hero shows the TUPSTAT admission message over the carousel.
                 Exam dates still come from the published schedules below.
                 @if ($publishedCount === 0)
@@ -46,6 +40,10 @@
                 <button type="submit" class="admin-btn admin-btn--primary">Save promo setting</button>
             </div>
         </form>
+    </div>
+
+    <div class="admin-section-head">
+        <h2 class="site-section-title admin-section-title">Schedules</h2>
     </div>
 
     <div class="admin-table-card">
@@ -68,7 +66,7 @@
                             <td>
                                 {{ $schedule->venue }}
                                 @if ($schedule->venue_note)
-                                    <br><span class="grey-text text-darken-1" style="font-size:0.85rem;">{{ $schedule->venue_note }}</span>
+                                    <br><span class="admin-panel__text" style="margin:0;display:inline-block;">{{ $schedule->venue_note }}</span>
                                 @endif
                             </td>
                             <td>

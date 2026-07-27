@@ -1,19 +1,31 @@
 @extends('layouts.admin')
 
+@section('title', 'Admin — New category')
+
 @section('admin_content')
-    <div class="section" style="max-width:500px;margin:0 auto;">
-        <h4 style="color:#C41E3A;font-weight:700;">Add New Category</h4>
+    <x-admin.page-header title="Add category" subtitle="Categories group news, announcements, jobs, and events.">
+        <x-slot name="actions">
+            <a href="{{ route('admin.categories.index') }}" class="admin-btn admin-btn--ghost">
+                <i class="material-icons" aria-hidden="true">arrow_back</i>
+                Back to categories
+            </a>
+        </x-slot>
+    </x-admin.page-header>
+
+    <div class="admin-form-card admin-form admin-form--narrow">
         <form method="POST" action="{{ route('admin.categories.store') }}">
             @csrf
-            <div class="input-field">
-                <label for="name" class="active">Category Name</label>
-                <input type="text" name="name" id="name" required>
+            <div class="admin-form__group">
+                <label class="admin-label" for="name">Category name</label>
+                <input class="admin-input" type="text" name="name" id="name" value="{{ old('name') }}" required>
                 @error('name')
-                    <span class="red-text">{{ $message }}</span>
+                    <span class="admin-form__error">{{ $message }}</span>
                 @enderror
             </div>
-            <button type="submit" class="btn">Add Category</button>
-            <a href="{{ route('admin.categories.index') }}" class="btn grey" style="color:#fff !important;">Cancel</a>
+            <div class="admin-form__actions">
+                <button type="submit" class="admin-btn admin-btn--primary">Add category</button>
+                <a href="{{ route('admin.categories.index') }}" class="admin-btn admin-btn--ghost">Cancel</a>
+            </div>
         </form>
     </div>
 @endsection

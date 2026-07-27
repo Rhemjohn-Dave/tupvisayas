@@ -60,6 +60,9 @@ class Course extends Model
                 ? static::generateUniqueSlug($course->slug, $course->id)
                 : static::generateUniqueSlug($course->name, $course->id);
         });
+
+        static::saved(fn () => \App\Services\EmaiFaqService::clearCache());
+        static::deleted(fn () => \App\Services\EmaiFaqService::clearCache());
     }
 
     public static function generateUniqueSlug(string $value, ?int $excludeId = null): string

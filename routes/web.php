@@ -25,6 +25,9 @@ Route::get('philgeps-posting', [ProcurementController::class, 'philgepsPosting']
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/emai/ask', [App\Http\Controllers\EmaiChatController::class, 'ask'])
+    ->middleware('throttle:30,1')
+    ->name('emai.ask');
 Route::redirect('/about', '/about/history', 301)->name('about');
 Route::view('/about/history', 'pages.about.history')->name('about.history');
 Route::view('/about/mission', 'pages.about.mission')->name('about.mission');

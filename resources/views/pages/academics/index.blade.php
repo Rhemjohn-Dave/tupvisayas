@@ -2,9 +2,11 @@
 
 @section('title', 'Academics - TUP Visayas')
 
+@section('main_class', 'site-main--full')
+
 @section('head')
     @php
-        $metaDescription = 'Explore undergraduate programs and college pages at the Technological University of the Philippines Visayas.';
+        $metaDescription = 'Discover undergraduate programs and specialized colleges at the Technological University of the Philippines Visayas.';
     @endphp
     <meta name="description" content="{{ $metaDescription }}">
     <meta property="og:title" content="Academics - TUP Visayas">
@@ -15,39 +17,103 @@
 @endsection
 
 @section('content')
-    <div class="section site-page site-page--academics-hub">
-        <h1 class="site-page-title site-page-title--center">Academics</h1>
-        <p class="site-page-intro">Explore undergraduate programs and college pages at TUP Visayas.</p>
+    @php
+        $collegeBlurbs = [
+            'coac' => 'Industrial automation, instrumentation, and control systems that power modern manufacturing and process industries.',
+            'coe' => 'Civil, mechanical, electrical, and allied engineering fields grounded in design, analysis, and professional practice.',
+            'coet' => 'Advanced manufacturing, digital technology, and applied engineering pathways built for industry-ready graduates.',
+        ];
+        $collegeMetaWords = [
+            'coac' => 'specialized',
+            'coe' => 'accredited',
+            'coet' => 'technical',
+        ];
+    @endphp
 
-        <div class="program-hero__actions program-hero__actions--center" role="group" aria-label="Program discovery">
-            <a class="program-hero__cta" href="{{ route('academics.undergraduate') }}">Undergraduate programs</a>
-            <a class="program-hero__link" href="{{ route('admissions.enrollment') }}">Apply as a freshman</a>
-        </div>
+    <div class="site-page site-page--academics-hub">
+        {{-- Hero --}}
+        <section class="acad-hero" aria-labelledby="acad-hero-heading">
+            <p class="acad-hero__badge">Academic excellence</p>
+            <h1 id="acad-hero-heading" class="acad-hero__title">Academics</h1>
+            <p class="acad-hero__lede">
+                Discover our undergraduate programs and specialized colleges dedicated to shaping the next generation of
+                engineers and technologists.
+            </p>
+            <div class="acad-hero__actions">
+                <a class="acad-btn acad-btn--primary" href="{{ route('academics.undergraduate') }}">Undergraduate Programs</a>
+                <a class="acad-btn acad-btn--ghost" href="{{ route('admissions.enrollment') }}">Apply as a freshman</a>
+            </div>
+        </section>
 
-        <section class="program-section" aria-labelledby="academics-colleges-heading">
-            <h2 id="academics-colleges-heading" class="site-section-title">Colleges</h2>
+        {{-- Colleges --}}
+        <section class="acad-colleges" aria-labelledby="academics-colleges-heading">
+            <div class="acad-colleges__inner">
+                <header class="acad-colleges__head">
+                    <h2 id="academics-colleges-heading" class="acad-colleges__title">Our Colleges</h2>
+                </header>
 
-            @forelse ($colleges as $college)
-                <article class="academics-hub-college">
-                    <h3 class="academics-hub-college__title">
-                        <a href="{{ route('academics.show', $college->routeSlug()) }}">{{ $college->college }}</a>
-                    </h3>
-                    <p class="academics-hub-college__meta">
-                        {{ $college->courses_count }}
-                        {{ $college->courses_count === 1 ? 'program' : 'programs' }}
-                    </p>
-                    <p class="academics-hub-college__text">
-                        Browse degree programs or meet the departments and faculty who teach them.
-                    </p>
-                    <div class="academics-hub-college__links">
-                        <a class="program-hero__link" href="{{ route('academics.show', $college->routeSlug()) }}">Programs</a>
-                        <a class="program-hero__link"
-                            href="{{ route('academics.faculty', $college->routeSlug()) }}">Faculty &amp; Departments</a>
-                    </div>
-                </article>
-            @empty
-                <p class="program-empty">College pages will appear here once published.</p>
-            @endforelse
+                <div class="acad-college-list">
+                    @forelse ($colleges as $college)
+                        @php
+                            $slug = $college->routeSlug();
+                            $count = (int) $college->courses_count;
+                            $metaWord = $collegeMetaWords[$slug] ?? 'offered';
+                            $blurb = $collegeBlurbs[$slug] ?? 'Browse degree programs or meet the departments and faculty who teach them.';
+                            $cover = $college->cover_photo
+                                ? asset('storage/' . $college->cover_photo)
+                                : asset('images/tupvisayas.jpg');
+                            $coverVer = $college->cover_photo
+                                ? @filemtime(public_path('storage/' . $college->cover_photo))
+                                : @filemtime(public_path('images/tupvisayas.jpg'));
+                        @endphp
+                        <article class="acad-college-card">
+                            <figure class="acad-college-card__media">
+                                <img src="{{ $cover }}?v={{ $coverVer ?: time() }}"
+                                    alt="{{ $college->college }}" loading="lazy">
+                            </figure>
+                            <div class="acad-college-card__body">
+                                <p class="acad-college-card__meta">
+                                    {{ $count }} {{ $metaWord }}
+                                    {{ $count === 1 ? 'program' : 'programs' }}
+                                </p>
+                                <h3 class="acad-college-card__title">
+                                    <a href="{{ route('academics.show', $slug) }}">{{ $college->college }}</a>
+                                </h3>
+                                <p class="acad-college-card__text">{{ $blurb }}</p>
+                                <div class="acad-college-card__links">
+                                    <a href="{{ route('academics.show', $slug) }}">
+                                        Browse Programs
+                                        <span aria-hidden="true">↗</span>
+                                    </a>
+                                    <a href="{{ route('academics.faculty', $slug) }}">
+                                        Faculty &amp; Departments
+                                        <span aria-hidden="true">↗</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    @empty
+                        <p class="acad-empty">College pages will appear here once published.</p>
+                    @endforelse
+                </div>
+            </div>
+        </section>
+
+        {{-- CTA --}}
+        <section class="acad-cta" aria-labelledby="acad-cta-heading">
+            <div class="acad-cta__inner">
+                <h2 id="acad-cta-heading" class="acad-cta__title">Ready to Join TUP Visayas?</h2>
+                <p class="acad-cta__lede">
+                    Take the first step toward a rewarding career in engineering and technology. Freshmen admissions
+                    through TUPSTAT are open for the coming academic year.
+                </p>
+                <div class="acad-cta__actions">
+                    <a class="acad-btn acad-btn--on-dark" href="{{ route('admissions.enrollment') }}">View Admission
+                        Requirements</a>
+                    <a class="acad-btn acad-btn--outline-light"
+                        href="{{ route('academics.undergraduate') }}">Browse Programs</a>
+                </div>
+            </div>
         </section>
     </div>
 @endsection

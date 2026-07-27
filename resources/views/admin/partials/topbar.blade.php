@@ -6,7 +6,7 @@
             <i class="material-icons" aria-hidden="true">menu</i>
         </button>
 
-        <p class="admin-topbar__title">TUP Visayas Admin</p>
+        <p class="admin-topbar__title">Admin Central</p>
 
         <form class="admin-topbar-search" action="{{ route('admin.dashboard') }}" method="get" role="search">
             <label class="visually-hidden" for="adminGlobalSearch">Search posts</label>
@@ -36,14 +36,22 @@
             </div>
         </details>
 
+        <details class="admin-disclosure">
+            <summary class="admin-icon-btn" aria-label="Help">
+                <i class="material-icons" aria-hidden="true">help_outline</i>
+            </summary>
+            <div class="admin-disclosure__panel admin-disclosure__panel--sm">
+                <p class="admin-disclosure__empty">Use the sidebar to manage site sections and create posts.</p>
+            </div>
+        </details>
+
         <details class="admin-disclosure admin-disclosure--profile">
             <summary class="admin-profile-trigger" aria-label="Account menu">
                 <span class="admin-avatar" aria-hidden="true">{{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}</span>
                 <span class="admin-profile-trigger__text hide-on-small-admin">
-                    <span class="admin-profile-trigger__name">{{ auth()->user()->name }}</span>
+                    <span class="admin-profile-trigger__name">Admin</span>
                     <span class="admin-profile-trigger__role">Administrator</span>
                 </span>
-                <i class="material-icons admin-profile-trigger__chevron" aria-hidden="true">expand_more</i>
             </summary>
             <div class="admin-disclosure__panel admin-disclosure__panel--profile">
                 <div class="admin-profile-card">

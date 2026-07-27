@@ -65,4 +65,10 @@ class AdmissionTestSchedule extends Model
     {
         return $this->exam_date?->format('F j, Y') ?? '';
     }
+
+    protected static function booted(): void
+    {
+        static::saved(fn () => \App\Services\EmaiFaqService::clearCache());
+        static::deleted(fn () => \App\Services\EmaiFaqService::clearCache());
+    }
 }

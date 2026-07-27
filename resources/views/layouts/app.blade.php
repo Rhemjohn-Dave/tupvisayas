@@ -16,6 +16,9 @@
 
     <link href="{{ asset('css/custom.css?v=' . time()) }}" rel="stylesheet">
     <link href="{{ asset('css/site.css?v=' . time()) }}" rel="stylesheet">
+    @unless(request()->routeIs('admin.*'))
+        <link href="{{ asset('css/emai-chat.css?v=' . time()) }}" rel="stylesheet">
+    @endunless
 
     @yield('head')
 </head>
@@ -35,6 +38,7 @@
 
     @unless(request()->routeIs('admin.*'))
         @include('layouts.partials.privacy-consent')
+        @include('layouts.partials.emai-chat')
     @endunless
 
     <button type="button" class="site-scroll-top" id="scrollTopBtn" aria-label="Back to top">
@@ -48,6 +52,9 @@
     <script src="{{ asset('js/navbar.init.js?v=' . time()) }}"></script>
     <script src="{{ asset('js/site-nav.js?v=' . time()) }}" defer></script>
     <script src="{{ asset('js/privacy-consent.js?v=' . time()) }}" defer></script>
+    @unless(request()->routeIs('admin.*'))
+        <script src="{{ asset('js/emai-chat.js?v=' . time()) }}" defer></script>
+    @endunless
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -73,6 +73,9 @@ class CollegePage extends Model
     {
         static::saved(fn () => Cache::forget('navbar.college_pages'));
         static::deleted(fn () => Cache::forget('navbar.college_pages'));
+
+        static::saved(fn () => \App\Services\EmaiFaqService::clearCache());
+        static::deleted(fn () => \App\Services\EmaiFaqService::clearCache());
     }
 
     public function routeSlug(): string

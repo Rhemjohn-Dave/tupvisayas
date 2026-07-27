@@ -6,7 +6,7 @@
     <x-admin.page-header title="Activity logs" subtitle="Audit trail of admin and content changes (RA 10173 accountability).">
     </x-admin.page-header>
 
-    <form class="admin-toolbar" method="GET" action="{{ route('admin.activity-logs.index') }}" style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.25rem;align-items:end;">
+    <form class="admin-toolbar" method="GET" action="{{ route('admin.activity-logs.index') }}">
         <div>
             <label class="admin-label" for="q">Search</label>
             <input class="admin-input" type="search" name="q" id="q" value="{{ request('q') }}" placeholder="Description…">

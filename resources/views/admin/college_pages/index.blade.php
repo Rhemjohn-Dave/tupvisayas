@@ -12,7 +12,9 @@
         </x-slot>
     </x-admin.page-header>
 
-    <h2 class="site-section-title admin-section-title">All colleges</h2>
+    <div class="admin-section-head">
+        <h2 class="site-section-title admin-section-title">All colleges</h2>
+    </div>
 
     <div class="admin-table-card">
         <div class="admin-table-scroll">

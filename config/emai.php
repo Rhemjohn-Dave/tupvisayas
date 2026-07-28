@@ -287,5 +287,9 @@ return [
         'min_faq_score' => (float) env('EMAI_FAQ_MIN_SCORE', 2.2),
         // Set false only on Windows local if cURL SSL CA is missing. Keep true on production.
         'verify_ssl' => filter_var(env('EMAI_AI_VERIFY_SSL', true), FILTER_VALIDATE_BOOLEAN),
+        'cache' => [
+            'enabled' => filter_var(env('EMAI_AI_CACHE_ENABLED', true), FILTER_VALIDATE_BOOLEAN),
+            'ttl_minutes' => (int) env('EMAI_AI_CACHE_TTL', 360),
+        ],
     ],
 ];

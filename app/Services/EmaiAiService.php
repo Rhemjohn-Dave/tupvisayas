@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Throwable;
 
 class EmaiAiService
@@ -35,6 +37,17 @@ class EmaiAiService
 
         $system = $this->systemPrompt();
         $user = $this->userPrompt($message, $contextFaqs);
+        $cacheKey = $this->cacheKey($model, $message, $contextFaqs);
+
+        if (config('emai.ai.cache.enabled', true)) {
+            $cached = Cache::get($cacheKey);
+            if (is_array($cached) && filled($cached['answer'] ?? null)) {
+                return [
+                    'answer' => (string) $cached['answer'],
+                    'used_ai' => true,
+                ];
+            }
+        }
 
         try {
             $request = Http::withToken($apiKey)
@@ -69,6 +82,14 @@ class EmaiAiService
                 return null;
             }
 
+            if (config('emai.ai.cache.enabled', true)) {
+                Cache::put(
+                    $cacheKey,
+                    ['answer' => $text],
+                    now()->addMinutes((int) config('emai.ai.cache.ttl_minutes', 360))
+                );
+            }
+
             return [
                 'answer' => $text,
                 'used_ai' => true,
@@ -80,6 +101,23 @@ class EmaiAiService
 
             return null;
         }
+    }
+
+    /**
+     * @param  list<array{question?: string, answer?: string}>  $contextFaqs
+     */
+    private function cacheKey(string $model, string $message, array $contextFaqs): string
+    {
+        $fingerprint = [
+            'model' => $model,
+            'message' => Str::lower(trim($message)),
+            'context' => array_map(fn (array $faq) => [
+                'q' => (string) ($faq['question'] ?? ''),
+                'a' => (string) ($faq['answer'] ?? ''),
+            ], $contextFaqs),
+        ];
+
+        return 'emai.ai.answer.'.sha1(json_encode($fingerprint, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
     }
 
     private function systemPrompt(): string

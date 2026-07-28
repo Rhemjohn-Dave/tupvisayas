@@ -42,6 +42,7 @@ class EmaiChatController extends Controller
             'matched_question' => $result['question'],
             'confidence' => $result['confidence'],
             'links' => $result['links'],
+            'source' => $result['source'] ?? null,
         ]);
     }
 }

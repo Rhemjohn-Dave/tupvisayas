@@ -3,9 +3,9 @@
 return [
     'name' => 'E-Mai',
     'full_name' => 'Electronics Machine AI',
-    'tagline' => 'Your TUP Visayas FAQ assistant',
-    'welcome' => "Hi! I'm E-Mai (Electronics Machine AI). Ask me about admissions, programs, campus services, or other common TUP Visayas questions.",
-    'fallback' => "I don't have a confident answer for that yet. Try asking about admissions, TUPSTAT, ERS, programs, or contact details — or visit the Admissions / Contact pages for official help.",
+    'tagline' => 'Your TUP Visayas AI assistant',
+    'welcome' => "Hi! I'm E-Mai (Electronics Machine AI). Ask me about TUP Visayas admissions and programs, technology, PRC board exams, engineering topics, or other study questions.",
+    'fallback' => "I don't have a confident answer for that yet. Try asking about admissions, TUPSTAT, programs, technology, PRC board exams — or visit the Admissions / Contact pages for official campus help.",
 
     'contact' => [
         'address' => 'Capt. Sabi Street, Brgy. Zone 12, Talisay City, Negros Occidental 6115',
@@ -172,7 +172,7 @@ return [
             'id' => 'about',
             'question' => 'Tell me about TUP Visayas',
             'answer' => 'The Technological University of the Philippines Visayas is a state university focused on engineering and technology education. Learn more under About TUP (history, mission, values, mandate, and hymn).',
-            'keywords' => ['about', 'history', 'mission', 'vision', 'mandate', 'who are you', 'tup visayas'],
+            'keywords' => ['about tup', 'about the university', 'history', 'mission', 'vision', 'mandate', 'tell me about tup', 'what is tup visayas'],
             'category' => 'campus',
             'links' => [
                 ['label' => 'History', 'route' => 'about.history'],
@@ -261,9 +261,31 @@ return [
     ],
     'suggestions' => [
         'How do I apply?',
-        'When is the TUPSTAT exam?',
+        'What is the PRC board exam?',
+        'Tips for studying engineering subjects',
         'What programs does COET offer?',
-        'What is the campus phone number?',
-        'What should I bring on exam day?',
+        'What is cloud computing?',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Groq AI fallback (optional)
+    |--------------------------------------------------------------------------
+    | When FAQ confidence is low, E-Mai can ask Groq using campus FAQ context.
+    | Leave GROQ_API_KEY empty to keep keyword-only mode.
+    */
+    'ai' => [
+        'enabled' => (bool) env('EMAI_AI_ENABLED', true),
+        'provider' => 'groq',
+        'api_key' => env('GROQ_API_KEY'),
+        'base_url' => env('GROQ_BASE_URL', 'https://api.groq.com/openai/v1'),
+        'model' => env('GROQ_MODEL', 'llama-3.1-8b-instant'),
+        'timeout' => (int) env('GROQ_TIMEOUT', 20),
+        'max_tokens' => (int) env('GROQ_MAX_TOKENS', 500),
+        'temperature' => (float) env('GROQ_TEMPERATURE', 0.4),
+        'context_faqs' => (int) env('EMAI_AI_CONTEXT_FAQS', 8),
+        'min_faq_score' => (float) env('EMAI_FAQ_MIN_SCORE', 2.2),
+        // Set false only on Windows local if cURL SSL CA is missing. Keep true on production.
+        'verify_ssl' => filter_var(env('EMAI_AI_VERIFY_SSL', true), FILTER_VALIDATE_BOOLEAN),
     ],
 ];

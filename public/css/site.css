@@ -5312,9 +5312,10 @@ body {
 
 .procurement-table {
     width: 100%;
+    min-width: 1080px;
     border-collapse: collapse;
     font-size: var(--text-sm);
-    table-layout: fixed;
+    table-layout: auto;
 }
 
 .procurement-table thead {
@@ -5333,13 +5334,13 @@ body {
     text-transform: uppercase;
 }
 
-.procurement-table th:nth-child(1) { width: 9%; }
-.procurement-table th:nth-child(2) { width: 34%; }
+.procurement-table th:nth-child(1) { width: 13%; }
+.procurement-table th:nth-child(2) { width: 31%; }
 .procurement-table th:nth-child(3) { width: 11%; }
 .procurement-table th:nth-child(4),
-.procurement-table th:nth-child(5) { width: 11%; }
-.procurement-table th:nth-child(6) { width: 12%; }
-.procurement-table th:nth-child(7) { width: 12%; }
+.procurement-table th:nth-child(5) { width: 12%; }
+.procurement-table th:nth-child(6) { width: 10%; }
+.procurement-table th:nth-child(7) { width: 11%; }
 
 .procurement-table td {
     padding: var(--space-4);
@@ -5355,12 +5356,14 @@ body {
 
 .procurement-table__ref {
     font-weight: 600;
-    white-space: nowrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .procurement-table__title {
     font-weight: 600;
     word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .procurement-table__category,

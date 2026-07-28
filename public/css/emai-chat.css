@@ -375,16 +375,6 @@
     padding: 0 !important;
 }
 
-/* Scroll-top sits just below E-Mai fab */
-.site-scroll-top {
-    bottom: calc(var(--space-4, 1rem) + 4.5rem);
-}
-
-body.emai-chat-open .site-scroll-top {
-    opacity: 0;
-    pointer-events: none;
-}
-
 @media (max-width: 600px) {
     .emai {
         right: var(--space-3, 0.75rem);
@@ -404,10 +394,6 @@ body.emai-chat-open .site-scroll-top {
         max-height: min(72vh, 560px);
     }
 
-    .site-scroll-top {
-        bottom: calc(var(--space-3, 0.75rem) + 4rem);
-        right: var(--space-3, 0.75rem);
-    }
 }
 
 body.admin .emai {

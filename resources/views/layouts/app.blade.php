@@ -41,12 +41,6 @@
         @include('layouts.partials.emai-chat')
     @endunless
 
-    <button type="button" class="site-scroll-top" id="scrollTopBtn" aria-label="Back to top">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
-        </svg>
-    </button>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ asset('js/navbar.init.js?v=' . time()) }}"></script>
@@ -55,20 +49,6 @@
     @unless(request()->routeIs('admin.*'))
         <script src="{{ asset('js/emai-chat.js?v=' . time()) }}" defer></script>
     @endunless
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var scrollTopBtn = document.getElementById('scrollTopBtn');
-            if (scrollTopBtn) {
-                scrollTopBtn.addEventListener('click', function() {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                });
-            }
-        });
-    </script>
 
     @yield('scripts')
     @if (request()->routeIs('admin.*'))

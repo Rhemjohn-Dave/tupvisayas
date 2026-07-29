@@ -798,11 +798,12 @@ body {
 
 /* Full-width main (e.g. homepage hero edge-to-edge) */
 .site-main.site-main--full {
-    max-width: none;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    margin: 0 auto;
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .site-footer {
@@ -1034,7 +1035,10 @@ body {
 /* ---- Hero ---- */
 .home-hero {
     position: relative;
-    min-height: min(78vh, 40rem);
+    /* Fill the visible screen beneath the sticky header. */
+    height: calc(100vh - 4.5rem);
+    min-height: calc(100dvh - 4.5rem);
+    width: 100%;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -1073,15 +1077,9 @@ body {
 .home-hero__slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     display: block;
-    transform: scale(1.04);
-    animation: home-hero-ken 18s ease-out both;
-}
-
-.home-hero__slide.is-active img {
-    animation-name: home-hero-ken;
 }
 
 @keyframes home-hero-ken {
@@ -1103,7 +1101,8 @@ body {
 
 .home-hero--cta-only {
     align-items: flex-end;
-    min-height: min(72vh, 36rem);
+    height: calc(100vh - 4.5rem);
+    min-height: calc(100dvh - 4.5rem);
 }
 
 .home-hero--cta-only .home-hero__shade {
@@ -1112,12 +1111,37 @@ body {
 }
 
 .home-hero--cta-only .home-hero__actions {
-    position: relative;
+    position: absolute;
+    left: clamp(1.25rem, 5vw, 4rem);
+    bottom: clamp(5.5rem, 10vh, 7.5rem);
     z-index: 2;
-    width: min(72rem, calc(100% - 2rem));
-    margin: 0 auto;
-    padding: 0 0 clamp(2.5rem, 6vh, 3.5rem);
+    width: auto;
+    margin: 0;
+    padding: 0.65rem;
+    border-radius: 999px;
+    background: rgba(12, 8, 10, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
     animation: home-rise 0.7s ease both;
+}
+
+.home-hero--cta-only .home-hero__cta--primary {
+    background: #fff;
+    color: var(--color-brand) !important;
+    border: 1px solid #fff;
+}
+
+.home-hero--cta-only .home-hero__cta--primary:hover {
+    background: #f3f3f3;
+    border-color: #f3f3f3;
+    color: var(--color-brand) !important;
+}
+
+.home-hero--cta-only .home-hero__cta--ghost {
+    background: transparent;
+    color: #fff !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
 }
 
 .home-hero__content {
@@ -1275,17 +1299,22 @@ body {
 
 @media (max-width: 720px) {
     .home-hero {
-        min-height: min(72vh, 32rem);
+        height: calc(100vh - 4rem);
+        min-height: calc(100dvh - 4rem);
         align-items: flex-end;
     }
 
     .home-hero--cta-only {
-        min-height: min(70vh, 28rem);
+        height: calc(100vh - 4rem);
+        min-height: calc(100dvh - 4rem);
     }
 
     .home-hero--cta-only .home-hero__actions {
+        left: 50%;
+        right: auto;
+        bottom: clamp(5rem, 12vh, 6.5rem);
         width: calc(100% - 2rem);
-        padding-bottom: 4rem;
+        transform: translateX(-50%);
         justify-content: center;
     }
 

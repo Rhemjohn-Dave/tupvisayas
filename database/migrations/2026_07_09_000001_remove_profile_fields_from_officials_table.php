@@ -11,7 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('officials', function (Blueprint $table) {
-            $table->dropColumn(['bio', 'social_links']);
+            $cols = \Illuminate\Support\Facades\Schema::getColumnListing('officials');
+            $drop = array_values(array_intersect(['bio', 'social_links'], $cols));
+            if ($drop) {
+                $table->dropColumn($drop);
+            }
         });
     }
 

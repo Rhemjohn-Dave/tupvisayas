@@ -1299,23 +1299,34 @@ body {
 
 @media (max-width: 720px) {
     .home-hero {
-        height: calc(100vh - 4rem);
-        min-height: calc(100dvh - 4rem);
+        /* Keep the earlier compact phone hero — not full-screen. */
+        height: 320px;
+        min-height: 320px;
         align-items: flex-end;
     }
 
     .home-hero--cta-only {
-        height: calc(100vh - 4rem);
-        min-height: calc(100dvh - 4rem);
+        height: 320px;
+        min-height: 320px;
+    }
+
+    .home-hero__slide img {
+        object-fit: cover;
+        object-position: center top;
     }
 
     .home-hero--cta-only .home-hero__actions {
-        left: 50%;
-        right: auto;
-        bottom: clamp(5rem, 12vh, 6.5rem);
-        width: calc(100% - 2rem);
-        transform: translateX(-50%);
+        left: 0;
+        right: 0;
+        bottom: 1.25rem;
+        width: max-content;
+        max-width: calc(100% - 1.5rem);
+        margin-left: auto;
+        margin-right: auto;
+        transform: none;
         justify-content: center;
+        padding: 0.45rem;
+        animation: none;
     }
 
     .home-hero__content {

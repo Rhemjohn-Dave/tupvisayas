@@ -41,6 +41,7 @@ class RolePermissionSeeder extends Seeder
                 CmsPermissions::MANAGE_CAROUSEL,
                 CmsPermissions::MANAGE_TIPTTO,
                 CmsPermissions::MANAGE_DIRECTOR_POSTS,
+                CmsPermissions::MANAGE_SIT,
             ],
             'Officials Manager' => [
                 CmsPermissions::ACCESS_ADMIN,

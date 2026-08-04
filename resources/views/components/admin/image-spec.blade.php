@@ -95,6 +95,28 @@
                 'SVG uploads are not allowed (security). Use PNG with transparency.',
             ],
         ],
+        'sit-partner' => [
+            'ratio' => '1:1 square or wide logo',
+            'size' => '512 × 512 px (or 640 × 320 px for horizontal logos)',
+            'format' => 'PNG (transparent) or JPG / WebP',
+            'max' => '2 MB',
+            'tips' => [
+                'Shown on the public SIT industry partners grid.',
+                'Logo is contained (not cropped) inside the card.',
+                'Prefer transparent PNG for clean placement on white.',
+            ],
+        ],
+        'sit-gallery' => [
+            'ratio' => '4:3 landscape',
+            'size' => '1200 × 900 px recommended',
+            'format' => 'JPG, PNG, or WebP',
+            'max' => '4 MB',
+            'tips' => [
+                'Student experience photos on the public SIT page.',
+                'Landscape photos work best; images use cover crop.',
+                'Only upload photos with student / company consent.',
+            ],
+        ],
     ];
 
     $spec = $specs[$type] ?? null;

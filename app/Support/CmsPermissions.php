@@ -28,6 +28,8 @@ final class CmsPermissions
 
     public const MANAGE_ADMISSIONS = 'manage admissions';
 
+    public const MANAGE_SIT = 'manage sit';
+
     /**
      * @return list<string>
      */
@@ -46,6 +48,7 @@ final class CmsPermissions
             self::MANAGE_ACADEMICS,
             self::MANAGE_PROCUREMENTS,
             self::MANAGE_ADMISSIONS,
+            self::MANAGE_SIT,
         ];
     }
 
@@ -69,6 +72,7 @@ final class CmsPermissions
             self::MANAGE_ACADEMICS => 'Academics pages',
             self::MANAGE_PROCUREMENTS => 'Bidding / procurement',
             self::MANAGE_ADMISSIONS => 'Admission test schedules',
+            self::MANAGE_SIT => 'SIT partners & student photos',
         ];
     }
 }

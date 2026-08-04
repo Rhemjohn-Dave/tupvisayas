@@ -7,6 +7,8 @@
     $openContent = request()->routeIs('admin.dashboard')
         || request()->routeIs('admin.categories.*')
         || request()->routeIs('admin.carousel-images.*')
+        || request()->routeIs('admin.sit-partners.*')
+        || request()->routeIs('admin.sit-gallery.*')
         || request()->routeIs('admin.tiptto_posts.*')
         || request()->routeIs('admin.director_posts.*');
 
@@ -19,6 +21,7 @@
     $showContent = $user?->can(CmsPermissions::MANAGE_POSTS)
         || $user?->can(CmsPermissions::MANAGE_CATEGORIES)
         || $user?->can(CmsPermissions::MANAGE_CAROUSEL)
+        || $user?->can(CmsPermissions::MANAGE_SIT)
         || $user?->can(CmsPermissions::MANAGE_TIPTTO)
         || $user?->can(CmsPermissions::MANAGE_DIRECTOR_POSTS);
 
@@ -71,6 +74,18 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
                     <li>
                         <x-admin.sidebar-nav-link href="{{ route('admin.carousel-images.index') }}" label="Carousel"
                             icon="photo_library" :active="request()->routeIs('admin.carousel-images.*')"
+                            class="admin-sidebar__link--nested" />
+                    </li>
+                @endcan
+                @can(CmsPermissions::MANAGE_SIT)
+                    <li>
+                        <x-admin.sidebar-nav-link href="{{ route('admin.sit-partners.index') }}" label="SIT Partners"
+                            icon="handshake" :active="request()->routeIs('admin.sit-partners.*')"
+                            class="admin-sidebar__link--nested" />
+                    </li>
+                    <li>
+                        <x-admin.sidebar-nav-link href="{{ route('admin.sit-gallery.index') }}" label="SIT Gallery"
+                            icon="collections" :active="request()->routeIs('admin.sit-gallery.*')"
                             class="admin-sidebar__link--nested" />
                     </li>
                 @endcan

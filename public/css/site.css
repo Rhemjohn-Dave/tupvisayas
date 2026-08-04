@@ -7809,3 +7809,511 @@ body {
         justify-content: center;
     }
 }
+
+/* --- Supervised Industrial Training (SIT) --- */
+.site-page--sit {
+    padding-bottom: 0;
+}
+
+.sit-hero__motto {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 0.6vw + 0.9rem, 1.2rem);
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-brand);
+}
+
+.sit-section {
+    padding: clamp(2.75rem, 5vw, 4rem) var(--space-4);
+}
+
+.sit-section--muted {
+    background: #f4f2f0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sit-section__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.sit-section__inner--narrow {
+    max-width: 46rem;
+}
+
+.sit-section__head {
+    margin-bottom: var(--space-6);
+}
+
+.sit-eyebrow {
+    margin: 0 0 var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+.sit-section__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.sit-section__lede {
+    margin: 0;
+    max-width: 40rem;
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+}
+
+.sit-prose {
+    margin: 0 0 var(--space-5);
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+.sit-prose--tight {
+    margin-bottom: 0;
+}
+
+.sit-prose a {
+    color: var(--color-brand);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.sit-check-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-3);
+}
+
+.sit-check-list li {
+    position: relative;
+    padding-left: 1.55rem;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text);
+}
+
+.sit-check-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--color-brand);
+}
+
+.sit-schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+}
+
+.sit-schedule-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+    padding: clamp(1.15rem, 2.5vw, 1.5rem);
+    box-shadow: 0 10px 28px rgba(26, 18, 20, 0.04);
+}
+
+.sit-schedule-card__title {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-brand);
+}
+
+.sit-schedule-card__note {
+    margin: 0 0 var(--space-4);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.sit-table-wrap {
+    overflow-x: auto;
+}
+
+.sit-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+}
+
+.sit-table th,
+.sit-table td {
+    padding: 0.65rem 0.55rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+}
+
+.sit-table th {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.sit-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.sit-steps {
+    margin: 0 0 var(--space-6);
+    padding: 0;
+    list-style: none;
+    counter-reset: sit-step;
+    display: grid;
+    gap: var(--space-4);
+}
+
+.sit-steps li {
+    counter-increment: sit-step;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-4);
+    row-gap: 0.25rem;
+    align-items: start;
+    padding: 1rem 1.15rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.sit-steps li::before {
+    content: counter(sit-step, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #5c4810;
+    background: #f3e4a8;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    grid-row: 1 / span 2;
+}
+
+.sit-steps strong {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+}
+
+.sit-steps span {
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    grid-column: 2;
+}
+
+.sit-callout {
+    padding: clamp(1.15rem, 2.5vw, 1.5rem);
+    background: #fff8e8;
+    border: 1px solid #e8d59a;
+    border-radius: var(--radius-md);
+}
+
+.sit-callout__title {
+    margin: 0 0 var(--space-3);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5c4810;
+}
+
+.sit-callout ul {
+    margin: 0;
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.4rem;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.sit-partner-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+.sit-partner-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    min-height: 8.5rem;
+    padding: 1.15rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.sit-partner-card__link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.sit-partner-card__link:hover .sit-partner-card__name {
+    color: var(--color-brand);
+}
+
+.sit-partner-card__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding: 0.35rem;
+    border-radius: 0.65rem;
+    background: #f8f7f6;
+    border: 1px solid var(--color-border);
+}
+
+.sit-partner-card__logo img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.sit-partner-card__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.65rem;
+    background: #f4f2f0;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--color-brand);
+}
+
+.sit-partner-card__name {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.sit-partner-card__hint {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+}
+
+.sit-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+.sit-gallery__item {
+    margin: 0;
+}
+
+.sit-gallery__frame {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 3;
+    background:
+        linear-gradient(145deg, rgba(110, 20, 36, 0.08), rgba(26, 18, 20, 0.72)),
+        #3a1a22;
+    border-radius: var(--radius-md);
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    overflow: hidden;
+}
+
+.sit-gallery__frame--photo {
+    background: #1a1214;
+}
+
+.sit-gallery__frame--photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sit-empty {
+    margin: 0;
+    padding: var(--space-6);
+    text-align: center;
+    color: var(--color-text-muted);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.sit-gallery__item figcaption {
+    margin-top: 0.65rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+}
+
+.sit-contact-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 0.8fr);
+    gap: var(--space-5);
+    align-items: center;
+    padding: clamp(1.35rem, 3vw, 2rem);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+    box-shadow: 0 10px 28px rgba(26, 18, 20, 0.05);
+}
+
+.sit-contact-card__photo {
+    margin: 0;
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 3px solid #f3e4a8;
+    background: #f4f2f0;
+    flex-shrink: 0;
+}
+
+.sit-contact-card__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.sit-contact-card__role {
+    margin: 0 0 var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.sit-contact-card__name {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 1vw + 1rem, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.sit-contact-card__title {
+    margin: 0 0 var(--space-5);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-text-muted);
+}
+
+.sit-contact-card__meta {
+    margin: 0;
+    display: grid;
+    gap: var(--space-3);
+}
+
+.sit-contact-card__meta div {
+    display: grid;
+    gap: 0.15rem;
+}
+
+.sit-contact-card__meta dt {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.sit-contact-card__meta dd {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.sit-contact-card__meta a {
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.sit-contact-card__meta a:hover {
+    text-decoration: underline;
+}
+
+.sit-contact-card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+@media (max-width: 900px) {
+    .sit-schedule-grid,
+    .sit-partner-grid,
+    .sit-gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sit-contact-card {
+        grid-template-columns: auto 1fr;
+    }
+
+    .sit-contact-card__actions {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 640px) {
+    .sit-schedule-grid,
+    .sit-partner-grid,
+    .sit-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .sit-contact-card {
+        grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .sit-contact-card__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

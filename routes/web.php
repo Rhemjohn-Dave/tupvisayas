@@ -49,6 +49,7 @@ Route::redirect('/admissions/undergraduate-programs', '/academics/undergraduate-
 Route::get('/admissions/enrollment-procedure', [App\Http\Controllers\AdmissionsController::class, 'enrollmentProcedure'])->name('admissions.enrollment');
 Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
+Route::get('/sit', [App\Http\Controllers\SitController::class, 'index'])->name('sit');
 Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');
 Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');
 Route::get('/directors-corner', [App\Http\Controllers\DirectorCornerController::class, 'index'])->name('directors.corner');
@@ -106,6 +107,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::middleware('permission:manage carousel')->group(function () {
         Route::resource('carousel-images', App\Http\Controllers\Admin\CarouselImageController::class);
+    });
+
+    Route::middleware('permission:manage sit')->group(function () {
+        Route::resource('sit-partners', App\Http\Controllers\Admin\SitIndustryPartnerController::class)
+            ->except(['show'])
+            ->parameters(['sit-partners' => 'partner']);
+        Route::resource('sit-gallery', App\Http\Controllers\Admin\SitGalleryImageController::class)
+            ->except(['show'])
+            ->parameters(['sit-gallery' => 'image']);
     });
 
     Route::middleware('permission:manage academics')->group(function () {

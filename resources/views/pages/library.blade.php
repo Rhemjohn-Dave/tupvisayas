@@ -91,8 +91,12 @@
                     <div class="lib-org__tier" role="listitem">
                         @foreach ($leadership as $person)
                             <article class="lib-person lib-person--lead">
-                                <figure class="lib-person__photo">
-                                    <img src="{{ $person['photo_url'] }}" alt="{{ $person['name'] }}" loading="lazy">
+                                <figure class="lib-person__photo {{ empty($person['photo_url']) ? 'lib-person__photo--empty' : '' }}">
+                                    @if (! empty($person['photo_url']))
+                                        <img src="{{ $person['photo_url'] }}" alt="{{ $person['name'] }}" loading="lazy">
+                                    @else
+                                        <span aria-hidden="true">{{ mb_substr($person['name'], 0, 1) }}</span>
+                                    @endif
                                 </figure>
                                 <h3 class="lib-person__name">{{ $person['name'] }}</h3>
                                 <p class="lib-person__title">{{ $person['title'] }}</p>
@@ -108,8 +112,12 @@
                     <div class="lib-org__tier lib-org__tier--team" role="list">
                         @foreach ($libraryTeam as $person)
                             <article class="lib-person" role="listitem">
-                                <figure class="lib-person__photo">
-                                    <img src="{{ $person['photo_url'] }}" alt="{{ $person['name'] }}" loading="lazy">
+                                <figure class="lib-person__photo {{ empty($person['photo_url']) ? 'lib-person__photo--empty' : '' }}">
+                                    @if (! empty($person['photo_url']))
+                                        <img src="{{ $person['photo_url'] }}" alt="{{ $person['name'] }}" loading="lazy">
+                                    @else
+                                        <span aria-hidden="true">{{ mb_substr($person['name'], 0, 1) }}</span>
+                                    @endif
                                 </figure>
                                 <h3 class="lib-person__name">{{ $person['name'] }}</h3>
                                 <p class="lib-person__title">{{ $person['title'] }}</p>

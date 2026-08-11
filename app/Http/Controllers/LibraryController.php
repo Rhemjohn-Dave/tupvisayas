@@ -9,56 +9,45 @@ class LibraryController extends Controller
 {
     public function index()
     {
-        $officials = Official::query()
-            ->whereNotNull('photo')
-            ->where('photo', '!=', '')
-            ->get(['id', 'name', 'position', 'photo']);
+        $officials = Official::query()->get(['id', 'name', 'position', 'photo']);
 
+        // These three must come from Officials only — never from /images/library.
         $leadership = [
-            $this->person(
+            $this->fromOfficialsOnly(
                 officials: $officials,
-                search: 'Malo-oy',
+                needles: ['malo-oy', 'malooy', 'malo oy'],
                 fallbackName: 'Eric A. Malo-oy, Ph.D.',
                 fallbackTitle: 'Campus Director',
-                fallbackPhoto: 'images/library/malo-oy.jpg',
             ),
-            $this->person(
+            $this->fromOfficialsOnly(
                 officials: $officials,
-                search: 'Delumpa',
+                needles: ['delumpa'],
                 fallbackName: 'Patrick John G. Delumpa, Ph.D.',
                 fallbackTitle: 'Assistant Director for Academic Affairs',
-                fallbackPhoto: 'images/library/delumpa.jpg',
             ),
         ];
 
         $libraryTeam = [
-            $this->person(
+            $this->fromOfficialsOnly(
                 officials: $officials,
-                search: 'Dichosa',
+                needles: ['dichosa'],
                 fallbackName: 'Janette P. Dichosa, MSLS, RL',
                 fallbackTitle: 'College Librarian III',
-                fallbackPhoto: 'images/library/dichosa.jpg',
             ),
-            $this->person(
-                officials: $officials,
-                search: null,
-                fallbackName: 'Aisa Marie J. Ortega, PhD-TM, RL',
-                fallbackTitle: 'College Librarian II',
-                fallbackPhoto: 'images/library/ortega.jpg',
+            $this->libraryOnly(
+                name: 'Aisa Marie J. Ortega, PhD-TM, RL',
+                title: 'College Librarian II',
+                photo: 'images/library/ortega.jpg',
             ),
-            $this->person(
-                officials: $officials,
-                search: null,
-                fallbackName: 'Evelyn A. Flores, RL',
-                fallbackTitle: 'College Librarian I',
-                fallbackPhoto: 'images/library/flores.jpg',
+            $this->libraryOnly(
+                name: 'Evelyn A. Flores, RL',
+                title: 'College Librarian I',
+                photo: 'images/library/flores.jpg',
             ),
-            $this->person(
-                officials: $officials,
-                search: null,
-                fallbackName: 'Juvielyn L. Estardo',
-                fallbackTitle: 'Library Staff (J.O.)',
-                fallbackPhoto: 'images/library/estardo.png',
+            $this->libraryOnly(
+                name: 'Juvielyn L. Estardo',
+                title: 'Library Staff (J.O.)',
+                photo: 'images/library/estardo.png',
             ),
         ];
 
@@ -66,33 +55,62 @@ class LibraryController extends Controller
     }
 
     /**
-     * @return array{name: string, title: string, photo_url: string, from_officials: bool}
+     * @param  list<string>  $needles
+     * @return array{name: string, title: string, photo_url: ?string, from_officials: bool}
      */
-    private function person(
+    private function fromOfficialsOnly(
         Collection $officials,
-        ?string $search,
+        array $needles,
         string $fallbackName,
         string $fallbackTitle,
-        string $fallbackPhoto,
     ): array {
-        $match = $search
-            ? $officials->first(fn (Official $o) => str_contains(mb_strtolower($o->name), mb_strtolower($search)))
-            : null;
+        $match = $officials->first(function (Official $official) use ($needles) {
+            $haystack = $this->normalize($official->name);
 
-        if ($match?->photo) {
+            foreach ($needles as $needle) {
+                if (str_contains($haystack, $this->normalize($needle))) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        if (! $match) {
             return [
-                'name' => $match->name,
-                'title' => $match->position ?: $fallbackTitle,
-                'photo_url' => asset('storage/' . $match->photo),
-                'from_officials' => true,
+                'name' => $fallbackName,
+                'title' => $fallbackTitle,
+                'photo_url' => null,
+                'from_officials' => false,
             ];
         }
 
         return [
-            'name' => $fallbackName,
-            'title' => $fallbackTitle,
-            'photo_url' => asset($fallbackPhoto),
+            'name' => $match->name,
+            'title' => $match->position ?: $fallbackTitle,
+            'photo_url' => filled($match->photo) ? asset('storage/' . ltrim($match->photo, '/')) : null,
+            'from_officials' => true,
+        ];
+    }
+
+    /**
+     * @return array{name: string, title: string, photo_url: string, from_officials: bool}
+     */
+    private function libraryOnly(string $name, string $title, string $photo): array
+    {
+        return [
+            'name' => $name,
+            'title' => $title,
+            'photo_url' => asset($photo),
             'from_officials' => false,
         ];
+    }
+
+    private function normalize(string $value): string
+    {
+        $value = mb_strtolower($value);
+        $value = str_replace(['-', '.', ','], ' ', $value);
+
+        return preg_replace('/\s+/', ' ', trim($value)) ?? '';
     }
 }

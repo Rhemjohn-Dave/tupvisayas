@@ -17,46 +17,6 @@
 @endsection
 
 @section('content')
-    @php
-        $leadership = [
-            [
-                'name' => 'Eric A. Malo-oy, Ph.D.',
-                'title' => 'Campus Director',
-                'photo' => 'images/library/malo-oy.jpg',
-                'level' => 'top',
-            ],
-            [
-                'name' => 'Patrick John G. Delumpa, Ph.D.',
-                'title' => 'Assistant Director for Academic Affairs',
-                'photo' => 'images/library/delumpa.jpg',
-                'level' => 'top',
-            ],
-        ];
-
-        $libraryTeam = [
-            [
-                'name' => 'Janette P. Dichosa, MSLS, RL',
-                'title' => 'College Librarian III',
-                'photo' => 'images/library/dichosa.jpg',
-            ],
-            [
-                'name' => 'Aisa Marie J. Ortega, PhD-TM, RL',
-                'title' => 'College Librarian II',
-                'photo' => 'images/library/ortega.jpg',
-            ],
-            [
-                'name' => 'Evelyn A. Flores, RL',
-                'title' => 'College Librarian I',
-                'photo' => 'images/library/flores.jpg',
-            ],
-            [
-                'name' => 'Juvielyn L. Estardo',
-                'title' => 'Library Staff (J.O.)',
-                'photo' => 'images/library/estardo.png',
-            ],
-        ];
-    @endphp
-
     <div class="site-page site-page--library">
         <section class="acad-hero" aria-labelledby="library-hero-heading">
             <p class="acad-hero__badge">Resources &amp; Offices</p>
@@ -132,7 +92,7 @@
                         @foreach ($leadership as $person)
                             <article class="lib-person lib-person--lead">
                                 <figure class="lib-person__photo">
-                                    <img src="{{ asset($person['photo']) }}" alt="{{ $person['name'] }}" loading="lazy">
+                                    <img src="{{ $person['photo_url'] }}" alt="{{ $person['name'] }}" loading="lazy">
                                 </figure>
                                 <h3 class="lib-person__name">{{ $person['name'] }}</h3>
                                 <p class="lib-person__title">{{ $person['title'] }}</p>
@@ -149,7 +109,7 @@
                         @foreach ($libraryTeam as $person)
                             <article class="lib-person" role="listitem">
                                 <figure class="lib-person__photo">
-                                    <img src="{{ asset($person['photo']) }}" alt="{{ $person['name'] }}" loading="lazy">
+                                    <img src="{{ $person['photo_url'] }}" alt="{{ $person['name'] }}" loading="lazy">
                                 </figure>
                                 <h3 class="lib-person__name">{{ $person['name'] }}</h3>
                                 <p class="lib-person__title">{{ $person['title'] }}</p>

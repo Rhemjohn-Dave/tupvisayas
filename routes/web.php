@@ -49,7 +49,7 @@ Route::redirect('/admissions/undergraduate-programs', '/academics/undergraduate-
 Route::get('/admissions/enrollment-procedure', [App\Http\Controllers\AdmissionsController::class, 'enrollmentProcedure'])->name('admissions.enrollment');
 Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
-Route::view('/library', 'pages.library')->name('library');
+Route::get('/library', [App\Http\Controllers\LibraryController::class, 'index'])->name('library');
 Route::get('/sit', [App\Http\Controllers\SitController::class, 'index'])->name('sit');
 Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');
 Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');

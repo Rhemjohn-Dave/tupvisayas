@@ -1298,27 +1298,36 @@ body {
 }
 
 @media (max-width: 720px) {
-    .home-hero {
-        /* Keep the earlier compact phone hero — not full-screen. */
-        height: 320px;
-        min-height: 320px;
+    .home-hero,
+    .home-hero--cta-only {
+        /* Match desktop: show the full banner without cropping. */
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+        max-height: none;
         align-items: flex-end;
     }
 
-    .home-hero--cta-only {
-        height: 320px;
-        min-height: 320px;
+    .home-hero__slide img {
+        object-fit: contain;
+        object-position: center;
     }
 
-    .home-hero__slide img {
-        object-fit: cover;
-        object-position: center top;
+    /* Shade was darkening the banner on phones — keep it subtle like desktop. */
+    .home-hero__shade {
+        background:
+            linear-gradient(180deg, transparent 0%, transparent 70%, rgba(12, 8, 10, 0.35) 100%);
+    }
+
+    .home-hero--cta-only .home-hero__shade {
+        background:
+            linear-gradient(180deg, transparent 0%, transparent 72%, rgba(12, 8, 10, 0.28) 100%);
     }
 
     .home-hero--cta-only .home-hero__actions {
         left: 0;
         right: 0;
-        bottom: 1.25rem;
+        bottom: 1rem;
         width: max-content;
         max-width: calc(100% - 1.5rem);
         margin-left: auto;
@@ -5634,8 +5643,7 @@ body {
 
 /* --- University IT Center (technology) page --- */
 .site-page--technology {
-    max-width: var(--layout-max, 72rem);
-    margin: 0 auto;
+    padding-bottom: 0;
 }
 
 .uitc-quick {
@@ -8626,6 +8634,312 @@ body {
 
 @media (max-width: 560px) {
     .lib-org__tier--team {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- UITC / technology page (institutional layout) --- */
+.tech-section {
+    padding: clamp(2.75rem, 5vw, 4rem) var(--space-4);
+}
+
+.tech-section--muted {
+    background: #f4f2f0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tech-section__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.tech-section__head {
+    margin-bottom: var(--space-6);
+}
+
+.tech-section__head--center {
+    text-align: center;
+}
+
+.tech-section__head--center .tech-section__lede {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tech-eyebrow {
+    margin: 0 0 var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+.tech-section__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.tech-section__lede {
+    margin: 0;
+    max-width: 40rem;
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+}
+
+.tech-card-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+.tech-card-grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tech-card-grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tech-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.25rem 1.3rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+    box-shadow: 0 10px 28px rgba(26, 18, 20, 0.04);
+}
+
+.tech-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-brand);
+}
+
+.tech-card__text {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+.tech-card__link {
+    margin-top: auto;
+    padding-top: 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.tech-card__link:hover {
+    color: var(--color-brand);
+}
+
+.tech-split {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+.tech-panel {
+    padding: 1.25rem 1.3rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+}
+
+.tech-panel__title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.tech-meta {
+    margin: 0;
+    display: grid;
+    gap: var(--space-3);
+}
+
+.tech-meta div {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.tech-meta dt {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.tech-meta dd {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.tech-meta a {
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.tech-meta a:hover {
+    text-decoration: underline;
+}
+
+.tech-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.tech-org {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: center;
+}
+
+.tech-org__tier {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+    width: 100%;
+}
+
+.tech-org__tier--team {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--space-4);
+}
+
+.tech-org__connector {
+    width: 2px;
+    height: 1.5rem;
+    background: var(--color-border-strong, #cfc8c4);
+}
+
+.tech-org__spine {
+    width: min(64%, 40rem);
+    height: 2px;
+    background: var(--color-border-strong, #cfc8c4);
+    position: relative;
+    margin-bottom: var(--space-2);
+}
+
+.tech-org__spine::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 2px;
+    height: 1.25rem;
+    background: var(--color-border-strong, #cfc8c4);
+    transform: translateX(-50%);
+}
+
+.tech-person {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 0.55rem;
+    width: 100%;
+    max-width: 16rem;
+    margin: 0 auto;
+    padding: 1.1rem 0.9rem 1.25rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+    box-shadow: 0 10px 28px rgba(26, 18, 20, 0.04);
+}
+
+.tech-person--lead {
+    max-width: 18rem;
+}
+
+.tech-person__photo {
+    margin: 0 0 0.35rem;
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 3px solid #f3e4a8;
+    background: #f4f2f0;
+}
+
+.tech-person--lead .tech-person__photo {
+    width: 7.25rem;
+    height: 7.25rem;
+}
+
+.tech-person__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.tech-person__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+}
+
+.tech-person__title {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--color-brand);
+    font-weight: 600;
+}
+
+@media (max-width: 960px) {
+    .tech-card-grid,
+    .tech-card-grid--three,
+    .tech-split {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tech-org__tier--team {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .tech-card-grid,
+    .tech-card-grid--two,
+    .tech-card-grid--three,
+    .tech-split {
         grid-template-columns: 1fr;
     }
 }

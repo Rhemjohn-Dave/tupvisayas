@@ -2,314 +2,323 @@
 
 @section('title', 'University Information Technology Center - TUP Visayas')
 
-@section('content')
-    <div class="section site-page site-page--technology">
-        <h1 class="site-page-title site-page-title--center">University Information Technology Center</h1>
-        <p class="site-page-intro">Information technology services and support for students, faculty, and staff at TUP Visayas.</p>
+@section('main_class', 'site-main--full')
 
-        <div class="uitc-tabs" data-uitc-tabs>
-            <div class="uitc-tabs__nav" role="tablist" aria-label="UITC sections">
-                <button type="button" class="uitc-tabs__btn is-active" role="tab" aria-selected="true"
-                    aria-controls="uitc-panel-services" id="uitc-tab-services" data-uitc-tab="uitc-panel-services">Core
-                    services</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="uitc-panel-support" id="uitc-tab-support" data-uitc-tab="uitc-panel-support">Support</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="uitc-panel-security" id="uitc-tab-security"
-                    data-uitc-tab="uitc-panel-security">Security</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="uitc-panel-students" id="uitc-tab-students"
-                    data-uitc-tab="uitc-panel-students">Students</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="uitc-panel-faculty" id="uitc-tab-faculty"
-                    data-uitc-tab="uitc-panel-faculty">Faculty</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="uitc-panel-team" id="uitc-tab-team" data-uitc-tab="uitc-panel-team">UITC team</button>
-            </div>
-
-            <div id="uitc-panel-services" class="uitc-tabs__panel is-active" role="tabpanel"
-                aria-labelledby="uitc-tab-services">
-                <section class="uitc-block" aria-labelledby="uitc-services-heading">
-                    <h2 id="uitc-services-heading" class="site-section-title">Core technology services</h2>
-                    <p class="uitc-block__intro">Technology services that support academic and administrative operations on campus.</p>
-                    <div class="uitc-grid">
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">manage_accounts</i></span>
-                            <h3 class="mission-card__title">Accounts &amp; access</h3>
-                            <p class="mission-card__text">Student and staff accounts, password management, and access control.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">wifi</i></span>
-                            <h3 class="mission-card__title">Network &amp; Wi‑Fi</h3>
-                            <p class="mission-card__text">Campus network connectivity, Wi‑Fi access, and related infrastructure.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">school</i></span>
-                            <h3 class="mission-card__title">Learning management system</h3>
-                            <p class="mission-card__text">Online course delivery, materials, and student engagement tools.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">apps</i></span>
-                            <h3 class="mission-card__title">Software &amp; tools</h3>
-                            <p class="mission-card__text">Licensed software and productivity applications for campus users.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">computer</i></span>
-                            <h3 class="mission-card__title">Hardware &amp; devices</h3>
-                            <p class="mission-card__text">Computer laboratories, device support, and printing services.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">forum</i></span>
-                            <h3 class="mission-card__title">Communication tools</h3>
-                            <p class="mission-card__text">Email, conferencing, and collaboration platforms for the university community.</p>
-                        </article>
-                    </div>
-                </section>
-            </div>
-
-            <div id="uitc-panel-support" class="uitc-tabs__panel" role="tabpanel" aria-labelledby="uitc-tab-support" hidden>
-                <section class="uitc-block" aria-labelledby="uitc-support-heading">
-                    <h2 id="uitc-support-heading" class="site-section-title">Support &amp; helpdesk</h2>
-                    <div class="uitc-support-grid">
-                        <div class="uitc-info">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">headset_mic</i></span>
-                            <h3 class="uitc-info__title">Contact</h3>
-                            <dl class="contact-list">
-                                <div class="contact-list__item">
-                                    <dt>Email</dt>
-                                    <dd><a href="mailto:visayas.uitc@tup.edu.ph">visayas.uitc@tup.edu.ph</a></dd>
-                                </div>
-                                <div class="contact-list__item">
-                                    <dt>Telephone</dt>
-                                    <dd><a href="tel:+63344953480">(034) 495-3480</a></dd>
-                                </div>
-                                <div class="contact-list__item">
-                                    <dt>Office</dt>
-                                    <dd>University Information Technology Center, TUP Visayas</dd>
-                                </div>
-                            </dl>
-                        </div>
-                        <div class="uitc-info">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">schedule</i></span>
-                            <h3 class="uitc-info__title">Service hours</h3>
-                            <ul class="mission-list">
-                                <li>Monday to Friday — 8:00 AM to 5:00 PM</li>
-                                <li>Saturday — closed</li>
-                                <li>Sunday — closed</li>
-                            </ul>
-                        </div>
-                        <div class="uitc-info">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">help_outline</i></span>
-                            <h3 class="uitc-info__title">Common requests</h3>
-                            <ul class="mission-list">
-                                <li>Password reset procedures</li>
-                                <li>Campus Wi‑Fi connection</li>
-                                <li>LMS access from off campus</li>
-                                <li>Email and account issues</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div id="uitc-panel-security" class="uitc-tabs__panel" role="tabpanel" aria-labelledby="uitc-tab-security" hidden>
-                <section class="uitc-block" aria-labelledby="uitc-security-heading">
-                    <h2 id="uitc-security-heading" class="site-section-title">Security &amp; policies</h2>
-                    <div class="uitc-grid uitc-grid--three">
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">security</i></span>
-                            <h3 class="mission-card__title">Cybersecurity awareness</h3>
-                            <p class="mission-card__text">Guidance on protecting accounts, devices, and university data.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">policy</i></span>
-                            <h3 class="mission-card__title">IT policies</h3>
-                            <p class="mission-card__text">Acceptable use and technology policies for the TUP community.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">lock</i></span>
-                            <h3 class="mission-card__title">Account security</h3>
-                            <p class="mission-card__text">Strong passwords and multi-factor authentication where applicable.</p>
-                        </article>
-                    </div>
-                </section>
-            </div>
-
-            <div id="uitc-panel-students" class="uitc-tabs__panel" role="tabpanel" aria-labelledby="uitc-tab-students" hidden>
-                <section class="uitc-block" aria-labelledby="uitc-students-heading">
-                    <h2 id="uitc-students-heading" class="site-section-title">Student digital resources</h2>
-                    <div class="uitc-grid uitc-grid--two">
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">how_to_reg</i></span>
-                            <h3 class="mission-card__title">Enrollment &amp; records (ERS)</h3>
-                            <p class="mission-card__text">Online enrollment, grades, and student records through the TUP ERS portal.</p>
-                            <p class="uitc-card-link">
-                                <a href="https://ers.tup.edu.ph/aims/students/" target="_blank" rel="noopener noreferrer">Open student ERS</a>
-                            </p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">email</i></span>
-                            <h3 class="mission-card__title">Student email</h3>
-                            <p class="mission-card__text">Official university email for students. Contact UITC for account assistance.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">local_library</i></span>
-                            <h3 class="mission-card__title">E-library &amp; research</h3>
-                            <p class="mission-card__text">Digital library and research resources available through campus services.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">menu_book</i></span>
-                            <h3 class="mission-card__title">Learning management system</h3>
-                            <p class="mission-card__text">Course materials and online activities provided by faculty through the LMS.</p>
-                        </article>
-                    </div>
-                </section>
-            </div>
-
-            <div id="uitc-panel-faculty" class="uitc-tabs__panel" role="tabpanel" aria-labelledby="uitc-tab-faculty" hidden>
-                <section class="uitc-block" aria-labelledby="uitc-faculty-heading">
-                    <h2 id="uitc-faculty-heading" class="site-section-title">Faculty technology resources</h2>
-                    <div class="uitc-grid uitc-grid--two">
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">badge</i></span>
-                            <h3 class="mission-card__title">Faculty ERS</h3>
-                            <p class="mission-card__text">Faculty access to enrollment, grading, and related academic systems.</p>
-                            <p class="uitc-card-link">
-                                <a href="https://ers.tup.edu.ph/aims/faculty/" target="_blank" rel="noopener noreferrer">Open faculty ERS</a>
-                            </p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">cast_for_education</i></span>
-                            <h3 class="mission-card__title">LMS management</h3>
-                            <p class="mission-card__text">Course setup, content delivery, and student engagement through the LMS.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">groups</i></span>
-                            <h3 class="mission-card__title">Collaboration tools</h3>
-                            <p class="mission-card__text">Email, conferencing, and shared workspaces for teaching and administration.</p>
-                        </article>
-                        <article class="mission-card uitc-service-card">
-                            <span class="uitc-service-card__icon" aria-hidden="true"><i class="material-icons">cloud_upload</i></span>
-                            <h3 class="mission-card__title">Research &amp; file storage</h3>
-                            <p class="mission-card__text">Secure storage and backup options for academic and research materials.</p>
-                        </article>
-                    </div>
-                </section>
-            </div>
-
-            <div id="uitc-panel-team" class="uitc-tabs__panel" role="tabpanel" aria-labelledby="uitc-tab-team" hidden>
-                <section class="uitc-block" aria-labelledby="uitc-team-heading">
-                    <h2 id="uitc-team-heading" class="site-section-title">UITC team</h2>
-                    <p class="uitc-block__intro uitc-block__intro--center">Organizational structure of the University Information Technology Center at TUP Visayas.</p>
-
-                    <div class="uitc-org" role="group" aria-label="UITC organizational chart">
-                        <div class="uitc-org__level">
-                            <article class="uitc-org__card uitc-org__card--lead">
-                                <img src="{{ asset('images/Malo-oy, Eric A-2154.jpg') }}" alt="Dr. Eric A. Malo-oy" loading="lazy">
-                                <p class="uitc-org__level-label">Campus head</p>
-                                <strong>Dr. Eric A. Malo-oy</strong>
-                                <span>Campus Director</span>
-                            </article>
-                        </div>
-
-                        <div class="uitc-org__line" aria-hidden="true"></div>
-
-                        <div class="uitc-org__level">
-                            <article class="uitc-org__card">
-                                <img src="{{ asset('images/tupan,jofred.jpg') }}" alt="Jofred S. Tupan" loading="lazy">
-                                <p class="uitc-org__level-label">UITC administration</p>
-                                <strong>Jofred S. Tupan</strong>
-                                <span>UITC Administrator</span>
-                            </article>
-                        </div>
-
-                        <div class="uitc-org__line" aria-hidden="true"></div>
-
-                        <div class="uitc-org__staff-tree">
-                            <p class="uitc-org__staff-label">UITC staff</p>
-                            <div class="uitc-org__staff-row">
-                                <div class="uitc-org__staff-item">
-                                    <article class="uitc-org__card">
-                                        <img src="{{ asset('images/faciolan-chris.jpg') }}" alt="Engr. Christopher Faciolan, PECE" loading="lazy">
-                                        <strong>Engr. Christopher Faciolan, PECE</strong>
-                                        <span>Network Administrator</span>
-                                    </article>
-                                </div>
-                                <div class="uitc-org__staff-item">
-                                    <article class="uitc-org__card">
-                                        <img src="{{ asset('images/Suela, Ricardo F Jr-2211.jpg') }}" alt="Ricardo Suela" loading="lazy">
-                                        <strong>Ricardo Suela</strong>
-                                        <span>UITC Staff</span>
-                                    </article>
-                                </div>
-                                <div class="uitc-org__staff-item">
-                                    <article class="uitc-org__card">
-                                        <img src="{{ asset('images/Pitong, Rhemjohn Dave N-2902-copy.jpg') }}"
-                                            alt="Engr. Rhemjohn Dave N. Pitong" loading="lazy">
-                                        <strong>Engr. Rhemjohn Dave N. Pitong</strong>
-                                        <span>Web Administrator</span>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <section class="uitc-quick" aria-labelledby="uitc-quick-heading">
-            <h2 id="uitc-quick-heading" class="site-section-title">Quick links</h2>
-            <ul class="home-quick">
-                <li>
-                    <a href="https://ers.tup.edu.ph/aims/students/" target="_blank" rel="noopener noreferrer">Student ERS</a>
-                </li>
-                <li>
-                    <a href="https://ers.tup.edu.ph/aims/faculty/" target="_blank" rel="noopener noreferrer">Faculty ERS</a>
-                </li>
-                <li>
-                    <a href="mailto:visayas.uitc@tup.edu.ph">IT helpdesk email</a>
-                </li>
-                <li>
-                    <a href="{{ route('contact') }}">Campus contact</a>
-                </li>
-            </ul>
-        </section>
-    </div>
+@section('head')
+    @php
+        $metaDescription = 'University Information Technology Center (UITC) at TUP Visayas — campus IT services, support, security, and digital resources for students and faculty.';
+    @endphp
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta property="og:title" content="University Information Technology Center - TUP Visayas">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/tup-logo.png') }}">
 @endsection
 
-@section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var root = document.querySelector('[data-uitc-tabs]');
-            if (!root) return;
+@section('content')
+    @php
+        $coreServices = [
+            ['title' => 'Accounts & access', 'text' => 'Student and staff accounts, password management, and access control.'],
+            ['title' => 'Network & Wi‑Fi', 'text' => 'Campus network connectivity, Wi‑Fi access, and related infrastructure.'],
+            ['title' => 'Learning management system', 'text' => 'Online course delivery, materials, and student engagement tools.'],
+            ['title' => 'Software & tools', 'text' => 'Licensed software and productivity applications for campus users.'],
+            ['title' => 'Hardware & devices', 'text' => 'Computer laboratories, device support, and printing services.'],
+            ['title' => 'Communication tools', 'text' => 'Email, conferencing, and collaboration platforms for the university community.'],
+        ];
 
-            var buttons = root.querySelectorAll('[data-uitc-tab]');
-            var panels = root.querySelectorAll('.uitc-tabs__panel');
+        $securityItems = [
+            ['title' => 'Cybersecurity awareness', 'text' => 'Guidance on protecting accounts, devices, and university data.'],
+            ['title' => 'IT policies', 'text' => 'Acceptable use and technology policies for the TUP community.'],
+            ['title' => 'Account security', 'text' => 'Strong passwords and multi-factor authentication where applicable.'],
+        ];
 
-            buttons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var targetId = button.getAttribute('data-uitc-tab');
+        $studentResources = [
+            [
+                'title' => 'Enrollment & records (ERS)',
+                'text' => 'Online enrollment, grades, and student records through the TUP ERS portal.',
+                'link' => 'https://ers.tup.edu.ph/aims/students/',
+                'link_label' => 'Open student ERS',
+            ],
+            [
+                'title' => 'Student email',
+                'text' => 'Official university email for students. Contact UITC for account assistance.',
+            ],
+            [
+                'title' => 'E-library & research',
+                'text' => 'Digital library and research resources available through campus services.',
+                'link' => route('library'),
+                'link_label' => 'Visit Library page',
+            ],
+            [
+                'title' => 'Learning management system',
+                'text' => 'Course materials and online activities provided by faculty through the LMS.',
+            ],
+        ];
 
-                    buttons.forEach(function(btn) {
-                        btn.classList.remove('is-active');
-                        btn.setAttribute('aria-selected', 'false');
-                    });
+        $facultyResources = [
+            [
+                'title' => 'Faculty ERS',
+                'text' => 'Faculty access to enrollment, grading, and related academic systems.',
+                'link' => 'https://ers.tup.edu.ph/aims/faculty/',
+                'link_label' => 'Open faculty ERS',
+            ],
+            [
+                'title' => 'LMS management',
+                'text' => 'Course setup, content delivery, and student engagement through the LMS.',
+            ],
+            [
+                'title' => 'Collaboration tools',
+                'text' => 'Email, conferencing, and shared workspaces for teaching and administration.',
+            ],
+            [
+                'title' => 'Research & file storage',
+                'text' => 'Secure storage and backup options for academic and research materials.',
+            ],
+        ];
 
-                    panels.forEach(function(panel) {
-                        panel.classList.remove('is-active');
-                        panel.hidden = true;
-                    });
+        $leadership = [
+            [
+                'name' => 'Dr. Eric A. Malo-oy',
+                'title' => 'Campus Director',
+                'photo' => 'images/Malo-oy, Eric A-2154.jpg',
+            ],
+            [
+                'name' => 'Jofred S. Tupan',
+                'title' => 'UITC Administrator',
+                'photo' => 'images/tupan,jofred.jpg',
+            ],
+        ];
 
-                    button.classList.add('is-active');
-                    button.setAttribute('aria-selected', 'true');
+        $staff = [
+            [
+                'name' => 'Engr. Christopher Faciolan, PECE',
+                'title' => 'Network Administrator',
+                'photo' => 'images/faciolan-chris.jpg',
+            ],
+            [
+                'name' => 'Ricardo Suela',
+                'title' => 'UITC Staff',
+                'photo' => 'images/Suela, Ricardo F Jr-2211.jpg',
+            ],
+            [
+                'name' => 'Engr. Rhemjohn Dave N. Pitong',
+                'title' => 'Web Administrator',
+                'photo' => 'images/Pitong, Rhemjohn Dave N-2902-copy.jpg',
+            ],
+        ];
+    @endphp
 
-                    var panel = document.getElementById(targetId);
-                    if (panel) {
-                        panel.classList.add('is-active');
-                        panel.hidden = false;
-                    }
-                });
-            });
-        });
-    </script>
+    <div class="site-page site-page--technology">
+        <section class="acad-hero" aria-labelledby="uitc-hero-heading">
+            <p class="acad-hero__badge">Resources &amp; Offices</p>
+            <h1 id="uitc-hero-heading" class="acad-hero__title">University Information Technology Center</h1>
+            <p class="acad-hero__lede">
+                Empowering students, faculty, and staff with secure connectivity, campus systems, and digital tools that
+                support teaching, learning, and university operations.
+            </p>
+            <div class="acad-hero__actions">
+                <a class="acad-btn acad-btn--primary" href="#uitc-services">Core services</a>
+                <a class="acad-btn acad-btn--ghost" href="#uitc-support">Support</a>
+                <a class="acad-btn acad-btn--ghost" href="#uitc-team">UITC team</a>
+            </div>
+        </section>
+
+        <section class="tech-section" id="uitc-services" aria-labelledby="uitc-services-heading">
+            <div class="tech-section__inner">
+                <header class="tech-section__head">
+                    <p class="tech-eyebrow">Technology services</p>
+                    <h2 id="uitc-services-heading" class="tech-section__title">Core services</h2>
+                    <p class="tech-section__lede">
+                        Technology services that support academic and administrative operations on campus.
+                    </p>
+                </header>
+                <ul class="tech-card-grid">
+                    @foreach ($coreServices as $service)
+                        <li class="tech-card">
+                            <h3 class="tech-card__title">{{ $service['title'] }}</h3>
+                            <p class="tech-card__text">{{ $service['text'] }}</p>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+
+        <section class="tech-section tech-section--muted" id="uitc-support" aria-labelledby="uitc-support-heading">
+            <div class="tech-section__inner">
+                <header class="tech-section__head">
+                    <p class="tech-eyebrow">Helpdesk</p>
+                    <h2 id="uitc-support-heading" class="tech-section__title">Support &amp; contact</h2>
+                </header>
+
+                <div class="tech-split">
+                    <article class="tech-panel">
+                        <h3 class="tech-panel__title">Contact</h3>
+                        <dl class="tech-meta">
+                            <div>
+                                <dt>Email</dt>
+                                <dd><a href="mailto:visayas.uitc@tup.edu.ph">visayas.uitc@tup.edu.ph</a></dd>
+                            </div>
+                            <div>
+                                <dt>Telephone</dt>
+                                <dd><a href="tel:+63344953480">(034) 495-3480</a></dd>
+                            </div>
+                            <div>
+                                <dt>Office</dt>
+                                <dd>University Information Technology Center, TUP Visayas</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article class="tech-panel">
+                        <h3 class="tech-panel__title">Service hours</h3>
+                        <ul class="tech-list">
+                            <li>Monday to Friday — 8:00 AM to 5:00 PM</li>
+                            <li>Saturday — closed</li>
+                            <li>Sunday — closed</li>
+                        </ul>
+                    </article>
+
+                    <article class="tech-panel">
+                        <h3 class="tech-panel__title">Common requests</h3>
+                        <ul class="tech-list">
+                            <li>Password reset procedures</li>
+                            <li>Campus Wi‑Fi connection</li>
+                            <li>LMS access from off campus</li>
+                            <li>Email and account issues</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-section" id="uitc-security" aria-labelledby="uitc-security-heading">
+            <div class="tech-section__inner">
+                <header class="tech-section__head">
+                    <p class="tech-eyebrow">Protection</p>
+                    <h2 id="uitc-security-heading" class="tech-section__title">Security &amp; policies</h2>
+                    <p class="tech-section__lede">
+                        Protecting campus systems and digital identities through awareness, policy, and secure access.
+                    </p>
+                </header>
+                <ul class="tech-card-grid tech-card-grid--three">
+                    @foreach ($securityItems as $item)
+                        <li class="tech-card">
+                            <h3 class="tech-card__title">{{ $item['title'] }}</h3>
+                            <p class="tech-card__text">{{ $item['text'] }}</p>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+
+        <section class="tech-section tech-section--muted" id="uitc-students" aria-labelledby="uitc-students-heading">
+            <div class="tech-section__inner">
+                <header class="tech-section__head">
+                    <p class="tech-eyebrow">For students</p>
+                    <h2 id="uitc-students-heading" class="tech-section__title">Student digital resources</h2>
+                </header>
+                <ul class="tech-card-grid tech-card-grid--two">
+                    @foreach ($studentResources as $item)
+                        <li class="tech-card">
+                            <h3 class="tech-card__title">{{ $item['title'] }}</h3>
+                            <p class="tech-card__text">{{ $item['text'] }}</p>
+                            @if (!empty($item['link']))
+                                <a class="tech-card__link"
+                                    href="{{ $item['link'] }}"
+                                    @if (str_starts_with($item['link'], 'http')) target="_blank" rel="noopener noreferrer" @endif>
+                                    {{ $item['link_label'] }}
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+
+        <section class="tech-section" id="uitc-faculty" aria-labelledby="uitc-faculty-heading">
+            <div class="tech-section__inner">
+                <header class="tech-section__head">
+                    <p class="tech-eyebrow">For faculty</p>
+                    <h2 id="uitc-faculty-heading" class="tech-section__title">Faculty technology resources</h2>
+                </header>
+                <ul class="tech-card-grid tech-card-grid--two">
+                    @foreach ($facultyResources as $item)
+                        <li class="tech-card">
+                            <h3 class="tech-card__title">{{ $item['title'] }}</h3>
+                            <p class="tech-card__text">{{ $item['text'] }}</p>
+                            @if (!empty($item['link']))
+                                <a class="tech-card__link"
+                                    href="{{ $item['link'] }}"
+                                    @if (str_starts_with($item['link'], 'http')) target="_blank" rel="noopener noreferrer" @endif>
+                                    {{ $item['link_label'] }}
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+
+        <section class="tech-section tech-section--muted" id="uitc-team" aria-labelledby="uitc-team-heading">
+            <div class="tech-section__inner">
+                <header class="tech-section__head tech-section__head--center">
+                    <p class="tech-eyebrow">Organization</p>
+                    <h2 id="uitc-team-heading" class="tech-section__title">UITC team</h2>
+                    <p class="tech-section__lede">
+                        Organizational structure of the University Information Technology Center at TUP Visayas.
+                    </p>
+                </header>
+
+                <div class="tech-org">
+                    <div class="tech-org__tier">
+                        @foreach ($leadership as $person)
+                            <article class="tech-person {{ $loop->first ? 'tech-person--lead' : '' }}">
+                                <figure class="tech-person__photo">
+                                    <img src="{{ asset($person['photo']) }}" alt="{{ $person['name'] }}" loading="lazy">
+                                </figure>
+                                <h3 class="tech-person__name">{{ $person['name'] }}</h3>
+                                <p class="tech-person__title">{{ $person['title'] }}</p>
+                            </article>
+                            @if (! $loop->last)
+                                <div class="tech-org__connector" aria-hidden="true"></div>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <div class="tech-org__spine" aria-hidden="true"></div>
+
+                    <div class="tech-org__tier tech-org__tier--team">
+                        @foreach ($staff as $person)
+                            <article class="tech-person">
+                                <figure class="tech-person__photo">
+                                    <img src="{{ asset($person['photo']) }}" alt="{{ $person['name'] }}" loading="lazy">
+                                </figure>
+                                <h3 class="tech-person__name">{{ $person['name'] }}</h3>
+                                <p class="tech-person__title">{{ $person['title'] }}</p>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="acad-cta" aria-labelledby="uitc-cta-heading">
+            <div class="acad-cta__inner">
+                <h2 id="uitc-cta-heading" class="acad-cta__title">Need IT assistance?</h2>
+                <p class="acad-cta__lede">
+                    Email the UITC helpdesk or open the campus systems you use most often.
+                </p>
+                <div class="acad-cta__actions">
+                    <a class="acad-btn acad-btn--on-dark" href="mailto:visayas.uitc@tup.edu.ph">Email UITC</a>
+                    <a class="acad-btn acad-btn--outline-light" href="https://ers.tup.edu.ph/aims/students/"
+                        target="_blank" rel="noopener noreferrer">Student ERS</a>
+                    <a class="acad-btn acad-btn--outline-light" href="https://ers.tup.edu.ph/aims/faculty/"
+                        target="_blank" rel="noopener noreferrer">Faculty ERS</a>
+                </div>
+            </div>
+        </section>
+    </div>
 @endsection

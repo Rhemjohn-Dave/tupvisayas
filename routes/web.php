@@ -48,6 +48,7 @@ Route::redirect('/admissions/international', '/admissions/enrollment-procedure',
 Route::redirect('/admissions/undergraduate-programs', '/academics/undergraduate-programs', 301);
 Route::get('/admissions/enrollment-procedure', [App\Http\Controllers\AdmissionsController::class, 'enrollmentProcedure'])->name('admissions.enrollment');
 Route::view('/facilities', 'pages.facilities')->name('facilities');
+Route::view('/campus-tour', 'pages.campus_tour')->name('campus.tour');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
 Route::get('/library', [App\Http\Controllers\LibraryController::class, 'index'])->name('library');
 Route::get('/sit', [App\Http\Controllers\SitController::class, 'index'])->name('sit');

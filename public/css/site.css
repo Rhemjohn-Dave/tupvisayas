@@ -8952,3 +8952,373 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* --- Interactive Campus Tour --- */
+.site-page--campus-tour {
+    padding-bottom: 0;
+}
+
+.ctour-section {
+    padding: clamp(2.5rem, 5vw, 4rem) var(--space-4);
+    background: #f4f2f0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.ctour-section__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.ctour-section__head {
+    margin-bottom: var(--space-6);
+}
+
+.ctour-eyebrow {
+    margin: 0 0 var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+.ctour-section__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.4vw + 1rem, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.ctour-section__lede {
+    margin: 0;
+    max-width: 40rem;
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+}
+
+.ctour-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(16rem, 0.9fr);
+    gap: var(--space-5);
+    align-items: start;
+}
+
+.ctour-map-shell {
+    position: relative;
+    background: #1a1214;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(26, 18, 20, 0.06);
+    height: min(68vh, 34rem);
+    min-height: 22rem;
+}
+
+.ctour-map-shell--leaflet {
+    cursor: grab;
+}
+
+.ctour-leaflet {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    font: inherit;
+}
+
+.ctour-leaflet .leaflet-control-layers,
+.ctour-leaflet .leaflet-control-zoom a,
+.ctour-leaflet .leaflet-control-scale-line {
+    border-radius: 0.45rem;
+    border-color: var(--color-border);
+    box-shadow: 0 4px 14px rgba(26, 18, 20, 0.12);
+}
+
+.ctour-leaflet .leaflet-control-layers {
+    font-size: 0.8rem;
+}
+
+.ctour-leaflet .leaflet-popup-content-wrapper {
+    border-radius: 0.65rem;
+    box-shadow: 0 10px 28px rgba(26, 18, 20, 0.16);
+}
+
+.ctour-leaflet .leaflet-popup-content {
+    margin: 0.75rem 0.9rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.ctour-leaflet .leaflet-popup-content strong {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--color-brand);
+}
+
+.ctour-leaflet-marker {
+    background: transparent;
+    border: 0;
+}
+
+.ctour-leaflet-marker__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: rgba(158, 27, 50, 0.22);
+    animation: ctour-pulse 2.4s ease-out infinite;
+}
+
+.ctour-leaflet-marker__dot {
+    position: absolute;
+    inset: 4px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--color-brand, #9e1b32);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 12px rgba(26, 18, 20, 0.28);
+}
+
+.ctour-leaflet-marker.is-active .ctour-leaflet-marker__dot {
+    background: #5c4810;
+}
+
+.ctour-leaflet-marker.is-active .ctour-leaflet-marker__pulse {
+    background: rgba(201, 162, 39, 0.35);
+}
+
+/* Legacy schematic map helpers (kept harmless if unused) */
+.ctour-map-stage {
+    display: none;
+}
+
+.ctour-map {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@keyframes ctour-pulse {
+    0% {
+        transform: scale(0.7);
+        opacity: 0.85;
+    }
+    70% {
+        transform: scale(1.35);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.35);
+        opacity: 0;
+    }
+}
+
+.ctour-panel {
+    position: sticky;
+    top: 5.5rem;
+    padding: 1.15rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+    box-shadow: 0 12px 32px rgba(26, 18, 20, 0.06);
+}
+
+.ctour-panel.is-updating {
+    animation: ctour-panel-in 0.35s ease both;
+}
+
+@keyframes ctour-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.ctour-panel__media {
+    margin: 0 0 var(--space-3);
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: #1a1214;
+}
+
+.ctour-panel__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+}
+
+.ctour-panel__thumbs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin: 0 0 var(--space-4);
+}
+
+.ctour-panel__thumbs[hidden] {
+    display: none;
+}
+
+.ctour-panel__thumb {
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 0.45rem;
+    overflow: hidden;
+    background: #1a1214;
+    cursor: pointer;
+    aspect-ratio: 16 / 10;
+}
+
+.ctour-panel__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ctour-panel__thumb:hover,
+.ctour-panel__thumb:focus-visible {
+    border-color: rgba(158, 27, 50, 0.45);
+    outline: none;
+}
+
+.ctour-panel__thumb.is-active {
+    border-color: var(--color-brand, #9e1b32);
+}
+
+.ctour-panel__eyebrow {
+    margin: 0 0 var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+.ctour-panel__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--color-text);
+}
+
+.ctour-panel__text {
+    margin: 0 0 var(--space-5);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
+
+.ctour-panel__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.ctour-stop-list {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.ctour-stop-list__btn {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    align-items: center;
+    text-align: left;
+    padding: 0.9rem 1rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ctour-stop-list__btn:hover,
+.ctour-stop-list__btn:focus-visible {
+    border-color: var(--color-brand);
+    outline: none;
+}
+
+.ctour-stop-list__btn.is-active {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 1px var(--color-brand);
+}
+
+.ctour-stop-list__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: #f3e4a8;
+    color: #5c4810;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.ctour-stop-list__copy {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.ctour-stop-list__copy strong {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+}
+
+.ctour-stop-list__copy span {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+    .ctour-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .ctour-panel {
+        position: static;
+    }
+
+    .ctour-map-shell {
+        height: min(58vh, 26rem);
+        min-height: 18rem;
+    }
+
+    .ctour-stop-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ctour-panel.is-updating,
+    .ctour-leaflet-marker__pulse {
+        animation: none;
+    }
+}

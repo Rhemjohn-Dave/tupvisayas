@@ -241,10 +241,11 @@ return [
         [
             'id' => 'facilities',
             'question' => 'What facilities does the campus have?',
-            'answer' => 'TUP Visayas provides laboratories, classrooms, and college facilities supporting engineering and technology programs. Visit the Facilities page for an overview.',
-            'keywords' => ['facilities', 'laboratory', 'lab', 'campus tour', 'building'],
+            'answer' => 'TUP Visayas provides laboratories, classrooms, and college facilities supporting engineering and technology programs. Take the interactive Campus Tour for a map of key buildings, or visit the Facilities page for an overview.',
+            'keywords' => ['facilities', 'laboratory', 'lab', 'campus tour', 'building', 'campus map', 'tour'],
             'category' => 'campus',
             'links' => [
+                ['label' => 'Campus Tour', 'route' => 'campus.tour'],
                 ['label' => 'Facilities', 'route' => 'facilities'],
             ],
         ],

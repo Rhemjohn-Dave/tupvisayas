@@ -19,7 +19,8 @@
         <p class="program-requirements__note facilities-note">Facility details and photos will be expanded as college units publish updates. For campus visits or specific laboratory inquiries, contact the relevant college or the campus through the contact page.</p>
 
         <div class="program-hero__actions program-hero__actions--center" role="group" aria-label="Related links">
-            <a class="program-hero__cta" href="{{ route('academics') }}">Browse academics</a>
+            <a class="program-hero__cta" href="{{ route('campus.tour') }}">Interactive campus tour</a>
+            <a class="program-hero__link" href="{{ route('academics') }}">Browse academics</a>
             <a class="program-hero__link" href="{{ route('contact') }}">Contact the campus</a>
         </div>
     </div>

@@ -43,14 +43,14 @@
                     <div class="home-hero__actions">
                         <a class="home-hero__cta home-hero__cta--primary"
                             href="{{ route('admissions.enrollment') }}">Apply Now</a>
-                        <a class="home-hero__cta home-hero__cta--ghost" href="{{ route('facilities') }}">Campus Tour</a>
+                        <a class="home-hero__cta home-hero__cta--ghost" href="{{ route('campus.tour') }}">Campus Tour</a>
                     </div>
                 </div>
             @else
                 <div class="home-hero__actions">
                     <a class="home-hero__cta home-hero__cta--primary"
                         href="{{ route('admissions.enrollment') }}">Apply Now</a>
-                    <a class="home-hero__cta home-hero__cta--ghost" href="{{ route('facilities') }}">Campus Tour</a>
+                    <a class="home-hero__cta home-hero__cta--ghost" href="{{ route('campus.tour') }}">Campus Tour</a>
                 </div>
             @endif
 

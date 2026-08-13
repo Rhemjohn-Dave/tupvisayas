@@ -135,6 +135,7 @@
                                         <li><a href="{{ route('student_services') }}">Student Services</a></li>
                                         <li><a href="{{ route('library') }}">Library</a></li>
                                         <li><a href="{{ route('sit') }}">Supervised Industrial Training (SIT)</a></li>
+                                        <li><a href="{{ route('campus.tour') }}">Campus Tour</a></li>
                                         <li><a href="{{ route('facilities') }}">Facilities</a></li>
                                         <li><a href="{{ route('contact') }}">Contact</a></li>
                                     </ul>
@@ -254,6 +255,7 @@
                     <li><a href="{{ route('student_services') }}">Student Services</a></li>
                     <li><a href="{{ route('library') }}">Library</a></li>
                     <li><a href="{{ route('sit') }}">Supervised Industrial Training (SIT)</a></li>
+                    <li><a href="{{ route('campus.tour') }}">Campus Tour</a></li>
                     <li><a href="{{ route('facilities') }}">Facilities</a></li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>

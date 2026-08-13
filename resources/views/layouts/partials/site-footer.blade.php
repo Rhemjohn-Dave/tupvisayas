@@ -43,7 +43,8 @@
                         Information</a></li>
                 <li><a href="https://drive.google.com/file/d/1u_I6kqTajs8CYbA7dKqp3LqL4NgPxL6w/view?usp=drive_link"
                         target="_blank" rel="noopener noreferrer">Citizen's Charter</a></li>
-                <li><a href="{{ route('jobs') }}">Careers</a></li>
+                <li><a href="{{ route('human-resources') }}">Human Resources</a></li>
+                <li><a href="{{ route('sit') }}">SIT</a></li>
                 <li><a href="https://www.gov.ph/feedback" target="_blank" rel="noopener noreferrer">Feedback</a></li>
                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 @guest

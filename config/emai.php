@@ -150,11 +150,23 @@ return [
         [
             'id' => 'jobs',
             'question' => 'Where are job openings posted?',
-            'answer' => 'Career opportunities are listed on the Jobs page of the TUP Visayas website.',
-            'keywords' => ['job', 'career', 'hiring', 'vacancy', 'employment', 'work'],
+            'answer' => 'Faculty and staff vacancies are posted under Human Resources. Student internships and OJT placements are under SIT Campus Recruitment.',
+            'keywords' => ['job', 'career', 'hiring', 'vacancy', 'employment', 'work', 'hr', 'job opening', 'human resources'],
             'category' => 'campus',
             'links' => [
-                ['label' => 'Jobs', 'route' => 'jobs'],
+                ['label' => 'Human Resources', 'route' => 'human-resources'],
+                ['label' => 'SIT campus recruitment', 'route' => 'sit'],
+            ],
+        ],
+        [
+            'id' => 'campus-recruitment',
+            'question' => 'Where can students find campus recruitment or SIT / OJT openings?',
+            'answer' => 'Campus Recruitment listings are for TUP Visayas students — internships, OJT, and partner-company openings coordinated by the SIT Office. Faculty and staff jobs are listed separately under Human Resources.',
+            'keywords' => ['campus recruitment', 'sit', 'ojt', 'internship', 'student hiring', 'industry partner', 'placement'],
+            'category' => 'campus',
+            'links' => [
+                ['label' => 'SIT campus recruitment', 'route' => 'sit'],
+                ['label' => 'Human Resources', 'route' => 'human-resources'],
             ],
         ],
         [

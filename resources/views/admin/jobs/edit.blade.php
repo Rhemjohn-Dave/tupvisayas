@@ -3,7 +3,7 @@
 @section('title', 'Admin — Edit job')
 
 @section('admin_content')
-    <x-admin.page-header title="Edit job post" subtitle="Update the published job opening.">
+    <x-admin.page-header title="Edit hiring post" subtitle="Update a job opening (HR) or campus recruitment (SIT) posting.">
         <x-slot name="actions">
             <a href="{{ route('admin.dashboard') }}" class="admin-btn admin-btn--ghost">
                 <i class="material-icons" aria-hidden="true">arrow_back</i>
@@ -28,6 +28,24 @@
                     @endforeach
                 </select>
                 @error('category_id')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="admin-form__group">
+                <label class="admin-label" for="listing_type">Hiring type</label>
+                <select class="admin-select browser-default" name="listing_type" id="listing_type" required>
+                    <option value="{{ \App\Models\Job::TYPE_JOB_OPENING }}"
+                        @selected(old('listing_type', $job->listing_type) === \App\Models\Job::TYPE_JOB_OPENING)>
+                        Job opening — HR (faculty &amp; staff)
+                    </option>
+                    <option value="{{ \App\Models\Job::TYPE_CAMPUS_RECRUITMENT }}"
+                        @selected(old('listing_type', $job->listing_type) === \App\Models\Job::TYPE_CAMPUS_RECRUITMENT)>
+                        Campus recruitment — SIT (students / OJT)
+                    </option>
+                </select>
+                <p class="admin-form__hint">Job openings are campus HR vacancies. Campus recruitment is for SIT student placements.</p>
+                @error('listing_type')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror
             </div>

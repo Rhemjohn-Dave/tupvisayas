@@ -37,10 +37,28 @@
                     <option value="" disabled {{ old('type') ? '' : 'selected' }}>Select post type</option>
                     <option value="news" @selected(old('type') === 'news')>News</option>
                     <option value="announcement" @selected(old('type') === 'announcement')>Announcement</option>
-                    <option value="job" @selected(old('type') === 'job')>Job opening</option>
+                    <option value="job" @selected(old('type') === 'job')>Hiring (job / campus recruitment)</option>
                     <option value="event" @selected(old('type') === 'event')>Event</option>
                 </select>
                 @error('type')
+                    <span class="admin-form__error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="admin-form__group" id="listing-type-group" hidden>
+                <label class="admin-label" for="listing_type">Hiring type</label>
+                <select class="admin-select browser-default" name="listing_type" id="listing_type">
+                    <option value="{{ \App\Models\Job::TYPE_JOB_OPENING }}"
+                        @selected(old('listing_type', \App\Models\Job::TYPE_JOB_OPENING) === \App\Models\Job::TYPE_JOB_OPENING)>
+                        Job opening — HR (faculty &amp; staff)
+                    </option>
+                    <option value="{{ \App\Models\Job::TYPE_CAMPUS_RECRUITMENT }}"
+                        @selected(old('listing_type') === \App\Models\Job::TYPE_CAMPUS_RECRUITMENT)>
+                        Campus recruitment — SIT (students / OJT)
+                    </option>
+                </select>
+                <p class="admin-form__hint">Job openings are campus HR vacancies. Campus recruitment is for SIT student placements.</p>
+                @error('listing_type')
                     <span class="admin-form__error">{{ $message }}</span>
                 @enderror
             </div>
@@ -77,4 +95,27 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('admin_scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var typeSelect = document.getElementById('type');
+            var listingGroup = document.getElementById('listing-type-group');
+            var listingSelect = document.getElementById('listing_type');
+            if (!typeSelect || !listingGroup || !listingSelect) return;
+
+            function syncListingType() {
+                var isJob = typeSelect.value === 'job';
+                listingGroup.hidden = !isJob;
+                listingSelect.required = isJob;
+                if (!isJob) {
+                    listingSelect.value = '{{ \App\Models\Job::TYPE_JOB_OPENING }}';
+                }
+            }
+
+            typeSelect.addEventListener('change', syncListingType);
+            syncListingType();
+        });
+    </script>
 @endsection

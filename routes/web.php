@@ -52,6 +52,7 @@ Route::view('/campus-tour', 'pages.campus_tour')->name('campus.tour');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
 Route::get('/library', [App\Http\Controllers\LibraryController::class, 'index'])->name('library');
 Route::get('/sit', [App\Http\Controllers\SitController::class, 'index'])->name('sit');
+Route::redirect('/sit/campus-recruitment', '/sit#sit-recruitment');
 Route::view('/transparency-seal', 'pages.transparency_seal')->name('transparency_seal');
 Route::get('/officials', [App\Http\Controllers\OfficialController::class, 'index'])->name('officials');
 Route::get('/directors-corner', [App\Http\Controllers\DirectorCornerController::class, 'index'])->name('directors.corner');
@@ -59,6 +60,7 @@ Route::get('/directors-corner/posts/{slug}', [App\Http\Controllers\DirectorCorne
 Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index'])->name('news_events');
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
+Route::get('/human-resources', [App\Http\Controllers\HumanResourcesController::class, 'index'])->name('human-resources');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/privacy-notice', 'pages.privacy_notice')->name('privacy.notice');
 Route::redirect('/privacy-policy', '/privacy-notice');

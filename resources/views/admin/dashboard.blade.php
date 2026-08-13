@@ -56,7 +56,9 @@
                 <option value="">All types</option>
                 <option value="news" @selected(($filters['type'] ?? '') === 'news')>News</option>
                 <option value="announcement" @selected(($filters['type'] ?? '') === 'announcement')>Announcements</option>
-                <option value="job" @selected(($filters['type'] ?? '') === 'job')>Jobs</option>
+                <option value="job" @selected(($filters['type'] ?? '') === 'job')>All hiring</option>
+                <option value="job_opening" @selected(($filters['type'] ?? '') === 'job_opening')>Job openings (HR)</option>
+                <option value="campus_recruitment" @selected(($filters['type'] ?? '') === 'campus_recruitment')>Campus recruitment (SIT)</option>
                 <option value="event" @selected(($filters['type'] ?? '') === 'event')>Events</option>
             </select>
         </form>
@@ -88,12 +90,16 @@
                             <td class="admin-table__cell-title" title="{{ $row['title'] }}">{{ Str::limit($row['title'], 56) }}</td>
                             <td>
                                 @php
-                                    $badgeClass = match ($row['type']) {
-                                        'news' => 'admin-badge--news',
-                                        'announcement' => 'admin-badge--announcement',
-                                        'job' => 'admin-badge--job',
-                                        'event' => 'admin-badge--event',
-                                        default => 'admin-badge--news',
+                                    $badgeClass = match ($row['type_label']) {
+                                        'Campus recruitment' => 'admin-badge--announcement',
+                                        'Job opening', 'Job' => 'admin-badge--job',
+                                        default => match ($row['type']) {
+                                            'news' => 'admin-badge--news',
+                                            'announcement' => 'admin-badge--announcement',
+                                            'job' => 'admin-badge--job',
+                                            'event' => 'admin-badge--event',
+                                            default => 'admin-badge--news',
+                                        },
                                     };
                                 @endphp
                                 <span class="admin-badge {{ $badgeClass }}">{{ $row['type_label'] }}</span>

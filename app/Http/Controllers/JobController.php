@@ -10,11 +10,13 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = \App\Models\Job::orderBy('created_at', 'desc')->paginate(12);
+        if ($request->query('type') === Job::TYPE_CAMPUS_RECRUITMENT) {
+            return redirect()->to(route('sit') . '#sit-recruitment');
+        }
 
-        return view('pages.jobs', compact('jobs'));
+        return redirect()->route('human-resources');
     }
 
     /**
@@ -34,16 +36,17 @@ class JobController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
+            'listing_type' => 'required|in:' . implode(',', array_keys(Job::listingTypes())),
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        $data = $request->only(['title', 'content', 'category_id']);
+        $data = $request->only(['title', 'content', 'category_id', 'listing_type']);
 
         if ($request->hasFile('picture')) {
             $data['picture'] = $request->file('picture')->store('uploads', 'public');
         }
 
-        \App\Models\Job::create($data);
+        Job::create($data);
 
         return redirect()->route('admin.dashboard')->with('success', 'Job created successfully!');
     }
@@ -53,7 +56,14 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        return view('pages.job_show', compact('job'));
+        $related = Job::query()
+            ->listingType($job->listing_type ?: Job::TYPE_JOB_OPENING)
+            ->where('id', '!=', $job->id)
+            ->orderByDesc('created_at')
+            ->limit(3)
+            ->get();
+
+        return view('pages.job_show', compact('job', 'related'));
     }
 
     /**
@@ -62,6 +72,7 @@ class JobController extends Controller
     public function edit(Job $job)
     {
         $categories = \App\Models\Category::all();
+
         return view('admin.jobs.edit', compact('job', 'categories'));
     }
 
@@ -74,10 +85,11 @@ class JobController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
+            'listing_type' => 'required|in:' . implode(',', array_keys(Job::listingTypes())),
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        $data = $request->only(['title', 'content', 'category_id']);
+        $data = $request->only(['title', 'content', 'category_id', 'listing_type']);
 
         if ($request->hasFile('picture')) {
             if ($job->picture) {
@@ -100,6 +112,8 @@ class JobController extends Controller
             \Storage::disk('public')->delete($job->picture);
         }
         $job->delete();
+
         return redirect()->route('admin.dashboard')->with('success', 'Job deleted successfully!');
     }
 }
+

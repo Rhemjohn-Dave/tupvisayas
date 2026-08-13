@@ -4692,6 +4692,10 @@ body {
 
 /* --- Article / detail pages (news, events, announcements, jobs) --- */
 .site-article-badge-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
     text-align: center;
     margin-bottom: var(--space-4);
 }
@@ -7927,6 +7931,82 @@ body {
     background: var(--color-brand);
 }
 
+.office-job-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+}
+
+.office-job-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius-md) + 2px);
+    box-shadow: 0 10px 28px rgba(26, 18, 20, 0.05);
+}
+
+.office-job-card__media {
+    margin: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #1a1214;
+}
+
+.office-job-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.office-job-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.15rem 1.2rem 1.25rem;
+    flex: 1;
+}
+
+.office-job-card__badge {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+.office-job-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+.office-job-card__excerpt {
+    margin: 0;
+    flex: 1;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+.office-job-card__body .acad-btn {
+    align-self: flex-start;
+    margin-top: 0.25rem;
+}
+
+@media (max-width: 720px) {
+    .office-job-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .sit-schedule-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -9320,5 +9400,92 @@ body {
     .ctour-panel.is-updating,
     .ctour-leaflet-marker__pulse {
         animation: none;
+    }
+}
+
+/* Jobs / campus recruitment */
+.jobs-kicker {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+.jobs-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    margin: var(--space-6) 0 0;
+}
+
+.jobs-tabs__btn {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(26, 18, 20, 0.04);
+}
+
+.jobs-tabs__btn:hover,
+.jobs-tabs__btn:focus-visible {
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+    outline: none;
+}
+
+.jobs-tabs__btn.is-active {
+    border-color: var(--color-brand);
+    background: var(--color-brand-muted, rgba(158, 27, 50, 0.06));
+    box-shadow: inset 0 0 0 1px var(--color-brand);
+}
+
+.jobs-tabs__label {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.jobs-tabs__meta {
+    flex: 1 1 auto;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.jobs-tabs__count {
+    margin-left: auto;
+    min-width: 1.6rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(26, 18, 20, 0.08);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.jobs-tabs__btn.is-active .jobs-tabs__count {
+    background: var(--color-brand);
+    color: #fff;
+}
+
+.jobs-card__badge {
+    margin: 0 0 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+@media (max-width: 600px) {
+    .jobs-tabs {
+        grid-template-columns: 1fr;
     }
 }

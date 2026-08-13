@@ -77,6 +77,7 @@
             <div class="acad-hero__actions">
                 <a class="acad-btn acad-btn--primary" href="#sit-schedules">Deployment schedules</a>
                 <a class="acad-btn acad-btn--ghost" href="#sit-partners">Industry partners</a>
+                <a class="acad-btn acad-btn--ghost" href="#sit-recruitment">Campus recruitment</a>
                 <a class="acad-btn acad-btn--ghost" href="#sit-contact">Contact SIT Office</a>
             </div>
         </section>
@@ -303,6 +304,26 @@
             </div>
         </section>
 
+        {{-- Campus recruitment --}}
+        <section class="sit-section sit-section--muted" id="sit-recruitment" aria-labelledby="sit-recruitment-heading">
+            <div class="sit-section__inner">
+                <header class="sit-section__head">
+                    <p class="sit-eyebrow">For students</p>
+                    <h2 id="sit-recruitment-heading" class="sit-section__title">Campus recruitment</h2>
+                    <p class="sit-section__lede">
+                        Internships, OJT, and partner-company openings coordinated by the SIT Office.
+                        Faculty and staff vacancies are posted under
+                        <a href="{{ route('human-resources') }}">Human Resources</a>.
+                    </p>
+                </header>
+
+                @include('pages.partials.job_cards', [
+                    'jobs' => $campusRecruitment ?? collect(),
+                    'empty' => 'No campus recruitment postings yet. Coordinate with the SIT Office for current industry slots.',
+                ])
+            </div>
+        </section>
+
         {{-- Contact --}}
         <section class="sit-section" id="sit-contact" aria-labelledby="sit-contact-heading">
             <div class="sit-section__inner">
@@ -354,8 +375,8 @@
                     Office before the summer or term deployment window.
                 </p>
                 <div class="acad-cta__actions">
-                    <a class="acad-btn acad-btn--on-dark" href="#sit-schedules">View schedules</a>
-                    <a class="acad-btn acad-btn--outline-light" href="{{ route('academics') }}">Browse Academics</a>
+                    <a class="acad-btn acad-btn--on-dark" href="#sit-recruitment">Campus recruitment</a>
+                    <a class="acad-btn acad-btn--outline-light" href="#sit-schedules">View schedules</a>
                 </div>
             </div>
         </section>

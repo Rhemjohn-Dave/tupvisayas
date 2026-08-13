@@ -56,6 +56,7 @@
                             <li><a href="{{ route('student_services') }}">Student Services</a></li>
                             <li><a href="{{ route('student_services') }}#osa">Office of Student Affairs</a></li>
                             <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure</a></li>
+                            <li><a href="{{ route('sit') }}">Supervised Industrial Training (SIT)</a></li>
                         </ul>
                     </li>
                     <li class="site-nav__item">
@@ -126,6 +127,7 @@
                                         <li><a href="{{ route('officials') }}">Board of Regents</a></li>
                                         <li><a href="{{ route('directors.corner') }}">Office of the Director</a></li>
                                         <li><a href="{{ route('adre') }}">Assistant Director for Research &amp; Extension</a></li>
+                                        <li><a href="{{ route('human-resources') }}">Human Resources</a></li>
                                     </ul>
                                 </div>
                                 <div>
@@ -212,6 +214,7 @@
                     <li><a href="{{ route('student_services') }}">Student Services</a></li>
                     <li><a href="{{ route('student_services') }}#osa">Office of Student Affairs</a></li>
                     <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure</a></li>
+                    <li><a href="{{ route('sit') }}">Supervised Industrial Training (SIT)</a></li>
                 </ul>
             </details>
             <details>
@@ -251,6 +254,7 @@
                 <ul class="site-drawer__sub">
                     <li><a href="{{ route('directors.corner') }}">Office of the Director</a></li>
                     <li><a href="{{ route('adre') }}">Assistant Director for Research &amp; Extension</a></li>
+                    <li><a href="{{ route('human-resources') }}">Human Resources</a></li>
                     <li><a href="{{ route('technology') }}">University IT Center</a></li>
                     <li><a href="{{ route('student_services') }}">Student Services</a></li>
                     <li><a href="{{ route('library') }}">Library</a></li>

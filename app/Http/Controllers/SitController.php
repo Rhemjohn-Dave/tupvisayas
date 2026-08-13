@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use App\Models\Official;
 use App\Models\SitGalleryImage;
 use App\Models\SitIndustryPartner;
@@ -16,7 +17,11 @@ class SitController extends Controller
             ->where('name', 'like', '%Pabalinas%')
             ->orderBy('order')
             ->first();
+        $campusRecruitment = Job::query()
+            ->campusRecruitment()
+            ->orderByDesc('created_at')
+            ->get();
 
-        return view('pages.sit', compact('partners', 'galleryImages', 'sitOfficer'));
+        return view('pages.sit', compact('partners', 'galleryImages', 'sitOfficer', 'campusRecruitment'));
     }
 }

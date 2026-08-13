@@ -21,7 +21,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $type = $request->query('type');
-        if ($type && ! in_array($type, ['news', 'announcement', 'job', 'event'], true)) {
+        if ($type && ! in_array($type, ['news', 'announcement', 'job', 'job_opening', 'campus_recruitment', 'event'], true)) {
             $type = null;
         }
 
@@ -62,7 +62,16 @@ class PostController extends Controller
 
         $news = $this->dashboardSelect(News::query(), 'news', 'News', 'news.show', 'admin.news.edit', 'admin.news.destroy', $q);
         $announcements = $this->dashboardSelect(Announcement::query(), 'announcement', 'Announcement', 'announcements.show', 'admin.announcements.edit', 'admin.announcements.destroy', $q);
-        $jobs = $this->dashboardSelect(Job::query(), 'job', 'Job', 'jobs.show', 'admin.jobs.edit', 'admin.jobs.destroy', $q);
+        $jobs = $this->dashboardSelect(
+            Job::query(),
+            'job',
+            'Job',
+            'jobs.show',
+            'admin.jobs.edit',
+            'admin.jobs.destroy',
+            $q,
+            "CASE WHEN jobs.listing_type = '" . Job::TYPE_CAMPUS_RECRUITMENT . "' THEN 'Campus recruitment' ELSE 'Job opening' END"
+        );
         $events = $this->dashboardSelect(Event::query(), 'event', 'Event', 'events.show', 'admin.events.edit', 'admin.events.destroy', $q);
 
         $union = $news->unionAll($announcements)->unionAll($jobs)->unionAll($events);
@@ -101,11 +110,21 @@ class PostController extends Controller
         [$model, $typeKey, $typeLabel, $showRoute, $editRoute, $destroyRoute] = match ($type) {
             'news' => [News::class, 'news', 'News', 'news.show', 'admin.news.edit', 'admin.news.destroy'],
             'announcement' => [Announcement::class, 'announcement', 'Announcement', 'announcements.show', 'admin.announcements.edit', 'admin.announcements.destroy'],
-            'job' => [Job::class, 'job', 'Job', 'jobs.show', 'admin.jobs.edit', 'admin.jobs.destroy'],
+            'job', 'job_opening', 'campus_recruitment' => [Job::class, 'job', 'Job', 'jobs.show', 'admin.jobs.edit', 'admin.jobs.destroy'],
             default => [Event::class, 'event', 'Event', 'events.show', 'admin.events.edit', 'admin.events.destroy'],
         };
 
         $query = $model::query()->with('category');
+
+        if ($type === 'job_opening') {
+            $query->where('listing_type', Job::TYPE_JOB_OPENING);
+            $typeLabel = 'Job opening';
+        } elseif ($type === 'campus_recruitment') {
+            $query->where('listing_type', Job::TYPE_CAMPUS_RECRUITMENT);
+            $typeLabel = 'Campus recruitment';
+        } elseif ($type === 'job') {
+            $typeLabel = 'Job';
+        }
 
         if ($q !== '') {
             $query->where(function (Builder $builder) use ($q) {
@@ -132,7 +151,7 @@ class PostController extends Controller
             return [
                 'title' => $item->title,
                 'type' => $typeKey,
-                'type_label' => $typeLabel,
+                'type_label' => $item instanceof Job ? $item->listingTypeLabel() : $typeLabel,
                 'category' => $item->category?->name ?? '—',
                 'created_at' => $item->created_at,
                 'view_url' => route($showRoute, $item->slug),
@@ -153,7 +172,8 @@ class PostController extends Controller
         string $showRoute,
         string $editRoute,
         string $destroyRoute,
-        string $q
+        string $q,
+        ?string $typeLabelSql = null
     ): Builder {
         $table = $query->getModel()->getTable();
 
@@ -169,15 +189,22 @@ class PostController extends Controller
             });
         }
 
-        return $query
+        $query = $query
             ->leftJoin('categories', 'categories.id', '=', "{$table}.category_id")
             ->select([
                 "{$table}.title",
                 "{$table}.slug",
                 "{$table}.created_at",
             ])
-            ->selectRaw('? as type', [$type])
-            ->selectRaw('? as type_label', [$typeLabel])
+            ->selectRaw('? as type', [$type]);
+
+        if ($typeLabelSql) {
+            $query->selectRaw($typeLabelSql . ' as type_label');
+        } else {
+            $query->selectRaw('? as type_label', [$typeLabel]);
+        }
+
+        return $query
             ->selectRaw('COALESCE(categories.name, ?) as category', ['—'])
             ->selectRaw('? as show_route', [$showRoute])
             ->selectRaw('? as edit_route', [$editRoute])
@@ -212,6 +239,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
+            'listing_type' => 'required_if:type,job|nullable|in:' . implode(',', array_keys(Job::listingTypes())),
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
@@ -229,6 +257,7 @@ class PostController extends Controller
                 Announcement::create($data);
                 break;
             case 'job':
+                $data['listing_type'] = $request->input('listing_type', Job::TYPE_JOB_OPENING);
                 Job::create($data);
                 break;
             case 'event':

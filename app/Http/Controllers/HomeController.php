@@ -20,7 +20,7 @@ class HomeController extends Controller
         $news = News::orderByDesc('created_at')->limit(3)->get();
         $events = Event::orderByDesc('created_at')->limit(3)->get();
         $announcements = Announcement::orderByDesc('created_at')->limit(3)->get();
-        $jobs = Job::orderByDesc('created_at')->limit(1)->get();
+        $jobs = Job::query()->jobOpenings()->orderByDesc('created_at')->limit(1)->get();
         $officials_preview = Official::orderBy('order')->limit(4)->get();
 
         $latestUpdates = collect()

@@ -195,7 +195,7 @@
                     <div class="home-aside-career">
                         @if ($featuredJob)
                             <a class="home-career-feature" href="{{ route('jobs.show', $featuredJob->slug) }}">
-                                <span class="home-career-feature__label">Career Opportunities</span>
+                                <span class="home-career-feature__label">Human Resources</span>
                                 <h3 class="home-career-feature__title">{{ $featuredJob->title }}</h3>
                                 <p class="home-career-feature__excerpt">
                                     {{ \Illuminate\Support\Str::limit(strip_tags($featuredJob->content), 90) }}
@@ -203,8 +203,8 @@
                                 <span class="home-career-feature__cta">Apply for position</span>
                             </a>
                         @else
-                            <a class="home-career-feature" href="{{ route('jobs') }}">
-                                <span class="home-career-feature__label">Career Opportunities</span>
+                            <a class="home-career-feature" href="{{ route('human-resources') }}">
+                                <span class="home-career-feature__label">Human Resources</span>
                                 <h3 class="home-career-feature__title">Join the TUP Visayas team</h3>
                                 <p class="home-career-feature__excerpt">
                                     View open faculty and staff positions on campus.

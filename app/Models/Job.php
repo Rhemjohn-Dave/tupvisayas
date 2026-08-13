@@ -12,18 +12,82 @@ class Job extends Model
 {
     use HasFactory, SanitizesHtmlAttributes, LogsModelActivity;
 
+    public const TYPE_JOB_OPENING = 'job_opening';
+
+    public const TYPE_CAMPUS_RECRUITMENT = 'campus_recruitment';
+
     protected string $activityLogName = 'job';
 
-    protected $fillable = ['title', 'slug', 'content', 'picture', 'category_id'];
+    protected $fillable = ['title', 'slug', 'content', 'picture', 'category_id', 'listing_type'];
 
     protected array $htmlAttributes = ['content'];
 
-    protected array $activityLogAttributes = ['title', 'slug', 'content', 'picture', 'category_id'];
+    protected array $activityLogAttributes = ['title', 'slug', 'content', 'picture', 'category_id', 'listing_type'];
+
+    public static function listingTypes(): array
+    {
+        return [
+            self::TYPE_JOB_OPENING => 'Job opening',
+            self::TYPE_CAMPUS_RECRUITMENT => 'Campus recruitment',
+        ];
+    }
+
+    public function isCampusRecruitment(): bool
+    {
+        return $this->listing_type === self::TYPE_CAMPUS_RECRUITMENT;
+    }
+
+    public function listingTypeLabel(): string
+    {
+        return self::listingTypes()[$this->listing_type] ?? 'Job opening';
+    }
+
+    public function officeLabel(): string
+    {
+        return $this->isCampusRecruitment()
+            ? 'Supervised Industrial Training (SIT)'
+            : 'Human Resources';
+    }
+
+    public static function indexUrl(?string $type = null): string
+    {
+        if (($type ?: self::TYPE_JOB_OPENING) === self::TYPE_CAMPUS_RECRUITMENT) {
+            return route('sit') . '#sit-recruitment';
+        }
+
+        return route('human-resources');
+    }
+
+    public function audienceLabel(): string
+    {
+        return $this->isCampusRecruitment()
+            ? 'For TUP Visayas students (SIT / OJT)'
+            : 'For faculty and staff applicants';
+    }
+
+    public function scopeListingType($query, string $type)
+    {
+        return $query->where('listing_type', $type);
+    }
+
+    public function scopeJobOpenings($query)
+    {
+        return $query->where('listing_type', self::TYPE_JOB_OPENING);
+    }
+
+    public function scopeCampusRecruitment($query)
+    {
+        return $query->where('listing_type', self::TYPE_CAMPUS_RECRUITMENT);
+    }
+
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($job) {
+            if (empty($job->listing_type)) {
+                $job->listing_type = static::TYPE_JOB_OPENING;
+            }
             if (empty($job->slug)) {
                 $job->slug = static::generateUniqueSlug($job->title);
             }

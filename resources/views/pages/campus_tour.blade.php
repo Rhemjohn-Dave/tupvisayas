@@ -16,6 +16,7 @@
     <meta property="og:image" content="{{ asset('images/campus-tour/admin.jpg') }}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 @endsection
 
 @section('content')
@@ -96,6 +97,7 @@
                 'tagline' => 'Digital campus, labs, and helpdesk',
                 'description' => 'UITC powers campus connectivity, accounts, learning systems, and computer laboratories — the digital backbone of a technological university.',
                 'photos' => [$img('uitc.jpg'), $img('uitc-2.jpg'), $img('uitc-3.jpg')],
+                'pano' => $img('uitc-360.jpg'),
                 'lat' => 10.740297753202075,
                 'lng' => 122.97007690020871,
                 'links' => [
@@ -183,8 +185,15 @@
             ],
         ];
 
+        $stops = array_map(static function (array $stop): array {
+            $stop['pano'] = $stop['pano'] ?? null;
+
+            return $stop;
+        }, $stops);
+
         $first = $stops[0];
         $firstPhoto = $first['photos'][0] ?? asset('images/tupvisayas.jpg');
+        $stopCount = count($stops);
     @endphp
 
     <div class="site-page site-page--campus-tour"
@@ -195,10 +204,12 @@
             <p class="acad-hero__badge">Explore the campus</p>
             <h1 id="campus-tour-heading" class="acad-hero__title">Interactive Campus Tour</h1>
             <p class="acad-hero__lede">
-                Explore TUP Visayas on a live map — pan, zoom, and select campus stops to browse photos and learn what happens in each space.
+                Explore TUP Visayas on a live map — follow a guided flythrough, tap numbered pins, and open fullscreen photo galleries for each stop.
             </p>
             <div class="acad-hero__actions">
-                <a class="acad-btn acad-btn--primary" href="#campus-tour-map">Open the map</a>
+                <button type="button" class="acad-btn acad-btn--primary" data-campus-tour-play data-campus-tour-scroll>
+                    <span data-campus-tour-play-label>Start tour</span>
+                </button>
                 <a class="acad-btn acad-btn--ghost" href="{{ route('facilities') }}">Facilities list</a>
                 <a class="acad-btn acad-btn--ghost" href="{{ route('academics') }}">Academics</a>
             </div>
@@ -211,8 +222,28 @@
                     <h2 id="ctour-map-heading" class="ctour-section__title">Select a stop</h2>
                     <p class="ctour-section__lede">
                         Drag to pan, scroll or pinch to zoom, switch Satellite / Streets, then tap a numbered pin.
-                        Open a stop to browse its photo gallery. Marker positions are approximate and can be refined later.
+                        Open a stop’s photo to view it fullscreen. Marker positions are approximate and can be refined later.
                     </p>
+                    <div class="ctour-playback" data-campus-playback>
+                        <button type="button" class="acad-btn acad-btn--primary" data-campus-tour-play>
+                            <i class="material-icons" aria-hidden="true">play_arrow</i>
+                            <span data-campus-tour-play-label>Start tour</span>
+                        </button>
+                        <button type="button" class="acad-btn acad-btn--ghost" data-campus-tour-prev hidden>
+                            <i class="material-icons" aria-hidden="true">skip_previous</i>
+                            Previous
+                        </button>
+                        <button type="button" class="acad-btn acad-btn--ghost" data-campus-tour-next hidden>
+                            Next
+                            <i class="material-icons" aria-hidden="true">skip_next</i>
+                        </button>
+                        <button type="button" class="acad-btn acad-btn--ghost" data-campus-tour-end hidden>
+                            End tour
+                        </button>
+                        <p class="ctour-playback__status" data-campus-tour-status hidden>
+                            Stop 1 of {{ $stopCount }}
+                        </p>
+                    </div>
                 </header>
 
                 <div class="ctour-layout">
@@ -226,7 +257,13 @@
 
                     <aside class="ctour-panel" data-campus-panel aria-live="polite">
                         <figure class="ctour-panel__media">
-                            <img data-campus-photo src="{{ $firstPhoto }}" alt="{{ $first['name'] }}" loading="lazy">
+                            <button type="button"
+                                class="ctour-panel__media-open"
+                                data-campus-open-theater
+                                aria-label="Open photo gallery for {{ $first['name'] }}">
+                                <img data-campus-photo src="{{ $firstPhoto }}" alt="{{ $first['name'] }}" loading="lazy">
+                                <span class="ctour-panel__media-hint">Open gallery</span>
+                            </button>
                         </figure>
                         <div class="ctour-panel__thumbs" data-campus-thumbs aria-label="Photos for this stop">
                             @foreach ($first['photos'] as $index => $photo)
@@ -237,6 +274,14 @@
                                     <img src="{{ $photo }}" alt="" loading="lazy">
                                 </button>
                             @endforeach
+                        </div>
+                        <div class="ctour-panel__actions">
+                            <button type="button" class="ctour-panel__view" data-campus-open-theater>
+                                View photos
+                            </button>
+                            <button type="button" class="ctour-panel__pano" data-campus-open-pano hidden>
+                                Look around 360°
+                            </button>
                         </div>
                         <p class="ctour-panel__eyebrow" data-campus-tagline>{{ $first['tagline'] }}</p>
                         <h3 class="ctour-panel__title" data-campus-name>{{ $first['name'] }}</h3>
@@ -262,7 +307,7 @@
                                 aria-pressed="{{ $index === 0 ? 'true' : 'false' }}">
                                 <span class="ctour-stop-list__num">{{ $index + 1 }}</span>
                                 <span class="ctour-stop-list__copy">
-                                    <strong>{{ $stop['name'] }}</strong>
+                                    <strong>{{ $stop['name'] }}@if (!empty($stop['pano'])) <span class="ctour-stop-list__360">360°</span>@endif</strong>
                                     <span>{{ $stop['tagline'] }}</span>
                                 </span>
                             </button>
@@ -275,6 +320,57 @@
         <script type="application/json" data-campus-stops>
             {!! json_encode($stops, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
         </script>
+
+        <div class="ctour-theater"
+            data-campus-theater
+            hidden
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ctour-theater-title">
+            <button type="button"
+                class="ctour-theater__backdrop"
+                data-campus-theater-close
+                tabindex="-1"
+                aria-label="Close photo gallery"></button>
+            <div class="ctour-theater__stage">
+                <button type="button" class="ctour-theater__close" data-campus-theater-close aria-label="Close gallery">
+                    <i class="material-icons" aria-hidden="true">close</i>
+                </button>
+                <button type="button"
+                    class="ctour-theater__nav ctour-theater__nav--prev"
+                    data-campus-theater-photo-prev
+                    aria-label="Previous photo">
+                    <i class="material-icons" aria-hidden="true">chevron_left</i>
+                </button>
+                <figure class="ctour-theater__frame">
+                    <img class="ctour-theater__photo" data-campus-theater-photo src="{{ $firstPhoto }}" alt="{{ $first['name'] }}">
+                    <div class="ctour-theater__pano" data-campus-theater-pano hidden></div>
+                </figure>
+                <button type="button"
+                    class="ctour-theater__nav ctour-theater__nav--next"
+                    data-campus-theater-photo-next
+                    aria-label="Next photo">
+                    <i class="material-icons" aria-hidden="true">chevron_right</i>
+                </button>
+                <div class="ctour-theater__meta">
+                    <p class="ctour-theater__tagline" data-campus-theater-tagline>{{ $first['tagline'] }}</p>
+                    <h3 id="ctour-theater-title" class="ctour-theater__title" data-campus-theater-name>{{ $first['name'] }}</h3>
+                    <p class="ctour-theater__count" data-campus-theater-count>1 / {{ count($first['photos']) }}</p>
+                </div>
+                <div class="ctour-theater__thumbs" data-campus-theater-thumbs aria-label="Gallery thumbnails"></div>
+                <div class="ctour-theater__stops">
+                    <button type="button" class="acad-btn acad-btn--outline-light" data-campus-theater-stop-prev>
+                        Previous stop
+                    </button>
+                    <button type="button" class="acad-btn acad-btn--outline-light" data-campus-theater-pano-toggle hidden>
+                        360° look around
+                    </button>
+                    <button type="button" class="acad-btn acad-btn--on-dark" data-campus-theater-stop-next>
+                        Next stop
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <section class="acad-cta" aria-labelledby="ctour-cta-heading">
             <div class="acad-cta__inner">
@@ -295,5 +391,6 @@
 @section('scripts')
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <script src="{{ asset('js/campus-tour.js?v=' . time()) }}" defer></script>
 @endsection

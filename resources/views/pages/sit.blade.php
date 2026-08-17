@@ -75,7 +75,8 @@
                 prepares TUP Visayas students for real workplace practice.
             </p>
             <div class="acad-hero__actions">
-                <a class="acad-btn acad-btn--primary" href="#sit-schedules">Deployment schedules</a>
+                <a class="acad-btn acad-btn--primary" href="#sit-enlistment">Department enlistment</a>
+                <a class="acad-btn acad-btn--ghost" href="#sit-schedules">Deployment schedules</a>
                 <a class="acad-btn acad-btn--ghost" href="#sit-partners">Industry partners</a>
                 <a class="acad-btn acad-btn--ghost" href="#sit-recruitment">Campus recruitment</a>
                 <a class="acad-btn acad-btn--ghost" href="#sit-contact">Contact SIT Office</a>
@@ -151,8 +152,49 @@
             </div>
         </section>
 
+        {{-- Department enlistment QR --}}
+        <section class="sit-section" id="sit-enlistment" aria-labelledby="sit-enlistment-heading">
+            <div class="sit-section__inner">
+                <header class="sit-section__head">
+                    <p class="sit-eyebrow">For students</p>
+                    <h2 id="sit-enlistment-heading" class="sit-section__title">Department enlistment</h2>
+                    <p class="sit-section__lede">
+                        Students must scan this QR code so the department enlistment officers in charge can
+                        identify who will take SIT — and confirm that students in their department who are
+                        required to undergo Supervised Industrial Training are properly listed.
+                    </p>
+                </header>
+
+                <div class="sit-enlistment">
+                    <figure class="sit-enlistment__qr">
+                        <img src="{{ asset('images/sitqr.jpg') }}"
+                            alt="QR code for SIT department enlistment"
+                            width="280"
+                            height="280"
+                            loading="lazy"
+                            decoding="async">
+                        <figcaption>Scan with your phone camera</figcaption>
+                    </figure>
+                    <div class="sit-enlistment__copy">
+                        <h3 class="sit-enlistment__title">Why you need to scan</h3>
+                        <ol class="sit-enlistment__steps">
+                            <li>Open your phone camera or QR scanner and point it at the code.</li>
+                            <li>Complete and submit the enlistment form with your student details.</li>
+                            <li>This notifies the department officers in charge that you will take SIT.</li>
+                            <li>It helps your department make sure students who are required to take SIT are accounted for.</li>
+                        </ol>
+                        <p class="sit-enlistment__note">
+                            If you are scheduled for SIT this term or summer, scanning is required.
+                            For questions, contact your program adviser or the
+                            <a href="#sit-contact">SIT Office</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         {{-- Process for students --}}
-        <section class="sit-section" aria-labelledby="sit-students-heading">
+        <section class="sit-section sit-section--muted" aria-labelledby="sit-students-heading">
             <div class="sit-section__inner">
                 <header class="sit-section__head">
                     <p class="sit-eyebrow">For students</p>
@@ -207,7 +249,7 @@
         </section>
 
         {{-- For partners --}}
-        <section class="sit-section sit-section--muted" aria-labelledby="sit-host-heading">
+        <section class="sit-section" aria-labelledby="sit-host-heading">
             <div class="sit-section__inner sit-section__inner--narrow">
                 <header class="sit-section__head">
                     <p class="sit-eyebrow">For industry</p>
@@ -233,7 +275,7 @@
         </section>
 
         {{-- Industry partners --}}
-        <section class="sit-section" id="sit-partners" aria-labelledby="sit-partners-heading">
+        <section class="sit-section sit-section--muted" id="sit-partners" aria-labelledby="sit-partners-heading">
             <div class="sit-section__inner">
                 <header class="sit-section__head">
                     <p class="sit-eyebrow">Linkages</p>
@@ -270,7 +312,7 @@
         </section>
 
         {{-- Student experiences gallery --}}
-        <section class="sit-section sit-section--muted" id="sit-gallery" aria-labelledby="sit-gallery-heading">
+        <section class="sit-section" id="sit-gallery" aria-labelledby="sit-gallery-heading">
             <div class="sit-section__inner">
                 <header class="sit-section__head">
                     <p class="sit-eyebrow">Campus life</p>

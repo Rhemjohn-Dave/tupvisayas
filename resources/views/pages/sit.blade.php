@@ -184,10 +184,18 @@
                             <li>It helps your department make sure students who are required to take SIT are accounted for.</li>
                         </ol>
                         <p class="sit-enlistment__note">
-                            If you are scheduled for SIT this term or summer, scanning is required.
+                            If you are scheduled for SIT this term or summer, scanning or submitting the form is required.
                             For questions, contact your program adviser or the
                             <a href="#sit-contact">SIT Office</a>.
                         </p>
+                        <div class="sit-enlistment__actions">
+                            <a class="acad-btn acad-btn--primary"
+                                href="https://docs.google.com/forms/d/e/1FAIpQLSdkgO3huBEhiOatE_3Fdvu2TTOdVCssGWbmJQtp4hLcOStTmA/viewform"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                Open SIT enrollment form
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

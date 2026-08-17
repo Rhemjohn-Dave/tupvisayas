@@ -8183,6 +8183,13 @@ body {
     text-underline-offset: 0.15em;
 }
 
+.sit-enlistment__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-4);
+}
+
 @media (max-width: 700px) {
     .sit-enlistment {
         grid-template-columns: 1fr;

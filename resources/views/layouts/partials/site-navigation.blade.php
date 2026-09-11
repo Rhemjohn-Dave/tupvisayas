@@ -27,6 +27,8 @@
                             <li><a href="{{ route('about.mission') }}">Mission &amp; Vision</a></li>
                             <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
                             <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
+                            <li><a href="{{ route('officials') }}">Officials</a></li>
+                            <li><a href="{{ route('transparency_seal') }}">Transparency Seal</a></li>
                         </ul>
                     </li>
                     <li class="site-nav__item">
@@ -197,6 +199,8 @@
                     <li><a href="{{ route('about.mission') }}">Mission &amp; Vision</a></li>
                     <li><a href="{{ route('about.mandate') }}">The TUP Mandate</a></li>
                     <li><a href="{{ route('about.hymn') }}">The TUP Hymn</a></li>
+                    <li><a href="{{ route('officials') }}">Officials</a></li>
+                    <li><a href="{{ route('transparency_seal') }}">Transparency Seal</a></li>
                 </ul>
             </details>
             <details>

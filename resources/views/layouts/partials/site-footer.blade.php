@@ -14,6 +14,15 @@
                     title="Commission on Higher Education">
                     <img src="{{ asset('images/ched-logo.png') }}" alt="CHED" width="72" height="28">
                 </a>
+                <a class="site-footer__seal" href="{{ route('transparency_seal') }}"
+                    title="Philippine Transparency Seal — TUP Visayas">
+                    <img src="{{ asset('images/Philippine_Transparency_Seal.svg') }}"
+                        alt="Philippine Transparency Seal — TUP Visayas"
+                        width="28"
+                        height="28"
+                        loading="lazy"
+                        decoding="async">
+                </a>
             </div>
         </div>
         <div class="site-footer__col">
@@ -32,24 +41,20 @@
                 <li><a href="{{ route('academics') }}">Academics</a></li>
                 <li><a href="{{ route('news_events') }}">News &amp; Events</a></li>
                 <li><a href="{{ route('student_services') }}">Student services</a></li>
+                <li><a href="{{ route('human-resources') }}">Human Resources</a></li>
+                <li><a href="{{ route('sit') }}">SIT</a></li>
+                <li><a href="{{ route('contact') }}">Contact Us</a></li>
             </ul>
         </div>
         <div class="site-footer__col">
             <h2>Transparency</h2>
             <ul>
-                <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="{{ route('transparency_seal') }}">Transparency Seal</a></li>
                 <li><a href="https://www.foi.gov.ph/agencies/tup/" target="_blank" rel="noopener noreferrer">Freedom of
                         Information</a></li>
                 <li><a href="https://drive.google.com/file/d/1u_I6kqTajs8CYbA7dKqp3LqL4NgPxL6w/view?usp=drive_link"
                         target="_blank" rel="noopener noreferrer">Citizen's Charter</a></li>
-                <li><a href="{{ route('human-resources') }}">Human Resources</a></li>
-                <li><a href="{{ route('sit') }}">SIT</a></li>
                 <li><a href="https://www.gov.ph/feedback" target="_blank" rel="noopener noreferrer">Feedback</a></li>
-                <li><a href="{{ route('contact') }}">Contact Us</a></li>
-                @guest
-                    <li><a href="{{ route('login') }}">Admin Login</a></li>
-                @endguest
             </ul>
         </div>
     </div>
@@ -58,6 +63,9 @@
         <p>
             <a href="{{ route('privacy.notice') }}">Privacy Notice (RA 10173)</a>
             · Developed by UITC TUPV
+            @guest
+                · <a href="{{ route('login') }}">Admin Login</a>
+            @endguest
         </p>
     </div>
 </footer>

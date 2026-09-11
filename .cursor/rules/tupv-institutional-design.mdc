@@ -1,0 +1,50 @@
+---
+description: Follow TUP Visayas institutional layout and design on public UI
+globs: resources/views/**/*.blade.php,public/css/site.css,public/css/custom.css,public/js/**/*.js
+alwaysApply: false
+---
+
+# TUP Visayas institutional design
+
+When editing public UI, match the existing institutional site — do not invent a new look.
+
+## Shell
+
+- Extend `layouts.app`. Set `@section('main_class', 'site-main--full')` for marketing / full-bleed pages.
+- Contained pages keep the default `container` main class and use `.site-page` + `.site-page-title` / `.site-page-intro`.
+- Keep nav/footer via existing partials; do not rebuild the chrome.
+
+## Page recipe (full-bleed)
+
+1. `.acad-hero` — `__badge`, `__title`, `__lede`, `__actions`
+2. Alternating `.sit-section` / `.sit-section--muted` (or page family: `.home-*`, `.ctour-*`, `.acad-colleges`)
+3. Close with `.acad-cta` + `.acad-btn--on-dark` / `--outline-light`
+
+One purpose per section: eyebrow + title + short lede + content/actions.
+
+## Components
+
+- Buttons: `.acad-btn` with `--primary`, `--ghost`, `--on-dark`, `--outline-light` only (pill shape).
+- Section headers: `.sit-eyebrow` + `.sit-section__title` + `.sit-section__lede` (or page-family equivalents).
+- Cards only when grouping interactive or list content — never in the hero.
+
+## Tokens
+
+- Brand: `--color-brand` `#9e1b32`, hover `#7a1528`
+- Gold accent: `#f3e4a8` / text `#5c4810` (badges, selective CTAs)
+- Surfaces: white / muted `#f4f2f0` / `--color-surface-alt` `#f6f6f4`
+- Type: Inter only (`--font-sans` / `--font-display`)
+
+## CSS
+
+- New public styles go in `public/css/site.css` using existing tokens.
+- Use `custom.css` only for Materialize bridges — Materialize is not the visual system.
+
+## Do not
+
+- Purple / indigo / glow / cream+terracotta “AI default” themes
+- Second display font, Inter replacements, or generic SaaS dashboards
+- Raw Materialize cards/buttons as the primary look
+- Hero overlays, pill clusters, or cluttered first viewports
+
+For templates and checklists, read `.cursor/skills/tupv-institutional-design/SKILL.md`.

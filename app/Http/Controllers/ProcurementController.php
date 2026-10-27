@@ -35,8 +35,9 @@ class ProcurementController extends Controller
         $categories = (clone $baseQuery)->select('category')->distinct()->orderBy('category')->pluck('category');
         $summary = [
             'total' => (clone $baseQuery)->count(),
-            'pending' => (clone $baseQuery)->where('status', 'pending')->count(),
+            'ongoing' => (clone $baseQuery)->where('status', 'ongoing')->count(),
             'awarded' => (clone $baseQuery)->where('status', 'awarded')->count(),
+            'failed' => (clone $baseQuery)->where('status', 'failed')->count(),
         ];
 
         return view('procurement.bid-opportunities', compact('procurements', 'categories', 'summary', 'sort'));

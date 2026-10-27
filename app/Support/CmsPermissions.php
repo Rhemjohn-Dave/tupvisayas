@@ -16,6 +16,8 @@ final class CmsPermissions
 
     public const MANAGE_DIRECTOR_POSTS = 'manage director posts';
 
+    public const MANAGE_HR_POSTS = 'manage hr posts';
+
     public const MANAGE_USERS = 'manage users';
 
     public const MANAGE_OFFICIALS = 'manage officials';
@@ -42,6 +44,7 @@ final class CmsPermissions
             self::MANAGE_CAROUSEL,
             self::MANAGE_TIPTTO,
             self::MANAGE_DIRECTOR_POSTS,
+            self::MANAGE_HR_POSTS,
             self::MANAGE_USERS,
             self::MANAGE_OFFICIALS,
             self::VIEW_ACTIVITY_LOGS,
@@ -66,6 +69,7 @@ final class CmsPermissions
             self::MANAGE_CAROUSEL => 'Homepage carousel',
             self::MANAGE_TIPTTO => 'TIPTTO / ADRE posts',
             self::MANAGE_DIRECTOR_POSTS => "Director's Corner",
+            self::MANAGE_HR_POSTS => 'Human Resources posts',
             self::MANAGE_USERS => 'Users & roles',
             self::MANAGE_OFFICIALS => 'Officials',
             self::VIEW_ACTIVITY_LOGS => 'Activity logs',

@@ -22,7 +22,7 @@
         $categories = ['Goods', 'Services', 'Infrastructure', 'Consulting'];
         $selectedType = old('type', $procurement->type ?: 'bid_opportunity');
         $selectedCategory = old('category', $procurement->category ?: 'Goods');
-        $selectedStatus = old('status', $procurement->status ?? 'pending');
+        $selectedStatus = old('status', $procurement->status ?? 'ongoing');
         $existingPoFiles = is_array($procurement->po_files)
             ? $procurement->po_files
             : (empty($procurement->po_file_url) ? [] : [$procurement->po_file_url]);
@@ -117,11 +117,14 @@
             <div class="admin-form__group">
                 <label class="admin-label" for="status">Status</label>
                 <select class="admin-select browser-default" name="status" id="status" required>
-                    <option value="pending" {{ $selectedStatus === 'pending' ? 'selected' : '' }}>
-                        Pending
+                    <option value="ongoing" {{ $selectedStatus === 'ongoing' ? 'selected' : '' }}>
+                        Ongoing
                     </option>
                     <option value="awarded" {{ $selectedStatus === 'awarded' ? 'selected' : '' }}>
                         Awarded
+                    </option>
+                    <option value="failed" {{ $selectedStatus === 'failed' ? 'selected' : '' }}>
+                        Failed
                     </option>
                 </select>
                 <p class="admin-form__hint">Awarded records require at least one purchase order file.</p>
@@ -134,7 +137,7 @@
                 <label class="admin-label" for="file">Procurement document</label>
                 <input class="admin-file" type="file" name="file" id="file"
                     accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx">
-                <p class="admin-form__hint">Optional for pending postings. PDF, Word, Excel, or PowerPoint · max 10 MB.</p>
+                <p class="admin-form__hint">Optional for ongoing postings. PDF, Word, Excel, or PowerPoint · max 10 MB.</p>
                 @if ($procurement->file_url)
                     <p class="admin-form__hint">
                         Current file:

@@ -61,6 +61,8 @@ Route::get('/news-events', [App\Http\Controllers\NewsController::class, 'index']
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index'])->name('jobs');
 Route::get('/human-resources', [App\Http\Controllers\HumanResourcesController::class, 'index'])->name('human-resources');
+Route::get('/human-resources/posts/{hrPost:slug}', [App\Http\Controllers\HumanResourcesController::class, 'show'])
+    ->name('human-resources.post.show');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/privacy-notice', 'pages.privacy_notice')->name('privacy.notice');
 Route::redirect('/privacy-policy', '/privacy-notice');
@@ -120,6 +122,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::resource('sit-gallery', App\Http\Controllers\Admin\SitGalleryImageController::class)
             ->except(['show'])
             ->parameters(['sit-gallery' => 'image']);
+        Route::resource('sit_campus_recruitments', App\Http\Controllers\Admin\SitCampusRecruitmentController::class)
+            ->except(['show']);
     });
 
     Route::middleware('permission:manage academics')->group(function () {
@@ -161,6 +165,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::middleware('permission:manage director posts')->group(function () {
         Route::resource('director_posts', App\Http\Controllers\Admin\DirectorPostController::class)->except(['show']);
     });
+
+    Route::middleware('permission:manage hr posts')->group(function () {
+        Route::resource('hr_posts', App\Http\Controllers\Admin\HrPostController::class)->except(['show']);
+        Route::resource('hr_job_openings', App\Http\Controllers\Admin\HrJobOpeningController::class)->except(['show']);
+    });
+
 
     Route::get('activity-logs', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])
         ->middleware('permission:view activity logs')

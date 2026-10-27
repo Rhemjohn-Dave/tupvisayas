@@ -96,6 +96,10 @@ class User extends Authenticatable
             return route('admin.director_posts.index');
         }
 
+        if ($this->can(CmsPermissions::MANAGE_HR_POSTS)) {
+            return route('admin.hr_posts.index');
+        }
+
         if ($this->can(CmsPermissions::MANAGE_TIPTTO)) {
             return route('admin.tiptto_posts.index');
         }

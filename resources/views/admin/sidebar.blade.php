@@ -7,10 +7,15 @@
     $openContent = request()->routeIs('admin.dashboard')
         || request()->routeIs('admin.categories.*')
         || request()->routeIs('admin.carousel-images.*')
-        || request()->routeIs('admin.sit-partners.*')
-        || request()->routeIs('admin.sit-gallery.*')
         || request()->routeIs('admin.tiptto_posts.*')
         || request()->routeIs('admin.director_posts.*');
+
+    $openHr = request()->routeIs('admin.hr_posts.*')
+        || request()->routeIs('admin.hr_job_openings.*');
+
+    $openSit = request()->routeIs('admin.sit-partners.*')
+        || request()->routeIs('admin.sit-gallery.*')
+        || request()->routeIs('admin.sit_campus_recruitments.*');
 
     $openManagement = request()->routeIs('admin.users.*')
         || request()->routeIs('admin.officials.*')
@@ -21,9 +26,12 @@
     $showContent = $user?->can(CmsPermissions::MANAGE_POSTS)
         || $user?->can(CmsPermissions::MANAGE_CATEGORIES)
         || $user?->can(CmsPermissions::MANAGE_CAROUSEL)
-        || $user?->can(CmsPermissions::MANAGE_SIT)
         || $user?->can(CmsPermissions::MANAGE_TIPTTO)
         || $user?->can(CmsPermissions::MANAGE_DIRECTOR_POSTS);
+
+    $showHr = $user?->can(CmsPermissions::MANAGE_HR_POSTS);
+
+    $showSit = $user?->can(CmsPermissions::MANAGE_SIT);
 
     $showManagement = $user?->can(CmsPermissions::MANAGE_USERS)
         || $user?->can(CmsPermissions::MANAGE_OFFICIALS)
@@ -77,18 +85,6 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
                             class="admin-sidebar__link--nested" />
                     </li>
                 @endcan
-                @can(CmsPermissions::MANAGE_SIT)
-                    <li>
-                        <x-admin.sidebar-nav-link href="{{ route('admin.sit-partners.index') }}" label="SIT Partners"
-                            icon="handshake" :active="request()->routeIs('admin.sit-partners.*')"
-                            class="admin-sidebar__link--nested" />
-                    </li>
-                    <li>
-                        <x-admin.sidebar-nav-link href="{{ route('admin.sit-gallery.index') }}" label="SIT Gallery"
-                            icon="collections" :active="request()->routeIs('admin.sit-gallery.*')"
-                            class="admin-sidebar__link--nested" />
-                    </li>
-                @endcan
                 @can(CmsPermissions::MANAGE_TIPTTO)
                     <li>
                         <x-admin.sidebar-nav-link href="{{ route('admin.tiptto_posts.index') }}" label="TIPTTO" icon="science"
@@ -102,6 +98,48 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
                             class="admin-sidebar__link--nested" />
                     </li>
                 @endcan
+            </x-admin.sidebar-collapsible>
+        @endif
+
+        @if ($showHr)
+            <x-admin.sidebar-collapsible title="Human Resources" icon="work" group-id="sb-group-hr"
+                :open="$openHr">
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.hr_posts.index') }}"
+                        label="Announcements & seminars" icon="campaign"
+                        :active="request()->routeIs('admin.hr_posts.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.hr_job_openings.index') }}"
+                        label="Job openings" icon="work_outline"
+                        :active="request()->routeIs('admin.hr_job_openings.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
+            </x-admin.sidebar-collapsible>
+        @endif
+
+        @if ($showSit)
+            <x-admin.sidebar-collapsible title="SIT" icon="handshake" group-id="sb-group-sit"
+                :open="$openSit">
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.sit-partners.index') }}"
+                        label="Industry partners" icon="handshake"
+                        :active="request()->routeIs('admin.sit-partners.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.sit-gallery.index') }}"
+                        label="Student gallery" icon="collections"
+                        :active="request()->routeIs('admin.sit-gallery.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.sit_campus_recruitments.index') }}"
+                        label="Campus recruitment" icon="school"
+                        :active="request()->routeIs('admin.sit_campus_recruitments.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
             </x-admin.sidebar-collapsible>
         @endif
 

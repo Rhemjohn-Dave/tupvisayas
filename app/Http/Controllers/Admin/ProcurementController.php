@@ -144,7 +144,7 @@ class ProcurementController extends Controller
             'closing_date' => ['nullable', 'date'],
             'type' => ['required', 'in:bid_opportunity,philgeps_posting'],
             'file' => ['nullable', 'file', 'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx', 'max:10240'],
-            'status' => ['required', 'in:pending,awarded'],
+            'status' => ['required', 'in:ongoing,awarded,failed'],
         ];
         // Multiple PO files support
         $rules['po_files'] = ['nullable', 'array'];

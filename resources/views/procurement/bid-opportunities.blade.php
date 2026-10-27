@@ -28,12 +28,16 @@
                 <strong class="procurement-stat__value">{{ $summary['total'] }}</strong>
             </article>
             <article class="procurement-stat">
-                <span class="procurement-stat__label">Pending</span>
-                <strong class="procurement-stat__value">{{ $summary['pending'] }}</strong>
+                <span class="procurement-stat__label">Ongoing</span>
+                <strong class="procurement-stat__value">{{ $summary['ongoing'] }}</strong>
             </article>
             <article class="procurement-stat">
                 <span class="procurement-stat__label">Awarded</span>
                 <strong class="procurement-stat__value">{{ $summary['awarded'] }}</strong>
+            </article>
+            <article class="procurement-stat">
+                <span class="procurement-stat__label">Failed</span>
+                <strong class="procurement-stat__value">{{ $summary['failed'] }}</strong>
             </article>
         </div>
 
@@ -136,8 +140,10 @@
                                         <a href="{{ $poUrl }}" target="_blank" rel="noopener noreferrer"
                                             class="procurement-doc-link procurement-doc-link--po">Purchase order{{ count($poFiles) > 1 ? ' ' . ($idx + 1) : '' }}</a>
                                     @endforeach
+                                @elseif ($p->status === 'failed')
+                                    <span class="procurement-status procurement-status--failed">Failed</span>
                                 @else
-                                    <span class="procurement-status procurement-status--pending">Pending</span>
+                                    <span class="procurement-status procurement-status--ongoing">Ongoing</span>
                                 @endif
                             </td>
                         </tr>
@@ -186,8 +192,10 @@
                                 <a href="{{ $poUrl }}" target="_blank" rel="noopener noreferrer"
                                     class="procurement-doc-link procurement-doc-link--po">Purchase order{{ count($poFiles) > 1 ? ' ' . ($idx + 1) : '' }}</a>
                             @endforeach
+                        @elseif ($p->status === 'failed')
+                            <span class="procurement-status procurement-status--failed">Failed</span>
                         @else
-                            <span class="procurement-status procurement-status--pending">Pending</span>
+                            <span class="procurement-status procurement-status--ongoing">Ongoing</span>
                         @endif
                     </div>
                 </article>

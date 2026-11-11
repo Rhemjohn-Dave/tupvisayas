@@ -292,7 +292,8 @@ return [
         'provider' => 'groq',
         'api_key' => env('GROQ_API_KEY'),
         'base_url' => env('GROQ_BASE_URL', 'https://api.groq.com/openai/v1'),
-        'model' => env('GROQ_MODEL', 'llama-3.1-8b-instant'),
+        // llama-3.1-8b-instant shut down for free/dev tiers (Aug 16, 2026). Prefer openai/gpt-oss-20b.
+        'model' => env('GROQ_MODEL', 'openai/gpt-oss-20b'),
         'timeout' => (int) env('GROQ_TIMEOUT', 20),
         'max_tokens' => (int) env('GROQ_MAX_TOKENS', 500),
         'temperature' => (float) env('GROQ_TEMPERATURE', 0.4),

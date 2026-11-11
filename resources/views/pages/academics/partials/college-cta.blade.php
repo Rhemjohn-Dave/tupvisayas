@@ -4,6 +4,7 @@
         'coac' => 'Ready to lead the future of industry?',
         'coe' => 'Ready to engineer solutions that matter?',
         'coet' => 'Ready to build with technology?',
+        'basd' => 'Ready to join TUP Visayas?',
     ];
     $ctaTitle = $ctaLines[$collegeSlug] ?? 'Ready to join TUP Visayas?';
 @endphp

@@ -23,6 +23,10 @@
 
     $openProcurement = request()->routeIs('admin.procurements.*');
 
+    $openUsg = request()->routeIs('admin.usg-settings.*')
+        || request()->routeIs('admin.usg-documents.*')
+        || request()->routeIs('admin.usg-officers.*');
+
     $showContent = $user?->can(CmsPermissions::MANAGE_POSTS)
         || $user?->can(CmsPermissions::MANAGE_CATEGORIES)
         || $user?->can(CmsPermissions::MANAGE_CAROUSEL)
@@ -209,6 +213,31 @@ Admin sidebar — light institutional rail, brand red accents (matches public si
                         label="PhilGEPS" icon="public" :active="request()->routeIs('admin.procurements.index') && request()->query('type') === 'philgeps_posting'" class="admin-sidebar__link--nested" />
                 </li>
 
+            </x-admin.sidebar-collapsible>
+        @endcan
+
+        @can(CmsPermissions::MANAGE_USG)
+            <x-admin.sidebar-collapsible title="USG" icon="groups" group-id="sb-group-usg" :open="$openUsg">
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.usg-settings.edit') }}" label="About &amp; contact"
+                        icon="info" :active="request()->routeIs('admin.usg-settings.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.usg-documents.index') }}" label="Documents"
+                        icon="description" :active="request()->routeIs('admin.usg-documents.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.usg-documents.create') }}" label="Add document"
+                        icon="add_circle" :active="request()->routeIs('admin.usg-documents.create')"
+                        class="admin-sidebar__link--nested" />
+                </li>
+                <li>
+                    <x-admin.sidebar-nav-link href="{{ route('admin.usg-officers.index') }}" label="Officers"
+                        icon="badge" :active="request()->routeIs('admin.usg-officers.*')"
+                        class="admin-sidebar__link--nested" />
+                </li>
             </x-admin.sidebar-collapsible>
         @endcan
     </div>

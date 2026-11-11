@@ -9,6 +9,16 @@ class SiteSetting extends Model
 {
     public const TUPSTAT_HERO_ENABLED = 'tupstat_hero_enabled';
 
+    public const USG_ABOUT = 'usg.about';
+
+    public const USG_MISSION = 'usg.mission';
+
+    public const USG_VISION = 'usg.vision';
+
+    public const USG_CONTACT_EMAIL = 'usg.contact_email';
+
+    public const USG_OFFICE_HOURS = 'usg.office_hours';
+
     protected $fillable = [
         'key',
         'value',

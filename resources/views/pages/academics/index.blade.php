@@ -22,6 +22,7 @@
             'coac' => 'Industrial automation, instrumentation, and control systems that power modern manufacturing and process industries.',
             'coe' => 'Civil, mechanical, electrical, and allied engineering fields grounded in design, analysis, and professional practice.',
             'coet' => 'Advanced manufacturing, digital technology, and applied engineering pathways built for industry-ready graduates.',
+            'basd' => 'General education and foundational sciences faculty supporting every program across TUP Visayas.',
         ];
         $collegeMetaWords = [
             'coac' => 'specialized',
@@ -56,9 +57,13 @@
                     @forelse ($colleges as $college)
                         @php
                             $slug = $college->routeSlug();
+                            $facultyOnly = $college->isFacultyOnly();
                             $count = (int) $college->courses_count;
                             $metaWord = $collegeMetaWords[$slug] ?? 'offered';
                             $blurb = $collegeBlurbs[$slug] ?? 'Browse degree programs or meet the departments and faculty who teach them.';
+                            $primaryUrl = $facultyOnly
+                                ? route('academics.faculty', $slug)
+                                : route('academics.show', $slug);
                             $cover = $college->cover_photo
                                 ? asset('storage/' . $college->cover_photo)
                                 : asset('images/tupvisayas.jpg');
@@ -73,18 +78,24 @@
                             </figure>
                             <div class="acad-college-card__body">
                                 <p class="acad-college-card__meta">
-                                    {{ $count }} {{ $metaWord }}
-                                    {{ $count === 1 ? 'program' : 'programs' }}
+                                    @if ($facultyOnly)
+                                        Faculty directory
+                                    @else
+                                        {{ $count }} {{ $metaWord }}
+                                        {{ $count === 1 ? 'program' : 'programs' }}
+                                    @endif
                                 </p>
                                 <h3 class="acad-college-card__title">
-                                    <a href="{{ route('academics.show', $slug) }}">{{ $college->college }}</a>
+                                    <a href="{{ $primaryUrl }}">{{ $college->college }}</a>
                                 </h3>
                                 <p class="acad-college-card__text">{{ $blurb }}</p>
                                 <div class="acad-college-card__links">
-                                    <a href="{{ route('academics.show', $slug) }}">
-                                        Browse Programs
-                                        <span aria-hidden="true">↗</span>
-                                    </a>
+                                    @unless ($facultyOnly)
+                                        <a href="{{ route('academics.show', $slug) }}">
+                                            Browse Programs
+                                            <span aria-hidden="true">↗</span>
+                                        </a>
+                                    @endunless
                                     <a href="{{ route('academics.faculty', $slug) }}">
                                         Faculty &amp; Departments
                                         <span aria-hidden="true">↗</span>

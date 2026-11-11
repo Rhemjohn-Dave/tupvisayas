@@ -39,12 +39,14 @@ class CollegePage extends Model
         'College of Automation and Control' => 'coac',
         'College of Automation and Control Engineering' => 'coac',
         'College of Engineering Technology' => 'coet',
+        'Basic Arts and Sciences Department' => 'basd',
     ];
 
     public const SLUG_NAMES = [
         'coe' => 'College of Engineering',
         'coac' => 'College of Automation and Control',
         'coet' => 'College of Engineering Technology',
+        'basd' => 'Basic Arts and Sciences Department',
     ];
 
     /** Alternate DB titles accepted for each short key */
@@ -59,6 +61,10 @@ class CollegePage extends Model
         'coet' => [
             'College of Engineering Technology',
         ],
+        'basd' => [
+            'Basic Arts and Sciences Department',
+            'Basic Arts and Sciences',
+        ],
     ];
 
     /** Common legacy / mistyped URL segments → preferred college name */
@@ -67,6 +73,13 @@ class CollegePage extends Model
         'college-of-automation-and-control-engineering' => 'College of Automation and Control Engineering',
         'college-of-engineering' => 'College of Engineering',
         'college-of-engineering-technology' => 'College of Engineering Technology',
+        'basic-arts-and-sciences-department' => 'Basic Arts and Sciences Department',
+        'basic-arts-and-sciences' => 'Basic Arts and Sciences Department',
+    ];
+
+    /** Units that publish faculty only (no undergraduate programs). */
+    private const FACULTY_ONLY_SLUGS = [
+        'basd',
     ];
 
     protected static function booted(): void
@@ -94,6 +107,14 @@ class CollegePage extends Model
         }
 
         return \Illuminate\Support\Str::slug($this->college);
+    }
+
+    /**
+     * Faculty-only academic units (e.g. BASD) have no degree programs.
+     */
+    public function isFacultyOnly(): bool
+    {
+        return in_array($this->routeSlug(), self::FACULTY_ONLY_SLUGS, true);
     }
 
     public static function nameFromRouteSlug(string $slug): string

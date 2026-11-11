@@ -57,6 +57,10 @@ class RolePermissionSeeder extends Seeder
                 CmsPermissions::ACCESS_ADMIN,
                 CmsPermissions::MANAGE_ADMISSIONS,
             ],
+            'USG Officer' => [
+                CmsPermissions::ACCESS_ADMIN,
+                CmsPermissions::MANAGE_USG,
+            ],
         ];
 
         foreach ($roles as $roleName => $permissions) {

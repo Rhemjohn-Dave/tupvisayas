@@ -3,10 +3,16 @@
 @section('title', 'Admin — Edit ' . $college->college)
 
 @section('admin_content')
+    @php
+        $facultyOnlyCollege = $college->isFacultyOnly();
+    @endphp
     <x-admin.page-header :title="'Edit academics: ' . $college->college"
-        subtitle="Manage the public college page shown under Academics in the site menu.">
+        :subtitle="$facultyOnlyCollege
+            ? 'Manage department info and faculty shown under Academics.'
+            : 'Manage the public college page shown under Academics in the site menu.'">
         <x-slot name="actions">
-            <a href="{{ route('academics.show', $college->routeSlug()) }}" class="admin-btn admin-btn--ghost"
+            <a href="{{ $facultyOnlyCollege ? route('academics.faculty', $college->routeSlug()) : route('academics.show', $college->routeSlug()) }}"
+                class="admin-btn admin-btn--ghost"
                 target="_blank" rel="noopener noreferrer">
                 <i class="material-icons" aria-hidden="true">open_in_new</i>
                 View on site
@@ -20,18 +26,22 @@
                 <button type="button" class="uitc-tabs__btn is-active" role="tab" aria-selected="true"
                     aria-controls="admin-college-info" id="admin-college-tab-info"
                     data-uitc-tab="admin-college-info">College info</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="admin-college-history" id="admin-college-tab-history"
-                    data-uitc-tab="admin-college-history">History</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="admin-college-courses" id="admin-college-tab-courses"
-                    data-uitc-tab="admin-college-courses">Courses offered</button>
+                @unless ($facultyOnlyCollege)
+                    <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
+                        aria-controls="admin-college-history" id="admin-college-tab-history"
+                        data-uitc-tab="admin-college-history">History</button>
+                    <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
+                        aria-controls="admin-college-courses" id="admin-college-tab-courses"
+                        data-uitc-tab="admin-college-courses">Courses offered</button>
+                @endunless
                 <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
                     aria-controls="admin-college-dept" id="admin-college-tab-dept"
                     data-uitc-tab="admin-college-dept">Department &amp; faculty</button>
-                <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
-                    aria-controls="admin-college-board" id="admin-college-tab-board"
-                    data-uitc-tab="admin-college-board">Board exam ratings</button>
+                @unless ($facultyOnlyCollege)
+                    <button type="button" class="uitc-tabs__btn" role="tab" aria-selected="false"
+                        aria-controls="admin-college-board" id="admin-college-tab-board"
+                        data-uitc-tab="admin-college-board">Board exam ratings</button>
+                @endunless
             </div>
 
             {{-- College info: name, cover, public URL --}}
@@ -85,97 +95,124 @@
                 </div>
             </div>
 
-            {{-- History --}}
-            <div id="admin-college-history" class="uitc-tabs__panel" role="tabpanel"
-                aria-labelledby="admin-college-tab-history" hidden>
-                <div class="admin-form-card admin-form">
-                    <form method="POST" action="{{ route('admin.college-pages.update', $college->id) }}">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="section" value="history">
-                        <input type="hidden" name="tab" value="admin-college-history">
+            @unless ($facultyOnlyCollege)
+                {{-- History --}}
+                <div id="admin-college-history" class="uitc-tabs__panel" role="tabpanel"
+                    aria-labelledby="admin-college-tab-history" hidden>
+                    <div class="admin-form-card admin-form">
+                        <form method="POST" action="{{ route('admin.college-pages.update', $college->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="section" value="history">
+                            <input type="hidden" name="tab" value="admin-college-history">
 
-                        <div class="admin-form__group">
-                            <label class="admin-label" for="history">History</label>
-                            <textarea name="history" id="history"
-                                class="admin-textarea wysiwyg">{{ old('history', $college->history) }}</textarea>
-                            @error('history')
-                                <span class="admin-form__error">{{ $message }}</span>
-                            @enderror
-                        </div>
+                            <div class="admin-form__group">
+                                <label class="admin-label" for="history">History</label>
+                                <textarea name="history" id="history"
+                                    class="admin-textarea wysiwyg">{{ old('history', $college->history) }}</textarea>
+                                @error('history')
+                                    <span class="admin-form__error">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                        <div class="admin-form__actions">
-                            <button type="submit" class="admin-btn admin-btn--primary">Save history</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            {{-- Courses --}}
-            <div id="admin-college-courses" class="uitc-tabs__panel" role="tabpanel"
-                aria-labelledby="admin-college-tab-courses" hidden>
-                <div class="admin-form__actions admin-form__actions--toolbar">
-                    <a href="{{ route('admin.courses.create', ['college_page_id' => $college->id]) }}"
-                        class="admin-btn admin-btn--primary">
-                        <i class="material-icons" aria-hidden="true">add</i>
-                        Add course
-                    </a>
-                </div>
-
-                <div class="admin-table-card">
-                    <div class="admin-table-scroll">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col" class="admin-table__actions">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($college->courses as $course)
-                                    <tr>
-                                        <td class="admin-table__cell-title" title="{{ $course->name }}">{{ $course->name }}</td>
-                                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($course->description), 80) ?: '—' }}</td>
-                                        <td class="admin-table__actions">
-                                            <div class="admin-actions-row">
-                                                <a href="{{ route('admin.courses.edit', $course->id) }}"
-                                                    class="admin-btn admin-btn--icon admin-btn--secondary" title="Edit course"
-                                                    aria-label="Edit course">
-                                                    <i class="material-icons" aria-hidden="true">edit</i>
-                                                </a>
-                                                <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST"
-                                                    class="admin-inline-form"
-                                                    onsubmit="return confirm('Delete this course and its department?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="admin-btn admin-btn--icon admin-btn--danger"
-                                                        title="Delete" aria-label="Delete">
-                                                        <i class="material-icons" aria-hidden="true">delete</i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="3" class="admin-table__empty">No courses yet. Add a course to create its department.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                            <div class="admin-form__actions">
+                                <button type="submit" class="admin-btn admin-btn--primary">Save history</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
+
+                {{-- Courses --}}
+                <div id="admin-college-courses" class="uitc-tabs__panel" role="tabpanel"
+                    aria-labelledby="admin-college-tab-courses" hidden>
+                    <div class="admin-form__actions admin-form__actions--toolbar">
+                        <a href="{{ route('admin.courses.create', ['college_page_id' => $college->id]) }}"
+                            class="admin-btn admin-btn--primary">
+                            <i class="material-icons" aria-hidden="true">add</i>
+                            Add course
+                        </a>
+                    </div>
+
+                    <div class="admin-table-card">
+                        <div class="admin-table-scroll">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col" class="admin-table__actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($college->courses as $course)
+                                        <tr>
+                                            <td class="admin-table__cell-title" title="{{ $course->name }}">{{ $course->name }}</td>
+                                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($course->description), 80) ?: '—' }}</td>
+                                            <td class="admin-table__actions">
+                                                <div class="admin-actions-row">
+                                                    <a href="{{ route('admin.courses.edit', $course->id) }}"
+                                                        class="admin-btn admin-btn--icon admin-btn--secondary" title="Edit course"
+                                                        aria-label="Edit course">
+                                                        <i class="material-icons" aria-hidden="true">edit</i>
+                                                    </a>
+                                                    <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST"
+                                                        class="admin-inline-form"
+                                                        onsubmit="return confirm('Delete this course and its department?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="admin-btn admin-btn--icon admin-btn--danger"
+                                                            title="Delete" aria-label="Delete">
+                                                            <i class="material-icons" aria-hidden="true">delete</i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="admin-table__empty">No courses yet. Add a course to create its department.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            @endunless
 
             {{-- Departments & faculty --}}
             <div id="admin-college-dept" class="uitc-tabs__panel" role="tabpanel"
                 aria-labelledby="admin-college-tab-dept" hidden>
                 <p class="admin-form__hint" style="margin-bottom:var(--admin-space-4);">
-                    Each course creates a matching department. Rename departments here or manage faculty below.
+                    @if ($facultyOnlyCollege)
+                        Manage this department’s faculty roster below. You can also add another department if needed.
+                    @else
+                        Each course creates a matching department. You can also add a standalone department without a course.
+                        Rename departments here or manage faculty below.
+                    @endif
                 </p>
 
+                <form method="POST" action="{{ route('admin.departments.store') }}"
+                    class="admin-form-card admin-form" style="margin-bottom:var(--admin-space-4);">
+                    @csrf
+                    <input type="hidden" name="college_page_id" value="{{ $college->id }}">
+                    <div class="admin-form__group" style="margin-bottom:0;">
+                        <label class="admin-label" for="new-department-name">Add department</label>
+                        <div class="admin-dept-rename__row">
+                            <input class="admin-input" type="text" name="name" id="new-department-name"
+                                value="{{ old('name') }}" placeholder="Department name" required>
+                            <button type="submit" class="admin-btn admin-btn--secondary">Add</button>
+                        </div>
+                        @error('name')
+                            <p class="admin-form__error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </form>
+
                 @forelse($college->departments as $department)
+                    @php
+                        $headLabel = $department->course_id ? 'Program head' : 'Department head';
+                    @endphp
                     <details class="admin-accordion" @if($loop->first) open @endif>
                         <summary class="admin-accordion__summary">{{ $department->name }}</summary>
                         <div class="admin-accordion__body">
@@ -194,7 +231,7 @@
                                 </div>
 
                                 <div class="admin-form__group" style="margin-bottom:var(--admin-space-4);">
-                                    <label class="admin-label" for="dept-head-{{ $department->id }}">Program head</label>
+                                    <label class="admin-label" for="dept-head-{{ $department->id }}">{{ $headLabel }}</label>
                                     <select class="admin-select browser-default" name="head_faculty_id"
                                         id="dept-head-{{ $department->id }}">
                                         <option value="">— Not assigned —</option>
@@ -206,7 +243,11 @@
                                         @endforeach
                                     </select>
                                     <p class="admin-form__hint">
-                                        Shown on the college Programs tab, Faculty tab, and the program page.
+                                        @if ($department->course_id)
+                                            Shown on the college Programs tab, Faculty tab, and the program page.
+                                        @else
+                                            Shown on the public Faculty directory for this department.
+                                        @endif
                                         Add faculty below first if the list is empty.
                                     </p>
                                 </div>
@@ -247,7 +288,7 @@
                                                         <td class="admin-table__cell-title">
                                                             {{ $faculty->name }}
                                                             @if ((int) $department->head_faculty_id === (int) $faculty->id)
-                                                                <span class="admin-badge" style="margin-left:0.35rem;">Program head</span>
+                                                                <span class="admin-badge" style="margin-left:0.35rem;">{{ $headLabel }}</span>
                                                             @endif
                                                         </td>
                                                         <td>{{ $faculty->rank ?: '—' }}</td>
@@ -283,40 +324,48 @@
                         </div>
                     </details>
                 @empty
-                    <p class="admin-form__hint">No departments yet. Add a course under the Courses offered tab first.</p>
+                    <p class="admin-form__hint">
+                        @if ($facultyOnlyCollege)
+                            No departments yet. Use Add department above to create one, then add faculty.
+                        @else
+                            No departments yet. Add a course under the Courses offered tab, or create a standalone department above.
+                        @endif
+                    </p>
                 @endforelse
             </div>
 
-            {{-- Board exam ratings --}}
-            <div id="admin-college-board" class="uitc-tabs__panel" role="tabpanel"
-                aria-labelledby="admin-college-tab-board" hidden>
-                <div class="admin-form-card admin-form">
-                    <form method="POST" action="{{ route('admin.college-pages.update', $college->id) }}">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="section" value="board_exam_ratings">
-                        <input type="hidden" name="tab" value="admin-college-board">
+            @unless ($facultyOnlyCollege)
+                {{-- Board exam ratings --}}
+                <div id="admin-college-board" class="uitc-tabs__panel" role="tabpanel"
+                    aria-labelledby="admin-college-tab-board" hidden>
+                    <div class="admin-form-card admin-form">
+                        <form method="POST" action="{{ route('admin.college-pages.update', $college->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="section" value="board_exam_ratings">
+                            <input type="hidden" name="tab" value="admin-college-board">
 
-                        <p class="admin-form__hint" style="margin-bottom:var(--admin-space-4);">
-                            Publish college-level licensure / board exam results shown on the public Board exam ratings tab.
-                            Program-specific board notes can still live on each course’s Board performance field.
-                        </p>
+                            <p class="admin-form__hint" style="margin-bottom:var(--admin-space-4);">
+                                Publish college-level licensure / board exam results shown on the public Board exam ratings tab.
+                                Program-specific board notes can still live on each course’s Board performance field.
+                            </p>
 
-                        <div class="admin-form__group">
-                            <label class="admin-label" for="board_exam_ratings">Board exam ratings</label>
-                            <textarea name="board_exam_ratings" id="board_exam_ratings"
-                                class="admin-textarea wysiwyg">{{ old('board_exam_ratings', $college->board_exam_ratings) }}</textarea>
-                            @error('board_exam_ratings')
-                                <span class="admin-form__error">{{ $message }}</span>
-                            @enderror
-                        </div>
+                            <div class="admin-form__group">
+                                <label class="admin-label" for="board_exam_ratings">Board exam ratings</label>
+                                <textarea name="board_exam_ratings" id="board_exam_ratings"
+                                    class="admin-textarea wysiwyg">{{ old('board_exam_ratings', $college->board_exam_ratings) }}</textarea>
+                                @error('board_exam_ratings')
+                                    <span class="admin-form__error">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                        <div class="admin-form__actions">
-                            <button type="submit" class="admin-btn admin-btn--primary">Save board exam ratings</button>
-                        </div>
-                    </form>
+                            <div class="admin-form__actions">
+                                <button type="submit" class="admin-btn admin-btn--primary">Save board exam ratings</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endunless
         </div>
     </div>
 @endsection
@@ -332,7 +381,11 @@
 
             function activateTab(targetId) {
                 var button = root.querySelector('[data-uitc-tab="' + targetId + '"]');
-                if (!button) return;
+                if (!button) {
+                    targetId = 'admin-college-info';
+                    button = root.querySelector('[data-uitc-tab="' + targetId + '"]');
+                    if (!button) return;
+                }
 
                 buttons.forEach(function(btn) {
                     btn.classList.remove('is-active');

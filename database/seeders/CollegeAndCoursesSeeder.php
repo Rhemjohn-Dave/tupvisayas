@@ -70,6 +70,21 @@ class CollegeAndCoursesSeeder extends Seeder
                 }
             }
         }
+
+        // Faculty-only unit: no courses, one department roster.
+        $basd = CollegePage::firstOrCreate(
+            ['college' => 'Basic Arts and Sciences Department'],
+            [
+                'history' => null,
+                'department_faculty' => null,
+                'student_organization' => null,
+            ]
+        );
+
+        Department::firstOrCreate([
+            'college_page_id' => $basd->id,
+            'name' => 'Basic Arts and Sciences',
+        ]);
     }
 }
 

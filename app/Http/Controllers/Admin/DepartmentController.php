@@ -3,12 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CollegePage;
 use App\Models\Department;
 use App\Models\Faculty;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'college_page_id' => 'required|integer|exists:college_pages,id',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $college = CollegePage::findOrFail($data['college_page_id']);
+
+        Department::create([
+            'college_page_id' => $college->id,
+            'name' => $data['name'],
+            'course_id' => null,
+        ]);
+
+        return redirect()
+            ->to(route('admin.college-pages.edit', $college->id) . '?tab=admin-college-dept')
+            ->with('success', 'Department created.');
+    }
+
     public function update(Request $request, $id)
     {
         $department = Department::findOrFail($id);

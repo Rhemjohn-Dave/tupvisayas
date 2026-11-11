@@ -64,7 +64,9 @@
                                 @endif
                             </div>
                             <div class="college-faculty-head__copy">
-                                <p class="college-faculty-head__label">Program head</p>
+                                <p class="college-faculty-head__label">
+                                    {{ $department->course_id ? 'Program head' : 'Department head' }}
+                                </p>
                                 <p class="college-faculty-head__name">{{ $head->name }}</p>
                                 @if ($head->rank)
                                     <p class="college-faculty-head__rank">{{ $head->rank }}</p>

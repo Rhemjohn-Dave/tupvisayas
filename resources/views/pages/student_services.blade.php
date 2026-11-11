@@ -11,6 +11,8 @@
             <h2 id="osa-heading" class="site-section-title">Office of Student Affairs</h2>
             <div class="mission-card site-prose">
                 <p>The Office of Student Affairs (OSA) coordinates student development programs, organization activities, and student welfare concerns. For student organization matters, student discipline guidance, and campus student activities, start with OSA.</p>
+                <p>For campus-wide student representation, officers, and official student government releases, visit the
+                    <a href="{{ route('usg.index') }}">University Student Government</a> page.</p>
             </div>
         </section>
 

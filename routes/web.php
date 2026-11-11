@@ -40,6 +40,7 @@ Route::get('/academics/undergraduate-programs', [App\Http\Controllers\Admissions
 Route::get('/academics/coe', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coe')->name('academics.coe');
 Route::get('/academics/coac', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coac')->name('academics.coac');
 Route::get('/academics/coet', [App\Http\Controllers\CollegePageController::class, 'showPublic'])->defaults('college', 'coet')->name('academics.coet');
+Route::get('/academics/basd', [App\Http\Controllers\CollegePageController::class, 'showFaculty'])->defaults('college', 'basd')->name('academics.basd');
 Route::get('/academics/{college}/programs/{course:slug}', [App\Http\Controllers\CollegePageController::class, 'showProgram'])->name('academics.program');
 Route::get('/academics/{college}/faculty', [App\Http\Controllers\CollegePageController::class, 'showFaculty'])->name('academics.faculty');
 Route::redirect('/admissions', '/admissions/enrollment-procedure', 301)->name('admissions');
@@ -50,6 +51,8 @@ Route::get('/admissions/enrollment-procedure', [App\Http\Controllers\AdmissionsC
 Route::view('/facilities', 'pages.facilities')->name('facilities');
 Route::view('/campus-tour', 'pages.campus_tour')->name('campus.tour');
 Route::view('/student-services', 'pages.student_services')->name('student_services');
+Route::get('/usg', [App\Http\Controllers\UsgController::class, 'index'])->name('usg.index');
+Route::get('/usg/documents', [App\Http\Controllers\UsgController::class, 'documents'])->name('usg.documents');
 Route::get('/library', [App\Http\Controllers\LibraryController::class, 'index'])->name('library');
 Route::get('/sit', [App\Http\Controllers\SitController::class, 'index'])->name('sit');
 Route::redirect('/sit/campus-recruitment', '/sit#sit-recruitment');
@@ -133,6 +136,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::resource('student-organizations', App\Http\Controllers\Admin\StudentOrganizationController::class)
             ->except(['show', 'index'])
             ->parameters(['student-organizations' => 'student_organization']);
+        Route::post('departments', [App\Http\Controllers\Admin\DepartmentController::class, 'store'])->name('departments.store');
         Route::put('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'update'])->name('departments.update');
         Route::delete('departments/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'destroy'])->name('departments.destroy');
     });
@@ -171,6 +175,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::resource('hr_job_openings', App\Http\Controllers\Admin\HrJobOpeningController::class)->except(['show']);
     });
 
+    Route::middleware('permission:manage usg')->group(function () {
+        Route::get('usg-settings', [App\Http\Controllers\Admin\UsgSettingController::class, 'edit'])
+            ->name('usg-settings.edit');
+        Route::put('usg-settings', [App\Http\Controllers\Admin\UsgSettingController::class, 'update'])
+            ->name('usg-settings.update');
+        Route::resource('usg-documents', App\Http\Controllers\Admin\UsgDocumentController::class)
+            ->except(['show']);
+        Route::resource('usg-officers', App\Http\Controllers\Admin\UsgOfficerController::class)
+            ->except(['show']);
+    });
 
     Route::get('activity-logs', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])
         ->middleware('permission:view activity logs')

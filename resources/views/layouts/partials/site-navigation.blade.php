@@ -55,6 +55,7 @@
                     <ul id="desk-students" class="site-nav__panel" hidden>
                         <li><a href="{{ route('student_services') }}">Student Services</a></li>
                         <li><a href="{{ route('student_services') }}#osa">Office of Student Affairs</a></li>
+                        <li><a href="{{ route('usg.index') }}">University Student Government</a></li>
                         <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure</a></li>
                         <li><a href="{{ route('sit') }}">Supervised Industrial Training (SIT)</a></li>
                     </ul>
@@ -206,6 +207,7 @@
             <ul class="site-drawer__sub">
                 <li><a href="{{ route('student_services') }}">Student Services</a></li>
                 <li><a href="{{ route('student_services') }}#osa">Office of Student Affairs</a></li>
+                <li><a href="{{ route('usg.index') }}">University Student Government</a></li>
                 <li><a href="{{ route('admissions.enrollment') }}">Enrollment Procedure</a></li>
                 <li><a href="{{ route('sit') }}">Supervised Industrial Training (SIT)</a></li>
             </ul>

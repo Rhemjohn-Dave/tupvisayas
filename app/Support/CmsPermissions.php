@@ -32,6 +32,8 @@ final class CmsPermissions
 
     public const MANAGE_SIT = 'manage sit';
 
+    public const MANAGE_USG = 'manage usg';
+
     /**
      * @return list<string>
      */
@@ -52,6 +54,7 @@ final class CmsPermissions
             self::MANAGE_PROCUREMENTS,
             self::MANAGE_ADMISSIONS,
             self::MANAGE_SIT,
+            self::MANAGE_USG,
         ];
     }
 
@@ -77,6 +80,7 @@ final class CmsPermissions
             self::MANAGE_PROCUREMENTS => 'Bidding / procurement',
             self::MANAGE_ADMISSIONS => 'Admission test schedules',
             self::MANAGE_SIT => 'SIT partners & student photos',
+            self::MANAGE_USG => 'University Student Government',
         ];
     }
 }

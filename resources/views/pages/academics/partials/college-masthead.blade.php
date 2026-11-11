@@ -1,19 +1,24 @@
 @php
     $collegeSection = $collegeSection ?? 'programs';
     $collegeSlug = $collegePage->routeSlug();
+    $facultyOnly = $collegePage->isFacultyOnly();
     $exploreLabels = [
         'coac' => 'CACE',
         'coe' => 'COE',
         'coet' => 'COET',
+        'basd' => 'BASD',
     ];
     $heroLedes = [
         'coac' => 'Industry-aligned automation, mechatronics, and control systems that prepare graduates to lead modern manufacturing and process industries.',
         'coe' => 'Rigorous engineering education across civil, mechanical, electrical, and allied fields—designing solutions for Visayas and the nation.',
         'coet' => 'Hands-on engineering technology pathways in advanced manufacturing and digital systems for industry-ready professionals.',
+        'basd' => 'Foundational arts and sciences faculty who deliver general education and support every undergraduate program at TUP Visayas.',
     ];
     $exploreLabel = $exploreLabels[$collegeSlug] ?? 'College';
     $lede = $heroLedes[$collegeSlug]
-        ?? 'Explore degree programs, faculty, and the academic community of this college at TUP Visayas.';
+        ?? ($facultyOnly
+            ? 'Meet the faculty of this department at TUP Visayas.'
+            : 'Explore degree programs, faculty, and the academic community of this college at TUP Visayas.');
     $coverUrl = $collegePage->cover_photo
         ? asset('storage/' . $collegePage->cover_photo)
         : asset('images/tupvisayas.jpg');
@@ -34,7 +39,9 @@
         <h1 id="college-hero-heading" class="college-hero__title">{{ $collegePage->college }}</h1>
         <p class="college-hero__lede">{{ $lede }}</p>
         <div class="college-hero__actions">
-            @if ($collegeSection === 'faculty')
+            @if ($facultyOnly)
+                <a class="college-btn college-btn--gold" href="#college-explore">Faculty Directory</a>
+            @elseif ($collegeSection === 'faculty')
                 <a class="college-btn college-btn--gold"
                     href="{{ route('academics.show', $collegeSlug) }}">View Curriculum</a>
                 <a class="college-btn college-btn--ghost-light" href="#college-explore">Faculty Directory</a>
@@ -84,16 +91,26 @@
 
 <section class="college-explore" id="college-explore" aria-labelledby="college-explore-heading">
     <h2 id="college-explore-heading" class="college-explore__title">Explore {{ $exploreLabel }}</h2>
-    <nav class="college-switcher" aria-label="{{ $collegePage->college }} sections">
-        <a class="college-switcher__link{{ $collegeSection === 'programs' ? ' is-active' : '' }}"
-            href="{{ route('academics.show', $collegeSlug) }}"
-            @if ($collegeSection === 'programs') aria-current="page" @endif>
-            Programs Offered
-        </a>
-        <a class="college-switcher__link{{ $collegeSection === 'faculty' ? ' is-active' : '' }}"
-            href="{{ route('academics.faculty', $collegeSlug) }}"
-            @if ($collegeSection === 'faculty') aria-current="page" @endif>
-            Faculty &amp; Departments
-        </a>
-    </nav>
+    @if ($facultyOnly)
+        <nav class="college-switcher" aria-label="{{ $collegePage->college }} sections">
+            <a class="college-switcher__link is-active"
+                href="{{ route('academics.faculty', $collegeSlug) }}"
+                aria-current="page">
+                Faculty Directory
+            </a>
+        </nav>
+    @else
+        <nav class="college-switcher" aria-label="{{ $collegePage->college }} sections">
+            <a class="college-switcher__link{{ $collegeSection === 'programs' ? ' is-active' : '' }}"
+                href="{{ route('academics.show', $collegeSlug) }}"
+                @if ($collegeSection === 'programs') aria-current="page" @endif>
+                Programs Offered
+            </a>
+            <a class="college-switcher__link{{ $collegeSection === 'faculty' ? ' is-active' : '' }}"
+                href="{{ route('academics.faculty', $collegeSlug) }}"
+                @if ($collegeSection === 'faculty') aria-current="page" @endif>
+                Faculty &amp; Departments
+            </a>
+        </nav>
+    @endif
 </section>

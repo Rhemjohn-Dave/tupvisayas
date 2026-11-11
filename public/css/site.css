@@ -10281,3 +10281,119 @@ body.ctour-theater-open {
     }
 }
 
+
+/* —— USG (University Student Government) —— */
+.usg-officer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1.25rem;
+}
+
+.usg-officer-card {
+    background: var(--color-surface, #fff);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1rem 1.5rem;
+    text-align: center;
+}
+
+.sit-section--muted .usg-officer-card {
+    background: #fff;
+}
+
+.usg-officer-card__photo {
+    width: 6.5rem;
+    height: 6.5rem;
+    margin: 0 auto 1rem;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #f4f2f0;
+    display: grid;
+    place-items: center;
+    color: #5c5c5c;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.usg-officer-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.usg-officer-card__name {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    font-weight: 650;
+    color: #1a1a1a;
+}
+
+.usg-officer-card__role {
+    margin: 0;
+    color: var(--color-brand, #9e1b32);
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.usg-officer-card__term {
+    margin: 0.35rem 0 0;
+    color: #5c5c5c;
+    font-size: 0.85rem;
+}
+
+.usg-doc-filters {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.usg-doc-filters__cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.usg-doc-filters__chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 999px;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    background: #fff;
+}
+
+.usg-doc-filters__chip:hover,
+.usg-doc-filters__chip.is-active {
+    border-color: var(--color-brand, #9e1b32);
+    color: var(--color-brand, #9e1b32);
+    background: rgba(158, 27, 50, 0.06);
+}
+
+.usg-doc-filters__search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    align-items: center;
+}
+
+.usg-doc-filters__search input[type="search"] {
+    flex: 1 1 14rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 0.4rem;
+    font: inherit;
+}
+
+.usg-doc-pagination {
+    margin-top: 1.75rem;
+}
+
+@media (max-width: 640px) {
+    .usg-officer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

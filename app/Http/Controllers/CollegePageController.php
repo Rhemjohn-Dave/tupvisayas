@@ -12,7 +12,7 @@ class CollegePageController extends Controller
     public function index()
     {
         $colleges = CollegePage::query()
-            ->withCount('courses')
+            ->withCount(['courses', 'departments'])
             ->orderBy('college')
             ->get();
 
@@ -29,6 +29,10 @@ class CollegePageController extends Controller
         $canonical = $collegePage->routeSlug();
         if ($college !== $canonical) {
             return redirect()->route('academics.show', $canonical, 301);
+        }
+
+        if ($collegePage->isFacultyOnly()) {
+            return redirect()->route('academics.faculty', $canonical);
         }
 
         $collegePage->load([

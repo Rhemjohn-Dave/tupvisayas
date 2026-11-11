@@ -100,6 +100,10 @@ class User extends Authenticatable
             return route('admin.hr_posts.index');
         }
 
+        if ($this->can(CmsPermissions::MANAGE_USG)) {
+            return route('admin.usg-documents.index');
+        }
+
         if ($this->can(CmsPermissions::MANAGE_TIPTTO)) {
             return route('admin.tiptto_posts.index');
         }

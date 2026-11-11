@@ -10188,6 +10188,7 @@ body.ctour-theater-open {
     display: flex;
     flex-direction: column;
     gap: 0.65rem;
+    height: 100%;
     padding: 1.15rem 1.2rem;
     background: #fff;
     border: 1px solid var(--color-border);
@@ -10207,16 +10208,20 @@ body.ctour-theater-open {
 
 .ts-doc-card__title {
     margin: 0;
-    flex: 1 1 10rem;
+    flex: 0 1 auto;
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.35;
     color: var(--color-text);
 }
 
+.ts-doc-card__meta .ts-doc-card__title {
+    flex: 1 1 10rem;
+}
+
 .ts-doc-card__text {
     margin: 0;
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     font-size: var(--text-sm);
     line-height: 1.55;
     color: var(--color-text-muted);
@@ -10225,8 +10230,10 @@ body.ctour-theater-open {
 .ts-doc-card__actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.55rem;
-    margin-top: 0.25rem;
+    margin-top: auto;
+    min-height: 2.4rem;
 }
 
 .ts-doc-card__actions .acad-btn {

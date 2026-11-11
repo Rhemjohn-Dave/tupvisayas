@@ -327,8 +327,8 @@
                             @endif
                         </div>
                         <p class="ts-doc-card__text">
-                            Post the report of modifications under the GAA, or a certification that no modifications
-                            were made for the covered period (paste Google Drive link in <code>$drive['modifications_na']</code>).
+                            Report of modifications under the GAA, or a certification that no modifications
+                            were made for the covered period.
                         </p>
                         <div class="ts-doc-card__actions">
                             @if ($hasDrive('modifications_na'))
@@ -408,7 +408,7 @@
                             @endif
                         </div>
                         <p class="ts-doc-card__text">
-                            Evaluation or assessment reports of major programs or projects (flagged in COA AOM).
+                            Evaluation or assessment reports of major programs or projects.
                         </p>
                         <div class="ts-doc-card__actions">
                             @if ($hasDrive('evaluation_reports'))
@@ -475,8 +475,7 @@
                             @endif
                         </div>
                         <p class="ts-doc-card__text">
-                            Report of contracts awarded with names of winning suppliers, contractors, or consultants
-                            (COA AOM gap). Paste the Google Drive PDF link in <code>$drive['contracts_awarded']</code>.
+                            Report of contracts awarded with names of winning suppliers, contractors, or consultants.
                         </p>
                         <div class="ts-doc-card__actions">
                             @if ($hasDrive('contracts_awarded'))
@@ -486,7 +485,9 @@
                         </div>
                     </article>
                     <article class="ts-doc-card">
-                        <h3 class="ts-doc-card__title">Bid opportunities (awarded listings)</h3>
+                        <div class="ts-doc-card__meta">
+                            <h3 class="ts-doc-card__title">Bid opportunities (awarded listings)</h3>
+                        </div>
                         <p class="ts-doc-card__text">
                             Campus bid opportunities board, including items marked awarded.
                         </p>
@@ -495,7 +496,9 @@
                         </div>
                     </article>
                     <article class="ts-doc-card">
-                        <h3 class="ts-doc-card__title">PhilGEPS posting</h3>
+                        <div class="ts-doc-card__meta">
+                            <h3 class="ts-doc-card__title">PhilGEPS posting</h3>
+                        </div>
                         <p class="ts-doc-card__text">
                             PhilGEPS-related procurement postings for TUP Visayas.
                         </p>

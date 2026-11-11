@@ -10252,6 +10252,46 @@ body.ctour-theater-open {
     color: #5c4810;
 }
 
+.ts-status--pending {
+    background: #f0e6e8;
+    color: #7a1528;
+}
+
+.ts-status--na {
+    background: #ebebeb;
+    color: #5c5c5c;
+}
+
+.ts-compliance-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.ts-compliance-list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding: 0.85rem 1rem;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.4rem;
+}
+
+.ts-compliance-list a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.ts-compliance-list a:hover {
+    color: var(--color-brand, #9e1b32);
+}
+
 .ts-updated {
     margin: var(--space-6) 0 0;
     font-size: 0.85rem;
